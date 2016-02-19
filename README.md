@@ -16,15 +16,23 @@ It's liberating to cast off the dogma that says that an application's view and m
  
 ## Installation
 
-The browserified easyui.js file is available in the `dist/` folder. Alternatively you can download and unzip the project zip file or clone the repository. There is an `index.js` file in the root of the distribution that will work with both [Browserify](http://browserify.org/) and [Node.js](http://nodejs.org). These instructions assume you have created an EasyUI folder next to your project folder:
+If you're running [Node.js](http://nodejs.org) you can install EasyUI with [npm](https://www.npmjs.com/):
 
-With Browserify:
+    npm install easyui
 
-```js
-./node_modules/.bin/browserify ./../EasyUI/index.js --standalone easyui --debug --verbose -o ./public/scripts/lib/easyui.js
+Client-side you can take the `easyui.js` file in the `dist/` folder put it somewhere and reference it via the usual script element:
+ 
+```html
+<script src="scripts/lib/easyui.js"> </script>
 ```
 
-You can now use EasyUI via an AMD require:
+This will give you a global `easyui` variable which you use directly:
+  
+```js
+ var easyui = easyui.Button;
+```
+ 
+If you're using AMD require client-side or CommonJS server-side the syntax for requiring EasyUI is the same:
 
 ```js
  var easyui = require('lib/easyui'),
@@ -32,19 +40,7 @@ You can now use EasyUI via an AMD require:
      Checkbox = easyui.Checkbox;
 ```
 
-With Node.js, assuming you have [npm](https://www.npmjs.com/) installed:
-
-```js
-npm ../EasyUI
-```
-Using EasyUI via a CommonJS require is much the same:
-
-```js
- var easyui = require('easyui'),
-     Button = easyui.Button;
-```
-
-jQuery is not bundled with EasyUI so you will need to include it explicitly on your site whichever way you feel is best. The standard HTML script element will do of course.
+jQuery is not bundled with EasyUI so you will need to include it explicitly whichever way you feel is best.
 
 ## Documentation
 
