@@ -1,0 +1,160 @@
+# EasyUI
+
+A V-framework.
+
+EasyUI is an MVC framework without the M and without the C. It's without a model, only abstracting away from the view, namely the document object model. There is some irony here. It's without a controller, or whatever. It will not help you with the architecture of your large application. It is about the leaves of an application, not its branches. 
+
+It leverages jQuery to provide a very basic set of classes for DOM elements such as buttons, links, etc. It covers up jQuery's idiosyncratic syntax and is more readable. It allows you to associate JavaScript classes directly with static HTML, you don't have to dynamically create DOM elements unless you want to. Few frameworks allow you to do this without fuss.
+
+It's liberating to cast off the dogma that says that an application's view and model always have to be two sides of the exact same coin. And you won't have to wade through hundreds of lines of obscure source code when things slow down or start to go wrong. The nearest thing to EasyUI is ReactJS but EasyUI is an order of magnitude less complex. 
+
+## Related projects
+
+- [EasyUI-Layout](https://github.com/jecs-imperial/EasyUI-Layout) Layout components that work with CSS flexbox.
+- [EasyUI-Explorer](https://github.com/jecs-imperial/EasyUI-Explorer) A file explorer with drag and drop functionality. 
+- [Florence](http://djalbat.com/Florence) A collaborative proof assistant that depends on all three EasyUI projects.
+ 
+## Installation
+
+The browserified easyui.js file is available in the `dist/` folder. Alternatively you can download and unzip the project zip file or clone the repository. There is an `index.js` file in the root of the distribution that will work with both [Browserify](http://browserify.org/) and [Node.js](http://nodejs.org). These instructions assume you have created an EasyUI folder next to your project folder:
+
+With Browserify:
+
+```js
+./node_modules/.bin/browserify ./../EasyUI/index.js --standalone easyui --debug --verbose -o ./public/scripts/lib/easyui.js
+```
+
+You can now use EasyUI via an AMD require:
+
+```js
+ var easyui = require('lib/easyui'),
+     Select = easyui.Select,
+     Checkbox = easyui.Checkbox;
+```
+
+With Node.js, assuming you have [npm](https://www.npmjs.com/) installed:
+
+```js
+npm ../EasyUI
+```
+Using EasyUI via a CommonJS require is much the same:
+
+```js
+ var easyui = require('easyui'),
+     Button = easyui.Button;
+```
+
+jQuery is not bundled with EasyUI so you will need to include it explicitly on your site whichever way you feel is best. The standard HTML script element will do of course.
+
+## Documentation
+
+See the `examples.html` file in the `docs/` folder for some examples. 
+
+#### Creating elements 
+
+You can pass jQuery selectors to constructors:
+
+```js
+var link = new Link('#link', function(href) {
+  console.log('Link click with href ' + href);
+});
+```
+
+Or you can use HTML snippets with the `fromHTML()` factory method of any relevant class:
+
+```js
+var checkboxFromHTML = Checkbox.fromHTML('<input type="checkbox"/>');
+```
+
+#### Cloning elements
+
+You can call the `clone()` method of an element. If your element has an `id` attribute it's best to remove this from the cloned element:
+ 
+```js
+var button = new Button('#button'),
+    clonedButton = button.clone();
+     
+clonedButton.removeAttribute('id');
+```
+
+You can also use the `clone()` factory methods of the relevant classes and pass jQuery selectors. Again remove the `id` attribute from the cloned element if necessary:
+
+```js
+var clonedButton = Button.clone('#button');
+     
+clonedButton.removeAttribute('id');
+```
+
+
+#### Standard methods
+
+Each element class extends the `Element` class and therefore has the same standard methods. These do nothing much apart from ape jQuery functionality:
+
+- `show`
+- `hide`
+- `enable`
+- `disable`
+- `getWidth`
+- `getHeight`
+- `setWidth`
+- `setHeight`
+- `addAttribute`
+- `removeAttribute`
+- `prependBefore`
+- `appendAfter`
+- `prepend`
+- `append`
+- `remove`
+- `hasClass`
+- `addClass`
+- `removeClass`
+- `removeClasses`
+- `html`
+- `css`
+- `on`
+
+#### Other methods
+
+- `getBounds`, returns an instance of the `Bounds` class with the `top`, `left`, `bottom` and `right` bounds of the element.
+- `onMouseXXX`, each apes jQuery functionality except that it calls the handler with `mouseTop` and `mouseLeft` rather than the event object. If you want the event object, use the `on()` method.
+
+
+The methods to add elements to the DOM are hopefully intuitive. Note the difference between the `append()` and `appendAfter()` methods. 
+
+```js
+var button = Button.fromHTML('<button/>'),
+    select = Select.fromHTML('<select><option>a</option></select>');
+    
+select.appendAfter(button); // what you want
+select.append(button); // not what you want
+```
+
+The `appendAfter()` call above results in the following HTML:
+
+```html
+<select><option>a</option></select></button>
+```
+
+The `append()` call above results in the following HTML and is probably not what you want in this instance:
+
+```html
+<select><option>a</option></button></select>
+```
+
+Similarly for the `prepend()` and `prependBefore()` methods.
+
+#### Supported elements:
+
+- `Body`
+- `Button`
+- `Checkbox`
+- `Input`
+- `Link`
+- `Select`
+
+Obviously the list is incomplete. Use the `Element` class if there is no relevant class or submit a pull request!
+
+## Contact
+
+- james.smith@djalbat.com
+- http://djalbat.com
