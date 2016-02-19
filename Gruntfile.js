@@ -37,5 +37,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', []);
-  grunt.registerTask('git', ['browserify', 'bumpup', 'shell:git']);
+  grunt.registerTask('git', ['bumpup', 'browserify', 'shell:git']);
 };
