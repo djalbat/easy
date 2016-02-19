@@ -13,9 +13,8 @@ module.exports = function(grunt) {
         dest: 'dist/easyui.js'
       }
     },
-    watch: {
-      files: './lib/*.js',
-      tasks: 'browserify'
+    bumpup: {
+      file: 'package.json'
     },
     shell: {
       git: {
@@ -25,13 +24,18 @@ module.exports = function(grunt) {
           'git push'
         ].join('&&')
       }
+    },
+    watch: {
+      files: './lib/*.js',
+      tasks: 'browserify'
     }
   });
 
   grunt.loadNpmTasks('grunt-shell');
+  grunt.loadNpmTasks('grunt-bumpup');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', []);
-  grunt.registerTask('git', ['browserify', 'shell:git']);
+  grunt.registerTask('git', ['browserify', 'bumpup', 'shell:git']);
 };
