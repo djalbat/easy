@@ -29,15 +29,15 @@ Client-side you can take the `easyui.js` file in the `dist/` folder put it somew
 This will give you a global `easyui` variable which you use directly:
   
 ```js
- var easyui = easyui.Button;
+var Button = easyui.Button;
 ```
  
 If you're using AMD require client-side or CommonJS server-side the syntax for requiring EasyUI is the same:
 
 ```js
- var easyui = require('lib/easyui'),
-     Select = easyui.Select,
-     Checkbox = easyui.Checkbox;
+var easyui = require('lib/easyui'),
+    Select = easyui.Select,
+    Checkbox = easyui.Checkbox;
 ```
 
 jQuery is not bundled with EasyUI so you will need to include it explicitly whichever way you feel is best.
