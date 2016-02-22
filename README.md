@@ -10,9 +10,9 @@ It's liberating to cast off the dogma that says that an application's view and m
 
 ## Related projects
 
-- [EasyUI-Layout](https://github.com/jecs-imperial/EasyUI-Layout) Layout components that work with CSS flexbox.
-- [EasyUI-Explorer](https://github.com/jecs-imperial/EasyUI-Explorer) A file explorer with drag and drop functionality. 
-- [Florence](http://djalbat.com/Florence) A collaborative proof assistant that depends on all three EasyUI projects.
+- [EasyUI-Layout](https://github.com/djalbat/EasyUI-Layout) Layout components that work with CSS flexbox.
+- [EasyUI-Explorer](https://github.com/djalbat/EasyUI-Explorer) A file explorer with drag and drop functionality. 
+- [Florence](https://github.com/jecs-imperial/Florence) A collaborative proof assistant that depends on all three EasyUI projects. 
  
 ## Installation
 
