@@ -32,30 +32,29 @@ define(function(require) {
       br3 = br2.clone(),
       br4 = br3.clone();
 
-  var clonedLink = Link.clone('#link'),
-      clonedButton = button.clone(),
-      selectFromHTML = Select.fromHTML('<select><option>a</option><option>b</option><option>c</option></select>'),
-      checkboxFromHTML = Checkbox.fromHTML('<input type="checkbox"/>');
+  var clonedLink = Link.clone('#link', function(href) {
+    console.log('Cloned link click with href ' + href);
+  });
 
   clonedLink.removeAttribute('id');
   clonedLink.html('Cloned link');
-  clonedLink.onClick(function(href) {
-    console.log('Cloned link click with href ' + href);
+
+
+  var clonedButton = button.clone(function() {
+    console.log('Cloned button click');
   });
 
   clonedButton.removeAttribute('id');
   clonedButton.html('Cloned button');
-  clonedButton.onClick(function() {
-    console.log('Cloned button click');
+
+  var selectFromHTML = Select.fromHTML('<select><option>a</option><option>b</option><option>c</option></select>', function(selectedOptionValue) {
+    console.log('Cloned select from HTML changed with selected option value ' + selectedOptionValue)
   });
 
   selectFromHTML.setSelectedOptionByValue('c');
-  selectFromHTML.onChange(function(selectedOptionValue) {
-    console.log('Select from HTML changed with selected option value ' + selectedOptionValue)
-  });
 
-  checkboxFromHTML.onClick(function(checked) {
-    console.log('Checkbox from HTML click with checked ' + checked);
+  var checkboxFromHTML = Checkbox.fromHTML('<input type="checkbox"/>', function(checked) {
+    console.log('Cloned checkbox from HTML click with checked ' + checked);
   });
 
   checkbox.appendAfter(br1);

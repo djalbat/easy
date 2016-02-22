@@ -62,6 +62,8 @@ Or you can use HTML snippets with the `fromHTML()` factory method of any relevan
 var checkboxFromHTML = Checkbox.fromHTML('<input type="checkbox"/>');
 ```
 
+If constructors take change or click handlers you can pass these to `fromHTML()` methods.
+
 #### Cloning elements
 
 You can call the `clone()` method of an element. If your element has an `id` attribute it's best to remove this from the cloned element:
@@ -81,6 +83,8 @@ var clonedButton = Button.clone('#button');
 clonedButton.removeAttribute('id');
 ```
 
+When you clone an existing element you will need to re-register any click or change handlers.
+You can pass these straight to the `clone()` methods if you like.
 
 #### Standard methods
 

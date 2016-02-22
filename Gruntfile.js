@@ -20,13 +20,13 @@ module.exports = function(grunt) {
       git: {
         command: [
           'git add . --all',
-          'git commit -m "' + grunt.option('commit_message') + '"',
+          'git commit -m "' + grunt.option('git_commit_message') + '"',
           'git push'
         ].join('&&')
       }
     },
     watch: {
-      files: './lib/*.js',
+      files: './lib/**/*.js',
       tasks: 'browserify'
     }
   });
@@ -37,8 +37,14 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', []);
-  grunt.registerTask('git', ['bumpup', 'browserify', 'shell:git']);
+
+  grunt.registerTask('b', ['browserify']);
+  grunt.registerTask('w', ['browserify', 'watch']);
+  grunt.registerTask('g', function() {
+    grunt.task.run('browserify');
+
+    grunt.task.run('bumpup:' + (grunt.option('bumpup_type') || 'patch'));
+
+    grunt.task.run('shell:git')
+  });
 };
-
-
-
