@@ -83,8 +83,7 @@ var clonedButton = Button.clone('#button');
 clonedButton.removeAttribute('id');
 ```
 
-When you clone an existing element you will need to re-register any click or change handlers.
-You can pass these straight to the `clone()` methods if you like.
+When you clone an existing element you will need to re-register any click or change handlers. You can pass these straight to the `clone()` methods if you like.
 
 #### Standard methods
 
