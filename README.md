@@ -115,7 +115,7 @@ Each element class extends the `Element` class and therefore has the same standa
 #### Other methods
 
 - `getBounds`, returns an instance of the `Bounds` class with the `top`, `left`, `bottom` and `right` bounds of the element.
-- `onMouseXXX`, each apes jQuery functionality except that it calls the handler with `mouseTop` and `mouseLeft` rather than the event object. If you want the event object, use the `on()` method.
+- `onMouseXXX`, each apes jQuery functionality except that it calls the handler with `mouseTop`, `mouseLeft` and `mouseButton` rather than the event object. If you want the event object, use the `on()` method. The value of the `mouseButton` argument is either `Element.LEFT_MOUSE_BUTTON`, `Element.MIDDLE_MOUSE_BUTTON` or ``Element.RIGHT_MOUSE_BUTTON`.
 
 
 The methods to add elements to the DOM are hopefully intuitive. Note the difference between the `append()` and `appendAfter()` methods. 
