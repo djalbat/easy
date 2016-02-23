@@ -5,12 +5,12 @@ module.exports = function(grunt) {
       options: {
         browserifyOptions: {
           debug: true,
-          standalone: 'easyui-explorer'
+          standalone: 'easyui'
         }
       },
       build: {
         src: './index.js',
-        dest: 'dist/easyui-explorer.js'
+        dest: 'dist/easyui.js'
       }
     },
     bumpup: {
