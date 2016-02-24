@@ -191,10 +191,7 @@ The `fromHTML()` method is also boilerplate:
 
 ```js
 Checkbox.fromHTML = function(html, clickHandler) {
-  var $element = $(html),
-      checkbox = new Checkbox($element, clickHandler);
-
-  return checkbox;
+  return Element.fromHTML(html, Checkbox, clickHandler);
 };
 ```
 

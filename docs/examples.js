@@ -48,13 +48,13 @@ define(function(require) {
   clonedButton.html('Cloned button');
 
   var selectFromHTML = Select.fromHTML('<select><option>a</option><option>b</option><option>c</option></select>', function(selectedOptionValue) {
-    console.log('Cloned select from HTML changed with selected option value ' + selectedOptionValue)
+    console.log('Select from HTML changed with selected option value ' + selectedOptionValue)
   });
 
   selectFromHTML.setSelectedOptionByValue('c');
 
   var checkboxFromHTML = Checkbox.fromHTML('<input type="checkbox"/>', function(checked) {
-    console.log('Cloned checkbox from HTML click with checked ' + checked);
+    console.log('Checkbox from HTML click with checked ' + checked);
   });
 
   checkbox.appendAfter(br1);
