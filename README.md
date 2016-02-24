@@ -171,6 +171,8 @@ Cloning is done by passing the private `$element` property to the `clone()` fact
 Checkbox.prototype = {
   clone: function(clickHandler) { return Checkbox.clone(this.$element, clickHandler); },
   
+  ...
+  
   isChecked: function() {
     return this.$element.is(':checked');
   }
@@ -181,7 +183,7 @@ You can use the `clone()` factory method of the `Element` class to create your o
  
 ```js
 Checkbox.clone = function(selectorOr$Element, clickHandler) {
-    return Element.clone(selectorOr$Element, Checkbox, clickHandler);
+  return Element.clone(selectorOr$Element, Checkbox, clickHandler);
 };
 ```
 
