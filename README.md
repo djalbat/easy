@@ -151,7 +151,50 @@ Similarly for the `prepend()` and `prependBefore()` methods.
 - `Link`
 - `Select`
 
-Obviously the list is incomplete. Use the `Element` class if there is no relevant class or submit a pull request!
+Obviously the list is incomplete. Use the `Element` class if there is no relevant class, submit a pull request or roll your own.
+
+#### Rolling your own elements
+
+This is easily done. Taking the `Checkbox` class as an example, call the `Element' constructor from within your own:
+
+```js
+var Checkbox = function(selectorOr$Element, clickHandler) {
+  inherits(this, new Element(selectorOr$Element));
+
+  ...
+};
+```
+
+Cloning is done by passing the private `$element` property to the `clone()` factory method. You can also use this property to ape jQuery functionality, as the `isChecked()` method shows:
+
+```js
+Checkbox.prototype = {
+  clone: function(clickHandler) { return Checkbox.clone(this.$element, clickHandler); },
+  
+  isChecked: function() {
+    return this.$element.is(':checked');
+  }
+};
+```
+
+You can use the `clone()` factory method of the `Element` class to create your own, passing it your class followed by all the arguments for its constructor:
+ 
+```js
+Checkbox.clone = function(selectorOr$Element, clickHandler) {
+    return Element.clone(selectorOr$Element, Checkbox, clickHandler);
+};
+```
+
+The `fromHTML()` method is also boilerplate:
+
+```js
+Checkbox.fromHTML = function(html, clickHandler) {
+  var $element = $(html),
+      checkbox = new Checkbox($element, clickHandler);
+
+  return checkbox;
+};
+```
 
 ## Contact
 
