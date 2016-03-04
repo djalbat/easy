@@ -116,6 +116,7 @@ Each element class extends the `Element` class and therefore has the same standa
 
 - `getBounds`, returns an instance of the `Bounds` class with the `top`, `left`, `bottom` and `right` bounds of the element.
 - `onMouseXXX`, each apes jQuery functionality except that it calls the handler with `mouseTop`, `mouseLeft` and `mouseButton` rather than the event object. If you want the event object, use the `on()` method. The value of the `mouseButton` argument is either `Element.LEFT_MOUSE_BUTTON`, `Element.MIDDLE_MOUSE_BUTTON` or ``Element.RIGHT_MOUSE_BUTTON`.
+- `childElements` returns all the direct EasyUI child elements of the element.
 
 
 The methods to add elements to the DOM are hopefully intuitive. Note the difference between the `append()` and `appendAfter()` methods. 
@@ -165,6 +166,8 @@ var Checkbox = function(selectorOr$Element, clickHandler) {
 };
 ```
 
+The first argument should be `selectorOr$Element` which you don't have to worry about but should pass straight to the constructor of the `Element` class.
+
 Cloning is done by passing the private `$element` property to the `clone()` factory method. You can also use this property to ape jQuery functionality, as the `isChecked()` method shows:
 
 ```js
@@ -194,6 +197,8 @@ Checkbox.fromHTML = function(html, clickHandler) {
   return Element.fromHTML(html, Checkbox, clickHandler);
 };
 ```
+
+When you roll these `clone()` or `fromHTML()` methods you still need to write constructors like the one above.    
 
 ## Contact
 

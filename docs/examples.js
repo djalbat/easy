@@ -4,6 +4,7 @@ define(function(require) {
 
   var easyui = require('./../dist/easyui'),
       Element = easyui.Element,
+      Body = easyui.Body,
       Link = easyui.Link,
       Input = easyui.Input,
       Button = easyui.Button,
@@ -70,4 +71,11 @@ define(function(require) {
   br3.appendAfter(selectFromHTML);
   selectFromHTML.appendAfter(br4);
   br4.appendAfter(checkboxFromHTML);
+
+  var body = new Body(),
+      bodyChildElements = body.childElements();
+
+  bodyChildElements.forEach(function(bodyChildElement) {
+
+  });
 });
