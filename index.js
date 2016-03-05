@@ -4,6 +4,7 @@ module.exports = {
   Element: require('./lib/element'),
   Bounds: require('./lib/bounds'),
   Body: require('./lib/body'),
+  Div: require('./lib/div'),
   Link: require('./lib/link'),
   Input: require('./lib/input'),
   Select: require('./lib/select'),

@@ -4,6 +4,7 @@ define(function(require) {
 
   var easyui = require('./../dist/easyui'),
       Element = easyui.Element,
+      Div = easyui.Div,
       Body = easyui.Body,
       Link = easyui.Link,
       Input = easyui.Input,
@@ -73,9 +74,18 @@ define(function(require) {
   br4.appendAfter(checkboxFromHTML);
 
   var body = new Body(),
-      bodyChildElements = body.childElements();
+      outerDiv = Div.fromHTML('<div><div id="firstDiv"></div><div id="secondDiv"></div><div id="thirdDiv"></div></div>');
 
-  bodyChildElements.forEach(function(bodyChildElement) {
+  body.append(outerDiv);
 
+  new Div('#firstDiv');
+  new Div('#thirdDiv');
+
+  var outDivChildElements = outerDiv.childElements();
+
+  outDivChildElements.forEach(function(outDivChildElement) {
+    var outDivChildElementId = outDivChildElement.getAttribute('id');
+
+    console.log(outDivChildElementId);
   });
 });

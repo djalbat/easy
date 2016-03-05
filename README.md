@@ -44,7 +44,31 @@ jQuery is not bundled with EasyUI so you will need to include it explicitly whic
 
 ## Documentation
 
-See the `examples.html` file in the `docs/` folder for some examples. 
+See the `examples.html` file in the `docs/` folder for some examples.
+
+#### Working example
+
+Here an element corresponding to the `body` DOM element is constructed and an outer `div` element is appended to that. `Div` elements corresponding to two of the three inner `div`s are then constructed. Note there are no references. These can be recovered by iterating over the child elements of the outer `div`. Note also that the second inner `div`, since no corresponding `Div` element has been created for it.   
+
+```js
+var body = new Body(),
+    outerDiv = Div.fromHTML('<div><div id="firstDiv"></div><div id="secondDiv"></div><div id="thirdDiv"></div></div>');
+
+body.append(outerDiv);
+
+new Div('#firstDiv');
+new Div('#thirdDiv');
+
+var outDivChildElements = outerDiv.childElements();
+
+outDivChildElements.forEach(function(outDivChildElement) {
+  var outDivChildElementId = outDivChildElement.getAttribute('id');
+
+  console.log(outDivChildElementId);
+});
+```
+
+Essentially you bind instances of EesyUI classes to DOM elements via jQuery, making use of jQuey's selector syntax. The [EasyUI-Explorer](https://github.com/djalbat/EasyUI-Explorer) project uses this approach to good effect. The explorer has no model as such, just a nested collection of elements bound to the DOM. One way to think of it is as a widget for viewing and manipulating file paths. The files themselves are part of the application's model but they are quite separate from the explorer, held in an array somewhere else in fact. This is the EasyUI approach, not binding an application's model and view tightly unless it makes sense to do so. 
 
 #### Creating elements 
 
@@ -97,6 +121,7 @@ Each element class extends the `Element` class and therefore has the same standa
 - `getHeight`
 - `setWidth`
 - `setHeight`
+- `getAttribute`
 - `addAttribute`
 - `removeAttribute`
 - `prependBefore`
@@ -116,7 +141,8 @@ Each element class extends the `Element` class and therefore has the same standa
 
 - `getBounds`, returns an instance of the `Bounds` class with the `top`, `left`, `bottom` and `right` bounds of the element.
 - `onMouseXXX`, each apes jQuery functionality except that it calls the handler with `mouseTop`, `mouseLeft` and `mouseButton` rather than the event object. If you want the event object, use the `on()` method. The value of the `mouseButton` argument is either `Element.LEFT_MOUSE_BUTTON`, `Element.MIDDLE_MOUSE_BUTTON` or `Element.RIGHT_MOUSE_BUTTON`.
-- `childElements` returns all the direct EasyUI child elements of the element.
+- `childElements` returns all the immediate descendants
+- `findElements` returns all the descendants
 
 
 The methods to add elements to the DOM are hopefully intuitive. Note the difference between the `append()` and `appendAfter()` methods. 
@@ -146,6 +172,7 @@ Similarly for the `prepend()` and `prependBefore()` methods.
 #### Supported elements:
 
 - `Body`
+- `Div`
 - `Button`
 - `Checkbox`
 - `Input`
@@ -156,7 +183,23 @@ Obviously the list is incomplete. Use the `Element` class if there is no relevan
 
 #### Rolling your own elements
 
-This is easily done. Taking the `Checkbox` class as an example, call the `Element' constructor from within your own:
+This is easily done. We take the `Checkbox` class as an example. Use the `clone()` factory method of the `Element` class to create your own element, passing it your class followed by all the arguments for its constructor:
+ 
+```js
+Checkbox.clone = function(selectorOr$Element, clickHandler) {
+  return Element.clone(Checkbox, selectorOr$Element, clickHandler);
+};
+```
+
+The `fromHTML()` method is also boilerplate:
+
+```js
+Checkbox.fromHTML = function(html, clickHandler) {
+  return Element.fromHTML(Checkbox, html, clickHandler);
+};
+```
+
+When writing the constructor, the `Element' constructor from within your own:
 
 ```js
 var Checkbox = function(selectorOr$Element, clickHandler) {
@@ -168,7 +211,7 @@ var Checkbox = function(selectorOr$Element, clickHandler) {
 
 The first argument should be `selectorOr$Element` which you don't have to worry about but should pass straight to the constructor of the `Element` class.
 
-Cloning is done by passing the private `$element` property to the `clone()` factory method. You can also use this property to ape jQuery functionality, as the `isChecked()` method shows:
+You can also create a `clone()` method by passing the private `$element` property to the `clone()` factory method. 
 
 ```js
 Checkbox.prototype = {
@@ -182,24 +225,8 @@ Checkbox.prototype = {
 };
 ```
 
-You can use the `clone()` factory method of the `Element` class to create your own, passing it your class followed by all the arguments for its constructor:
- 
-```js
-Checkbox.clone = function(selectorOr$Element, clickHandler) {
-  return Element.clone(selectorOr$Element, Checkbox, clickHandler);
-};
-```
-
-The `fromHTML()` method is also boilerplate:
-
-```js
-Checkbox.fromHTML = function(html, clickHandler) {
-  return Element.fromHTML(html, Checkbox, clickHandler);
-};
-```
-
-When you roll these `clone()` or `fromHTML()` methods you still need to write constructors like the one above.    
-
+Note that you can also use the `$element` property to ape jQuery functionality, as the `isChecked()` method shows.
+    
 ## Contact
 
 - james.smith@djalbat.com
