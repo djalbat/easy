@@ -48,7 +48,7 @@ See the `examples.html` file in the `docs/` folder for some examples.
 
 #### Working example
 
-Here an element corresponding to the `body` DOM element is constructed and an outer `div` element is appended to that. `Div` elements corresponding to two of the three inner `div`s are then constructed. Note there are no references. These can be recovered by iterating over the child elements of the outer `div`. Note also that the second inner `div`, since no corresponding `Div` element has been created for it.   
+Here an element corresponding to the `body` DOM element is constructed and an outer `div` element is appended to that. `Div` elements corresponding to two of the three inner `div`s are then constructed. Note there are no references. These can be recovered by iterating over the child elements of the outer `div`. Note also that there is no second inner `div`, since no corresponding `Div` element has been created for it.   
 
 ```js
 var body = new Body(),
@@ -64,11 +64,15 @@ var outDivChildElements = outerDiv.childElements();
 outDivChildElements.forEach(function(outDivChildElement) {
   var outDivChildElementId = outDivChildElement.getAttribute('id');
 
-  console.log(outDivChildElementId);
+  console.log(outDivChildElementId);    // firstDiv, thirdDiv
 });
 ```
 
-Essentially you bind instances of EesyUI classes to DOM elements via jQuery, making use of jQuey's selector syntax. The [EasyUI-Explorer](https://github.com/djalbat/EasyUI-Explorer) project uses this approach to good effect. The explorer has no model as such, just a nested collection of elements bound to the DOM. One way to think of it is as a widget for viewing and manipulating file paths. The files themselves are part of the application's model but they are quite separate from the explorer, held in an array somewhere else in fact. This is the EasyUI approach, not binding an application's model and view tightly unless it makes sense to do so. 
+Essentially you bind instances of EasyUI classes to DOM elements via jQuery, making use of jQuey's selector syntax. 
+
+The [EasyUI-Explorer](https://github.com/djalbat/EasyUI-Explorer) project uses this approach to good effect. The explorer has no model as such, just a nested collection of elements bound to the DOM. One way to think of it is as a widget for viewing and manipulating file paths. The files themselves are part of the application's model but they are quite separate from the explorer, held in an array somewhere else in fact. 
+
+This is the EasyUI approach, not binding an application's model and view tightly unless it makes sense to do so. 
 
 #### Creating elements 
 
