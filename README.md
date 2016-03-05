@@ -70,7 +70,7 @@ outDivChildElements.forEach(function(outDivChildElement) {
 
 Essentially you bind instances of EasyUI classes to DOM elements via jQuery, making use of jQuey's selector syntax. 
 
-The [EasyUI-Explorer](https://github.com/djalbat/EasyUI-Explorer) project uses this approach to good effect. The explorer has no model as such, just a nested collection of elements bound to the DOM. One way to think of it is as a widget for viewing and manipulating file paths. The files themselves are part of the application's model but they are quite separate from the explorer, held in an array somewhere else in fact. 
+In the [EasyUI-Explorer](https://github.com/djalbat/EasyUI-Explorer) project this approach is used to good effect. The explorer has no model as such, just a nested collection of elements bound to the DOM. One way to think of it is as a widget for viewing and manipulating file paths. The files themselves are part of the application's model but they are quite separate from the explorer, held in an array somewhere else in fact. 
 
 This is the EasyUI approach, not binding an application's model and view tightly unless it makes sense to do so. 
 
