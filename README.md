@@ -132,6 +132,7 @@ Each element class extends the `Element` class and therefore has the same standa
 - `appendAfter`
 - `prepend`
 - `append`
+- `detach`
 - `remove`
 - `hasClass`
 - `addClass`
