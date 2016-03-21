@@ -146,10 +146,12 @@ Each element class extends the `Element` class and therefore has the same standa
 
 - `getBounds`, returns an instance of the `Bounds` class with the `top`, `left`, `bottom` and `right` bounds of the element.
 - `onMouseXXX`, each apes jQuery functionality except that it calls the handler with `mouseTop`, `mouseLeft` and `mouseButton` rather than the event object. If you want the event object, use the `on()` method. The value of the `mouseButton` argument is either `Element.LEFT_MOUSE_BUTTON`, `Element.MIDDLE_MOUSE_BUTTON` or `Element.RIGHT_MOUSE_BUTTON`.
-- `childElements` returns all the immediate descendants
-- `findElements` returns all the descendants
-- `sameAs` returns true if the argument and instance share the same DOM element.
+- `childElements` returns an array containing all the immediate descendant elements, taking an optional selector
+- `findElements` returns an array containing all the descendant elements, taking an optional selector
+- `parentElement` returns the immediate ascendant element or null, taking an optional selector
+- `parentElements` returns an array containing all the ascendant elements, taking an optional selector
 
+- `sameAs` returns true if the argument and instance share the same DOM element.
 
 The methods to add elements to the DOM are hopefully intuitive. Note the difference between the `append()` and `appendAfter()` methods. 
 
@@ -158,7 +160,7 @@ var button = Button.fromHTML('<button/>'),
     select = Select.fromHTML('<select><option>a</option></select>');
     
 select.appendAfter(button); // what you want
-select.append(button); // not what you want
+select.append(button); // probably not what you want
 ```
 
 The `appendAfter()` call above results in the following HTML:

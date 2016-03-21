@@ -46,7 +46,6 @@ define(function(require) {
   clonedLink.removeAttribute('id');
   clonedLink.html('Cloned link');
 
-
   var clonedButton = button.clone(function() {
     console.log('Cloned button click');
   });
@@ -74,7 +73,7 @@ define(function(require) {
   br4.appendAfter(checkboxFromHTML);
 
   var body = new Body(),
-      outerDiv = Div.fromHTML('<div><div id="firstDiv"></div><div id="secondDiv"></div><div id="thirdDiv"></div></div>');
+      outerDiv = Div.fromHTML('<div><div id="firstDiv"></div><div id="secondDiv"><div id="fourthDiv"></div></div><div id="thirdDiv"><div id="fifthDiv"></div></div></div>');
 
   body.append(outerDiv);
 
@@ -88,4 +87,16 @@ define(function(require) {
 
     console.log(outDivChildElementId);
   });
+
+  var fourthDiv = new Div('#fourthDiv'),
+      fifthDiv = new Div('#fifthDiv'),
+      fourthDivParentElement = fourthDiv.parentElement(),
+      fourthDivParentElements = fourthDiv.parentElements(),
+      fifthDivParentElement = fifthDiv.parentElement(),
+      fourthDivParentElementsLength = fourthDivParentElements.length,
+      fifthDivParentElementIdAttr = fifthDivParentElement.getAttribute('id');
+
+  console.log('The parent element of the fourth div is ' + fourthDivParentElement);
+  console.log('The \'id\' attribute of the parent element of the fifth div is \'' + fifthDivParentElementIdAttr + '\'');
+  console.log('There are ' + fourthDivParentElementsLength + ' parent elements of the fourth div');
 });
