@@ -1,7 +1,7 @@
 {
   "name": "easyui",
   "author": "James Smith",
-  "version": "2.6.2",
+  "version": "2.6.3",
   "license": "MIT",
   "repository": "https://github.com/djalbat/EasyUI",
   "dependencies": {
