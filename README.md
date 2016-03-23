@@ -40,8 +40,6 @@ var easyui = require('lib/easyui'),
     Checkbox = easyui.Checkbox;
 ```
 
-jQuery is not bundled with EasyUI so you will need to include it explicitly whichever way you feel is best.
-
 ## Documentation
 
 See the `examples.html` file in the `docs/` folder for some examples.

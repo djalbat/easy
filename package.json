@@ -1,9 +1,11 @@
 {
   "name": "easyui",
   "author": "James Smith",
-  "version": "2.5.1",
+  "version": "2.6.0",
   "repository": {},
-  "dependencies": {},
+  "dependencies": {
+    "jquery": "^2.2.2"
+  },
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-watch": "^0.6.1",

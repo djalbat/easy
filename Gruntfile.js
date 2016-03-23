@@ -28,8 +28,8 @@ module.exports = function(grunt) {
     watch: {
       files: [
         './lib/**/*.js',
-        '.inherits.js',
-        '.index.js'
+        './inherits.js',
+        './index.js'
       ],
       tasks: 'browserify'
     }
