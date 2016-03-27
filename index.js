@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {
+  window: require('./lib/window'),
   Element: require('./lib/element'),
   Bounds: require('./lib/bounds'),
   Body: require('./lib/body'),
