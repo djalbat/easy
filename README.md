@@ -172,7 +172,9 @@ The `TextArea` class has the following methods:
 - `getScrollTop` 
 - `getScrollLeft` 
 - `setScrollTop` 
-- `setScrollLeft` 
+- `setScrollLeft`
+ 
+ The `Window`
 
 The methods to add elements to the DOM are hopefully intuitive. Note the difference between the `append()` and `appendAfter()` methods. 
 
@@ -200,6 +202,7 @@ Similarly for the `prepend()` and `prependBefore()` methods.
 
 #### Supported elements:
 
+- `window`
 - `Body`
 - `Div`
 - `Button`
@@ -209,6 +212,7 @@ Similarly for the `prepend()` and `prependBefore()` methods.
 - `Link`
 - `Select`
 
+The `Window` class is not exported, only the single `window` instance.
 Obviously the list is incomplete. Use the `Element` class if there is no relevant class, submit a pull request or roll your own.
 
 #### Rolling your own elements
