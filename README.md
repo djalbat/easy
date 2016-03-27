@@ -142,7 +142,7 @@ Each element has the following methods. These do nothing much apart from ape jQu
 
 Each input element has the following additional methods:
 
-- `isFocused`
+- `hasFocus`
 - `onFocus`
 - `onBlur`
 - `focus`

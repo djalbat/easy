@@ -34,7 +34,7 @@ define(function(require) {
   });
 
   var textArea = new TextArea('#textarea'),
-      textAreaIsFocused = textArea.isFocused();
+      textAreaIsFocused = textArea.hasFocus();
 
   textArea.onFocus(function() {
     console.log('Text area has gained the focus');
