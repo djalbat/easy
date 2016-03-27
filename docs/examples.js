@@ -10,7 +10,8 @@ define(function(require) {
       Input = easyui.Input,
       Button = easyui.Button,
       Select = easyui.Select,
-      Checkbox = easyui.Checkbox;
+      Checkbox = easyui.Checkbox,
+      TextArea = easyui.TextArea;
 
   var link = new Link('#link', function(href) {
     console.log('Link click with href: ' + href);
@@ -29,10 +30,37 @@ define(function(require) {
   });
 
   var checkbox = new Checkbox('#checkbox', function(checked) {
-    console.log('Checkbox click with checked: ' + checked);
+    console.log('Checkbox change with checked: ' + checked);
   });
 
+  var textArea = new TextArea('#textarea'),
+      textAreaIsFocused = textArea.isFocused();
+
+  textArea.onFocus(function() {
+    console.log('Text area has gained the focus');
+  });
+
+  textArea.onBlur(function() {
+    console.log('Text area has lost the focus');
+  });
+
+  textArea.onChange(function(value) {
+    console.log('The value of the text area has changed to: ' + value)
+  });
+
+  textArea.onScroll(function(scrollTop, scrollLeft) {
+    console.log('The text area has been scrolled to: (' + scrollTop + ',' + scrollLeft +')')
+  });
+
+  textAreaIsFocused ?
+    console.log('Initially the text area has the focus') :
+      console.log('Initially the text area does not have the focus');
+
+  textArea.setValue('Initial value');
+
   checkbox.check();
+
+  checkbox.focus();
 
   var br1 = Element.fromHTML('<br/>'),
       br2 = br1.clone(),

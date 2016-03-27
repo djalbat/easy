@@ -113,7 +113,7 @@ When you clone an existing element you will need to re-register any click or cha
 
 #### Standard methods
 
-Each element class extends the `Element` class and therefore has the same standard methods. These do nothing much apart from ape jQuery functionality:
+Each element has the following methods. These do nothing much apart from ape jQuery functionality:
 
 - `show`
 - `hide`
@@ -140,7 +140,14 @@ Each element class extends the `Element` class and therefore has the same standa
 - `css`
 - `on`
 
-#### Other methods
+Each input element has the following additional methods:
+
+- `isFocused`
+- `onFocus`
+- `onBlur`
+- `focus`
+
+#### Other shared methods
 
 - `getBounds`, returns an instance of the `Bounds` class with the `top`, `left`, `bottom` and `right` bounds of the element.
 - `onMouseXXX`, each apes jQuery functionality except that it calls the handler with `mouseTop`, `mouseLeft` and `mouseButton` rather than the event object. If you want the event object, use the `on()` method. The value of the `mouseButton` argument is either `Element.LEFT_MOUSE_BUTTON`, `Element.MIDDLE_MOUSE_BUTTON` or `Element.RIGHT_MOUSE_BUTTON`.
@@ -150,6 +157,11 @@ Each element class extends the `Element` class and therefore has the same standa
 - `parentElements` returns an array containing all the ascendant elements, taking an optional selector
 
 - `sameAs` returns true if the argument and instance share the same DOM element.
+
+#### Other methods
+
+- The `Input` and `TextArea` classes have `onChange` methods taking handler that is invoked every time their value changes by way of a keypress. Note that this is different from the jQuery functionality.
+- The `TextArea` class has an `onScroll` handler. 
 
 The methods to add elements to the DOM are hopefully intuitive. Note the difference between the `append()` and `appendAfter()` methods. 
 
@@ -181,6 +193,7 @@ Similarly for the `prepend()` and `prependBefore()` methods.
 - `Div`
 - `Button`
 - `Checkbox`
+- `TextArea`
 - `Input`
 - `Link`
 - `Select`
