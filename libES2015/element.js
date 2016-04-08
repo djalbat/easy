@@ -157,10 +157,6 @@ class Element {
   onMouseOver(handler) { this.$element.on('mouseover', returnMouseEventHandler(handler)); }
   onMouseOut(handler) { this.$element.on('mouseout', returnMouseEventHandler(handler)); }
   onMouseMove(handler) { this.$element.on('mousemove', returnMouseEventHandler(handler)); }
-
-  sameAs(element) {
-    return this.$element === element.$element;  ///
-  }
 }
 
 Element.fromHTML = function(html) {

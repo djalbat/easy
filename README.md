@@ -157,8 +157,6 @@ Each input element has the following additional methods:
 - `parentElement` returns the immediate ascendant element or null, taking an optional selector
 - `parentElements` returns an array containing all the ascendant elements, taking an optional selector
 
-- `sameAs` returns true if the argument and instance share the same DOM element.
-
 #### Other methods
 
 The `Input` and `TextArea` classes both have the following methods:
