@@ -44,7 +44,7 @@ module.exports = function(grunt) {
         './libES2015/**/*.js',
         './index.js'
       ],
-      tasks: 'browserify'
+      tasks: ['babel', 'browserify']
     }
   });
 
