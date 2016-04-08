@@ -138,6 +138,7 @@ Each element has the following methods. These do nothing much apart from ape jQu
 - `removeClasses`
 - `html`
 - `css`
+- `data`
 - `on`
 
 Each input element has the following additional methods:

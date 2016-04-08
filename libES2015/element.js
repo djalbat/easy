@@ -8,7 +8,7 @@ class Element {
   constructor(selectorOr$Element) {
     this.$element = $element(selectorOr$Element);
 
-    this.$element.data('element', this);
+    this.data('element', this);
   }
 
   clone() {
@@ -47,8 +47,33 @@ class Element {
 
   prependBefore(element) { this.$element.before(element.$element); }
   appendAfter(element) { this.$element.after(element.$element); }
-  prepend(element) { this.$element.prepend(element.$element); }
-  append(element) { this.$element.append(element.$element); }
+  
+  prepend(elementOrString) {
+    if (typeof elementOrString === 'string') {
+      var string = elementOrString; ///
+
+      this.$element.prepend(string);
+    } else {
+      var element = elementOrString,  ///
+          $element = element.$element;
+
+      this.$element.prepend($element);
+    }
+  }
+  
+  append(elementOrString) {
+    if (typeof elementOrString === 'string') {
+      var string = elementOrString; ///
+
+      this.$element.append(string);
+    } else {
+      var element = elementOrString,  ///
+          $element = element.$element;
+
+      this.$element.append($element);
+    }
+  }
+
   remove() { this.$element.remove(); }
   detach() { this.$element.detach(); }
 
@@ -76,6 +101,22 @@ class Element {
       return css;
     } else {
       this.$element.css(css);
+    }
+  }
+
+  data() {
+    var argumentsLength = arguments.length,
+        key = arguments[0],
+        value;
+
+    if (argumentsLength === 1) {
+      value = this.$element.data(key);
+
+      return value;
+    } else {
+      value = arguments[1];
+
+      this.$element.data(key, value);
     }
   }
 
@@ -197,7 +238,7 @@ function instance(Class, $element, args) {
 
   args.unshift(null); ///
   
-  var instance = new (Class.bind.apply(Class, args));  ///
+  var instance = new (Function.prototype.bind.apply(Class, args));  ///
 
   return instance;
 }
