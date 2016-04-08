@@ -21,7 +21,7 @@ module.exports = function(grunt) {
       git: {
         command: [
           'git add . --all',
-          'git commit -m "' + grunt.option('git_commit_message') + '"',
+          'git commit -m "' + grunt.option('commit_message') + '"',
           'git push'
         ].join('&&')
       }
@@ -45,10 +45,10 @@ module.exports = function(grunt) {
   grunt.registerTask('b', ['browserify']);
   grunt.registerTask('w', ['browserify', 'watch']);
   grunt.registerTask('g', function() {
-    var bumpup_type = grunt.option('bumpup_type') || 'patch';
+    var type = grunt.option('type') || 'patch';
 
     grunt.task.run('browserify');
-    grunt.task.run('bumpup:' + bumpup_type);
+    grunt.task.run('bumpup:' + type);
     grunt.task.run('shell:git')
   });
 };
