@@ -161,19 +161,23 @@ Each input element has the following additional methods:
 
 The `Input` and `TextArea` classes both have the following methods:
 
-- `onChange` takes a handler which is invoked every time the value of the element changes by way of a keypress. Note that this is different from the jQuery functionality.
+- `onChange` takes a handler which is invoked every time the value of the element changes by way of a keypress.
 - `getSelectionStart`
 - `getSelectionEnd`
+
+Note that the behaviour of the `onChange` method is different from the jQuery method it apes.
 
 The `TextArea` class has the following methods:
  
 - `onScroll` takes a handler which is invoked when the text area is scrolled
 - `getScrollTop` 
 - `getScrollLeft` 
-- `setScrollTop` 
+- `setScrollTop`
 - `setScrollLeft`
  
- The `Window`
+The `Window` class module returns a singleton with one method:
+
+-`onResize`
 
 The methods to add elements to the DOM are hopefully intuitive. Note the difference between the `append()` and `appendAfter()` methods. 
 
