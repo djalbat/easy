@@ -174,12 +174,12 @@ The `TextArea` class has the following methods:
 - `getScrollLeft` 
 - `setScrollTop`
 - `setScrollLeft`
+
+It `window` singleton, see below, only has one method.
+
+- `onResize`
  
-The `Window` class module returns a singleton with one method:
-
--`onResize`
-
-The methods to add elements to the DOM are hopefully intuitive. Note the difference between the `append()` and `appendAfter()` methods. 
+The methods to add elements to the DOM are hopefully intuitive. Note the difference between the `append()` and `appendAfter()` methods.
 
 ```js
 var button = Button.fromHTML('<button/>'),
@@ -216,6 +216,7 @@ Similarly for the `prepend()` and `prependBefore()` methods.
 - `Select`
 
 The `Window` class is not exported, only the single `window` instance.
+
 Obviously the list is incomplete. Use the `Element` class if there is no relevant class, submit a pull request or roll your own.
 
 #### Rolling your own elements
