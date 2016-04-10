@@ -175,9 +175,7 @@ The `TextArea` class has the following methods:
 - `setScrollTop`
 - `setScrollLeft`
 
-It `window` singleton, see below, only has one method.
-
-- `onResize`
+The `window` singleton only has one `onResize` method, the `document` singleton has the `onKeyUp` and `onKeyDown` methods.
  
 The methods to add elements to the DOM are hopefully intuitive. Note the difference between the `append()` and `appendAfter()` methods.
 
@@ -206,6 +204,7 @@ Similarly for the `prepend()` and `prependBefore()` methods.
 #### Supported elements:
 
 - `window`
+- `document`
 - `Body`
 - `Div`
 - `Button`
@@ -215,7 +214,7 @@ Similarly for the `prepend()` and `prependBefore()` methods.
 - `Link`
 - `Select`
 
-The `Window` class is not exported, only the single `window` instance.
+The `Window` and `Document` classes are not exported, only singletons.
 
 Obviously the list is incomplete. Use the `Element` class if there is no relevant class, submit a pull request or roll your own.
 
