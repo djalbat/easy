@@ -2,6 +2,7 @@
 
 module.exports = {
   window: require('./lib/window'),
+  document: require('./lib/document'),
   Element: require('./lib/element'),
   Bounds: require('./lib/bounds'),
   Body: require('./lib/body'),
