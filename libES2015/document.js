@@ -8,11 +8,11 @@ class Document {
   }
 
   onKeyUp(handler) {
-    this.$element.onKeyUp(handler);
+    this.$element.keyup(handler);
   }
 
   onKeyDown(handler) {
-    this.$element.onKeyDown(handler);
+    this.$element.keydown(handler);
   }
 }
 
