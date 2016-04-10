@@ -12,6 +12,4 @@ class Window {
   }
 }
 
-var window = new Window();
-
-module.exports = window;
+module.exports = new Window();  ///
