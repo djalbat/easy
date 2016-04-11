@@ -77,4 +77,8 @@ TextArea.fromHTML = function(html) {
   return InputElement.fromHTML(TextArea, html);
 };
 
+TextArea.fromDOMElement = function(domElement) {
+  return Element.fromDOMElement(TextArea, domElement);
+};
+
 module.exports = TextArea;

@@ -159,6 +159,24 @@ class Element {
   onMouseMove(handler) { this.$element.on('mousemove', returnMouseEventHandler(handler)); }
 }
 
+Element.clone = function(selectorOr$Element) {
+  var Class,
+      args;
+
+  if (arguments.length === 1) {
+    Class = Element;
+    args = [];
+  } else {
+    Class = arguments[0];
+    selectorOr$Element = arguments[1];
+    args = Array.prototype.slice.call(arguments, 2);
+  }
+
+  var $clonedElement = $element(selectorOr$Element).clone();
+
+  return instance(Class, $clonedElement, args);
+};
+
 Element.fromHTML = function(html) {
   var Class,
       args;
@@ -177,7 +195,7 @@ Element.fromHTML = function(html) {
   return instance(Class, $htmlElement, args);
 };
 
-Element.clone = function(selectorOr$Element) {
+Element.fromDOMElement = function(domElement) {
   var Class,
       args;
 
@@ -186,13 +204,13 @@ Element.clone = function(selectorOr$Element) {
     args = [];
   } else {
     Class = arguments[0];
-    selectorOr$Element = arguments[1];
+    domElement = arguments[1];
     args = Array.prototype.slice.call(arguments, 2);
   }
 
-  var $clonedElement = $element(selectorOr$Element).clone();
+  var $domElement = $(domElement);
 
-  return instance(Class, $clonedElement, args);
+  return instance(Class, $domElement, args);
 };
 
 Element.LEFT_MOUSE_BUTTON = 1;
@@ -217,7 +235,9 @@ function $element(selectorOr$Element) {
   if (selectorOr$Element instanceof $) {
     $element = selectorOr$Element;
   } else if (typeof selectorOr$Element === 'string') {
-    $element = $(selectorOr$Element);
+    var selector = selectorOr$Element;
+
+    $element = $(selector);
   } else {
     var parentSelectorOr$Element = selectorOr$Element[0], ///
         childSelector = selectorOr$Element[1],  ///

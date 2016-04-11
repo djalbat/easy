@@ -46,4 +46,8 @@ Checkbox.fromHTML = function(html, changeHandler) {
   return InputElement.fromHTML(Checkbox, html, changeHandler);
 };
 
+Checkbox.fromDOMElement = function(domElement) {
+  return Element.fromDOMElement(Checkbox, domElement);
+};
+
 module.exports = Checkbox;

@@ -38,4 +38,8 @@ Body.fromHTML = function(html) {
   return Element.fromHTML(Body, html);
 };
 
+Body.fromDOMElement = function(domElement) {
+  return Element.fromDOMElement(Body, domElement);
+};
+
 module.exports = Body;

@@ -28,5 +28,6 @@ class InputElement extends Element {
 
 InputElement.clone = Element.clone;
 InputElement.fromHTML = Element.fromHTML;
+InputElement.fromDOMElement = Element.fromDOMElement;
 
 module.exports = InputElement;

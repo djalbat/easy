@@ -38,4 +38,8 @@ Button.fromHTML = function(html, clickHandler) {
   return InputElement.fromHTML(Button, html, clickHandler);
 };
 
+Button.fromDOMElement = function(domElement) {
+  return Element.fromDOMElement(Button, domElement);
+};
+
 module.exports = Button;

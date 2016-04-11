@@ -32,4 +32,8 @@ Link.fromHTML = function(html, clickHandler) {
   return InputElement.fromHTML(Link, html, clickHandler);
 };
 
+Link.fromDOMElement = function(domElement) {
+  return Element.fromDOMElement(Link, domElement);
+};
+
 module.exports = Link;

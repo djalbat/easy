@@ -62,4 +62,8 @@ Input.fromHTML = function(html) {
   return InputElement.fromHTML(Input, html);
 };
 
+Input.fromDOMElement = function(domElement) {
+  return Element.fromDOMElement(Input, domElement);
+};
+
 module.exports = Input;

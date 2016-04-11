@@ -18,4 +18,8 @@ Div.fromHTML = function(html) {
   return Element.fromHTML(Div, html);
 };
 
+Div.fromDOMElement = function(domElement) {
+  return Element.fromDOMElement(Div, domElement);
+};
+
 module.exports = Div;

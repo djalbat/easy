@@ -41,4 +41,8 @@ Select.fromHTML = function(html, changeHandler) {
   return InputElement.fromHTML(Select, html, changeHandler);
 };
 
+Select.fromDOMElement = function(domElement) {
+  return Element.fromDOMElement(Select, domElement);
+};
+
 module.exports = Select;

@@ -27,8 +27,7 @@
         <script>
 
           (function() {
-            var document = easyui.document,
-                Element = easyui.Element,
+            var Element = easyui.Element,
                 Div = easyui.Div,
                 Body = easyui.Body,
                 Link = easyui.Link,
@@ -125,7 +124,7 @@
             selectFromHTML.appendAfter(br4);
             br4.appendAfter(checkboxFromHTML);
 
-            var body = new Body(),
+            var body = Body.fromDOMElement(document.getElementsByTagName('body')[0]),
               outerDiv = Div.fromHTML('<div><div id="firstDiv"></div><div id="secondDiv"><div id="fourthDiv"></div></div><div id="thirdDiv"><div id="fifthDiv"></div></div></div>');
 
             body.append(outerDiv);
@@ -153,10 +152,6 @@
             console.log('The \'id\' attribute of the parent element of the fifth div is \'' + fifthDivParentElementIdAttr + '\'');
             console.log('There are ' + fourthDivParentElementsLength + ' parent elements of the fourth div');
 
-            document.onKeyDown(function() {
-              console.log('document key down')
-            });
-            
           })();
 
         </script>
