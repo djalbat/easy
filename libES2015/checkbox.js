@@ -36,18 +36,18 @@ class Checkbox extends InputElement {
   isChecked() {
     return this.$element.is(':checked');
   }
+
+  static clone(selectorOr$Element, changeHandler) {
+    return InputElement.clone(Checkbox, selectorOr$Element, changeHandler);
+  }
+
+  static fromHTML(html, changeHandler) {
+    return InputElement.fromHTML(Checkbox, html, changeHandler);
+  }
+
+  static fromDOMElement(domElement) {
+    return Element.fromDOMElement(Checkbox, domElement);
+  }
 }
-
-Checkbox.clone = function(selectorOr$Element, changeHandler) {
-  return InputElement.clone(Checkbox, selectorOr$Element, changeHandler);
-};
-
-Checkbox.fromHTML = function(html, changeHandler) {
-  return InputElement.fromHTML(Checkbox, html, changeHandler);
-};
-
-Checkbox.fromDOMElement = function(domElement) {
-  return Element.fromDOMElement(Checkbox, domElement);
-};
 
 module.exports = Checkbox;

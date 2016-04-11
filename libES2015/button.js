@@ -28,18 +28,18 @@ class Button extends InputElement {
       return false;
     })
   }
+
+  static clone(selectorOr$Element, clickHandler) {
+    return InputElement.clone(Button, selectorOr$Element, clickHandler);
+  }
+
+  static fromHTML(html, clickHandler) {
+    return InputElement.fromHTML(Button, html, clickHandler);
+  }
+
+  static fromDOMElement(domElement) {
+    return Element.fromDOMElement(Button, domElement);
+  }
 }
-
-Button.clone = function(selectorOr$Element, clickHandler) {
-  return InputElement.clone(Button, selectorOr$Element, clickHandler);
-};
-
-Button.fromHTML = function(html, clickHandler) {
-  return InputElement.fromHTML(Button, html, clickHandler);
-};
-
-Button.fromDOMElement = function(domElement) {
-  return Element.fromDOMElement(Button, domElement);
-};
 
 module.exports = Button;

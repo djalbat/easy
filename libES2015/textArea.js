@@ -67,18 +67,18 @@ class TextArea extends InputElement {
   select() {
     this.$element.select();
   }
+
+  static clone(selectorOr$Element) {
+    return InputElement.clone(TextArea, selectorOr$Element);
+  }
+
+  static fromHTML(html) {
+    return InputElement.fromHTML(TextArea, html);
+  }
+
+  static fromDOMElement(domElement) {
+    return Element.fromDOMElement(TextArea, domElement);
+  }
 }
-
-TextArea.clone = function(selectorOr$Element) {
-  return InputElement.clone(TextArea, selectorOr$Element);
-};
-
-TextArea.fromHTML = function(html) {
-  return InputElement.fromHTML(TextArea, html);
-};
-
-TextArea.fromDOMElement = function(domElement) {
-  return Element.fromDOMElement(TextArea, domElement);
-};
 
 module.exports = TextArea;

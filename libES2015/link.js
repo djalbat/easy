@@ -22,18 +22,18 @@ class Link extends InputElement {
       return false;
     }.bind(this))
   }
+
+  static clone(selectorOr$Element, clickHandler) {
+    return InputElement.clone(Link, selectorOr$Element, clickHandler);
+  }
+
+  static fromHTML(html, clickHandler) {
+    return InputElement.fromHTML(Link, html, clickHandler);
+  }
+
+  static fromDOMElement(domElement) {
+    return Element.fromDOMElement(Link, domElement);
+  }
 }
-
-Link.clone = function(selectorOr$Element, clickHandler) {
-  return InputElement.clone(Link, selectorOr$Element, clickHandler);
-};
-
-Link.fromHTML = function(html, clickHandler) {
-  return InputElement.fromHTML(Link, html, clickHandler);
-};
-
-Link.fromDOMElement = function(domElement) {
-  return Element.fromDOMElement(Link, domElement);
-};
 
 module.exports = Link;

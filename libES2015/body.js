@@ -28,18 +28,18 @@ class Body extends Element {
       return false;
     })
   }
+
+  static clone(selectorOr$Element) {
+    return Element.clone(Body, selectorOr$Element);
+  }
+
+  static fromHTML(html) {
+    return Element.fromHTML(Body, html);
+  }
+
+  static fromDOMElement(domElement) {
+    return Element.fromDOMElement(Body, domElement);
+  }
 }
-
-Body.clone = function(selectorOr$Element) {
-  return Element.clone(Body, selectorOr$Element);
-};
-
-Body.fromHTML = function(html) {
-  return Element.fromHTML(Body, html);
-};
-
-Body.fromDOMElement = function(domElement) {
-  return Element.fromDOMElement(Body, domElement);
-};
 
 module.exports = Body;
