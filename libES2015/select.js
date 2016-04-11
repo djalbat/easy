@@ -40,8 +40,8 @@ class Select extends InputElement {
     return InputElement.fromHTML(Select, html, changeHandler);
   }
 
-  static fromDOMElement (domElement) {
-    return Element.fromDOMElement(Select, domElement);
+  static fromDOMElement (domElement, changeHandler) {
+    return InputElement.fromDOMElement(Select, domElement, changeHandler);
   }
 }
 

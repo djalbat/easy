@@ -31,8 +31,8 @@ class Link extends InputElement {
     return InputElement.fromHTML(Link, html, clickHandler);
   }
 
-  static fromDOMElement(domElement) {
-    return Element.fromDOMElement(Link, domElement);
+  static fromDOMElement(domElement, clickHandler) {
+    return Element.fromDOMElement(Link, domElement, clickHandler);
   }
 }
 

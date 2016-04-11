@@ -45,8 +45,8 @@ class Checkbox extends InputElement {
     return InputElement.fromHTML(Checkbox, html, changeHandler);
   }
 
-  static fromDOMElement(domElement) {
-    return Element.fromDOMElement(Checkbox, domElement);
+  static fromDOMElement(domElement, changeHandler) {
+    return InputElement.fromDOMElement(Checkbox, domElement, changeHandler);
   }
 }
 

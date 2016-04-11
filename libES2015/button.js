@@ -37,8 +37,8 @@ class Button extends InputElement {
     return InputElement.fromHTML(Button, html, clickHandler);
   }
 
-  static fromDOMElement(domElement) {
-    return Element.fromDOMElement(Button, domElement);
+  static fromDOMElement(domElement, clickHandler) {
+    return InputElement.fromDOMElement(Button, domElement, clickHandler);
   }
 }
 
