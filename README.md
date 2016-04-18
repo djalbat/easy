@@ -135,6 +135,7 @@ Each element has the following methods. These do nothing much apart from ape jQu
 - `prepend`
 - `append`
 - `detach`
+- `empty`
 - `remove`
 - `hasClass`
 - `addClass`

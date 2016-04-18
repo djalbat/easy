@@ -76,6 +76,8 @@ class Element {
 
   remove() { this.$element.remove(); }
   detach() { this.$element.detach(); }
+  
+  empty() { this.$element.empty(); }
 
   hasClass(className) { return this.$element.hasClass(className); }
   addClass(className) { this.$element.addClass(className); }
