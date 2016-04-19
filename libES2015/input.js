@@ -52,14 +52,18 @@ class Input extends InputElement {
   select() {
     this.$element.select();
   }
+  
+  static clone(selectorOr$Element) {
+    return InputElement.clone(Input, selectorOr$Element);
+  }
+
+  static fromHTML(html) {
+    return InputElement.fromHTML(Input, html);
+  }
+
+  static fromDOMElement(domElement) {
+    return Element.fromDOMElement(Input, domElement);
+  }
 }
-
-Input.clone = function(selectorOr$Element) {
-  return InputElement.clone(Input, selectorOr$Element);
-};
-
-Input.fromHTML = function(html) {
-  return InputElement.fromHTML(Input, html);
-};
 
 module.exports = Input;

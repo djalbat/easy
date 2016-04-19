@@ -31,14 +31,18 @@ class Select extends InputElement {
   setSelectedOptionByValue(value) {
     this.$element.val(value);
   }
+
+  static clone (selectorOr$Element, changeHandler) {
+    return InputElement.clone(Select, selectorOr$Element, changeHandler);
+  }
+
+  static fromHTML (html, changeHandler) {
+    return InputElement.fromHTML(Select, html, changeHandler);
+  }
+
+  static fromDOMElement (domElement, changeHandler) {
+    return InputElement.fromDOMElement(Select, domElement, changeHandler);
+  }
 }
-
-Select.clone = function(selectorOr$Element, changeHandler) {
-  return InputElement.clone(Select, selectorOr$Element, changeHandler);
-};
-
-Select.fromHTML = function(html, changeHandler) {
-  return InputElement.fromHTML(Select, html, changeHandler);
-};
 
 module.exports = Select;

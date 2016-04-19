@@ -82,11 +82,15 @@ var link = new Link('#link', function(href) {
 });
 ```
 
-Or you can use HTML snippets with the `fromHTML()` factory method of any relevant class:
+Or you can use HTML snippets or DOM elements with the `fromHTML()` and `fromDOMElement()` factory methods of any relevant class:
 
 ```js
 var checkboxFromHTML = Checkbox.fromHTML('<input type="checkbox"/>');
+
+var body = Body.fromDOMElement(document.getElementsByTagName('body')[0]);
 ```
+
+Note that in the second case the `document` is the global document reference, not EasyUI's `document` singleton.
 
 If constructors take change or click handlers you can pass these to `fromHTML()` methods.
 
@@ -131,6 +135,7 @@ Each element has the following methods. These do nothing much apart from ape jQu
 - `prepend`
 - `append`
 - `detach`
+- `empty`
 - `remove`
 - `hasClass`
 - `addClass`
