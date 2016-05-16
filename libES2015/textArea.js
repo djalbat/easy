@@ -44,15 +44,15 @@ class TextArea extends InputElement {
   }
 
   getSelectionStart() {
-    var textrange = this.$element.textrange('get'),
-        selectionStart = textrange['start'];  ///
+    var textRange = this.$element.textrange('get'),
+        selectionStart = textRange['start'];  ///
 
     return selectionStart;
   }
 
   getSelectionEnd() {
-    var textrange = this.$element.textrange('get'),
-        selectionEnd = textrange['end'];  ///
+    var textRange = this.$element.textrange('get'),
+        selectionEnd = textRange['end'];  ///
 
     return selectionEnd;
   }

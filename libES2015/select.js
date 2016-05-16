@@ -32,15 +32,15 @@ class Select extends InputElement {
     this.$element.val(value);
   }
 
-  static clone (selectorOr$Element, changeHandler) {
+  static clone(selectorOr$Element, changeHandler) {
     return InputElement.clone(Select, selectorOr$Element, changeHandler);
   }
 
-  static fromHTML (html, changeHandler) {
+  static fromHTML(html, changeHandler) {
     return InputElement.fromHTML(Select, html, changeHandler);
   }
 
-  static fromDOMElement (domElement, changeHandler) {
+  static fromDOMElement(domElement, changeHandler) {
     return InputElement.fromDOMElement(Select, domElement, changeHandler);
   }
 }

@@ -241,9 +241,9 @@ function $element(selectorOr$Element) {
 
     $element = $(selector);
   } else {
-    var parentSelectorOr$Element = selectorOr$Element[0], ///
+    var parentElement = selectorOr$Element[0], ///
         childSelector = selectorOr$Element[1],  ///
-        parent$Element = (parentSelectorOr$Element instanceof $) ? parentSelectorOr$Element : $(parentSelectorOr$Element);
+        parent$Element = parentElement.$element;  ///
 
     $element = parent$Element.find(childSelector);
   }
