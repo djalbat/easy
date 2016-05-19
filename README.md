@@ -10,9 +10,9 @@ It's liberating to cast off the dogma that says that an application's view and m
 
 ## Related projects
 
-- [EasyUI-Layout](https://github.com/djalbat/EasyUI-Layout) Layout components that work with CSS flexbox.
-- [EasyUI-Explorer](https://github.com/djalbat/EasyUI-Explorer) A file explorer with drag and drop functionality. 
 - [Florence](https://github.com/jecs-imperial/Florence) A collaborative proof assistant that depends on all three EasyUI projects. 
+- [EasyUI-Layout](https://github.com/djalbat/EasyUI-Layout) Layout components that work with CSS flexbox.
+- [EasyUI-DragAndDrop](https://github.com/djalbat/EasyUI-DragAndDrop) Drag and drop components including a file explorer and a rubbish bin. 
  
 ## Installation
 
@@ -26,18 +26,18 @@ Client-side you can take the `easyui.js` file in the `dist/` folder put it somew
 <script src="scripts/lib/easyui.js"> </script>
 ```
 
-This will give you a global `easyui` variable which you use directly:
+This will give you a global `easyUI` variable which you use directly:
   
 ```js
-var Button = easyui.Button;
+var Button = easyUI.Button;
 ```
  
 If you're using AMD require client-side or CommonJS server-side the syntax for requiring EasyUI is the same:
 
 ```js
-var easyui = require('lib/easyui'),
-    Select = easyui.Select,
-    Checkbox = easyui.Checkbox;
+var easyUI = require('lib/easyui'),
+    Select = easyUI.Select,
+    Checkbox = easyUI.Checkbox;
 ```
 
 ## Documentation
