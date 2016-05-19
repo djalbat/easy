@@ -11,7 +11,7 @@ class Checkbox extends InputElement {
     }
   }
 
-  clone(changeHandler) { return Checkbox.clone(this.$element, changeHandler); }
+  clone(changeHandler) { return Checkbox.clone(this, changeHandler); }
 
   onChange(handler) {
     this.$element.click(function() {
@@ -37,8 +37,8 @@ class Checkbox extends InputElement {
     return this.$element.is(':checked');
   }
 
-  static clone(selector, changeHandler) {
-    return InputElement.clone(Checkbox, selector, changeHandler);
+  static clone(selectorOrElement, changeHandler) {
+    return InputElement.clone(Checkbox, selectorOrElement, changeHandler);
   }
 
   static fromHTML(html, changeHandler) {

@@ -11,7 +11,7 @@ class Body extends Element {
     super(selector);
   }
 
-  clone() { return Body.clone(this.$element); }
+  clone() { return Body.clone(this); }
 
   onClick(handler) {
     this.$element.click(function() {
@@ -29,8 +29,8 @@ class Body extends Element {
     })
   }
 
-  static clone(selector) {
-    return Element.clone(Body, selector);
+  static clone(selectorOrElement) {
+    return Element.clone(Body, selectorOrElement);
   }
 
   static fromHTML(html) {

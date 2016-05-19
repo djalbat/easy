@@ -117,6 +117,9 @@ Each element has the following methods. These do nothing much apart from abstrac
 - `hide`
 - `enable`
 - `disable`
+- `remove`
+- `detach`
+- `empty`
 - `getWidth`
 - `getHeight`
 - `setWidth`
@@ -128,9 +131,6 @@ Each element has the following methods. These do nothing much apart from abstrac
 - `appendAfter`
 - `prepend`
 - `append`
-- `detach`
-- `empty`
-- `remove`
 - `hasClass`
 - `addClass`
 - `removeClass`
@@ -151,8 +151,8 @@ Each input element has the following additional methods:
 
 - `getBounds`, returns an instance of the `Bounds` class with the `top`, `left`, `bottom` and `right` bounds of the element.
 - `onMouseXXX`, each abstracts away from jQuery functionality except that it calls the handler with `mouseTop`, `mouseLeft` and `mouseButton` rather than the event object. If you want the event object, use the `on()` method. The value of the `mouseButton` argument is either `Element.LEFT_MOUSE_BUTTON`, `Element.MIDDLE_MOUSE_BUTTON` or `Element.RIGHT_MOUSE_BUTTON`.
-- `childElements` returns an array containing all the immediate descendant elements, taking an optional selector
 - `findElements` returns an array containing all the descendant elements, taking an optional selector
+- `childElements` returns an array containing all the immediate descendant elements, taking an optional selector
 - `parentElement` returns the immediate ascendant element or null, taking an optional selector
 - `parentElements` returns an array containing all the ascendant elements, taking an optional selector
 
@@ -164,7 +164,7 @@ The `Input` and `TextArea` classes both have the following methods:
 - `getSelectionStart`
 - `getSelectionEnd`
 
-Note that the behaviour of the `onChange` method is different from the jQuery method it abstract away froms.
+Note that the behaviour of the `onChange` method is different from the jQuery method it abstracts away from.
 
 The `TextArea` class has the following methods:
  
@@ -175,6 +175,10 @@ The `TextArea` class has the following methods:
 - `setScrollLeft`
 
 The `window` singleton only has one `onResize` method, the `document` singleton has the `onKeyUp` and `onKeyDown` methods.
+
+Other elements may have still other methods, please check the source!
+
+#### Adding elements to the DOM
  
 The methods to add elements to the DOM are hopefully intuitive. Note the difference between the `append()` and `appendAfter()` methods.
 
@@ -219,50 +223,52 @@ Obviously the list is incomplete. Use the `Element` class if there is no relevan
 
 #### Rolling your own elements
 
-This is easily done. We take the `Checkbox` class as an example. Use the `clone()` factory method of the `Element` class to create your own element, passing it your class followed by all the arguments for its constructor:
- 
+We use the existing `Div` element as an example:
+
 ```js
-Checkbox.clone = function(selector, clickHandler) {
-  return Element.clone(Checkbox, selector, clickHandler);
-};
+class Div extends Element {
+  constructor(selector) {
+    super(selector);
+  }
+
+  clone() { return Div.clone(this); }
+
+  static clone(selectorOrElement) {
+    return Element.clone(Div, selectorOrElement);
+  }
+
+  static fromHTML(html) {
+    return Element.fromHTML(Div, html);
+  }
+
+  static fromDOMElement(domElement) {
+    return Element.fromDOMElement(Div, domElement);
+  }
+}
 ```
 
-The `fromHTML()` method is also boilerplate:
-
+You can use the private `$element` property to abstract away from jQuery functionality, as in the `Checkbox` element:
+    
 ```js
-Checkbox.fromHTML = function(html, clickHandler) {
-  return Element.fromHTML(Checkbox, html, clickHandler);
-};
-```
+class Checkbox extends InputElement {
+  constructor(selector, changeHandler) {
+    super(selector);
 
-When writing the constructor, the `Element' constructor from within your own:
+    if (changeHandler) {
+      this.onChange(changeHandler);
+    }
+  }
 
-```js
-var Checkbox = function(selector, clickHandler) {
-  inherits(this, new Element(selector));
-
-  ...
-};
-```
-
-The first argument should be `selector` which you don't have to worry about but should pass straight to the constructor of the `Element` class.
-
-You can also create a `clone()` method by passing the private `$element` property to the `clone()` factory method. 
-
-```js
-Checkbox.prototype = {
-  clone: function(clickHandler) { return Checkbox.clone(this.$element, clickHandler); },
+  clone(changeHandler) { return Checkbox.clone(this.$element, changeHandler); }
   
   ...
-  
-  isChecked: function() {
+
+  isChecked() {
     return this.$element.is(':checked');
   }
-};
+}
 ```
 
-Note that you can also use the `$element` property to abstract away from jQuery functionality, as the `isChecked()` method shows.
-    
 ## Contact
 
 - james.smith@djalbat.com

@@ -13,7 +13,7 @@ class TextArea extends InputElement {
     }
   }
 
-  clone() { return TextArea.clone(this.$element); }
+  clone() { return TextArea.clone(this); }
 
   onChange(handler) {
     this.$element.keydown(function() {
@@ -68,8 +68,8 @@ class TextArea extends InputElement {
     this.$element.select();
   }
 
-  static clone(selector) {
-    return InputElement.clone(TextArea, selector);
+  static clone(selectorOrElement) {
+    return InputElement.clone(TextArea, selectorOrElement);
   }
 
   static fromHTML(html) {
@@ -77,7 +77,7 @@ class TextArea extends InputElement {
   }
 
   static fromDOMElement(domElement) {
-    return Element.fromDOMElement(TextArea, domElement);
+    return InputElement.fromDOMElement(TextArea, domElement);
   }
 }
 

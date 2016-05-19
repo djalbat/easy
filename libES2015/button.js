@@ -11,7 +11,7 @@ class Button extends InputElement {
     }
   }
 
-  clone(clickHandler) { return Button.clone(this.$element, clickHandler); }
+  clone(clickHandler) { return Button.clone(this, clickHandler); }
 
   onClick(handler) {
     this.$element.click(function() {
@@ -29,8 +29,8 @@ class Button extends InputElement {
     })
   }
 
-  static clone(selector, clickHandler) {
-    return InputElement.clone(Button, selector, clickHandler);
+  static clone(selectorOrElement, clickHandler) {
+    return InputElement.clone(Button, selectorOrElement, clickHandler);
   }
 
   static fromHTML(html, clickHandler) {

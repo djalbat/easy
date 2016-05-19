@@ -5,27 +5,21 @@ var $ = require('jquery');
 var Bounds = require('./bounds');
 
 class Element {
-  constructor(selector) {
-    var selectorOrSomething = selector; ///
-
-    this.$element = $element(selectorOrSomething);
+  constructor(selectorOrSomething) {
+    this.$element = to$Element(selectorOrSomething);
 
     this.data('element', this);
   }
 
-  clone() {
-    var clonedElement = Element.clone(this.$element);
-
-    return clonedElement;
-  }
+  clone() { return Element.clone(this); }
 
   show() { this.$element.show(); }
   hide() { this.$element.hide(); }
   enable() { this.$element.removeAttr('disabled'); }
   disable() { this.$element.attr('disabled', true); }
-
-  setWidth(width) { this.$element.width(width); }
-  setHeight(height) { this.$element.height(height); }
+  remove() { this.$element.remove(); }
+  detach() { this.$element.detach(); }
+  empty() { this.$element.empty(); }
 
   getWidth() { return this.$element.width(); }
   getHeight() { return this.$element.height(); }
@@ -43,10 +37,12 @@ class Element {
     return bounds;
   }
 
+  setWidth(width) { this.$element.width(width); }
+  setHeight(height) { this.$element.height(height); }
+
   getAttribute(name) { return this.$element.attr(name); }
   addAttribute(name, value) { this.$element.attr(name, value); }
   removeAttribute(name) { this.$element.removeAttr(name); }
-
   prependBefore(element) { this.$element.before(element.$element); }
   appendAfter(element) { this.$element.after(element.$element); }
   
@@ -75,11 +71,6 @@ class Element {
       this.$element.append($element);
     }
   }
-
-  remove() { this.$element.remove(); }
-  detach() { this.$element.detach(); }
-  
-  empty() { this.$element.empty(); }
 
   hasClass(className) { return this.$element.hasClass(className); }
   addClass(className) { this.$element.addClass(className); }
@@ -162,58 +153,56 @@ class Element {
   onMouseOut(handler) { this.$element.on('mouseout', returnMouseEventHandler(handler)); }
   onMouseMove(handler) { this.$element.on('mousemove', returnMouseEventHandler(handler)); }
 
-  static clone(selector) {
-    var Class,
-        args;
+  static clone() {
+    var firstArgument = first(arguments),
+        remainingArguments = remaining(arguments);
 
-    if (arguments.length === 1) {
-      Class = Element;
-      args = [];
-    } else {
-      Class = arguments[0];
-      selector = arguments[1];
-      args = Array.prototype.slice.call(arguments, 2);
-    }
+    return instance(
+      firstArgument,
+      remainingArguments,
+      function(firstArgument) {
+        return ((typeof firstArgument === 'string') || (firstArgument instanceof Element));
+      },
+      function(secondArgument) {
+        var $element = (typeof secondArgument === 'string') ?
+                         $(secondArgument) :
+                           secondArgument.$element;
 
-    var $clonedElement = $element(selector).clone();
-
-    return instance(Class, $clonedElement, args);
+        return $element.clone();
+      }
+    );
   }
 
-  static fromHTML(html) {
-    var Class,
-        args;
+  static fromHTML() {
+    var firstArgument = first(arguments),
+        remainingArguments = remaining(arguments);
 
-    if (arguments.length === 1) {
-      Class = Element;
-      args = [];
-    } else {
-      Class = arguments[0];
-      html = arguments[1];
-      args = Array.prototype.slice.call(arguments, 2);
-    }
-
-    var $htmlElement = $(html);
-
-    return instance(Class, $htmlElement, args);
+    return instance(
+      firstArgument,
+      remainingArguments,
+      function(firstArgument) {
+        return (typeof firstArgument === 'string');
+      },
+      function(secondArgument) {
+        return $(secondArgument);
+      }
+    );
   }
 
-  static fromDOMElement(domElement) {
-    var Class,
-        args;
+  static fromDOMElement() {
+    var firstArgument = first(arguments),
+        remainingArguments = remaining(arguments);
 
-    if (arguments.length === 1) {
-      Class = Element;
-      args = [];
-    } else {
-      Class = arguments[0];
-      domElement = arguments[1];
-      args = Array.prototype.slice.call(arguments, 2);
-    }
-
-    var $domElement = $(domElement);
-
-    return instance(Class, $domElement, args);
+    return instance(
+      firstArgument,
+      remainingArguments,
+      function(firstArgument) {
+        return (firstArgument instanceof HTMLElement);
+      },
+      function(secondArgument) {
+        return $(secondArgument);
+      }
+    );
   }
 }
 
@@ -223,6 +212,26 @@ Element.RIGHT_MOUSE_BUTTON = 3;
 
 module.exports = Element;
 
+function to$Element(selectorOrSomething) {
+  var $element;
+
+  if (false) {
+
+  } else if (typeof selectorOrSomething === 'string') {
+    $element = $(selectorOrSomething);
+  } else if (selectorOrSomething instanceof $) {
+    $element = selectorOrSomething;  ///
+  } else if (selectorOrSomething instanceof Array ) {
+    var parentElement = selectorOrSomething[0], ///
+        childSelector = selectorOrSomething[1],  ///
+        parent$Element = parentElement.$element;  ///
+
+    $element = parent$Element.find(childSelector);
+  }
+
+  return $element;
+}
+
 function returnMouseEventHandler(handler) {
   return function(event) {
     var mouseTop = event.pageY,  ///
@@ -231,38 +240,6 @@ function returnMouseEventHandler(handler) {
 
     handler(mouseTop, mouseLeft, mouseButton);
   };
-}
-
-function $element(selectorOrSomething) {
-  var $element;
-
-  if (false) {
-
-  } else if (typeof selectorOrSomething === 'string') {
-    $element = $(selectorOrSomething);
-  } else if (selectorOrSomething instanceof Array ) {
-    var parentElement = selectorOrSomething[0], ///
-        childSelector = selectorOrSomething[1],  ///
-        parent$Element = parentElement.$element;  ///
-
-    $element = parent$Element.find(childSelector);
-  } else if (selectorOrSomething instanceof $) {
-    $element = selectorOrSomething;  ///
-  } else {
-    ///
-  }
-
-  return $element;
-}
-
-function instance(Class, $element, args) {
-  args.unshift($element);
-
-  args.unshift(null); ///
-  
-  var instance = new (Function.prototype.bind.apply(Class, args));  ///
-
-  return instance;
 }
 
 function elementsFromDOMElements(domElements) {
@@ -282,4 +259,22 @@ function elementsFromDOMElements(domElements) {
   return elements;
 }
 
+function instance(firstArgument, remainingArguments, isNotAClass, to$Element) {
+  if (isNotAClass(firstArgument)) {
+    remainingArguments.unshift(firstArgument);
+    firstArgument = Element;
+  }
+
+  var Class = firstArgument,
+      secondArgument = remainingArguments.shift(),
+      $element = to$Element(secondArgument);
+
+  remainingArguments.unshift($element);
+  remainingArguments.unshift(null); ///
+
+  return new (Function.prototype.bind.apply(Class, remainingArguments));  ///
+}
+
 function first(array) { return array[0]; }
+
+function remaining(array) { return Array.prototype.slice.call(array, 1); }

@@ -7,10 +7,10 @@ class Div extends Element {
     super(selector);
   }
 
-  clone() { return Div.clone(this.$element); }
+  clone() { return Div.clone(this); }
 
-  static clone(selector) {
-    return Element.clone(Div, selector);
+  static clone(selectorOrElement) {
+    return Element.clone(Div, selectorOrElement);
   }
 
   static fromHTML(html) {

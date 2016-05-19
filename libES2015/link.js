@@ -11,7 +11,7 @@ class Link extends InputElement {
     }
   }
 
-  clone(clickHandler) { return Link.clone(this.$element, clickHandler); }
+  clone(clickHandler) { return Link.clone(this, clickHandler); }
 
   onClick(handler) {
     this.$element.click(function() {
@@ -23,8 +23,8 @@ class Link extends InputElement {
     }.bind(this))
   }
 
-  static clone(selector, clickHandler) {
-    return InputElement.clone(Link, selector, clickHandler);
+  static clone(selectorOrElement, clickHandler) {
+    return InputElement.clone(Link, selectorOrElement, clickHandler);
   }
 
   static fromHTML(html, clickHandler) {
@@ -32,7 +32,7 @@ class Link extends InputElement {
   }
 
   static fromDOMElement(domElement, clickHandler) {
-    return Element.fromDOMElement(Link, domElement, clickHandler);
+    return InputElement.fromDOMElement(Link, domElement, clickHandler);
   }
 }
 

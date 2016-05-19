@@ -13,7 +13,7 @@ class Input extends InputElement {
     }
   }
 
-  clone() { return Input.clone(this.$element); }
+  clone() { return Input.clone(this); }
 
   onChange(handler) {
     this.$element.keydown(function() {
@@ -53,8 +53,8 @@ class Input extends InputElement {
     this.$element.select();
   }
   
-  static clone(selector) {
-    return InputElement.clone(Input, selector);
+  static clone(selectorOrElement) {
+    return InputElement.clone(Input, selectorOrElement);
   }
 
   static fromHTML(html) {
@@ -62,7 +62,7 @@ class Input extends InputElement {
   }
 
   static fromDOMElement(domElement) {
-    return Element.fromDOMElement(Input, domElement);
+    return InputElement.fromDOMElement(Input, domElement);
   }
 }
 

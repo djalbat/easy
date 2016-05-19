@@ -11,7 +11,7 @@ class Select extends InputElement {
     }
   }
 
-  clone(changeHandler) { return Select.clone(this.$element, changeHandler); }
+  clone(changeHandler) { return Select.clone(this, changeHandler); }
 
   onChange(handler) {
     this.$element.change(function() {
@@ -32,8 +32,8 @@ class Select extends InputElement {
     this.$element.val(value);
   }
 
-  static clone(selector, changeHandler) {
-    return InputElement.clone(Select, selector, changeHandler);
+  static clone(selectorOrElement, changeHandler) {
+    return InputElement.clone(Select, selectorOrElement, changeHandler);
   }
 
   static fromHTML(html, changeHandler) {
