@@ -3,8 +3,8 @@
 var InputElement = require('./inputElement');
 
 class Select extends InputElement {
-  constructor(selectorOr$Element, changeHandler) {
-    super(selectorOr$Element);
+  constructor(selector, changeHandler) {
+    super(selector);
 
     if (changeHandler) {
       this.onChange(changeHandler);
@@ -32,8 +32,8 @@ class Select extends InputElement {
     this.$element.val(value);
   }
 
-  static clone(selectorOr$Element, changeHandler) {
-    return InputElement.clone(Select, selectorOr$Element, changeHandler);
+  static clone(selector, changeHandler) {
+    return InputElement.clone(Select, selector, changeHandler);
   }
 
   static fromHTML(html, changeHandler) {

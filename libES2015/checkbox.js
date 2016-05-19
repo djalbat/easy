@@ -3,8 +3,8 @@
 var InputElement = require('./inputElement');
 
 class Checkbox extends InputElement {
-  constructor(selectorOr$Element, changeHandler) {
-    super(selectorOr$Element);
+  constructor(selector, changeHandler) {
+    super(selector);
 
     if (changeHandler) {
       this.onChange(changeHandler);
@@ -37,8 +37,8 @@ class Checkbox extends InputElement {
     return this.$element.is(':checked');
   }
 
-  static clone(selectorOr$Element, changeHandler) {
-    return InputElement.clone(Checkbox, selectorOr$Element, changeHandler);
+  static clone(selector, changeHandler) {
+    return InputElement.clone(Checkbox, selector, changeHandler);
   }
 
   static fromHTML(html, changeHandler) {

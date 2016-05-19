@@ -5,8 +5,10 @@ var $ = require('jquery');
 var Bounds = require('./bounds');
 
 class Element {
-  constructor(selectorOr$Element) {
-    this.$element = $element(selectorOr$Element);
+  constructor(selector) {
+    var selectorOrSomething = selector; ///
+
+    this.$element = $element(selectorOrSomething);
 
     this.data('element', this);
   }
@@ -160,7 +162,7 @@ class Element {
   onMouseOut(handler) { this.$element.on('mouseout', returnMouseEventHandler(handler)); }
   onMouseMove(handler) { this.$element.on('mousemove', returnMouseEventHandler(handler)); }
 
-  static clone(selectorOr$Element) {
+  static clone(selector) {
     var Class,
         args;
 
@@ -169,11 +171,11 @@ class Element {
       args = [];
     } else {
       Class = arguments[0];
-      selectorOr$Element = arguments[1];
+      selector = arguments[1];
       args = Array.prototype.slice.call(arguments, 2);
     }
 
-    var $clonedElement = $element(selectorOr$Element).clone();
+    var $clonedElement = $element(selector).clone();
 
     return instance(Class, $clonedElement, args);
   }
@@ -231,21 +233,23 @@ function returnMouseEventHandler(handler) {
   };
 }
 
-function $element(selectorOr$Element) {
+function $element(selectorOrSomething) {
   var $element;
 
-  if (selectorOr$Element instanceof $) {
-    $element = selectorOr$Element;
-  } else if (typeof selectorOr$Element === 'string') {
-    var selector = selectorOr$Element;
+  if (false) {
 
-    $element = $(selector);
-  } else {
-    var parentElement = selectorOr$Element[0], ///
-        childSelector = selectorOr$Element[1],  ///
+  } else if (typeof selectorOrSomething === 'string') {
+    $element = $(selectorOrSomething);
+  } else if (selectorOrSomething instanceof Array ) {
+    var parentElement = selectorOrSomething[0], ///
+        childSelector = selectorOrSomething[1],  ///
         parent$Element = parentElement.$element;  ///
 
     $element = parent$Element.find(childSelector);
+  } else if (selectorOrSomething instanceof $) {
+    $element = selectorOrSomething;  ///
+  } else {
+    ///
   }
 
   return $element;

@@ -3,8 +3,8 @@
 var InputElement = require('./inputElement');
 
 class Button extends InputElement {
-  constructor(selectorOr$Element, clickHandler) {
-    super(selectorOr$Element);
+  constructor(selector, clickHandler) {
+    super(selector);
 
     if (clickHandler) {
       this.onClick(clickHandler);
@@ -29,8 +29,8 @@ class Button extends InputElement {
     })
   }
 
-  static clone(selectorOr$Element, clickHandler) {
-    return InputElement.clone(Button, selectorOr$Element, clickHandler);
+  static clone(selector, clickHandler) {
+    return InputElement.clone(Button, selector, clickHandler);
   }
 
   static fromHTML(html, clickHandler) {

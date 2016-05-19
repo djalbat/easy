@@ -3,8 +3,8 @@
 var InputElement = require('./inputElement');
 
 class Link extends InputElement {
-  constructor(selectorOr$Element, clickHandler) {
-    super(selectorOr$Element);
+  constructor(selector, clickHandler) {
+    super(selector);
 
     if (clickHandler) {
       this.onClick(clickHandler);
@@ -23,8 +23,8 @@ class Link extends InputElement {
     }.bind(this))
   }
 
-  static clone(selectorOr$Element, clickHandler) {
-    return InputElement.clone(Link, selectorOr$Element, clickHandler);
+  static clone(selector, clickHandler) {
+    return InputElement.clone(Link, selector, clickHandler);
   }
 
   static fromHTML(html, clickHandler) {

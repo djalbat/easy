@@ -5,8 +5,8 @@ require('jquery-textrange');
 var InputElement = require('./inputElement');
 
 class TextArea extends InputElement {
-  constructor(selectorOr$Element, changeHandler) {
-    super(selectorOr$Element);
+  constructor(selector, changeHandler) {
+    super(selector);
 
     if (changeHandler) {
       this.onChange(changeHandler);
@@ -68,8 +68,8 @@ class TextArea extends InputElement {
     this.$element.select();
   }
 
-  static clone(selectorOr$Element) {
-    return InputElement.clone(TextArea, selectorOr$Element);
+  static clone(selector) {
+    return InputElement.clone(TextArea, selector);
   }
 
   static fromHTML(html) {

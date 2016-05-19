@@ -3,8 +3,8 @@
 var Element = require('./element');
 
 class InputElement extends Element {
-  constructor(selectorOr$Element) {
-    super(selectorOr$Element);
+  constructor(selector) {
+    super(selector);
   }
 
   hasFocus() {

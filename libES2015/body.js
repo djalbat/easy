@@ -3,12 +3,12 @@
 var Element = require('./element');
 
 class Body extends Element {
-  constructor(selectorOr$Element) {
-    if (selectorOr$Element === undefined) {
-      selectorOr$Element = 'body';
+  constructor(selector) {
+    if (selector === undefined) {
+      selector = 'body';
     }
 
-    super(selectorOr$Element);
+    super(selector);
   }
 
   clone() { return Body.clone(this.$element); }
@@ -29,8 +29,8 @@ class Body extends Element {
     })
   }
 
-  static clone(selectorOr$Element) {
-    return Element.clone(Body, selectorOr$Element);
+  static clone(selector) {
+    return Element.clone(Body, selector);
   }
 
   static fromHTML(html) {

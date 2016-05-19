@@ -3,14 +3,14 @@
 var Element = require('./element');
 
 class Div extends Element {
-  constructor(selectorOr$Element) {
-    super(selectorOr$Element);
+  constructor(selector) {
+    super(selector);
   }
 
   clone() { return Div.clone(this.$element); }
 
-  static clone(selectorOr$Element) {
-    return Element.clone(Div, selectorOr$Element);
+  static clone(selector) {
+    return Element.clone(Div, selector);
   }
 
   static fromHTML(html) {
