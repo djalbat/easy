@@ -32,7 +32,7 @@ This will give you a global `easyUI` variable which you use directly:
 var Button = easyUI.Button;
 ```
  
-If you're using AMD require client-side or CommonJS server-side the syntax for requiring EasyUI is the same:
+If you're using AMD require client-side or CommonJS server-side the syntax for requiring EasyUI is much the same:
 
 ```js
 var easyUI = require('lib/easyui'),
