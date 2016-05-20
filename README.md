@@ -11,8 +11,8 @@ It's liberating to cast off the dogma that says that an application's view and m
 ## Related projects
 
 - [Florence](https://github.com/jecs-imperial/Florence) A collaborative proof assistant that depends on all three EasyUI projects. 
-- [EasyUI-Layout](https://github.com/djalbat/EasyUI-Layout) Layout components that work with CSS flexbox.
-- [EasyUI-DragAndDrop](https://github.com/djalbat/EasyUI-DragAndDrop) Drag and drop components including a file explorer and a rubbish bin. 
+- [EasyUI-Layout](https://github.com/djalbat/EasyUI-Layout) Layout elements that work with CSS flexbox.
+- [EasyUI-DragAndDrop](https://github.com/djalbat/EasyUI-DragAndDrop) Drag and drop elements including a file explorer and rubbish bin. 
  
 ## Installation
 
