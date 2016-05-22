@@ -149,7 +149,8 @@ Each input element has the following additional methods:
 
 #### Other shared methods
 
-- `getBounds`, returns an instance of the `Bounds` class with the `top`, `left`, `bottom` and `right` bounds of the element.
+- `getPosition`, returns an instance of the `Position` class with the `top` and `left` position of the element relative to the offset parent.
+- `getBounds`, returns an instance of the `Bounds` class with the `top`, `left`, `bottom` and `right` bounds of the element relative to the document.
 - `onMouseXXX`, each abstracts away from jQuery functionality except that it calls the handler with `mouseTop`, `mouseLeft` and `mouseButton` rather than the event object. If you want the event object, use the `on()` method. The value of the `mouseButton` argument is either `Element.LEFT_MOUSE_BUTTON`, `Element.MIDDLE_MOUSE_BUTTON` or `Element.RIGHT_MOUSE_BUTTON`.
 - `findElements` returns an array containing all the descendant elements, taking an optional selector
 - `childElements` returns an array containing all the immediate descendant elements, taking an optional selector

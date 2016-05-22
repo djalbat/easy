@@ -2,7 +2,8 @@
 
 var $ = require('jquery');
 
-var Bounds = require('./bounds');
+var Bounds = require('./bounds'),
+    Position = require('./position');
 
 class Element {
   constructor(selectorOrSomething) {
@@ -23,6 +24,14 @@ class Element {
 
   getWidth() { return this.$element.width(); }
   getHeight() { return this.$element.height(); }
+  getPosition() {
+    var $position = this.$element.position(),
+        top = $position.top,
+        left = $position.left,
+        position = new Position(top, left);
+    
+    return position;
+  }
 
   getBounds() {
     var $offset = this.$element.offset(),
