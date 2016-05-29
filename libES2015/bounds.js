@@ -25,10 +25,10 @@ class Bounds {
   }
 
   areOverlapping(bounds) {
-    return this.top <= bounds.bottom
-        && this.left <= bounds.right
-        && this.bottom >= bounds.top
-        && this.right >= bounds.left;
+    return this.top < bounds.bottom
+        && this.left < bounds.right
+        && this.bottom > bounds.top
+        && this.right > bounds.left;
   }
 }
 
