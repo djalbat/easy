@@ -154,13 +154,33 @@ class Element {
     return parentElements;
   }
 
-  on(events, handler) { this.$element.on(events, handler); }
+  on(events, handler, namespace) {
+    if (namespace !== undefined) {
+      events = events + '.' + namespace;
+    }
+    
+    this.$element.on(events, handler); 
+  }
+  
+  off(events, namespace) {
+    if (namespace !== undefined) {
+      events = events + '.' + namespace;
+    }
+    
+    this.$element.off(events);
+  }
 
-  onMouseUp(handler) { this.$element.on('mouseup', returnMouseEventHandler(handler)); }
-  onMouseDown(handler) { this.$element.on('mousedown', returnMouseEventHandler(handler)); }
-  onMouseOver(handler) { this.$element.on('mouseover', returnMouseEventHandler(handler)); }
-  onMouseOut(handler) { this.$element.on('mouseout', returnMouseEventHandler(handler)); }
-  onMouseMove(handler) { this.$element.on('mousemove', returnMouseEventHandler(handler)); }
+  onMouseUp(handler, namespace) { this.on('mouseup', returnMouseEventHandler(handler), namespace); }
+  onMouseDown(handler, namespace) { this.on('mousedown', returnMouseEventHandler(handler), namespace); }
+  onMouseOver(handler, namespace) { this.on('mouseover', returnMouseEventHandler(handler), namespace); }
+  onMouseOut(handler, namespace) { this.on('mouseout', returnMouseEventHandler(handler), namespace); }
+  onMouseMove(handler, namespace) { this.on('mousemove', returnMouseEventHandler(handler), namespace); }
+
+  offMouseUp(namespace) { this.off('mouseup', namespace); }
+  offMouseDown(namespace) { this.off('mousedown', namespace); }
+  offMouseOver(namespace) { this.off('mouseover', namespace); }
+  offMouseOut(namespace) { this.off('mouseout', namespace); }
+  offMouseMove(namespace) { this.off('mousemove', namespace); }
 
   static clone() {
     var firstArgument = first(arguments),

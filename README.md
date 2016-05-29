@@ -149,9 +149,12 @@ Each input element has the following additional methods:
 
 #### Other shared methods
 
-- `getPosition`, returns an instance of the `Position` class with the `top` and `left` position of the element relative to the offset parent.
-- `getBounds`, returns an instance of the `Bounds` class with the `top`, `left`, `bottom` and `right` bounds of the element relative to the document.
-- `onMouseXXX`, each abstracts away from jQuery functionality except that it calls the handler with `mouseTop`, `mouseLeft` and `mouseButton` rather than the event object. If you want the event object, use the `on()` method. The value of the `mouseButton` argument is either `Element.LEFT_MOUSE_BUTTON`, `Element.MIDDLE_MOUSE_BUTTON` or `Element.RIGHT_MOUSE_BUTTON`.
+- `getPosition` returns an instance of the `Position` class with the `top` and `left` position of the element relative to the offset parent.
+- `getBounds` returns an instance of the `Bounds` class with the `top`, `left`, `bottom` and `right` bounds of the element relative to the document.
+- `on` abstracts away from jQuery functionality except that it accepts a third, optional argument for the namespace
+- `off` abstracts away from jQuery functionality except that it accepts a second, optional argument for the namespace
+- `onMouseXXX` each abstracts away from jQuery functionality except that it calls the handler with `mouseTop`, `mouseLeft` and `mouseButton` rather than the event object. If you want the event object, use the `on()` method. The value of the `mouseButton` argument is either `Element.LEFT_MOUSE_BUTTON`, `Element.MIDDLE_MOUSE_BUTTON` or `Element.RIGHT_MOUSE_BUTTON`. A namespace can be passed as a second, optional argument.
+- `offMouseXXX` each abstracts away from jQuery functionality. A namespace can be passed as an optional argument.
 - `findElements` returns an array containing all the descendant elements, taking an optional selector
 - `childElements` returns an array containing all the immediate descendant elements, taking an optional selector
 - `parentElement` returns the immediate ascendant element or null, taking an optional selector
