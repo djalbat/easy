@@ -8,7 +8,7 @@ It leverages jQuery to provide a very basic set of classes for elements such as 
 
 ## Related projects
 
-- [Florence](https://github.com/jecs-imperial/Florence) A collaborative proof assistant that depends on all three EasyUI projects. 
+- [Florence](http://djalbat.com/florence) A collaborative proof assistant that depends on all three EasyUI projects. 
 - [EasyUI-Layout](https://github.com/djalbat/EasyUI-Layout) Layout elements that work with CSS flexbox.
 - [EasyUI-DragAndDrop](https://github.com/djalbat/EasyUI-DragAndDrop) Drag and drop elements including a file explorer and rubbish bin. 
  
