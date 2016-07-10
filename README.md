@@ -4,9 +4,7 @@ A V-framework.
 
 EasyUI is an MVC framework without the M and without the C. It's without a model, only abstracting away from the view, namely the document object model. There is some irony here. It's without a controller, or whatever. It will not help you with the architecture of your large application. It is about the leaves of an application, not its branches. 
 
-It leverages jQuery to provide a very basic set of classes for elements such as buttons, links, etc. It covers up jQuery's idiosyncratic syntax and is more readable. It allows you to associate JavaScript classes directly with static HTML, you don't have to dynamically create DOM elements unless you want to. Few frameworks allow you to do this without fuss.
-
-It's liberating to cast off the dogma that says that an application's view and model always have to be two sides of the exact same coin. And you won't have to wade through hundreds of lines of obscure source code when things slow down or start to go wrong. The nearest thing to EasyUI is ReactJS but EasyUI is an order of magnitude less complex. 
+It leverages jQuery to provide a very basic set of classes for elements such as buttons, links, etc. It covers up jQuery's idiosyncratic syntax and is more readable. It allows you to associate JavaScript classes directly with static HTML, you don't have to dynamically create DOM elements unless you want to.
 
 ## Related projects
 
