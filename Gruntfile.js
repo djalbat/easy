@@ -1,36 +1,41 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    babel: {
-      options: {
-        sourceMap: "inline",
-        presets: ['es2015']
-      },
-      dist: {
-        files: [{
-          expand: true,
-          cwd: './libES2015/',
-          src: ['**/*.js'],
-          dest: './lib/'
-        }]
-      }
-    },
     browserify: {
       dist: {
         options: {
           browserifyOptions: {
             debug: true,
             standalone: 'easyUI'
-          }
+          },
+          transform: [['babelify', { 'presets': ['es2015'] }]]
         },
-        src: ['./index.js'],
+        src: ['./lib/index.js'],
         dest: './dist/easyui.js'
       }
     },
     bumpup: {
       file: 'package.json'
     },
+    devUpdate: {
+      main: {
+        options: {
+          updateType: 'force',
+          reportUpdated: true,
+          semver: true,
+          packages: {
+            dependencies: true,
+            devDependencies: true
+          }
+        }
+      }
+    },
     shell: {
+      copy: {
+        command: [
+          'cp ./dist/easyui.js ./index.js'
+        ].join('&&')
+      },
       git: {
         command: [
           'git add . --all',
@@ -41,29 +46,29 @@ module.exports = function(grunt) {
     },
     watch: {
       files: [
-        './libES2015/**/*.js',
-        './index.js'
+        './lib/**/*.js'
       ],
-      tasks: ['babel', 'browserify']
+      tasks: ['browserify']
     }
   });
 
-  grunt.loadNpmTasks('grunt-babel');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-bumpup');
+  grunt.loadNpmTasks('grunt-dev-update');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('default', []);
 
-  grunt.registerTask('b', ['babel', 'browserify']);
-  grunt.registerTask('w', ['babel', 'browserify', 'watch']);
+  grunt.registerTask('b', ['devUpdate', 'browserify']);
+  grunt.registerTask('w', ['devUpdate', 'browserify', 'watch']);
   grunt.registerTask('g', function() {
     var type = grunt.option('type') || 'patch';
 
-    grunt.task.run('babel');
+    grunt.task.run('devUpdate');
     grunt.task.run('browserify');
     grunt.task.run('bumpup:' + type);
+    grunt.task.run('shell:copy');
     grunt.task.run('shell:git');
   });
 };
