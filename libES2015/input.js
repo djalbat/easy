@@ -1,7 +1,5 @@
 'use strict';
 
-require('jquery-textrange');
-
 var InputElement = require('./inputElement');
 
 class Input extends InputElement {
@@ -31,19 +29,8 @@ class Input extends InputElement {
     return value;
   }
 
-  getSelectionStart() {
-    var textrange = this.$element.textrange('get'),
-        selectionStart = textrange['start'];  ///
-
-    return selectionStart;
-  }
-
-  getSelectionEnd() {
-    var textrange = this.$element.textrange('get'),
-        selectionEnd = textrange['end'];  ///
-
-    return selectionEnd;
-  }
+  getSelectionStart() { return this.$element[0].selectionStart; }
+  getSelectionEnd() { return this.$element[0].selectionEnd; }
 
   setValue(value) {
     this.$element.val(value);
