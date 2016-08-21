@@ -43,15 +43,6 @@ module.exports = function(grunt) {
         }
       }
     },
-    shell: {
-      git: {
-        command: [
-          'git add . --all',
-          'git commit -m "' + grunt.option('commit_message') + '"',
-          'git push'
-        ].join('&&')
-      }
-    },
     watch: {
       files: [
         './libES2015/**/*.js'
@@ -61,7 +52,6 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-babel');
-  grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-bumpup');
   grunt.loadNpmTasks('grunt-dev-update');
   grunt.loadNpmTasks('grunt-browserify');
@@ -71,13 +61,9 @@ module.exports = function(grunt) {
 
   grunt.registerTask('b', ['devUpdate', 'babel', 'browserify']);
   grunt.registerTask('w', ['devUpdate', 'babel', 'browserify', 'watch']);
-  grunt.registerTask('g', function() {
+  grunt.registerTask('v', function() {
     var type = grunt.option('type') || 'patch';
 
-    grunt.task.run('devUpdate');
-    grunt.task.run('babel');
-    grunt.task.run('browserify');
     grunt.task.run('bumpup:' + type);
-    grunt.task.run('shell:git');
   });
 };
