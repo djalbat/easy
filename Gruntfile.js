@@ -1,21 +1,27 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    babel: {
+      options: {
+        sourceMap: "inline",
+        presets: ['es2015']
+      },
+      dist: {
+        files: [{
+          expand: true,
+          cwd: './es6/',
+          src: ['**/*.js'],
+          dest: './lib/'
+        }]
+      }
+    },
     browserify: {
       dist: {
         options: {
           browserifyOptions: {
             debug: true,
             standalone: 'easyUI'
-          },
-          transform: [[
-            'babelify',
-            {
-              presets: [
-                'es2015'
-              ]
-            }
-          ]]
+          }
         },
         src: ['./index.js'],
         dest: './dist/easyui.js'
@@ -45,6 +51,7 @@ module.exports = function(grunt) {
     }
   });
 
+  grunt.loadNpmTasks('grunt-babel');
   grunt.loadNpmTasks('grunt-bumpup');
   grunt.loadNpmTasks('grunt-dev-update');
   grunt.loadNpmTasks('grunt-browserify');
@@ -52,8 +59,8 @@ module.exports = function(grunt) {
 
   grunt.registerTask('default', []);
 
-  grunt.registerTask('b', ['devUpdate', 'browserify']);
-  grunt.registerTask('w', ['devUpdate', 'browserify', 'watch']);
+  grunt.registerTask('b', ['devUpdate', 'babel', 'browserify']);
+  grunt.registerTask('w', ['devUpdate', 'babel', 'browserify', 'watch']);
   grunt.registerTask('v', function() {
     var type = grunt.option('type') || 'patch';
 
