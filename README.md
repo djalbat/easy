@@ -8,7 +8,6 @@ It leverages jQuery to provide a very basic set of classes for elements such as 
 
 ## Related projects
 
-- [Florence](http://djalbat.com/florence) A collaborative proof assistant that depends on all three EasyUI projects. 
 - [EasyUI-Layout](https://github.com/djalbat/EasyUI-Layout) Layout elements that work with CSS flexbox.
 - [EasyUI-DragAndDrop](https://github.com/djalbat/EasyUI-DragAndDrop) Drag and drop elements including a file explorer and rubbish bin. 
  
@@ -24,23 +23,23 @@ Client-side you can take the `easyui.js` file in the `dist/` folder put it somew
 <script src="scripts/lib/easyui.js"> </script>
 ```
 
-This will give you a global `easyUI` variable which you use directly:
+This will give you a global `easyui` variable which you use directly:
   
 ```js
-var Button = easyUI.Button;
+var Button = easyui.Button;
 ```
  
 If you're using AMD require client-side or CommonJS server-side the syntax for requiring EasyUI is much the same:
 
 ```js
-var easyUI = require('lib/easyui'),
-    Select = easyUI.Select,
-    Checkbox = easyUI.Checkbox;
+var easyui = require('lib/easyui'),
+    Select = easyui.Select,
+    Checkbox = easyui.Checkbox;
 ```
 
-## Documentation
+## Examples
 
-See the `examples.html` file in the `docs/` folder for some examples.
+See the `examples.html` file in the root of the repository, or read on.
 
 #### Working example
 
@@ -107,7 +106,50 @@ clonedButton.removeAttribute('id');
 
 When you clone an existing element you will need to re-register any click or change handlers. You can pass these straight to the `clone()` methods if you like.
 
-#### Standard methods
+#### Adding elements to the DOM
+ 
+The methods to add elements to the DOM are hopefully intuitive. Note the difference between the `append()` and `appendAfter()` methods.
+
+```js
+var button = Button.fromHTML('<button/>'),
+    select = Select.fromHTML('<select><option>a</option></select>');
+    
+select.appendAfter(button); // what you want
+select.append(button); // probably not what you want
+```
+
+The `appendAfter()` call above results in the following HTML:
+
+```html
+<select><option>a</option></select></button>
+```
+
+The `append()` call above results in the following HTML and is probably not what you want in this instance:
+
+```html
+<select><option>a</option></button></select>
+```
+
+Similarly for the `prepend()` and `prependBefore()` methods.
+
+## Supported elements
+
+- `window`
+- `document`
+- `Body`
+- `Div`
+- `Button`
+- `Checkbox`
+- `TextArea`
+- `Input`
+- `Link`
+- `Select`
+
+The `Window` and `Document` classes are not exported, only singletons.
+
+Obviously the list is incomplete. Use the `Element` class if there is no relevant class, submit a pull request or roll your own.
+
+## Standard methods
 
 Each element has the following methods. These do nothing much apart from abstract away from jQuery functionality:
 
@@ -145,7 +187,7 @@ Each input element has the following additional methods:
 - `onBlur`
 - `focus`
 
-#### Other shared methods
+## Other shared methods
 
 - `getPosition` returns an instance of the `Position` class with the `top` and `left` position of the element relative to the offset parent.
 - `getBounds` returns an instance of the `Bounds` class with the `top`, `left`, `bottom` and `right` bounds of the element relative to the document.
@@ -158,7 +200,7 @@ Each input element has the following additional methods:
 - `parentElement` returns the immediate ascendant element or null, taking an optional selector
 - `parentElements` returns an array containing all the ascendant elements, taking an optional selector
 
-#### Other methods
+## Other methods
 
 The `Input` and `TextArea` classes both have the following methods:
 
@@ -180,50 +222,7 @@ The `window` singleton only has one `onResize` method, the `document` singleton 
 
 Other elements may have still other methods, please check the source!
 
-#### Adding elements to the DOM
- 
-The methods to add elements to the DOM are hopefully intuitive. Note the difference between the `append()` and `appendAfter()` methods.
-
-```js
-var button = Button.fromHTML('<button/>'),
-    select = Select.fromHTML('<select><option>a</option></select>');
-    
-select.appendAfter(button); // what you want
-select.append(button); // probably not what you want
-```
-
-The `appendAfter()` call above results in the following HTML:
-
-```html
-<select><option>a</option></select></button>
-```
-
-The `append()` call above results in the following HTML and is probably not what you want in this instance:
-
-```html
-<select><option>a</option></button></select>
-```
-
-Similarly for the `prepend()` and `prependBefore()` methods.
-
-#### Supported elements:
-
-- `window`
-- `document`
-- `Body`
-- `Div`
-- `Button`
-- `Checkbox`
-- `TextArea`
-- `Input`
-- `Link`
-- `Select`
-
-The `Window` and `Document` classes are not exported, only singletons.
-
-Obviously the list is incomplete. Use the `Element` class if there is no relevant class, submit a pull request or roll your own.
-
-#### Rolling your own elements
+## Rolling your own elements
 
 We use the existing `Div` element as an example:
 
