@@ -24,6 +24,7 @@ class Element {
 
   getWidth() { return this.$element.width(); }
   getHeight() { return this.$element.height(); }
+
   getPosition() {
     var $position = this.$element.position(),
         top = $position.top,
@@ -182,56 +183,44 @@ class Element {
   offMouseOut(namespace) { this.off('mouseout', namespace); }
   offMouseMove(namespace) { this.off('mousemove', namespace); }
 
-  static clone() {
-    var firstArgument = first(arguments),
-        remainingArguments = remaining(arguments);
+  static clone(firstArgument, ...remainingArguments) {
+    return instance(firstArgument, remainingArguments, isNotAClass, to$Element);
 
-    return instance(
-      firstArgument,
-      remainingArguments,
-      function(firstArgument) {
-        return ((typeof firstArgument === 'string') || (firstArgument instanceof Element));
-      },
-      function(secondArgument) {
-        var $element = (typeof secondArgument === 'string') ?
-                         $(secondArgument) :
-                           secondArgument.$element;
+    function isNotAClass(firstArgument) {
+      return ((typeof firstArgument === 'string') || (firstArgument instanceof Element));
+    }
 
-        return $element.clone();
-      }
-    );
+    function to$Element(secondArgument) {
+      var $element = (typeof secondArgument === 'string') ?
+          $(secondArgument) :
+          secondArgument.$element;
+
+      return $element.clone();
+    }
   }
 
-  static fromHTML() {
-    var firstArgument = first(arguments),
-        remainingArguments = remaining(arguments);
+  static fromHTML(firstArgument, ...remainingArguments) {
+    return instance(firstArgument, remainingArguments, isNotAClass, to$Element);
 
-    return instance(
-      firstArgument,
-      remainingArguments,
-      function(firstArgument) {
-        return (typeof firstArgument === 'string');
-      },
-      function(secondArgument) {
-        return $(secondArgument);
-      }
-    );
+    function isNotAClass(firstArgument) {
+      return (typeof firstArgument === 'string');
+    }
+
+    function to$Element(secondArgument) {
+      return $(secondArgument);
+    }
   }
 
-  static fromDOMElement() {
-    var firstArgument = first(arguments),
-        remainingArguments = remaining(arguments);
+  static fromDOMElement(firstArgument, ...remainingArguments) {
+    return instance(firstArgument, remainingArguments, isNotAClass, to$Element);
 
-    return instance(
-      firstArgument,
-      remainingArguments,
-      function(firstArgument) {
-        return (firstArgument instanceof HTMLElement);
-      },
-      function(secondArgument) {
-        return $(secondArgument);
-      }
-    );
+    function isNotAClass(firstArgument) {
+      return (firstArgument instanceof HTMLElement);
+    }
+
+    function to$Element(secondArgument) {
+      return $(secondArgument);
+    }
   }
 }
 
@@ -305,5 +294,3 @@ function instance(firstArgument, remainingArguments, isNotAClass, to$Element) {
 }
 
 function first(array) { return array[0]; }
-
-function remaining(array) { return Array.prototype.slice.call(array, 1); }
