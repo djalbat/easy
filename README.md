@@ -43,18 +43,25 @@ To use EasyUI in the browser, take the `easyui.js` file from the project's `dist
 <script src="scripts/lib/easyui.js"> </script>
 ```
 
-...will give a global `easyui` variable which can be used directly:
+...will give you a global `easyui` variable which can be used directly:
 
 ```js
 var Button = easyui.Button;
 ```
 
-Alternatively, if you're using an AMD style `require` the usage is similar to the Node.js case, only make sure you have the path to the distribution file is correct. Assuming that the following script lives in the the `public/scripts/` directory, the following should work:
+Alternatively, if you're using an AMD style `require` the usage is similar to the Node.js case, only make sure that the path to the distribution file is correct. Assuming that the following script should work, assuming it lives in the the `public/scripts/` directory:
 
 ```js
 var easyui = require('lib/easyui'),
     Button = easyui.Button;
 ```
+
+## Compiling from source
+
+Automation is done with [npm scripts](https://docs.npmjs.com/misc/scripts), have a look at the `package.json` file. The pertinent commands are:
+
+    npm run build-debug
+    npm run watch-debug
 
 ## Examples
 
