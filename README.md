@@ -49,7 +49,7 @@ To use EasyUI in the browser, take the `easyui.js` file from the project's `dist
 var Button = easyui.Button;
 ```
 
-Alternatively, if you're using an AMD style `require` the usage is similar to the Node.js case, only make sure that the path to the distribution file is correct. Assuming that the following script should work, assuming it lives in the the `public/scripts/` directory:
+Alternatively, if you're using an AMD style `require` the usage is similar to the Node.js case, only make sure that the path to the distribution file is correct. The following script should work, assuming it lives in the the `public/scripts/` directory:
 
 ```js
 var easyui = require('lib/easyui'),
