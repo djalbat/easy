@@ -67,7 +67,7 @@ Automation is done with [npm scripts](https://docs.npmjs.com/misc/scripts), have
 
 See the `examples.html` file in the project's root directory, or read on.
 
-#### Working example
+### Working example
 
 Here an element corresponding to the `body` DOM element is constructed and an outer `div` element is appended to that. `Div` elements corresponding to two of the three inner `div`s are then constructed. Note there are no references. These can be recovered by iterating over the child elements of the outer `div`. Note also that there is no second inner `div`, since no corresponding `Div` element has been created for it.   
 
@@ -89,7 +89,7 @@ outDivChildElements.forEach(function(outDivChildElement) {
 });
 ```
 
-#### Creating elements 
+### Creating elements
 
 You can pass jQuery selectors to constructors:
 
@@ -111,7 +111,7 @@ Note that in the second case the `document` is the global document reference, no
 
 If constructors take change or click handlers you can pass these to `fromHTML()` methods.
 
-#### Cloning elements
+### Cloning elements
 
 You can call the `clone()` method of an element. If your element has an `id` attribute it's best to remove this from the cloned element:
  
@@ -132,7 +132,7 @@ clonedButton.removeAttribute('id');
 
 When you clone an existing element you will need to re-register any click or change handlers. You can pass these straight to the `clone()` methods if you like.
 
-#### Adding elements to the DOM
+### Adding elements to the DOM
  
 The methods to add elements to the DOM are hopefully intuitive. Note the difference between the `append()` and `appendAfter()` methods.
 
