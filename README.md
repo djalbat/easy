@@ -4,7 +4,7 @@ A V-framework.
 
 EasyUI is an MVC framework without the M and without the C. It's without a model, only abstracting away from the view, namely the document object model. There is some irony here. It's without a controller, or whatever. It will not help you with the architecture of your large application. It is about the leaves of an application, not its branches. 
 
-It leverages jQuery to provide a very basic set of classes for elements such as buttons, links, etc. It covers up jQuery's idiosyncratic syntax and is more readable. It allows you to associate JavaScript classes directly with static HTML, you don't have to dynamically create DOM elements unless you want to.
+It leverages jQuery to provide a very basic set of classes for elements such as buttons, links, etc. It covers up jQuery's idiosyncratic syntax and is hopefully a bit more readable. It allows you to associate JavaScript classes directly with static HTML, you don't have to dynamically create DOM elements unless you want to.
 
 ## Related projects
 
@@ -13,33 +13,52 @@ It leverages jQuery to provide a very basic set of classes for elements such as 
  
 ## Installation
 
-If you're running [Node.js](http://nodejs.org) you can install EasyUI with [npm](https://www.npmjs.com/):
+You can install EasyUI with [npm](https://www.npmjs.com/):
 
     npm install easyui
 
-Client-side you can take the `easyui.js` file in the `dist/` folder put it somewhere and reference it via the usual script element:
- 
-```html
-<script src="scripts/lib/easyui.js"> </script>
-```
+You can also clone the repository with [git](https://git-scm.com/)...
 
-This will give you a global `easyui` variable which you use directly:
-  
-```js
-var Button = easyui.Button;
-```
- 
-If you're using AMD require client-side or CommonJS server-side the syntax for requiring EasyUI is much the same:
+    git clone https://github.com/djalbat/EasyUI.git
+
+...and then install the necessary modules with npm from within the project's root directory:
+
+    npm install
+
+You will need to do this if you want to look at the examples.
+
+## Usage
+
+If you're building with [Node.js](http://nodejs.org) the usage is as follows:
 
 ```js
-var easyui = require('lib/easyui'),
+var easyui = require('easyui'),
     Select = easyui.Select,
     Checkbox = easyui.Checkbox;
 ```
 
+To use EasyUI in the browser, take the `easyui.js` file from the project's `dist/` folder and put it somewhere such as a `public/scripts/lib` directory. Referencing this distribution file from a `script` element...
+
+```html
+<script src="scripts/lib/easyui.js"> </script>
+```
+
+...will give a global `easyui` variable which can be used directly:
+
+```js
+var Button = easyui.Button;
+```
+
+Alternatively, if you're using an AMD style `require` the usage is similar to the Node.js case, only make sure you have the path to the distribution file is correct. Assuming that the following script lives in the the `public/scripts/` directory, the following should work:
+
+```js
+var easyui = require('lib/easyui'),
+    Button = easyui.Button;
+```
+
 ## Examples
 
-See the `examples.html` file in the root of the repository, or read on.
+See the `examples.html` file in the project's root directory, or read on.
 
 #### Working example
 
