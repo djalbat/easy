@@ -1,6 +1,7 @@
 'use strict';
 
-var InputElement = require('./inputElement');
+var Element = require('./element'),
+    InputElement = require('./inputElement');
 
 class Button extends InputElement {
   constructor(selector, clickHandler) {
@@ -13,17 +14,29 @@ class Button extends InputElement {
 
   clone(clickHandler) { return Button.clone(this, clickHandler); }
 
-  onClick(handler) {
-    this.$element.click(function() {
-      handler();
+  onClick(clickHandler, button = Element.LEFT_MOUSE_BUTTON) {
+    this.$element.click(function(event) {
+      switch (button) {
+        case Element.LEFT_MOUSE_BUTTON :
+          if (event.button === 0) { ///
+            clickHandler();
+          }
+          break;
+
+        case Element.MIDDLE_MOUSE_BUTTON :
+          if (event.button === 1) { ///
+            clickHandler();
+          }
+          break;
+        }
 
       return false;
-    })
+    });
   }
 
-  onDoubleClick(handler) {
+  onDoubleClick(doubleClickHandler) {
     this.$element.dblclick(function() {
-      handler();
+      doubleClickHandler();
 
       return false;
     })

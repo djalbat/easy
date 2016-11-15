@@ -46,9 +46,13 @@
               console.log('Input changed with value: ' + value);
             });
 
-            var button = new Button('#button', function() {
-              console.log('Button click');
+            var button = new Button('#button', function(event) {
+              console.log('Left mouse button click');
             });
+
+            button.onClick(function() {
+              console.log('Middle mouse button click');
+            }, Element.MIDDLE_MOUSE_BUTTON);
 
             var select = new Select('#select', function(selectedOptionValue) {
               console.log('Select changed with selected option value: ' + selectedOptionValue)

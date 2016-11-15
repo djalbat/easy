@@ -171,11 +171,11 @@ class Element {
     this.$element.off(events);
   }
 
-  onMouseUp(handler, namespace) { this.on('mouseup', returnMouseEventHandler(handler), namespace); }
-  onMouseDown(handler, namespace) { this.on('mousedown', returnMouseEventHandler(handler), namespace); }
-  onMouseOver(handler, namespace) { this.on('mouseover', returnMouseEventHandler(handler), namespace); }
-  onMouseOut(handler, namespace) { this.on('mouseout', returnMouseEventHandler(handler), namespace); }
-  onMouseMove(handler, namespace) { this.on('mousemove', returnMouseEventHandler(handler), namespace); }
+  onMouseUp(mouseUpHandler, namespace) { this.on('mouseup', returnMouseEventHandler(mouseUpHandler), namespace); }
+  onMouseDown(mouseDownHandler, namespace) { this.on('mousedown', returnMouseEventHandler(mouseDownHandler), namespace); }
+  onMouseOver(mouseOverHandler, namespace) { this.on('mouseover', returnMouseEventHandler(mouseOverHandler), namespace); }
+  onMouseOut(mouseOutHandler, namespace) { this.on('mouseout', returnMouseEventHandler(mouseOutHandler), namespace); }
+  onMouseMove(mouseMoveHandler, namespace) { this.on('mousemove', returnMouseEventHandler(mouseMoveHandler), namespace); }
 
   offMouseUp(namespace) { this.off('mouseup', namespace); }
   offMouseDown(namespace) { this.off('mousedown', namespace); }
