@@ -4,11 +4,11 @@ var Element = require('./element'),
     InputElement = require('./inputElement');
 
 class Button extends InputElement {
-  constructor(selector, clickHandler) {
+  constructor(selector, clickHandler, button) {
     super(selector);
 
     if (clickHandler) {
-      this.onClick(clickHandler);
+      this.onClick(clickHandler, button);
     }
   }
 
