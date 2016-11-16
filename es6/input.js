@@ -40,6 +40,9 @@ class Input extends InputElement {
     this.$element.select();
   }
   
+  onResize(resizeHandler) {}
+  offResize(resizeHandler) {}
+  
   static clone(selectorOrElement) {
     return InputElement.clone(Input, selectorOrElement);
   }

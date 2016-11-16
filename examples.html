@@ -5,6 +5,7 @@
       <title>EasyUI Examples</title>
     </head>
     <body>
+        <div id="resizeable" style="background-color: lightgray; height: 1rem;"> </div>
         <input type="text" value="Input" id="input">
         <br/>
         <a href="https://github.com/djalbat/EasyUI" id="link">Link</a>
@@ -55,15 +56,21 @@
             }, Element.MIDDLE_MOUSE_BUTTON);
 
             var select = new Select('#select', function(selectedOptionValue) {
-              console.log('Select changed with selected option value: ' + selectedOptionValue)
+              console.log('Select changed with selected option value: ' + selectedOptionValue);
             });
 
             var checkbox = new Checkbox('#checkbox', function(checked) {
               console.log('Checkbox change with checked: ' + checked);
             });
 
+            var resizeableDiv = new Div('div#resizeable');
+
+            resizeableDiv.onResize(function(width, height) {
+              console.log('The resizeable div has been resized and now has width ' + width + ' and height ' + height + '.');
+            });
+
             var textArea = new TextArea('#textarea'),
-              textAreaIsFocused = textArea.hasFocus();
+                textAreaIsFocused = textArea.hasFocus();
 
             textArea.onFocus(function() {
               console.log('Text area has gained the focus');
@@ -74,11 +81,11 @@
             });
 
             textArea.onChange(function(value) {
-              console.log('The value of the text area has changed to: ' + value)
+              console.log('The value of the text area has changed to: ' + value);
             });
 
             textArea.onScroll(function(scrollTop, scrollLeft) {
-              console.log('The text area has been scrolled to: (' + scrollTop + ',' + scrollLeft +')')
+              console.log('The text area has been scrolled to: (' + scrollTop + ',' + scrollLeft +')');
             });
 
             textAreaIsFocused ?
@@ -111,7 +118,7 @@
             clonedButton.html('Cloned button');
 
             var selectFromHTML = Select.fromHTML('<select><option>a</option><option>b</option><option>c</option></select>', function(selectedOptionValue) {
-              console.log('Select from HTML changed with selected option value: ' + selectedOptionValue)
+              console.log('Select from HTML changed with selected option value: ' + selectedOptionValue);
             });
 
             selectFromHTML.setSelectedOptionByValue('c');

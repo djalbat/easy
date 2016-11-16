@@ -10,6 +10,8 @@ class Element {
     this.$element = to$Element(selectorOrSomething);
 
     this.data('element', this);
+
+    this.resizeHandlers = [];
   }
 
   clone() { return Element.clone(this); }
@@ -176,6 +178,26 @@ class Element {
   onMouseOver(mouseOverHandler, namespace) { this.on('mouseover', returnMouseEventHandler(mouseOverHandler), namespace); }
   onMouseOut(mouseOutHandler, namespace) { this.on('mouseout', returnMouseEventHandler(mouseOutHandler), namespace); }
   onMouseMove(mouseMoveHandler, namespace) { this.on('mousemove', returnMouseEventHandler(mouseMoveHandler), namespace); }
+  
+  onResize(resizeHandler) {
+    var resizeHandlers = hasResizeHandlers(this);
+
+    if (!resizeHandlers) {
+      appendResizeObject(this);
+    }
+
+    addResizeHandler(this, resizeHandler);
+  }
+
+  offResize(resizeHandler) {
+    removeResizeHandler(this, resizeHandler);
+
+    var resizeHandlers = hasResizeHandlers(this);
+
+    if (!resizeHandlers) {
+      removeResizeObject(this);
+    }
+  }
 
   offMouseUp(namespace) { this.off('mouseup', namespace); }
   offMouseDown(namespace) { this.off('mousedown', namespace); }
@@ -294,3 +316,70 @@ function instance(firstArgument, remainingArguments, isNotAClass, to$Element) {
 }
 
 function first(array) { return array[0]; }
+
+function addResizeHandler(instance, resizeHandler) {
+  instance.resizeHandlers.push(resizeHandler);
+}
+
+function removeResizeHandler(instance, resizeHandler) {
+  var start = instance.resizeHandlers.indexOf(resizeHandler); ///
+
+  if (start > -1) {
+    var deleteCount = 1;
+
+    instance.resizeHandlers.splice(start, deleteCount);
+  }
+}
+
+function hasResizeHandlers(instance) {
+  var resizeHandlersLength = instance.resizeHandlers.length,
+      resizeHandlers = (resizeHandlersLength > 0);
+
+  return resizeHandlers;
+}
+
+function appendResizeObject(instance) {
+  var resizeObject = document.createElement('object'),
+      domElement = instance.$element[0];  ///
+
+  resizeObject.setAttribute('style', 'display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; pointer-events: none; z-index: -1;');
+  resizeObject.data = 'about:blank';
+  resizeObject.type = 'text/html';
+
+  resizeObject.__domElement__ = domElement;
+  domElement.__resizeObject__ = resizeObject;
+  domElement.__instance__ = instance;
+
+  resizeObject.onload = resizeObjectLoadHandler;
+
+  domElement.appendChild(resizeObject);
+}
+
+function removeResizeObject(instance) {
+  var domElement = instance.$element[0],  ///
+      resizeObject = domElement.__resizeObject__,
+      objectWindow = resizeObject.contentDocument.defaultView;  ///
+
+  objectWindow.removeEventListener('resize', resizeListener);
+
+  domElement.removeChild(resizeObject);
+}
+
+function resizeObjectLoadHandler() {
+  var resizeObjectWindow = this.contentDocument.defaultView;  ///
+
+  resizeObjectWindow.__domElement__ = this.__domElement__;
+  resizeObjectWindow.addEventListener('resize', resizeListener);
+}
+
+function resizeListener(event) {
+  var resizeObjectWindow = event.target || event.srcElement,  ///
+      domElement = resizeObjectWindow.__domElement__,
+      instance = domElement.__instance__,
+      width = instance.getWidth(),
+      height = instance.getHeight();
+
+  instance.resizeHandlers.forEach(function(resizeHandler){
+    resizeHandler(width, height);
+  });
+}
