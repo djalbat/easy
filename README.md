@@ -230,9 +230,9 @@ Each input element has the following additional methods:
 
 The `Button` class has the following method:
 
-- `onClick` takes a handler which is invoked every time the left or middle button is clicked.
+- `onClick` takes a handler which is invoked every time the left or middle mouse button is clicked.
 
-The first parameter is the click handler, the second parameter is an optional value specifying which mouse button to listen for. The default is `Element.LEFT_MOUSE_BUTTON`, the other option being `Element.MIDDLE_MOUSE_BUTTON`. Only the left and middle mouse buttons are supported, not the right button. The `Button` constructor also takes these two parameters in additional to the standard first argument.  
+The first argument is the click handler, the second argument is an optional value specifying the mouse button, the default value being `Element.LEFT_MOUSE_BUTTON` and the other being `Element.MIDDLE_MOUSE_BUTTON`. Only the left and middle mouse buttons are supported, not the right button. The `Button` constructor also takes these two arguments in addition to the standard first argument.  
 
 The `Input` and `TextArea` classes both have the following methods:
 
