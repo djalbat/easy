@@ -255,7 +255,7 @@ The `window` singleton and all but the `input` and `textarea` elements have the 
 - `onResize`
 - `offResize`
 
-Both take a handler that is passed `width` and `height` arguments when the resize event is fired.
+Both take a handler that is passed `width` and `height` arguments when the resize event is fired. ***Note that you must explicitly set the `position` style attribute of an element to `relative` in order for its `onResize()` method to work.*** This was thought to be a better approach than setting it on the sly. It can be done dynamically with JavaScript or alternatively with CSS.
 
 Only the `document` singleton has the following methods:
 
