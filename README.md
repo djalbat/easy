@@ -250,9 +250,17 @@ The `TextArea` class has the following methods:
 - `setScrollTop`
 - `setScrollLeft`
 
-The `window` singleton only has one `onResize` method, the `document` singleton has the `onKeyUp` and `onKeyDown` methods.
+The `window` singleton and all but the `input` and `textarea` elements have the following methods:
 
-Other elements may have still other methods, please check the source!
+- `onResize`
+- `offResize`
+
+Both take a handler that is passed `width` and `height` arguments when the resize event is fired.
+
+Only the `document` singleton has the following methods:
+
+- `onKeyUp` 
+- `onKeyDown`
 
 ## Rolling your own elements
 

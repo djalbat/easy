@@ -55,6 +55,9 @@ class TextArea extends InputElement {
     this.$element.select();
   }
 
+  onResize(resizeHandler) {}
+  offResize(resizeHandler) {}
+
   static clone(selectorOrElement) {
     return InputElement.clone(TextArea, selectorOrElement);
   }

@@ -8,7 +8,11 @@ class Window {
   }
 
   onResize(handler) {
-    this.$element.resize(handler);
+    this.$element.on('resize', handler);
+  }
+
+  offResize(handler) {
+    this.$element.off('resize', handler);
   }
 }
 
