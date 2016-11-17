@@ -206,7 +206,7 @@ Each element has the following methods. These do nothing much apart from abstrac
 - `data`
 - `on`
 
-The `getWidth` and `getHeight` methods take two optional arguments, `includeBorder` and `includeMargin`, both set to false by default. To make use of the second argument, the first must be given explicitly.
+The `getWidth` and `getHeight` methods take two optional arguments, namely `includeBorder` and `includeMargin`, both set to `false` by default. To make use of the second argument, the first must be given explicitly.
 
 Each input element has the following additional methods:
 
