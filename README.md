@@ -206,6 +206,8 @@ Each element has the following methods. These do nothing much apart from abstrac
 - `data`
 - `on`
 
+The `getWidth` and `getHeight` methods take two optional arguments, `includeBorder` and `includeMargin`, both set to false by default. To make use of the second argument, the first must be given explicitly.
+
 Each input element has the following additional methods:
 
 - `hasFocus`
@@ -225,6 +227,8 @@ Each input element has the following additional methods:
 - `childElements` returns an array containing all the immediate descendant elements, taking an optional selector
 - `parentElement` returns the immediate ascendant element or null, taking an optional selector
 - `parentElements` returns an array containing all the ascendant elements, taking an optional selector
+
+The `getBounds` method takes optional `includeBorder` and `includeMargin` arguments in a similar vein to the `getWidth` and `getHeight` methods.
 
 ## Other methods
 

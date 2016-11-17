@@ -24,29 +24,38 @@ class Element {
   detach() { this.$element.detach(); }
   empty() { this.$element.empty(); }
 
-  getWidth() { return this.$element.width(); }
-  getHeight() { return this.$element.height(); }
-
   getPosition() {
     var $position = this.$element.position(),
         top = $position.top,
         left = $position.left,
         position = new Position(top, left);
-    
+
     return position;
   }
 
-  getBounds() {
+  getBounds(includeBorder = false, includeMargin = false) {
     var $offset = this.$element.offset(),
         top = $offset.top,  ///
         left = $offset.left,  ///
-        width = this.getWidth(),
-        height = this.getHeight(),
+        width = this.getWidth(includeBorder, includeMargin),
+        height = this.getHeight(includeBorder, includeMargin),
         bottom = top + height,
         right = left + width,
         bounds = new Bounds(top, left, bottom, right);
 
     return bounds;
+  }
+
+  getWidth(includeBorder = false, includeMargin = false) { 
+    return includeBorder ? 
+             this.$element.outerWidth(includeMargin) :
+               this.$element.width(); 
+  }
+  
+  getHeight(includeBorder = false, includeMargin = false) {
+    return includeBorder ?
+             this.$element.outerHeight(includeMargin) :
+               this.$element.height();
   }
 
   setWidth(width) { this.$element.width(width); }
