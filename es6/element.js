@@ -6,8 +6,8 @@ var Bounds = require('./bounds'),
     Position = require('./position');
 
 class Element {
-  constructor(selectorOrSomething) {
-    this.$element = to$Element(selectorOrSomething);
+  constructor(selector) {
+    this.$element = $elementFromSelector(selector);
 
     this.data('element', this);
 
@@ -215,13 +215,13 @@ class Element {
   offMouseMove(namespace) { this.off('mousemove', namespace); }
 
   static clone(firstArgument, ...remainingArguments) {
-    return instance(firstArgument, remainingArguments, isNotAClass, to$Element);
+    return instance(firstArgument, remainingArguments, isNotAClass, $elementFromSecondArgument);
 
     function isNotAClass(firstArgument) {
       return ((typeof firstArgument === 'string') || (firstArgument instanceof Element));
     }
 
-    function to$Element(secondArgument) {
+    function $elementFromSecondArgument(secondArgument) {
       var $element = (typeof secondArgument === 'string') ?
           $(secondArgument) :
           secondArgument.$element;
@@ -231,25 +231,25 @@ class Element {
   }
 
   static fromHTML(firstArgument, ...remainingArguments) {
-    return instance(firstArgument, remainingArguments, isNotAClass, to$Element);
+    return instance(firstArgument, remainingArguments, isNotAClass, $elementFromSecondArgument);
 
     function isNotAClass(firstArgument) {
       return (typeof firstArgument === 'string');
     }
 
-    function to$Element(secondArgument) {
+    function $elementFromSecondArgument(secondArgument) {
       return $(secondArgument);
     }
   }
 
   static fromDOMElement(firstArgument, ...remainingArguments) {
-    return instance(firstArgument, remainingArguments, isNotAClass, to$Element);
+    return instance(firstArgument, remainingArguments, isNotAClass, $elementFromSecondArgument);
 
     function isNotAClass(firstArgument) {
       return (firstArgument instanceof HTMLElement);
     }
 
-    function to$Element(secondArgument) {
+    function $elementFromSecondArgument(secondArgument) {
       return $(secondArgument);
     }
   }
@@ -261,18 +261,18 @@ Element.RIGHT_MOUSE_BUTTON = 3;
 
 module.exports = Element;
 
-function to$Element(selectorOrSomething) {
+function $elementFromSelector(selector) {
   var $element;
 
   if (false) {
 
-  } else if (typeof selectorOrSomething === 'string') {
-    $element = $(selectorOrSomething);
-  } else if (selectorOrSomething instanceof $) {
-    $element = selectorOrSomething;  ///
-  } else if (selectorOrSomething instanceof Array ) {
-    var parentElement = selectorOrSomething[0], ///
-        childSelector = selectorOrSomething[1],  ///
+  } else if (typeof selector === 'string') {
+    $element = $(selector);
+  } else if (selector instanceof $) {
+    $element = selector;  ///
+  } else if (selector instanceof Array ) {
+    var parentElement = selector[0], ///
+        childSelector = selector[1],  ///
         parent$Element = parentElement.$element;  ///
 
     $element = parent$Element.find(childSelector);
@@ -308,7 +308,7 @@ function elementsFromDOMElements(domElements) {
   return elements;
 }
 
-function instance(firstArgument, remainingArguments, isNotAClass, to$Element) {
+function instance(firstArgument, remainingArguments, isNotAClass, $elementFromSecondArgument) {
   if (isNotAClass(firstArgument)) {
     remainingArguments.unshift(firstArgument);
     firstArgument = Element;
@@ -316,7 +316,7 @@ function instance(firstArgument, remainingArguments, isNotAClass, to$Element) {
 
   var Class = firstArgument,
       secondArgument = remainingArguments.shift(),
-      $element = to$Element(secondArgument);
+      $element = $elementFromSecondArgument(secondArgument);
 
   remainingArguments.unshift($element);
   remainingArguments.unshift(null); ///
