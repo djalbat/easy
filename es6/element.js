@@ -47,15 +47,19 @@ class Element {
   }
 
   getWidth(includeBorder = false, includeMargin = false) { 
-    return includeBorder ? 
-             this.$element.outerWidth(includeMargin) :
-               this.$element.width(); 
+    var width = includeBorder ? 
+                  this.$element.outerWidth(includeMargin) :
+                    this.$element.width();
+    
+    return width;
   }
   
   getHeight(includeBorder = false, includeMargin = false) {
-    return includeBorder ?
-             this.$element.outerHeight(includeMargin) :
-               this.$element.height();
+    var height = includeBorder ?
+                   this.$element.outerHeight(includeMargin) :
+                     this.$element.height();
+    
+    return height;
   }
 
   setWidth(width) { this.$element.width(width); }
@@ -99,7 +103,7 @@ class Element {
   removeClasses() { this.$element.removeClass(); }
 
   html(html) {
-    if (arguments.length === 1) {
+    if (html !== undefined) {
       this.$element.html(html)
     } else {
       html = this.$element.html();
@@ -120,19 +124,13 @@ class Element {
     }
   }
 
-  data() {
-    var argumentsLength = arguments.length,
-        key = arguments[0],
-        value;
-
-    if (argumentsLength === 1) {
+  data(key, value) {
+    if (value !== undefined) {
+      this.$element.data(key, value);
+    } else {
       value = this.$element.data(key);
 
       return value;
-    } else {
-      value = arguments[1];
-
-      this.$element.data(key, value);
     }
   }
 
@@ -182,12 +180,50 @@ class Element {
     this.$element.off(events);
   }
 
+  onClick(clickHandler, button = Element.LEFT_MOUSE_BUTTON) {
+    this.$element.on('click',function(event) {
+      switch (button) {
+        case Element.LEFT_MOUSE_BUTTON :
+          if (event.button === 0) { ///
+            clickHandler();
+          }
+          break;
+
+        case Element.MIDDLE_MOUSE_BUTTON :
+          if (event.button === 1) { ///
+            clickHandler();
+          }
+          break;
+      }
+
+      return false;
+    });
+  }
+  
+  offClick(clickHandler) { this.$element.off('click', clickHandler); }
+
+  onDoubleClick(doubleClickHandler) {
+    this.$element.on('dbclick',function() {
+      doubleClickHandler();
+
+      return false;
+    })
+  }
+
+  offDoubleClick(doubleClickHandler) { this.$element.off('dbclick', doubleClickHandler); }
+
   onMouseUp(mouseUpHandler, namespace) { this.on('mouseup', returnMouseEventHandler(mouseUpHandler), namespace); }
   onMouseDown(mouseDownHandler, namespace) { this.on('mousedown', returnMouseEventHandler(mouseDownHandler), namespace); }
   onMouseOver(mouseOverHandler, namespace) { this.on('mouseover', returnMouseEventHandler(mouseOverHandler), namespace); }
   onMouseOut(mouseOutHandler, namespace) { this.on('mouseout', returnMouseEventHandler(mouseOutHandler), namespace); }
   onMouseMove(mouseMoveHandler, namespace) { this.on('mousemove', returnMouseEventHandler(mouseMoveHandler), namespace); }
-  
+
+  offMouseUp(namespace) { this.off('mouseup', namespace); }
+  offMouseDown(namespace) { this.off('mousedown', namespace); }
+  offMouseOver(namespace) { this.off('mouseover', namespace); }
+  offMouseOut(namespace) { this.off('mouseout', namespace); }
+  offMouseMove(namespace) { this.off('mousemove', namespace); }
+
   onResize(resizeHandler) {
     var resizeHandlers = hasResizeHandlers(this);
 
@@ -207,12 +243,6 @@ class Element {
       removeResizeObject(this);
     }
   }
-
-  offMouseUp(namespace) { this.off('mouseup', namespace); }
-  offMouseDown(namespace) { this.off('mousedown', namespace); }
-  offMouseOver(namespace) { this.off('mouseover', namespace); }
-  offMouseOut(namespace) { this.off('mouseout', namespace); }
-  offMouseMove(namespace) { this.off('mousemove', namespace); }
 
   static clone(firstArgument, ...remainingArguments) {
     return instance(firstArgument, remainingArguments, isNotAClass, $elementFromSecondArgument);
@@ -324,8 +354,6 @@ function instance(firstArgument, remainingArguments, isNotAClass, $elementFromSe
   return new (Function.prototype.bind.apply(Class, remainingArguments));  ///
 }
 
-function first(array) { return array[0]; }
-
 function addResizeHandler(instance, resizeHandler) {
   instance.resizeHandlers.push(resizeHandler);
 }
@@ -392,3 +420,5 @@ function resizeListener(event) {
     resizeHandler(width, height);
   });
 }
+
+function first(array) { return array[0]; }

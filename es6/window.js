@@ -8,12 +8,14 @@ class Window {
   }
 
   onResize(handler) {
-    this.$element.on('resize', handler);
+    this.$element.on('resize', handler);  ///
   }
 
   offResize(handler) {
-    this.$element.off('resize', handler);
+    this.$element.off('resize', handler); ///
   }
 }
 
-module.exports = new Window();  ///
+var window = new Window();
+
+module.exports = window;

@@ -13,11 +13,11 @@ class Select extends InputElement {
 
   clone(changeHandler) { return Select.clone(this, changeHandler); }
 
-  onChange(handler) {
-    this.$element.change(function() {
+  onChange(changeHandler) {
+    this.on('change', function() {
       var selectedOptionValue = this.getSelectedOptionValue();
 
-      handler(selectedOptionValue);
+      changeHandler(selectedOptionValue);
     }.bind(this));
   }
 

@@ -13,28 +13,24 @@ class Checkbox extends InputElement {
 
   clone(changeHandler) { return Checkbox.clone(this, changeHandler); }
 
-  onChange(handler) {
-    this.$element.click(function() {
+  onChange(changeHandler) {
+    this.onClick(function() {
       var checked = this.isChecked();
 
-      handler(checked);
+      changeHandler(checked);
     }.bind(this))
   }
 
-  check(checked) {
-    if (arguments.length === 0) {
-      checked = true;
-    }
-
-    if (checked) {
-      this.$element.attr('checked', 'checked');
-    } else {
-      this.$element.removeAttr('checked');
-    }
+  check(checked = true) {
+    checked ?
+      this.addAttribute('checked', 'checked') :
+        this.removeAttribute('checked');
   }
 
   isChecked() {
-    return this.$element.is(':checked');
+    var checked = this.$element.is(':checked'); ///
+    
+    return checked;
   }
 
   static clone(selectorOrElement, changeHandler) {

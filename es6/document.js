@@ -16,4 +16,6 @@ class Document {
   }
 }
 
-module.exports = new Document();  ///
+var document = new Document();
+
+module.exports = document;

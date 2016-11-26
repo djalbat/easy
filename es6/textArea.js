@@ -13,13 +13,11 @@ class TextArea extends InputElement {
 
   clone() { return TextArea.clone(this); }
 
-  onChange(handler) {
-    this.$element.keydown(function() {
-      setTimeout(function() {
-        var value = this.getValue();
+  onChange(changeHandler) {
+    this.on('input', function() { ///
+      var value = this.getValue();
 
-        handler(value);
-      }.bind(this));
+      changeHandler(value);
     }.bind(this));
   }
 

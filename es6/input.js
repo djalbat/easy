@@ -13,32 +13,22 @@ class Input extends InputElement {
 
   clone() { return Input.clone(this); }
 
-  onChange(handler) {
-    this.$element.keydown(function() {
-      setTimeout(function() {
-        var value = this.getValue();
+  onChange(changeHandler) {
+    this.on('input', function() { ///
+      var value = this.getValue();
 
-        handler(value);
-      }.bind(this));
+      changeHandler(value);
     }.bind(this));
   }
 
-  getValue() {
-    var value = this.$element.val();
-
-    return value;
-  }
+  getValue() { return this.$element.val(); }
 
   getSelectionStart() { return this.$element[0].selectionStart; } ///
   getSelectionEnd() { return this.$element[0].selectionEnd; } ///
 
-  setValue(value) {
-    this.$element.val(value);
-  }
+  setValue(value) { this.$element.val(value); }
 
-  select() {
-    this.$element.select();
-  }
+  select() { this.$element.select(); }
   
   onResize(resizeHandler) {}
   offResize(resizeHandler) {}
