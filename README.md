@@ -234,7 +234,7 @@ The `getBounds` method takes optional `includeBorder` and `includeMargin` argume
 
 The value of the third `mouseButton` argument of the handler passed to the `onMouseXXX` method is either `Element.LEFT_MOUSE_BUTTON`, `Element.MIDDLE_MOUSE_BUTTON` or `Element.RIGHT_MOUSE_BUTTON`. If you want the native event object passed to callbacks instead, use the `on()` method. 
 
-The second argument of the `onClick` method is an optional value specifying the mouse button, the default value being `Element.LEFT_MOUSE_BUTTON` and the other being `Element.MIDDLE_MOUSE_BUTTON`. Only the left and middle mouse buttons are supported, not the right button. The `Button` constructor also takes these two arguments in addition to the standard first argument.
+The second `button` argument of the `onClick` method is an optional value specifying the mouse button, the default value being `Element.LEFT_MOUSE_BUTTON` and the other being `Element.MIDDLE_MOUSE_BUTTON`. Only the left and middle mouse buttons are supported, not the right button. The third `allowDefault` argument specifies whether the browser's default behaviour is allowed. The default is `false`. The `Button` constructor also takes these optional arguments in addition to the standard first `selector` and second `clickHandler` argument.
   
 In the case of the `Link` class, the click handler is passed the value of the underlying element's `href` attribute. 
 

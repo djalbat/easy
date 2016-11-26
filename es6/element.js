@@ -180,7 +180,7 @@ class Element {
     this.$element.off(events);
   }
 
-  onClick(clickHandler, button = Element.LEFT_MOUSE_BUTTON) {
+  onClick(clickHandler, button = Element.LEFT_MOUSE_BUTTON, allowDefault = false) {
     this.$element.on('click',function(event) {
       switch (button) {
         case Element.LEFT_MOUSE_BUTTON :
@@ -196,7 +196,7 @@ class Element {
           break;
       }
 
-      return false;
+      return allowDefault;
     });
   }
   

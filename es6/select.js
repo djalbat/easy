@@ -14,11 +14,14 @@ class Select extends InputElement {
   clone(changeHandler) { return Select.clone(this, changeHandler); }
 
   onChange(changeHandler) {
+    var button = undefined,
+        allowDefault = true;
+    
     this.on('change', function() {
       var selectedOptionValue = this.getSelectedOptionValue();
 
       changeHandler(selectedOptionValue);
-    }.bind(this));
+    }.bind(this), button, allowDefault);
   }
 
   getSelectedOptionValue() {

@@ -14,11 +14,14 @@ class Checkbox extends InputElement {
   clone(changeHandler) { return Checkbox.clone(this, changeHandler); }
 
   onChange(changeHandler) {
+    var button = undefined,
+        allowDefault = true;
+
     this.onClick(function() {
       var checked = this.isChecked();
 
       changeHandler(checked);
-    }.bind(this))
+    }.bind(this), button, allowDefault)
   }
 
   check(checked = true) {

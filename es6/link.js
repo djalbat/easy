@@ -13,14 +13,12 @@ class Link extends InputElement {
 
   clone(clickHandler) { return Link.clone(this, clickHandler); }
 
-  onClick(clickHandler) {
+  onClick(clickHandler, button, allowDefault = false) {
     super.onClick(function() {
       var href = this.getAttribute('href');
 
       clickHandler(href);
-
-      return false;
-    }.bind(this))
+    }.bind(this), button, allowDefault)
   }
 
   static clone(selectorOrElement, clickHandler) {
