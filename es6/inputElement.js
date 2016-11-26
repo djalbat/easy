@@ -8,7 +8,7 @@ class InputElement extends Element {
   }
 
   hasFocus() {
-    var focused = document.activeElement === this.$element[0];  ///
+    var focused = (document.activeElement === this.$element[0]);  ///
 
     return focused;
   }

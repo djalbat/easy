@@ -3,11 +3,7 @@
 var Element = require('./element');
 
 class Body extends Element {
-  constructor(selector) {
-    if (selector === undefined) {
-      selector = 'body';
-    }
-
+  constructor(selector = 'body') {
     super(selector);
   }
 

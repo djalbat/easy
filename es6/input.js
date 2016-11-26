@@ -29,8 +29,8 @@ class Input extends InputElement {
     return value;
   }
 
-  getSelectionStart() { return this.$element[0].selectionStart; }
-  getSelectionEnd() { return this.$element[0].selectionEnd; }
+  getSelectionStart() { return this.$element[0].selectionStart; } ///
+  getSelectionEnd() { return this.$element[0].selectionEnd; } ///
 
   setValue(value) {
     this.$element.val(value);
