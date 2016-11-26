@@ -3,16 +3,12 @@
 var $ = require('jquery');
 
 class Window {
-  constructor() {
-    this.$element = $(window);  ///
-  }
-
   onResize(handler) {
-    this.$element.on('resize', handler);  ///
+    $(window).on('resize', handler);  ///
   }
 
   offResize(handler) {
-    this.$element.off('resize', handler); ///
+    $(window).off('resize', handler); ///
   }
 }
 

@@ -3,16 +3,12 @@
 var $ = require('jquery');
 
 class Document {
-  constructor() {
-    this.$element = $(document);  ///
-  }
-
   onKeyUp(handler) {
-    this.$element.keyup(handler);
+    $(document).keyup(handler); ///
   }
 
   onKeyDown(handler) {
-    this.$element.keydown(handler);
+    $(document).keydown(handler); ///
   }
 }
 
