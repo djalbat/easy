@@ -168,15 +168,15 @@ class Element {
     if (namespace !== undefined) {
       events = events + '.' + namespace;
     }
-    
-    this.$element.on(events, handler); 
+
+    this.$element.on(events, handler);
   }
   
   off(events, namespace) {
     if (namespace !== undefined) {
       events = events + '.' + namespace;
     }
-    
+
     this.$element.off(events);
   }
 

@@ -177,7 +177,7 @@ Obviously the list is incomplete. Use the `Element` class if there is no relevan
 
 ## Standard methods
 
-Each element has the following methods. These do nothing much apart from abstract away from jQuery functionality:
+Each element has the following methods:
 
 - `show`
 - `hide`
@@ -217,14 +217,14 @@ Each input element has the following additional methods:
 
 ## Other shared methods
 
-- `getPosition` returns an instance of the `Position` class with the `top` and `left` position of the element relative to the offset parent.
-- `getBounds` returns an instance of the `Bounds` class with the `top`, `left`, `bottom` and `right` bounds of the element relative to the document.
-- `on` abstracts away from jQuery functionality except that it accepts a third, optional argument for the namespace
-- `off` abstracts away from jQuery functionality except that it accepts a second, optional argument for the namespace
+- `getPosition` returns an instance of the `Position` class.
+- `getBounds` returns an instance of the `Bounds` class.
+- `on` takes a third, optional argument for the namespace
+- `off` takes a second, optional argument for the namespace
 - `onClick` takes a handler which is invoked every time the left or middle mouse button is clicked.
 - `onDoubleClick` takes a handler which is invoked every time the left mouse button is double clicked.
-- `onMouseXXX` each abstracts away from jQuery functionality except that it calls the handler with `mouseTop`, `mouseLeft` and `mouseButton` rather than the event object. 
-- `offMouseXXX` each abstracts away from jQuery functionality. A namespace can be passed as an optional argument.
+- `onMouseXXX` calls the handler with `mouseTop`, `mouseLeft` and `mouseButton` arguments 
+- `offMouseXXX` takes an optional namespace argument.
 - `findElements` returns an array containing all the descendant elements, taking an optional selector
 - `childElements` returns an array containing all the immediate descendant elements, taking an optional selector
 - `parentElement` returns the immediate ascendant element or null, taking an optional selector
@@ -233,8 +233,6 @@ Each input element has the following additional methods:
 The `getBounds` method takes optional `includeBorder` and `includeMargin` arguments in a similar vein to the `getWidth` and `getHeight` methods.
 
 The value of the third `mouseButton` argument of the handler passed to the `onMouseXXX` method is either `Element.LEFT_MOUSE_BUTTON`, `Element.MIDDLE_MOUSE_BUTTON` or `Element.RIGHT_MOUSE_BUTTON`. If you want the native event object passed to callbacks instead, use the `on()` method. 
-
-Check the source of the `Element` class for the use of namespaces in event handlers. 
 
 The second argument of the `onClick` method is an optional value specifying the mouse button, the default value being `Element.LEFT_MOUSE_BUTTON` and the other being `Element.MIDDLE_MOUSE_BUTTON`. Only the left and middle mouse buttons are supported, not the right button. The `Button` constructor also takes these two arguments in addition to the standard first argument.
   
