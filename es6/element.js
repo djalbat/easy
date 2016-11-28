@@ -9,7 +9,9 @@ class Element {
   constructor(selector) {
     this.$element = $elementFromSelector(selector);
 
-    this.data('element', this);
+    var domElement = $(this.$element)[0]; ///
+
+    domElement.__instance__ = this;
 
     this.resizeHandlers = [];
   }
@@ -327,10 +329,11 @@ function elementsFromDOMElements(domElements) {
 
   for (var i = 0; i < domElementsLength; i++) {
     var domElement = domElements[i],
-        $element = $(domElement),
-        element = $element.data('element');
+        instance = domElement.__instance__;
 
-    if (element) {
+    if (instance !== undefined) {
+      var element = instance; ///
+      
       elements.push(element);
     }
   }
@@ -385,7 +388,6 @@ function appendResizeObject(instance) {
 
   resizeObject.__domElement__ = domElement;
   domElement.__resizeObject__ = resizeObject;
-  domElement.__instance__ = instance;
 
   resizeObject.onload = resizeObjectLoadHandler;
 
