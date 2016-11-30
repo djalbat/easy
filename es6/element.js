@@ -205,14 +205,14 @@ class Element {
   offClick(clickHandler) { this.$element.off('click', clickHandler); }
 
   onDoubleClick(doubleClickHandler) {
-    this.$element.on('dbclick',function() {
+    this.$element.on('dblclick',function() {
       doubleClickHandler();
 
       return false;
     })
   }
 
-  offDoubleClick(doubleClickHandler) { this.$element.off('dbclick', doubleClickHandler); }
+  offDoubleClick(doubleClickHandler) { this.$element.off('dblclick', doubleClickHandler); }
 
   onMouseUp(mouseUpHandler, namespace) { this.on('mouseup', returnMouseEventHandler(mouseUpHandler), namespace); }
   onMouseDown(mouseDownHandler, namespace) { this.on('mousedown', returnMouseEventHandler(mouseDownHandler), namespace); }
