@@ -24,11 +24,18 @@ class Bounds {
     return this.right;
   }
 
+  isOverlappingMouse(mouseTop, mouseLeft) {
+    return (  (this.top < mouseTop) &&
+              (this.left < mouseLeft) &&
+              (this.bottom > mouseTop) &&
+              (this.right > mouseLeft)  );
+  }
+
   areOverlapping(bounds) {
-    return this.top < bounds.bottom
-        && this.left < bounds.right
-        && this.bottom > bounds.top
-        && this.right > bounds.left;
+    return (  (this.top < bounds.bottom) &&
+              (this.left < bounds.right) &&
+              (this.bottom > bounds.top) &&
+              (this.right > bounds.left)  );
   }
 }
 
