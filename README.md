@@ -219,30 +219,33 @@ Each input element has the following additional methods:
 
 - `getPosition` returns an instance of the `Position` class.
 - `getBounds` returns an instance of the `Bounds` class.
-- `on` takes a third, optional argument for the namespace
-- `off` takes a second, optional argument for the namespace
-- `onClick` takes a handler which is invoked every time the left or middle mouse button is clicked.
+- `on` takes a third, optional `namespace` argument.
+- `off` takes a second, optional `namespace` argument.
+- `onClick` takes a handler which is invoked every time the left or middle mouse button is clicked and a fourth, optional `namespace` argument. The second and third optional arguments are explained below.
+- `offClick` takes an optional `namespace` argument.
 - `onDoubleClick` takes a handler which is invoked every time the left mouse button is double clicked.
-- `onMouseXXX` calls the handler with `mouseTop`, `mouseLeft` and `mouseButton` arguments 
+- `offDoubleClick` takes an option `namespace` argument.
+- `onMouseXXX` calls the handler with `mouseTop`, `mouseLeft` and `mouseButton` arguments .
 - `offMouseXXX` takes an optional namespace argument.
-- `findElements` returns an array containing all the descendant elements, taking an optional selector
-- `childElements` returns an array containing all the immediate descendant elements, taking an optional selector
-- `parentElement` returns the immediate ascendant element or null, taking an optional selector
-- `parentElements` returns an array containing all the ascendant elements, taking an optional selector
+- `findElements` returns an array containing all the descendant elements, taking an optional selector.
+- `childElements` returns an array containing all the immediate descendant elements, taking an optional selector.
+- `parentElement` returns the immediate ascendant element or null, taking an optional selector.
+- `parentElements` returns an array containing all the ascendant elements, taking an optional selector.
 
 The `getBounds` method takes optional `includeBorder` and `includeMargin` arguments in a similar vein to the `getWidth` and `getHeight` methods.
 
 The value of the third `mouseButton` argument of the handler passed to the `onMouseXXX` method is either `Element.LEFT_MOUSE_BUTTON`, `Element.MIDDLE_MOUSE_BUTTON` or `Element.RIGHT_MOUSE_BUTTON`. If you want the native event object passed to callbacks instead, use the `on()` method. 
 
-The second `button` argument of the `onClick` method is an optional value specifying the mouse button, the default value being `Element.LEFT_MOUSE_BUTTON` and the other being `Element.MIDDLE_MOUSE_BUTTON`. Only the left and middle mouse buttons are supported, not the right button. The third `allowDefault` argument specifies whether the browser's default behaviour is allowed. The default is `false`. The `Button` constructor also takes these optional arguments in addition to the standard first `selector` and second `clickHandler` argument.
+The second `button` argument of the `onClick` method is an optional value specifying the mouse button, the default value being `Element.LEFT_MOUSE_BUTTON` and the other being `Element.MIDDLE_MOUSE_BUTTON`. Only the left and middle mouse buttons are supported, not the right button. The third `allowDefault` argument specifies whether the browser's default behaviour is allowed. The default is `false`. The fourth argument is the standard optional `namespace` argument. The `Button` constructor the first two of these optional arguments in addition to the standard first `selector` and second `clickHandler` argument.
   
 In the case of the `Link` class, the click handler is passed the value of the underlying element's `href` attribute. 
 
 ## Other methods
 
-The `Input`, `TextArea` and `Select` class have the following method:
+The `Input`, `TextArea` and `Select` classes have the following method:
 
-- `onChange` takes a handler which is invoked every time the value of the element changes.
+- `onChange` takes a handler which is invoked every time the value of the element changes, plus an optional second `namespace` argument.
+- `offChange` takes an optional `namespace` argument.
 
 The `Input` and `TextArea` classes both have the following methods:
 

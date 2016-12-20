@@ -13,44 +13,41 @@ class TextArea extends InputElement {
 
   clone() { return TextArea.clone(this); }
 
-  onChange(changeHandler) {
+  getValue() { return this.$element.val(); }
+  getSelectionStart() { return this.$element[0].selectionStart; }
+  getSelectionEnd() { return this.$element[0].selectionEnd; }
+  getScrollTop() { return this.$element.scrollTop(); }
+  getScrollLeft() { return this.$element.scrollLeft(); }
+
+  setValue(value) { this.$element.val(value); }
+  setScrollTop(scrollTop) { this.$element.scrollTop(scrollTop); }
+  setScrollLeft(scrollLeft) { this.$element.scrollLeft(scrollLeft); }
+
+  select() { this.$element.select(); }
+
+  onChange(changeHandler, namespace) {
     this.on('input', function() { ///
       var value = this.getValue();
 
       changeHandler(value);
-    }.bind(this));
+    }.bind(this), namespace);
   }
 
-  onScroll(handler) {
+  onScroll(handler, namespace) {
     this.$element.scroll(function() {
       var scrollTop = this.getScrollTop(),
           scrollLeft = this.getScrollLeft();
 
       handler(scrollTop, scrollLeft);
-    }.bind(this));
+    }.bind(this), namespace);
   }
 
-  getScrollTop() { return this.$element.scrollTop(); }
-  getScrollLeft() { return this.$element.scrollLeft(); }
-
-  getValue() {
-    var value = this.$element.val();
-
-    return value;
+  offChange(namespace) {
+    this.off('input', namespace); ///
   }
-
-  getSelectionStart() { return this.$element[0].selectionStart; }
-  getSelectionEnd() { return this.$element[0].selectionEnd; }
-
-  setValue(value) {
-    this.$element.val(value);
-  }
-
-  setScrollTop(scrollTop) { this.$element.scrollTop(scrollTop); }
-  setScrollLeft(scrollLeft) { this.$element.scrollLeft(scrollLeft); }
-
-  select() {
-    this.$element.select();
+  
+  offScroll(namespace) {
+    this.off('scroll', namespace)
   }
 
   onResize(resizeHandler) {}

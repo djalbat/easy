@@ -13,27 +13,26 @@ class Select extends InputElement {
 
   clone(changeHandler) { return Select.clone(this, changeHandler); }
 
-  onChange(changeHandler) {
-    var button = undefined,
-        allowDefault = true;
-    
+  onChange(changeHandler, namespace) {
     this.on('change', function() {
       var selectedOptionValue = this.getSelectedOptionValue();
 
       changeHandler(selectedOptionValue);
-    }.bind(this), button, allowDefault);
+    }.bind(this), namespace);
+  }
+  
+  offChange(namespace) {
+    this.off('change', namespace);
   }
 
   getSelectedOptionValue() {
-    var $selectedOption = this.$element.find(':selected'),
-        selectedOptionValue = $selectedOption.val();
+    var $selectedOption = this.$element.find(':selected'),  ///
+        selectedOptionValue = $selectedOption.val();  ///
 
     return selectedOptionValue;
   }
 
-  setSelectedOptionByValue(value) {
-    this.$element.val(value);
-  }
+  setSelectedOptionByValue(value) { this.$element.val(value); }
 
   static clone(selectorOrElement, changeHandler) {
     return InputElement.clone(Select, selectorOrElement, changeHandler);

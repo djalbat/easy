@@ -13,26 +13,26 @@ class Input extends InputElement {
 
   clone() { return Input.clone(this); }
 
-  onChange(changeHandler) {
-    this.on('input', function() { ///
-      var value = this.getValue();
-
-      changeHandler(value);
-    }.bind(this));
-  }
-
   getValue() { return this.$element.val(); }
-
   getSelectionStart() { return this.$element[0].selectionStart; } ///
   getSelectionEnd() { return this.$element[0].selectionEnd; } ///
 
   setValue(value) { this.$element.val(value); }
 
   select() { this.$element.select(); }
-  
-  onResize(resizeHandler) {}
-  offResize(resizeHandler) {}
-  
+
+  onChange(changeHandler, namespace) {
+    this.on('input', function() { ///
+      var value = this.getValue();
+
+      changeHandler(value);
+    }.bind(this), namespace);
+  }
+
+  offChange(namespace) {
+    this.off('input', namespace); ///
+  }
+
   static clone(selectorOrElement) {
     return InputElement.clone(Input, selectorOrElement);
   }

@@ -182,8 +182,8 @@ class Element {
     this.$element.off(events);
   }
 
-  onClick(clickHandler, button = Element.LEFT_MOUSE_BUTTON, allowDefault = false) {
-    this.$element.on('click',function(event) {
+  onClick(clickHandler, button = Element.LEFT_MOUSE_BUTTON, allowDefault = false, namespace) {
+    this.on('click', function(event) {
       switch (button) {
         case Element.LEFT_MOUSE_BUTTON :
           if (event.button === 0) { ///
@@ -199,20 +199,20 @@ class Element {
       }
 
       return allowDefault;
-    });
+    }, namespace);
   }
   
-  offClick(clickHandler) { this.$element.off('click', clickHandler); }
+  offClick(namespace) { this.off('click', namespace); }
 
-  onDoubleClick(doubleClickHandler) {
-    this.$element.on('dblclick',function() {
+  onDoubleClick(doubleClickHandler, namespace) {
+    this.on('dblclick',function() {
       doubleClickHandler();
 
       return false;
-    })
+    }, namespace)
   }
 
-  offDoubleClick(doubleClickHandler) { this.$element.off('dblclick', doubleClickHandler); }
+  offDoubleClick(namespace) { this.off('dblclick', namespace); }
 
   onMouseUp(mouseUpHandler, namespace) { this.on('mouseup', returnMouseEventHandler(mouseUpHandler), namespace); }
   onMouseDown(mouseDownHandler, namespace) { this.on('mousedown', returnMouseEventHandler(mouseDownHandler), namespace); }
