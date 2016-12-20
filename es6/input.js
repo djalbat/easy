@@ -11,7 +11,7 @@ class Input extends InputElement {
     }
   }
 
-  clone() { return Input.clone(this); }
+  clone(changeHandler) { return Input.clone(this, changeHandler); }
 
   getValue() { return this.$element.val(); }
   getSelectionStart() { return this.$element[0].selectionStart; } ///
@@ -22,7 +22,7 @@ class Input extends InputElement {
   select() { this.$element.select(); }
 
   onChange(changeHandler, namespace) {
-    this.on('input', function() { ///
+    this.on('change', function() { ///
       var value = this.getValue();
 
       changeHandler(value);
@@ -30,19 +30,19 @@ class Input extends InputElement {
   }
 
   offChange(namespace) {
-    this.off('input', namespace); ///
+    this.off('change', namespace); ///
   }
 
-  static clone(selectorOrElement) {
-    return InputElement.clone(Input, selectorOrElement);
+  static clone(selectorOrElement, changeHandler) {
+    return InputElement.clone(Input, selectorOrElement, changeHandler);
   }
 
-  static fromHTML(html) {
-    return InputElement.fromHTML(Input, html);
+  static fromHTML(html, changeHandler) {
+    return InputElement.fromHTML(Input, html, changeHandler);
   }
 
-  static fromDOMElement(domElement) {
-    return InputElement.fromDOMElement(Input, domElement);
+  static fromDOMElement(domElement, changeHandler) {
+    return InputElement.fromDOMElement(Input, domElement, changeHandler);
   }
 }
 

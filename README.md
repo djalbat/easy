@@ -244,7 +244,7 @@ In the case of the `Link` class, the click handler is passed the value of the un
 
 The `Input`, `TextArea` and `Select` classes have the following method:
 
-- `onChange` takes a handler which is invoked every time the value of the element changes, plus an optional second `namespace` argument.
+- `onChange` takes a handler which is invoked when the value of the element changes, plus an optional second `namespace` argument. The behaviour is the same as the underlying jQuery behaviour, namely thaht for select boxes the handler is invoked immediately when the user makes a selection with the mouse, but for other elements the handler is invoked only when the element in question loses the focus.
 - `offChange` takes an optional `namespace` argument.
 
 The `Input` and `TextArea` classes both have the following methods:

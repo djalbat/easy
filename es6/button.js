@@ -11,18 +11,18 @@ class Button extends InputElement {
     }
   }
 
-  clone(clickHandler) { return Button.clone(this, clickHandler); }
+  clone(clickHandler, button, allowDefault) { return Button.clone(this, clickHandler, button, allowDefault); }
 
-  static clone(selectorOrElement, clickHandler) {
-    return InputElement.clone(Button, selectorOrElement, clickHandler);
+  static clone(selectorOrElement, clickHandler, button, allowDefault) {
+    return InputElement.clone(Button, selectorOrElement, clickHandler, button, allowDefault);
   }
 
-  static fromHTML(html, clickHandler) {
-    return InputElement.fromHTML(Button, html, clickHandler);
+  static fromHTML(html, clickHandler, button, allowDefault) {
+    return InputElement.fromHTML(Button, html, clickHandler, button, allowDefault);
   }
 
-  static fromDOMElement(domElement, clickHandler) {
-    return InputElement.fromDOMElement(Button, domElement, clickHandler);
+  static fromDOMElement(domElement, clickHandler, button, allowDefault) {
+    return InputElement.fromDOMElement(Button, domElement, clickHandler, button, allowDefault);
   }
 }
 

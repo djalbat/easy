@@ -11,7 +11,7 @@ class TextArea extends InputElement {
     }
   }
 
-  clone() { return TextArea.clone(this); }
+  clone(changeHandler) { return TextArea.clone(this, changeHandler); }
 
   getValue() { return this.$element.val(); }
   getSelectionStart() { return this.$element[0].selectionStart; }
@@ -26,7 +26,7 @@ class TextArea extends InputElement {
   select() { this.$element.select(); }
 
   onChange(changeHandler, namespace) {
-    this.on('input', function() { ///
+    this.on('change', function() { ///
       var value = this.getValue();
 
       changeHandler(value);
@@ -43,7 +43,7 @@ class TextArea extends InputElement {
   }
 
   offChange(namespace) {
-    this.off('input', namespace); ///
+    this.off('change', namespace); ///
   }
   
   offScroll(namespace) {
@@ -53,16 +53,16 @@ class TextArea extends InputElement {
   onResize(resizeHandler) {}
   offResize(resizeHandler) {}
 
-  static clone(selectorOrElement) {
-    return InputElement.clone(TextArea, selectorOrElement);
+  static clone(selectorOrElement, changeHandler) {
+    return InputElement.clone(TextArea, selectorOrElement, changeHandler);
   }
 
-  static fromHTML(html) {
-    return InputElement.fromHTML(TextArea, html);
+  static fromHTML(html, changeHandler) {
+    return InputElement.fromHTML(TextArea, html, changeHandler);
   }
 
-  static fromDOMElement(domElement) {
-    return InputElement.fromDOMElement(TextArea, domElement);
+  static fromDOMElement(domElement, changeHandler) {
+    return InputElement.fromDOMElement(TextArea, domElement, changeHandler);
   }
 }
 
