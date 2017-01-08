@@ -17,7 +17,6 @@ Actually they are, here:
 
 - [Occam Proof Assistant](http://djalbat.com/occam)
 
- 
 ## Installation
 
 You can install EasyUI with [npm](https://www.npmjs.com/):
