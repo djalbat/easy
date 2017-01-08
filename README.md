@@ -9,7 +9,14 @@ It leverages jQuery to provide a very basic set of classes for elements such as 
 ## Related projects
 
 - [EasyUI-Layout](https://github.com/djalbat/EasyUI-Layout) Layout elements that work with CSS flexbox.
-- [EasyUI-DragAndDrop](https://github.com/djalbat/EasyUI-DragAndDrop) Drag and drop elements including a file explorer and rubbish bin. 
+- [EasyUI-DragAndDrop](https://github.com/djalbat/EasyUI-DragAndDrop) Drag and drop elements including a file explorer and rubbish bin.
+
+## Are the EasyUI projects actually used anywhere?
+
+Actually they are, here:
+
+- [Occam Proof Assistant](http://djalbat.com/occam)
+
  
 ## Installation
 
