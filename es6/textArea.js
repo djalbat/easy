@@ -26,7 +26,7 @@ class TextArea extends InputElement {
   select() { this.$element.select(); }
 
   onChange(changeHandler, namespace) {
-    this.on('change', function() { ///
+    this.on('change', function() {
       var value = this.getValue();
 
       changeHandler(value);
@@ -34,7 +34,7 @@ class TextArea extends InputElement {
   }
 
   onScroll(handler, namespace) {
-    this.$element.scroll(function() {
+    this.on('scroll', function() {
       var scrollTop = this.getScrollTop(),
           scrollLeft = this.getScrollLeft();
 
@@ -43,7 +43,7 @@ class TextArea extends InputElement {
   }
 
   offChange(namespace) {
-    this.off('change', namespace); ///
+    this.off('change', namespace);
   }
   
   offScroll(namespace) {
