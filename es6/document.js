@@ -3,13 +3,25 @@
 var $ = require('jquery');
 
 class Document {
-  onKeyUp(handler) {
-    $(document).keyup(handler); ///
+  on(events, handler, namespace) {
+    events = appendNamespaceToEvents(events, namespace);
+
+    $(document).on(events, handler);
   }
 
-  onKeyDown(handler) {
-    $(document).keydown(handler); ///
+  off(events, namespace) {
+    events = appendNamespaceToEvents(events, namespace);
+
+    $(document).off(events);
   }
 }
 
 module.exports = new Document();  ///
+
+function appendNamespaceToEvents(events, namespace) {
+  if (namespace !== undefined) {
+    events = events + '.' + namespace;
+  }
+
+  return events;
+}

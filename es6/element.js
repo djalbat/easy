@@ -167,17 +167,13 @@ class Element {
   }
 
   on(events, handler, namespace) {
-    if (namespace !== undefined) {
-      events = events + '.' + namespace;
-    }
+    events = appendNamespaceToEvents(events, namespace);
 
     this.$element.on(events, handler);
   }
   
   off(events, namespace) {
-    if (namespace !== undefined) {
-      events = events + '.' + namespace;
-    }
+    events = appendNamespaceToEvents(events, namespace);
 
     this.$element.off(events);
   }
@@ -421,6 +417,14 @@ function resizeListener(event) {
   instance.resizeHandlers.forEach(function(resizeHandler){
     resizeHandler(width, height);
   });
+}
+
+function appendNamespaceToEvents(events, namespace) {
+  if (namespace !== undefined) {
+    events = events + '.' + namespace;
+  }
+
+  return events;
 }
 
 function first(array) { return array[0]; }

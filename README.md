@@ -113,9 +113,9 @@ var checkboxFromHTML = Checkbox.fromHTML('<input type="checkbox"/>');
 var body = Body.fromDOMElement(document.getElementsByTagName('body')[0]);
 ```
 
-Note that in the second case the `document` is the global document reference, not EasyUI's `document` singleton.
+If constructors take handlers or other arguments you can pass these to `fromHTML()` and `fromDOMElement()` methods.
 
-If constructors take change or click handlers you can pass these to `fromHTML()` methods.
+Note that in the second case the `document` is the global document reference, not EasyUI's `document` singleton.
 
 ### Cloning elements
 
@@ -137,6 +137,8 @@ clonedButton.removeAttribute('id');
 ```
 
 When you clone an existing element you will need to re-register any click or change handlers. You can pass these straight to the `clone()` methods if you like.
+
+If constructors take handlers or other arguments you can pass these to both instance and static `clone()` methods.
 
 ### Adding elements to the DOM
  
@@ -266,17 +268,17 @@ The `TextArea` class has the following methods:
 - `setScrollTop`
 - `setScrollLeft`
 
+Both the `window` and `document` singletons have the following two methods, which are identical to the corresponding ones described above. That is, along with `events` and `handler` arguments they take a third, optional `namespace argument`:
+
+- `on`
+- `off`
+
 The `window` singleton and all but the `Input` and `Textarea` classes have the following methods:
 
 - `onResize`
 - `offResize`
 
-Both take a handler that is passed `width` and `height` arguments when the resize event is fired. ***Note that you must explicitly set the `position` style attribute of an element to `relative` in order for its `onResize()` method to work.*** This was thought to be a better approach than setting it on the sly. It can be done dynamically with JavaScript or alternatively with CSS.
-
-Only the `document` singleton has the following methods:
-
-- `onKeyUp` 
-- `onKeyDown`
+However the behaviour of these methods is different. In the case of the `window` singleton, they are no more than a shorthand for `on('resize', ...)` and `off('resize', ...)` and behave in the same way, that is taking a third, optional `namespace` argument. In the case of the other elements, however, there is no optional namespace and the `offResize()`` method must be passed the same handler that was passed to the `onResize()` method in order to de-register it. Additionally they will pass `width` and `height` arguments to the handlers. ***Note that you must explicitly set the `position` style attribute of an element to `relative` in order for its `onResize()` method to work.*** This was thought to be a better approach than setting it on the sly. It can be done dynamically with JavaScript or alternatively with CSS.
 
 ## Rolling your own elements
 
