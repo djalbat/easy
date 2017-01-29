@@ -20,6 +20,8 @@ class TextArea extends InputElement {
   getScrollLeft() { return this.$element.scrollLeft(); }
 
   setValue(value) { this.$element.val(value); }
+  setSelectionStart(selectionStart) { this.$element[0].selectionStart(selectionStart); } ///
+  setSelectionEnd(selectionEnd) { this.$element[0].selectionEnd(selectionEnd); } ///
   setScrollTop(scrollTop) { this.$element.scrollTop(scrollTop); }
   setScrollLeft(scrollLeft) { this.$element.scrollLeft(scrollLeft); }
 

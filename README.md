@@ -259,6 +259,8 @@ The `Input` and `TextArea` classes both have the following methods:
 
 - `getSelectionStart`
 - `getSelectionEnd`
+- `setSelectionStart`
+- `setSelectionEnd`
 
 The `TextArea` class has the following methods:
  
