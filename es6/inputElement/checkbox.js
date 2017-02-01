@@ -1,6 +1,6 @@
 'use strict';
 
-var InputElement = require('./inputElement');
+var InputElement = require('../inputElement');
 
 class Checkbox extends InputElement {
   constructor(selector, changeHandler) {
@@ -13,7 +13,7 @@ class Checkbox extends InputElement {
 
   clone(changeHandler) { return Checkbox.clone(this, changeHandler); }
 
-  onChange(changeHandler) {
+  onChange(changeHandler, namespace) {
     var button = undefined,
         allowDefault = true;
 
@@ -21,7 +21,7 @@ class Checkbox extends InputElement {
       var checked = this.isChecked();
 
       changeHandler(checked);
-    }.bind(this), button, allowDefault)
+    }.bind(this), namespace, button, allowDefault)
   }
 
   check(checked = true) {

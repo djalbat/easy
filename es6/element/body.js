@@ -1,6 +1,6 @@
 'use strict';
 
-var Element = require('./element');
+var Element = require('../element');
 
 class Body extends Element {
   constructor(selector = 'body') {

@@ -1,6 +1,6 @@
 'use strict';
 
-var InputElement = require('./inputElement');
+var InputElement = require('../inputElement');
 
 class Select extends InputElement {
   constructor(selector, changeHandler) {

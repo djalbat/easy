@@ -1,16 +1,19 @@
 'use strict';
 
 module.exports = {
+  Bounds: require('./lib/misc/bounds'),
+  Position: require('./lib/misc/position'),
   window: require('./lib/window'),
   document: require('./lib/document'),
+  Div: require('./lib/element/div'),
+  Span: require('./lib/element/span'),
+  Body: require('./lib/element/body'),
   Element: require('./lib/element'),
-  Bounds: require('./lib/bounds'),
-  Body: require('./lib/body'),
-  Div: require('./lib/div'),
-  Link: require('./lib/link'),
-  Input: require('./lib/input'),
-  Select: require('./lib/select'),
-  Button: require('./lib/button'),
-  Checkbox: require('./lib/checkbox'),
-  TextArea: require('./lib/textArea')
+  Link: require('./lib/inputElement/link'),
+  Input: require('./lib/inputElement/input'),
+  Select: require('./lib/inputElement/select'),
+  Button: require('./lib/inputElement/button'),
+  Checkbox: require('./lib/inputElement/checkbox'),
+  TextArea: require('./lib/inputElement/textArea'),
+  InputElement: require('./lib/inputElement')
 };

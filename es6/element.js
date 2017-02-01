@@ -2,8 +2,11 @@
 
 var $ = require('jquery');
 
-var Bounds = require('./bounds'),
-    Position = require('./position');
+var Position = require('./misc/position'),
+    Bounds = require('./misc/bounds'),
+    event = require('./delegate/event'),
+    mouse = require('./delegate/mouse'),
+    resize = require('./delegate/resize');
 
 class Element {
   constructor(selector) {
@@ -13,18 +16,12 @@ class Element {
 
     domElement.__instance__ = this;
 
-    this.resizeHandlers = [];
+    event.initialise(this);
+    mouse.initialise(this);
+    resize.initialise(this);
   }
 
   clone() { return Element.clone(this); }
-
-  show() { this.$element.show(); }
-  hide() { this.$element.hide(); }
-  enable() { this.$element.removeAttr('disabled'); }
-  disable() { this.$element.attr('disabled', true); }
-  remove() { this.$element.remove(); }
-  detach() { this.$element.detach(); }
-  empty() { this.$element.empty(); }
 
   getPosition() {
     var $position = this.$element.position(),
@@ -64,12 +61,17 @@ class Element {
     return height;
   }
 
-  setWidth(width) { this.$element.width(width); }
-  setHeight(height) { this.$element.height(height); }
-
   getAttribute(name) { return this.$element.attr(name); }
   addAttribute(name, value) { this.$element.attr(name, value); }
   removeAttribute(name) { this.$element.removeAttr(name); }
+  hasClass(className) { return this.$element.hasClass(className); }
+  addClass(className) { this.$element.addClass(className); }
+  removeClass(className) { this.$element.removeClass(className); }
+  removeClasses() { this.$element.removeClass(); }
+
+  setWidth(width) { this.$element.width(width); }
+  setHeight(height) { this.$element.height(height); }
+
   prependBefore(element) { this.$element.before(element.$element); }
   appendAfter(element) { this.$element.after(element.$element); }
   
@@ -99,10 +101,13 @@ class Element {
     }
   }
 
-  hasClass(className) { return this.$element.hasClass(className); }
-  addClass(className) { this.$element.addClass(className); }
-  removeClass(className) { this.$element.removeClass(className); }
-  removeClasses() { this.$element.removeClass(); }
+  show() { this.$element.show(); }
+  hide() { this.$element.hide(); }
+  enable() { this.$element.removeAttr('disabled'); }
+  disable() { this.$element.attr('disabled', true); }
+  remove() { this.$element.remove(); }
+  detach() { this.$element.detach(); }
+  empty() { this.$element.empty(); }
 
   html(html) {
     if (html !== undefined) {
@@ -166,19 +171,7 @@ class Element {
     return parentElements;
   }
 
-  on(events, handler, namespace) {
-    events = appendNamespaceToEvents(events, namespace);
-
-    this.$element.on(events, handler);
-  }
-  
-  off(events, namespace) {
-    events = appendNamespaceToEvents(events, namespace);
-
-    this.$element.off(events);
-  }
-
-  onClick(clickHandler, button = Element.LEFT_MOUSE_BUTTON, allowDefault = false, namespace) {
+  onClick(clickHandler, namespace, button = Element.LEFT_MOUSE_BUTTON, allowDefault = false) {
     this.on('click', function(event) {
       switch (button) {
         case Element.LEFT_MOUSE_BUTTON :
@@ -210,40 +203,8 @@ class Element {
 
   offDoubleClick(namespace) { this.off('dblclick', namespace); }
 
-  onMouseUp(mouseUpHandler, namespace) { this.on('mouseup', returnMouseEventHandler(mouseUpHandler), namespace); }
-  onMouseDown(mouseDownHandler, namespace) { this.on('mousedown', returnMouseEventHandler(mouseDownHandler), namespace); }
-  onMouseOver(mouseOverHandler, namespace) { this.on('mouseover', returnMouseEventHandler(mouseOverHandler), namespace); }
-  onMouseOut(mouseOutHandler, namespace) { this.on('mouseout', returnMouseEventHandler(mouseOutHandler), namespace); }
-  onMouseMove(mouseMoveHandler, namespace) { this.on('mousemove', returnMouseEventHandler(mouseMoveHandler), namespace); }
-
-  offMouseUp(namespace) { this.off('mouseup', namespace); }
-  offMouseDown(namespace) { this.off('mousedown', namespace); }
-  offMouseOver(namespace) { this.off('mouseover', namespace); }
-  offMouseOut(namespace) { this.off('mouseout', namespace); }
-  offMouseMove(namespace) { this.off('mousemove', namespace); }
-
-  onResize(resizeHandler) {
-    var resizeHandlers = hasResizeHandlers(this);
-
-    if (!resizeHandlers) {
-      appendResizeObject(this);
-    }
-
-    addResizeHandler(this, resizeHandler);
-  }
-
-  offResize(resizeHandler) {
-    removeResizeHandler(this, resizeHandler);
-
-    var resizeHandlers = hasResizeHandlers(this);
-
-    if (!resizeHandlers) {
-      removeResizeObject(this);
-    }
-  }
-
   static clone(firstArgument, ...remainingArguments) {
-    return instance(firstArgument, remainingArguments, isNotAClass, $elementFromSecondArgument);
+    return element(firstArgument, remainingArguments, isNotAClass, $elementFromSecondArgument);
 
     function isNotAClass(firstArgument) {
       return ((typeof firstArgument === 'string') || (firstArgument instanceof Element));
@@ -251,15 +212,15 @@ class Element {
 
     function $elementFromSecondArgument(secondArgument) {
       var $element = (typeof secondArgument === 'string') ?
-          $(secondArgument) :
-          secondArgument.$element;
+                       $(secondArgument) :
+                          secondArgument.$element;
 
       return $element.clone();
     }
   }
 
   static fromHTML(firstArgument, ...remainingArguments) {
-    return instance(firstArgument, remainingArguments, isNotAClass, $elementFromSecondArgument);
+    return element(firstArgument, remainingArguments, isNotAClass, $elementFromSecondArgument);
 
     function isNotAClass(firstArgument) {
       return (typeof firstArgument === 'string');
@@ -271,7 +232,7 @@ class Element {
   }
 
   static fromDOMElement(firstArgument, ...remainingArguments) {
-    return instance(firstArgument, remainingArguments, isNotAClass, $elementFromSecondArgument);
+    return element(firstArgument, remainingArguments, isNotAClass, $elementFromSecondArgument);
 
     function isNotAClass(firstArgument) {
       return (firstArgument instanceof HTMLElement);
@@ -288,6 +249,24 @@ Element.MIDDLE_MOUSE_BUTTON = 2;
 Element.RIGHT_MOUSE_BUTTON = 3;
 
 module.exports = Element;
+
+function element(firstArgument, remainingArguments, isNotAClass, $elementFromSecondArgument) {
+  var firstArgumentNotAClass = isNotAClass(firstArgument);
+
+  if (firstArgumentNotAClass) {
+    remainingArguments.unshift(firstArgument);
+    firstArgument = Element;
+  }
+
+  var Class = firstArgument,
+      secondArgument = remainingArguments.shift(),
+      $element = $elementFromSecondArgument(secondArgument);
+
+  remainingArguments.unshift($element);
+  remainingArguments.unshift(null); ///
+
+  return new (Function.prototype.bind.apply(Class, remainingArguments));  ///
+}
 
 function $elementFromSelector(selector) {
   var $element;
@@ -309,16 +288,6 @@ function $elementFromSelector(selector) {
   return $element;
 }
 
-function returnMouseEventHandler(handler) {
-  return function(event) {
-    var mouseTop = event.pageY,  ///
-        mouseLeft = event.pageX, ///
-        mouseButton = event.which; ///
-
-    handler(mouseTop, mouseLeft, mouseButton);
-  };
-}
-
 function elementsFromDOMElements(domElements) {
   var elements = [],
       domElementsLength = domElements.length;
@@ -335,96 +304,6 @@ function elementsFromDOMElements(domElements) {
   }
 
   return elements;
-}
-
-function instance(firstArgument, remainingArguments, isNotAClass, $elementFromSecondArgument) {
-  if (isNotAClass(firstArgument)) {
-    remainingArguments.unshift(firstArgument);
-    firstArgument = Element;
-  }
-
-  var Class = firstArgument,
-      secondArgument = remainingArguments.shift(),
-      $element = $elementFromSecondArgument(secondArgument);
-
-  remainingArguments.unshift($element);
-  remainingArguments.unshift(null); ///
-
-  return new (Function.prototype.bind.apply(Class, remainingArguments));  ///
-}
-
-function addResizeHandler(instance, resizeHandler) {
-  instance.resizeHandlers.push(resizeHandler);
-}
-
-function removeResizeHandler(instance, resizeHandler) {
-  var start = instance.resizeHandlers.indexOf(resizeHandler); ///
-
-  if (start > -1) {
-    var deleteCount = 1;
-
-    instance.resizeHandlers.splice(start, deleteCount);
-  }
-}
-
-function hasResizeHandlers(instance) {
-  var resizeHandlersLength = instance.resizeHandlers.length,
-      resizeHandlers = (resizeHandlersLength > 0);
-
-  return resizeHandlers;
-}
-
-function appendResizeObject(instance) {
-  var resizeObject = document.createElement('object'),
-      domElement = instance.$element[0];  ///
-
-  resizeObject.setAttribute('style', 'display: block; position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; pointer-events: none; z-index: -1;');
-  resizeObject.data = 'about:blank';
-  resizeObject.type = 'text/html';
-
-  resizeObject.__domElement__ = domElement;
-  domElement.__resizeObject__ = resizeObject;
-
-  resizeObject.onload = resizeObjectLoadHandler;
-
-  domElement.appendChild(resizeObject);
-}
-
-function removeResizeObject(instance) {
-  var domElement = instance.$element[0],  ///
-      resizeObject = domElement.__resizeObject__,
-      objectWindow = resizeObject.contentDocument.defaultView;  ///
-
-  objectWindow.removeEventListener('resize', resizeListener);
-
-  domElement.removeChild(resizeObject);
-}
-
-function resizeObjectLoadHandler() {
-  var resizeObjectWindow = this.contentDocument.defaultView;  ///
-
-  resizeObjectWindow.__domElement__ = this.__domElement__;
-  resizeObjectWindow.addEventListener('resize', resizeListener);
-}
-
-function resizeListener(event) {
-  var resizeObjectWindow = event.target || event.srcElement,  ///
-      domElement = resizeObjectWindow.__domElement__,
-      instance = domElement.__instance__,
-      width = instance.getWidth(),
-      height = instance.getHeight();
-
-  instance.resizeHandlers.forEach(function(resizeHandler){
-    resizeHandler(width, height);
-  });
-}
-
-function appendNamespaceToEvents(events, namespace) {
-  if (namespace !== undefined) {
-    events = events + '.' + namespace;
-  }
-
-  return events;
 }
 
 function first(array) { return array[0]; }

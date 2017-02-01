@@ -2,15 +2,22 @@
 
 var $ = require('jquery');
 
+var event = require('./delegate/event'),
+    mouse = require('./delegate/mouse');
+
 class Window {
+  constructor() {
+    mouse.initialise(this);
+  }
+
   on(events, handler, namespace) {
-    events = appendNamespaceToEvents(events, namespace);
+    events = event.appendNamespaceToEvents(events, namespace);
 
     $(window).on(events, handler);
   }
 
   off(events, namespace) {
-    events = appendNamespaceToEvents(events, namespace);
+    events = event.appendNamespaceToEvents(events, namespace);
 
     $(window).off(events);
   }
@@ -18,7 +25,7 @@ class Window {
   onResize(handler, namespace) {
     var events = 'resize';
 
-    events = appendNamespaceToEvents(events, namespace);
+    events = event.appendNamespaceToEvents(events, namespace);
 
     $(window).on(events, handler);
   }
@@ -26,18 +33,10 @@ class Window {
   offResize(namespace) {
     var events = 'resize';
 
-    events = appendNamespaceToEvents(events, namespace);
+    events = event.appendNamespaceToEvents(events, namespace);
 
     $(window).off(events);
   }
 }
 
 module.exports = new Window();  ///
-
-function appendNamespaceToEvents(events, namespace) {
-  if (namespace !== undefined) {
-    events = events + '.' + namespace;
-  }
-
-  return events;
-}

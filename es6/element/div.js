@@ -1,6 +1,6 @@
 'use strict';
 
-var Element = require('./element');
+var Element = require('../element');
 
 class Div extends Element {
   constructor(selector) {

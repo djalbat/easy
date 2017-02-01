@@ -86,10 +86,10 @@ body.append(outerDiv);
 new Div('#firstDiv');
 new Div('#thirdDiv');
 
-var outDivChildElements = outerDiv.childElements();
+var outerDivChildElements = outerDiv.childElements();
 
-outDivChildElements.forEach(function(outDivChildElement) {
-  var outDivChildElementId = outDivChildElement.getAttribute('id');
+outerDivChildElements.forEach(function(outDiverChildElement) {
+  var outDivChildElementId = outDiverChildElement.getAttribute('id');
 
   console.log(outDivChildElementId);    // firstDiv, thirdDiv
 });
@@ -168,25 +168,46 @@ Similarly for the `prepend()` and `prependBefore()` methods.
 
 ## Supported elements
 
-- `window`
-- `document`
-- `Body`
-- `Div`
-- `Button`
-- `Checkbox`
-- `TextArea`
-- `Input`
-- `Link`
-- `Select`
+-  window
+-  document
+-  Div
+-  Span
+-  Body
+-  Element
+-  Link
+-  Input
+-  Select
+-  Button
+-  Checkbox
+-  TextArea
+-  InputElement
 
-The `Window` and `Document` classes are not exported, only singletons.
+The `Window` and `Document` classes are not exported, only singletons, hence the lowercase.
 
 Obviously the list is incomplete. Use the `Element` class if there is no relevant class, submit a pull request or roll your own.
 
 ## Standard methods
 
-Each element has the following methods:
+Each element bar the `window` and `document` singletons has the following methods:
 
+- `clone`
+- `getPosition`
+- `getBounds`
+- `getWidth`
+- `getHeight`
+- `getAttribute`
+- `addAttribute`
+- `removeAttribute`
+- `hasClass`
+- `addClass`
+- `removeClass`
+- `removeClasses`
+- `setWidth`
+- `setHeight`
+- `prependBefore`
+- `appendAfter`
+- `prepend`
+- `append`
 - `show`
 - `hide`
 - `enable`
@@ -194,34 +215,26 @@ Each element has the following methods:
 - `remove`
 - `detach`
 - `empty`
-- `getWidth`
-- `getHeight`
-- `setWidth`
-- `setHeight`
-- `getAttribute`
-- `addAttribute`
-- `removeAttribute`
-- `prependBefore`
-- `appendAfter`
-- `prepend`
-- `append`
-- `hasClass`
-- `addClass`
-- `removeClass`
-- `removeClasses`
 - `html`
 - `css`
 - `data`
-- `on`
+- `findElements`
+- `childElements`
+- `parentElement`
+- `parentElements`
+- `onClick`
+- `offClick`
+- `onDoubleClick`
+- `offDoubleClick`
 
-The `getWidth` and `getHeight` methods take two optional arguments, namely `includeBorder` and `includeMargin`, both set to `false` by default. To make use of the second argument, the first must be given explicitly.
-
-Each input element has the following additional methods:
+Each input element, that is `Link`, `Input`, `Select`, `Button`, `Checkbox` or `Textarea` element, has the following methods:
 
 - `hasFocus`
 - `onFocus`
 - `onBlur`
 - `focus`
+
+Look at the source code of the `Element` and `InputElement` classes for signatures and functionality. Mostly these methods ape the functionality of the jQuery methods on which they rely. Aside from that the following notes may help.
 
 ## Other shared methods
 
@@ -229,7 +242,7 @@ Each input element has the following additional methods:
 - `getBounds` returns an instance of the `Bounds` class.
 - `on` takes a third, optional `namespace` argument.
 - `off` takes a second, optional `namespace` argument.
-- `onClick` takes a handler which is invoked every time the left or middle mouse button is clicked and a fourth, optional `namespace` argument. The second and third optional arguments are explained below.
+- `onClick` takes a handler which is invoked every time the left or middle mouse button is clicked and a second, optional `namespace` argument.
 - `offClick` takes an optional `namespace` argument.
 - `onDoubleClick` takes a handler which is invoked every time the left mouse button is double clicked.
 - `offDoubleClick` takes an option `namespace` argument.
@@ -239,18 +252,12 @@ Each input element has the following additional methods:
 - `childElements` returns an array containing all the immediate descendant elements, taking an optional selector.
 - `parentElement` returns the immediate ascendant element or null, taking an optional selector.
 - `parentElements` returns an array containing all the ascendant elements, taking an optional selector.
-
-The `getBounds` method takes optional `includeBorder` and `includeMargin` arguments in a similar vein to the `getWidth` and `getHeight` methods.
-
-The value of the third `mouseButton` argument of the handler passed to the `onMouseXXX` method is either `Element.LEFT_MOUSE_BUTTON`, `Element.MIDDLE_MOUSE_BUTTON` or `Element.RIGHT_MOUSE_BUTTON`. If you want the native event object passed to callbacks instead, use the `on()` method. 
-
-The second `button` argument of the `onClick` method is an optional value specifying the mouse button, the default value being `Element.LEFT_MOUSE_BUTTON` and the other being `Element.MIDDLE_MOUSE_BUTTON`. Only the left and middle mouse buttons are supported, not the right button. The third `allowDefault` argument specifies whether the browser's default behaviour is allowed. The default is `false`. The fourth argument is the standard optional `namespace` argument. The `Button` constructor the first two of these optional arguments in addition to the standard first `selector` and second `clickHandler` argument.
-  
-In the case of the `Link` class, the click handler is passed the value of the underlying element's `href` attribute. 
+- `getWidth`, `getHeight` take two optional arguments, namely `includeBorder` and `includeMargin`, both set to `false` by default.
+- `getBounds` takes optional `includeBorder` and `includeMargin` arguments in a similar vein.
 
 ## Other methods
 
-The `Input`, `TextArea` and `Select` classes have the following method:
+The `Input`, `TextArea` and `Select` classes have the following methods:
 
 - `onChange` takes a handler which is invoked when the value of the element changes, plus an optional second `namespace` argument. The behaviour is the same as the underlying jQuery behaviour, namely thaht for select boxes the handler is invoked immediately when the user makes a selection with the mouse, but for other elements the handler is invoked only when the element in question loses the focus.
 - `offChange` takes an optional `namespace` argument.
@@ -270,7 +277,7 @@ The `TextArea` class has the following methods:
 - `setScrollTop`
 - `setScrollLeft`
 
-Both the `window` and `document` singletons have the following two methods, which are identical to the corresponding ones described above. That is, along with `events` and `handler` arguments they take a third, optional `namespace argument`:
+Both the `window` and `document` singletons have the following methods, which are identical to the corresponding ones described above:
 
 - `on`
 - `off`

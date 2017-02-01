@@ -1,6 +1,6 @@
 'use strict';
 
-var InputElement = require('./inputElement');
+var InputElement = require('../inputElement');
 
 class Link extends InputElement {
   constructor(selector, clickHandler) {
@@ -13,12 +13,12 @@ class Link extends InputElement {
 
   clone(clickHandler) { return Link.clone(this, clickHandler); }
 
-  onClick(clickHandler, button, allowDefault = false) {
+  onClick(clickHandler, namespace, button, allowDefault = false) {
     super.onClick(function() {
       var href = this.getAttribute('href');
 
       clickHandler(href);
-    }.bind(this), button, allowDefault)
+    }.bind(this), namespace, button, allowDefault)
   }
 
   static clone(selectorOrElement, clickHandler) {

@@ -37,7 +37,8 @@
                 Button = easyui.Button,
                 Select = easyui.Select,
                 Checkbox = easyui.Checkbox,
-                TextArea = easyui.TextArea;
+                TextArea = easyui.TextArea,
+                window = easyui.window;
 
             var link = new Link('#link', function(href) {
               console.log('Link click with href: ' + href);
@@ -51,10 +52,6 @@
               console.log('Left mouse button click');
             });
 
-            button.onClick(function() {
-              console.log('Middle mouse button click');
-            }, Element.MIDDLE_MOUSE_BUTTON);
-
             var select = new Select('#select', function(selectedOptionValue) {
               console.log('Select changed with selected option value: ' + selectedOptionValue);
             });
@@ -65,15 +62,18 @@
 
             var resizeableDiv = new Div('div#resizeable');
 
-            resizeableDiv.onResize(function(width, height) {
-              console.log('The resizeable div has been resized and now has width ' + width + ' and height ' + height + '.');
-            });
+            var textArea = new TextArea('#textarea');
 
-            var textArea = new TextArea('#textarea'),
-                textAreaIsFocused = textArea.hasFocus();
+            button.onClick(function() {
+                  console.log('Middle mouse button click');
+              }, undefined, Element.MIDDLE_MOUSE_BUTTON);
+
+            resizeableDiv.onResize(function(width, height) {
+                  console.log('The resizeable div has been resized and now has width ' + width + ' and height ' + height + '.');
+              });
 
             textArea.onFocus(function() {
-              console.log('Text area has gained the focus');
+              console.log('The text area has gained the focus');
             });
 
             textArea.onBlur(function() {
@@ -88,9 +88,11 @@
               console.log('The text area has been scrolled to: (' + scrollTop + ',' + scrollLeft +')');
             });
 
+            var textAreaIsFocused = textArea.hasFocus();
+
             textAreaIsFocused ?
               console.log('Initially the text area has the focus') :
-              console.log('Initially the text area does not have the focus');
+                console.log('Initially the text area does not have the focus');
 
             textArea.setValue('Initial value');
 
@@ -117,7 +119,8 @@
             clonedButton.removeAttribute('id');
             clonedButton.html('Cloned button');
 
-            var selectFromHTML = Select.fromHTML('<select><option>a</option><option>b</option><option>c</option></select>', function(selectedOptionValue) {
+            var selectHTML = '<select><option>a</option><option>b</option><option>c</option></select>',
+                selectFromHTML = Select.fromHTML(selectHTML, function(selectedOptionValue) {
               console.log('Select from HTML changed with selected option value: ' + selectedOptionValue);
             });
 
@@ -137,19 +140,20 @@
             br4.appendAfter(checkboxFromHTML);
 
             var body = Body.fromDOMElement(document.getElementsByTagName('body')[0]),
-                outerDiv = Div.fromHTML('<div><div id="firstDiv"></div><div id="secondDiv"><div id="fourthDiv"></div></div><div id="thirdDiv"><div id="fifthDiv"></div></div></div>');
+                outerDivHTML = '<div><div id="firstDiv"></div><div id="secondDiv"><div id="fourthDiv"></div></div><div id="thirdDiv"><div id="fifthDiv"></div></div></div>',
+                outerDiv = Div.fromHTML(outerDivHTML);
 
             body.append(outerDiv);
 
             new Div('#firstDiv');
             new Div('#thirdDiv');
 
-            var outDivChildElements = outerDiv.childElements();
+            var outerDivChildElements = outerDiv.childElements();
 
-            outDivChildElements.forEach(function(outDivChildElement) {
-              var outDivChildElementId = outDivChildElement.getAttribute('id');
+            outerDivChildElements.forEach(function(outDivChildElement) {
+              var outerDivChildElementId = outDivChildElement.getAttribute('id');
 
-              console.log(outDivChildElementId);
+              console.log('The outer div child element id is ' + outerDivChildElementId);
             });
 
             var fourthDiv = new Div('#fourthDiv'),
@@ -163,6 +167,10 @@
             console.log('The parent element of the fourth div is ' + fourthDivParentElement);
             console.log('The \'id\' attribute of the parent element of the fifth div is \'' + fifthDivParentElementIdAttr + '\'');
             console.log('There are ' + fourthDivParentElementsLength + ' parent elements of the fourth div');
+
+            window.onMouseUp(function(mouseTop, mouseLeft) {
+             console.log('Window mouse up (' + mouseTop + ',' + mouseLeft + ')');
+            });
 
           })();
 
