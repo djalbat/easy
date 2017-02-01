@@ -182,9 +182,7 @@ Similarly for the `prepend()` and `prependBefore()` methods.
 -  TextArea
 -  InputElement
 
-The `Window` and `Document` classes are not exported, only singletons, hence the lowercase.
-
-Obviously the list is incomplete. Use the `Element` class if there is no relevant class, submit a pull request or roll your own.
+The `Window` and `Document` classes are not exported, only singletons, hence the lowercase. Obviously the list is incomplete. Use the `Element` class if there is no relevant class, submit a pull request or roll your own.
 
 ## Standard methods
 
@@ -271,7 +269,7 @@ The `Input` and `TextArea` classes both have the following methods:
 
 The `TextArea` class has the following methods:
  
-- `onScroll` takes a handler which is invoked when the text area is scrolled
+- `onScroll` takes a handler which is invoked when the text area is scrolled with arguments `scrollTop` and `scrollLeft`.
 - `getScrollTop` 
 - `getScrollLeft` 
 - `setScrollTop`
@@ -287,7 +285,9 @@ The `window` singleton and all but the `Input` and `Textarea` classes have the f
 - `onResize`
 - `offResize`
 
-However the behaviour of these methods is different. In the case of the `window` singleton, they are no more than a shorthand for `on('resize', ...)` and `off('resize', ...)` and behave in the same way, that is taking a third, optional `namespace` argument. In the case of the other elements, however, there is no optional namespace and the `offResize()`` method must be passed the same handler that was passed to the `onResize()` method in order to de-register it. Additionally they will pass `width` and `height` arguments to the handlers. ***Note that you must explicitly set the `position` style attribute of an element to `relative` in order for its `onResize()` method to work.*** This was thought to be a better approach than setting it on the sly. It can be done dynamically with JavaScript or alternatively with CSS.
+However the behaviour of these methods is different. In the case of the `window` singleton, they are no more than a shorthand for `on('resize', ...)` and `off('resize', ...)` and behave in the same way, that is taking a third, optional `namespace` argument. In the case of the other elements, however, there is no optional namespace and the `offResize()` method must be passed the same handler that was passed to the `onResize()` method in order to de-register it. Additionally they will pass `width` and `height` arguments to the handlers.
+
+***Note that you must explicitly set the `position` style attribute of an element to `relative` in order for its `onResize()` method to work.*** This was thought to be a better approach than setting it on the sly. It can be done dynamically with JavaScript or alternatively with CSS.
 
 ## Rolling your own elements
 
