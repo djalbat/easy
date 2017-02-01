@@ -2,17 +2,19 @@
 
 class mouse {
   static initialise(element) {
-    element.onMouseUp = onMouseUp;
-    element.onMouseDown = onMouseDown;
-    element.onMouseOver = onMouseOver;
-    element.onMouseOut = onMouseOut;
-    element.onMouseMove = onMouseMove;
+    var prototype = Object.getPrototypeOf(element);
 
-    element.offMouseUp = offMouseUp;
-    element.offMouseDown = offMouseDown;
-    element.offMouseOver = offMouseOver;
-    element.offMouseOut = offMouseOut;
-    element.offMouseMove = offMouseMove;
+    prototype.onMouseUp = onMouseUp;
+    prototype.onMouseDown = onMouseDown;
+    prototype.onMouseOver = onMouseOver;
+    prototype.onMouseOut = onMouseOut;
+    prototype.onMouseMove = onMouseMove;
+
+    prototype.offMouseUp = offMouseUp;
+    prototype.offMouseDown = offMouseDown;
+    prototype.offMouseOver = offMouseOver;
+    prototype.offMouseOut = offMouseOut;
+    prototype.offMouseMove = offMouseMove;
   }
 }
 

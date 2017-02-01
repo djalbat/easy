@@ -2,10 +2,12 @@
 
 class resize {
   static initialise(element) {
+    var prototype = Object.getPrototypeOf(element);
+
     element.resizeHandlers = [];
 
-    element.onResize = onResize;
-    element.offResize = offResize;
+    prototype.onResize = onResize;
+    prototype.offResize = offResize;
   }
 }
 

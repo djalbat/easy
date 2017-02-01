@@ -2,8 +2,10 @@
 
 class event {
   static initialise(element) {
-    element.on = on;
-    element.off = off;
+    var prototype = Object.getPrototypeOf(element);
+
+    prototype.on = on;
+    prototype.off = off;
   }
 
   static appendNamespaceToEvents(events, namespace) {

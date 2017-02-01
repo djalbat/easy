@@ -14,7 +14,7 @@ class Element {
 
     var domElement = $(this.$element)[0]; ///
 
-    domElement.__instance__ = this;
+    domElement.__element__ = this; ///
 
     event.initialise(this);
     mouse.initialise(this);
@@ -294,11 +294,9 @@ function elementsFromDOMElements(domElements) {
 
   for (var i = 0; i < domElementsLength; i++) {
     var domElement = domElements[i],
-        instance = domElement.__instance__;
+        element = domElement.__element__;
 
-    if (instance !== undefined) {
-      var element = instance; ///
-      
+    if (element !== undefined) {
       elements.push(element);
     }
   }
