@@ -8,7 +8,16 @@ class event {
 
   static appendNamespaceToEvents(events, namespace) {
     if (namespace !== undefined) {
-      events = events + '.' + namespace;
+      var eventsString = events, ///
+          eventStrings = eventsString.split(/,/);
+
+      eventStrings = eventStrings.map(function(eventString) {
+        eventString = `${eventString}.${namespace}`;  ///
+
+        return eventString;
+      });
+
+      events = eventStrings.join(',');  ///
     }
 
     return events;
