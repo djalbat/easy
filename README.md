@@ -10,6 +10,7 @@ It leverages jQuery to provide a very basic set of classes for elements such as 
 
 - [EasyUI-Layout](https://github.com/djalbat/EasyUI-Layout) Layout elements that work with CSS flexbox.
 - [EasyUI-DragAndDrop](https://github.com/djalbat/EasyUI-DragAndDrop) Drag and drop elements including a file explorer and a rubbish bin.
+- [EasyUI-RichTextArea](https://github.com/djalbat/EasyUI-RichTextArea) A textarea component that handles and hands off events well.
 
 ### Are these projects actually used anywhere?
 
@@ -43,7 +44,7 @@ var easyui = require('easyui'),
     Checkbox = easyui.Checkbox;
 ```
 
-To use EasyUI in the browser, take the `easyui.js` file from the project's `dist/` folder and put it somewhere such as a `public/scripts/lib` directory. Referencing this distribution file from a `script` element...
+To use EasyUI in the browser, take the `easyui.js` file from the project's `dist/` directory and put it somewhere such as a `public/scripts/lib` directory. Referencing this distribution file from a `script` element...
 
 ```html
 <script src="scripts/lib/easyui.js"> </script>
