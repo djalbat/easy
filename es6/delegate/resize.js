@@ -1,8 +1,10 @@
 'use strict';
 
+var util = require('./util');
+
 class resize {
-  static initialise(element) {
-    var prototype = Object.getPrototypeOf(element);
+  static delegateTo(element, Class) {
+    var prototype = util.findPrototype(element, Class);
 
     element.resizeHandlers = [];
 

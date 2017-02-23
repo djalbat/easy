@@ -16,9 +16,9 @@ class Element {
 
     domElement.__element__ = this; ///
 
-    event.initialise(this);
-    mouse.initialise(this);
-    resize.initialise(this);
+    event.delegateTo(this, Element);
+    mouse.delegateTo(this, Element);
+    resize.delegateTo(this, Element);
   }
 
   clone() { return Element.clone(this); }

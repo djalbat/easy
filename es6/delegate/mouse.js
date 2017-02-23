@@ -1,8 +1,10 @@
 'use strict';
 
+var util = require('./util');
+
 class mouse {
-  static initialise(element) {
-    var prototype = Object.getPrototypeOf(element);
+  static delegateTo(element, Class) {
+    var prototype = util.findPrototype(element, Class);
 
     prototype.onMouseUp = onMouseUp;
     prototype.onMouseDown = onMouseDown;
@@ -41,3 +43,4 @@ function adjustMouseEvent(handler) {
     handler(mouseTop, mouseLeft, mouseButton);
   };
 }
+

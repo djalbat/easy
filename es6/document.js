@@ -7,7 +7,7 @@ var event = require('./delegate/event'),
 
 class Document {
   constructor() {
-    mouse.initialise(this);
+    mouse.delegateTo(this, Document);
   }
 
   on(events, handler, namespace) {

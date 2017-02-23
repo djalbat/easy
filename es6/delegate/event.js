@@ -1,8 +1,10 @@
 'use strict';
 
+var util = require('./util');
+
 class event {
-  static initialise(element) {
-    var prototype = Object.getPrototypeOf(element);
+  static delegateTo(element, Class) {
+    var prototype = util.findPrototype(element, Class);
 
     prototype.on = on;
     prototype.off = off;
