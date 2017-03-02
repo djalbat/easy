@@ -62,17 +62,25 @@ class Element {
   }
 
   getAttribute(name) { return this.$element.attr(name); }
+
   addAttribute(name, value) { this.$element.attr(name, value); }
+
   removeAttribute(name) { this.$element.removeAttr(name); }
+
   hasClass(className) { return this.$element.hasClass(className); }
+
   addClass(className) { this.$element.addClass(className); }
+
   removeClass(className) { this.$element.removeClass(className); }
+
   removeClasses() { this.$element.removeClass(); }
 
   setWidth(width) { this.$element.width(width); }
+
   setHeight(height) { this.$element.height(height); }
 
   prependBefore(element) { this.$element.before(element.$element); }
+
   appendAfter(element) { this.$element.after(element.$element); }
   
   prepend(elementOrString) {
@@ -102,11 +110,17 @@ class Element {
   }
 
   show() { this.$element.show(); }
+
   hide() { this.$element.hide(); }
+
   enable() { this.$element.removeAttr('disabled'); }
+
   disable() { this.$element.attr('disabled', true); }
+
   remove() { this.$element.remove(); }
+
   detach() { this.$element.detach(); }
+
   empty() { this.$element.empty(); }
 
   html(html) {
