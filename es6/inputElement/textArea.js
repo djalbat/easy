@@ -66,6 +66,13 @@ class TextArea extends InputElement {
   static fromDOMElement(domElement, changeHandler) {
     return InputElement.fromDOMElement(TextArea, domElement, changeHandler);
   }
+
+  static fromProperties(properties) {
+    var html = '<textarea></textarea>',
+        { changeHandler } = properties;
+
+    return TextArea.fromHTML(html, changeHandler);
+  }
 }
 
 module.exports = TextArea;

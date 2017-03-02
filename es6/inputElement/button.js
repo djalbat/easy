@@ -24,6 +24,13 @@ class Button extends InputElement {
   static fromDOMElement(domElement, clickHandler, button, allowDefault) {
     return InputElement.fromDOMElement(Button, domElement, clickHandler, button, allowDefault);
   }
+
+  static fromProperties(properties) {
+    var html = '<button></button>',
+        { clickHandler, button, allowDefault } = properties;
+
+    return Button.fromHTML(html, clickHandler, button, allowDefault);
+  }
 }
 
 module.exports = Button;

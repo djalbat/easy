@@ -24,7 +24,7 @@ class Input extends InputElement {
   select() { this.$element.select(); }
 
   onChange(changeHandler, namespace) {
-    this.on('change', function() { ///
+    this.on('change', function() {
       var value = this.getValue();
 
       changeHandler(value);
@@ -32,7 +32,7 @@ class Input extends InputElement {
   }
 
   offChange(namespace) {
-    this.off('change', namespace); ///
+    this.off('change', namespace);
   }
 
   static clone(selectorOrElement, changeHandler) {
@@ -45,6 +45,13 @@ class Input extends InputElement {
 
   static fromDOMElement(domElement, changeHandler) {
     return InputElement.fromDOMElement(Input, domElement, changeHandler);
+  }
+
+  static fromProperties(properties) {
+    var html = '<input />',
+        { changeHandler } = properties;
+
+    return Input.fromHTML(html, changeHandler);
   }
 }
 

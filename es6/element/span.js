@@ -20,6 +20,12 @@ class Span extends Element {
   static fromDOMElement(domElement) {
     return Element.fromDOMElement(Span, domElement);
   }
+
+  static fromProperties(properties) {
+    var html = '<span></span>';
+
+    return Span.fromHTML(html);
+  }
 }
 
 module.exports = Span;

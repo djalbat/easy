@@ -20,6 +20,12 @@ class Div extends Element {
   static fromDOMElement(domElement) {
     return Element.fromDOMElement(Div, domElement);
   }
+
+  static fromProperties(properties) {
+    var html = '<div></div>';
+
+    return Div.fromHTML(html);
+  }
 }
 
 module.exports = Div;

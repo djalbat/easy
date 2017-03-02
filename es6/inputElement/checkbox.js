@@ -47,6 +47,13 @@ class Checkbox extends InputElement {
   static fromDOMElement(domElement, changeHandler) {
     return InputElement.fromDOMElement(Checkbox, domElement, changeHandler);
   }
+
+  static fromProperties(properties) {
+    var html = '<input type="checkbox" />',
+        { changeHandler } = properties;
+
+    return Checkbox.fromHTML(html, changeHandler);
+  }
 }
 
 module.exports = Checkbox;

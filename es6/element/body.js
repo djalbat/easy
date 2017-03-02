@@ -20,6 +20,12 @@ class Body extends Element {
   static fromDOMElement(domElement) {
     return Element.fromDOMElement(Body, domElement);
   }
+
+  static fromProperties(properties) {
+    var html = '<body></body>';
+
+    return Body.fromHTML(html);
+  }
 }
 
 module.exports = Body;

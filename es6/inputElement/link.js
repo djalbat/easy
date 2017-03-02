@@ -32,6 +32,13 @@ class Link extends InputElement {
   static fromDOMElement(domElement, clickHandler) {
     return InputElement.fromDOMElement(Link, domElement, clickHandler);
   }
+
+  static fromProperties(properties) {
+    var html = '<a></a>',
+        { clickHandler } = properties;
+
+    return Link.fromHTML(html, clickHandler);
+  }
 }
 
 module.exports = Link;

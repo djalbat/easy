@@ -45,6 +45,13 @@ class Select extends InputElement {
   static fromDOMElement(domElement, changeHandler) {
     return InputElement.fromDOMElement(Select, domElement, changeHandler);
   }
+
+  static fromProperties(properties) {
+    var html = '<select></select>',
+        { changeHandler } = properties;
+
+    return Select.fromHTML(html, changeHandler);
+  }
 }
 
 module.exports = Select;
