@@ -109,6 +109,18 @@ class Element {
     }
   }
 
+  appendTo(element) {
+    var $element = element.$element;
+
+    $element.append(this.$element);
+  }
+
+  prependTo(element) {
+    var $element = element.$element;
+
+    $element.append(this.$element);
+  }
+
   show() { this.$element.show(); }
 
   hide() { this.$element.hide(); }

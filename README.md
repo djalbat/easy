@@ -143,29 +143,27 @@ If constructors take handlers or other arguments you can pass these to both inst
 
 ### Adding elements to the DOM
  
-The methods to add elements to the DOM are hopefully intuitive. Note the difference between the `append()` and `appendAfter()` methods.
+The methods to add elements to the DOM are hopefully intuitive. Note the difference between the `append()`, `appendAfter()` and `appendTo()` methods.
 
 ```js
 var button = Button.fromHTML('<button/>'),
     select = Select.fromHTML('<select><option>a</option></select>');
     
-select.appendAfter(button); // what you want
-select.append(button); // probably not what you want
+select.appendAfter(button); // what you want, the select and button elements become siblings
+
+select.append(button); // probably not what you want, with the button element becoming a child of the select element
 ```
 
-The `appendAfter()` call above results in the following HTML:
+```js
+var body = new Body(),
+    form = Element.fromHTML('<form></form>');
 
-```html
-<select><option>a</option></select></button>
+body.append(form); // what you want, the form becoming a child of the body
+
+form.appendTo(body); // also what you would want, the form would again become a child of the body
 ```
 
-The `append()` call above results in the following HTML and is probably not what you want in this instance:
-
-```html
-<select><option>a</option></button></select>
-```
-
-Similarly for the `prepend()` and `prependBefore()` methods.
+Similarly for the prepend methods.
 
 ## Supported elements
 
