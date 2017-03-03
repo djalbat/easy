@@ -118,7 +118,7 @@ class Element {
   prependTo(element) {
     var $element = element.$element;
 
-    $element.append(this.$element);
+    $element.prepend(this.$element);
   }
 
   show() { this.$element.show(); }
