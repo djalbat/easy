@@ -151,16 +151,16 @@ var button = Button.fromHTML('<button/>'),
     
 select.appendAfter(button); // what you want, the select and button elements become siblings
 
-select.append(button); // probably not what you want, with the button element becoming a child of the select element
+select.append(button); // not what you want, the button element would become a child of the select element
 ```
 
 ```js
 var body = new Body(),
     form = Element.fromHTML('<form></form>');
 
-body.append(form); // what you want, the form becoming a child of the body
+body.append(form); // what you want, the form element becomes a child of the body element
 
-form.appendTo(body); // also what you would want, the form would again become a child of the body
+form.appendTo(body); // also what you would want, the form element would become a child of the body element
 ```
 
 Similarly for the prepend methods.
