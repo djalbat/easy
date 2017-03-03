@@ -158,9 +158,9 @@ select.append(button); // not what you want, the button element would become a c
 var body = new Body(),
     form = Element.fromHTML('<form></form>');
 
-body.append(form); // what you want, the form element becomes a child of the body element
+body.append(form); // what you want, the form element would become a child of the body element
 
-form.appendTo(body); // also what you would want, the form element would become a child of the body element
+form.appendTo(body); // also what you would want, the form element becomes a child of the body element
 ```
 
 Similarly for the prepend methods.
