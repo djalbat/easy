@@ -1,41 +1,34 @@
 'use strict';
 
-var $ = require('jquery');
-
-var event = require('./delegate/event'),
-    mouse = require('./delegate/mouse');
+const mixin = require('./mixin'),
+      event = require('./mixin/event'),
+      click = require('./mixin/click'),
+      mouse = require('./mixin/mouse');
 
 class Window {
   constructor() {
-    mouse.delegateTo(this, Window);
+    this.domElement = window;
+
+    // mixin(event, this, Window);
+    // mixin(click, this, Window);
+    // mixin(mouse, this, Window);
+  }
+  
+  getWidth() { return this.domElement.innerWidth; } ///
+  
+  getHeight() { return this.domElement.innerHeight; } ///
+  
+  onResize(handler) {
+    this.domElement.onResize(function() {
+      const width = this.getWidth(),
+            height = this.getHeight();
+      
+      handler(width, height);
+    }.bind(this));
   }
 
-  on(events, handler, namespace) {
-    events = event.appendNamespaceToEvents(events, namespace);
-
-    $(window).on(events, handler);
-  }
-
-  off(events, namespace) {
-    events = event.appendNamespaceToEvents(events, namespace);
-
-    $(window).off(events);
-  }
-
-  onResize(handler, namespace) {
-    var events = 'resize';
-
-    events = event.appendNamespaceToEvents(events, namespace);
-
-    $(window).on(events, handler);
-  }
-
-  offResize(namespace) {
-    var events = 'resize';
-
-    events = event.appendNamespaceToEvents(events, namespace);
-
-    $(window).off(events);
+  offResize(handler) {
+    this.domElement.offResize(handler);
   }
 }
 

@@ -1,6 +1,6 @@
 'use strict';
 
-var Element = require('./element');
+const Element = require('./element');
 
 class InputElement extends Element {
   constructor(selector) {
@@ -8,21 +8,21 @@ class InputElement extends Element {
   }
 
   hasFocus() {
-    var focus = (document.activeElement === this.$element[0]);  ///
+    const focus = (document.activeElement === this.domElement);  ///
 
     return focus;
   }
 
-  onFocus(focusHandler) {
-    this.$element.focus(focusHandler);
+  onFocus(handler) {
+    this.on('focus', handler);
   }
 
-  onBlur(blurHandler) {
-    this.$element.blur(blurHandler);
+  onBlur(handler) {
+    this.on('blur', handler);
   }
 
   focus() {
-    this.$element.focus();
+    this.domElement.focus();
   }
 }
 

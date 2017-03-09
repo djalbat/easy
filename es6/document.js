@@ -1,25 +1,17 @@
 'use strict';
 
-var $ = require('jquery');
-
-var event = require('./delegate/event'),
-    mouse = require('./delegate/mouse');
+const mixin = require('./mixin'),
+      event = require('./mixin/event'),
+      click = require('./mixin/click'),
+      mouse = require('./mixin/mouse');
 
 class Document {
   constructor() {
-    mouse.delegateTo(this, Document);
-  }
-
-  on(events, handler, namespace) {
-    events = event.appendNamespaceToEvents(events, namespace);
-
-    $(document).on(events, handler);
-  }
-
-  off(events, namespace) {
-    events = event.appendNamespaceToEvents(events, namespace);
-
-    $(document).off(events);
+    this.domElement = document;
+    
+    // mixin(event, this, Document);
+    // mixin(click, this, Document);
+    // mixin(mouse, this, Document);
   }
 }
 

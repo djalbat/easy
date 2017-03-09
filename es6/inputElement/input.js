@@ -1,6 +1,6 @@
 'use strict';
 
-var InputElement = require('../inputElement');
+const InputElement = require('../inputElement');
 
 class Input extends InputElement {
   constructor(selector, changeHandler) {
@@ -13,30 +13,32 @@ class Input extends InputElement {
 
   clone(changeHandler) { return Input.clone(this, changeHandler); }
 
-  getValue() { return this.$element.val(); }
-  getSelectionStart() { return this.$element[0].selectionStart; } ///
-  getSelectionEnd() { return this.$element[0].selectionEnd; } ///
+  getValue() { return this.domElement.value; }
+  
+  getSelectionStart() { return this.domElement.selectionStart; }
+  
+  getSelectionEnd() { return this.domElement.selectionEnd; }
+  
+  setValue(value) { this.domElement.value = value; }
+  
+  setSelectionStart(selectionStart) { this.domElement.selectionStart = selectionStart; }
+  
+  setSelectionEnd(selectionEnd) { this.domElement.selectionEnd = selectionEnd; }
 
-  setValue(value) { this.$element.val(value); }
-  setSelectionStart(selectionStart) { this.$element[0].selectionStart(selectionStart); } ///
-  setSelectionEnd(selectionEnd) { this.$element[0].selectionEnd(selectionEnd); } ///
-
-  select() { this.$element.select(); }
-
-  onChange(changeHandler, namespace) {
+  onChange(handler) {
     this.on('change', function() {
-      var value = this.getValue();
+      const value = this.getValue();
 
-      changeHandler(value);
-    }.bind(this), namespace);
+      handler(value);
+    }.bind(this));
   }
 
-  offChange(namespace) {
-    this.off('change', namespace);
+  offChange(handler) {
+    this.off('change', handler);
   }
 
-  static clone(selectorOrElement, changeHandler) {
-    return InputElement.clone(Input, selectorOrElement, changeHandler);
+  static clone(element, changeHandler) {
+    return InputElement.clone(Input, element, changeHandler);
   }
 
   static fromHTML(html, changeHandler) {
@@ -48,8 +50,9 @@ class Input extends InputElement {
   }
 
   static fromProperties(properties) {
-    var html = '<input />',
-        { changeHandler } = properties;
+    const html = '<input />',
+          { onChange } = properties,
+          changeHandler = onChange;  ///
 
     return Input.fromHTML(html, changeHandler);
   }

@@ -1,6 +1,6 @@
 'use strict';
 
-var InputElement = require('../inputElement');
+const InputElement = require('../inputElement');
 
 class TextArea extends InputElement {
   constructor(selector, changeHandler) {
@@ -13,50 +13,57 @@ class TextArea extends InputElement {
 
   clone(changeHandler) { return TextArea.clone(this, changeHandler); }
 
-  getValue() { return this.$element.val(); }
-  getSelectionStart() { return this.$element[0].selectionStart; }
-  getSelectionEnd() { return this.$element[0].selectionEnd; }
-  getScrollTop() { return this.$element.scrollTop(); }
-  getScrollLeft() { return this.$element.scrollLeft(); }
+  getValue() { return this.domElement.value; }
+  
+  getSelectionStart() { return this.domElement.selectionStart; }
+  
+  getSelectionEnd() { return this.domElement.selectionEnd; }
+  
+  getScrollTop() { return this.domElement.scrollTop; }
+  
+  getScrollLeft() { return this.domElement.scrollLeft; }
 
-  setValue(value) { this.$element.val(value); }
-  setSelectionStart(selectionStart) { this.$element[0].selectionStart(selectionStart); } ///
-  setSelectionEnd(selectionEnd) { this.$element[0].selectionEnd(selectionEnd); } ///
-  setScrollTop(scrollTop) { this.$element.scrollTop(scrollTop); }
-  setScrollLeft(scrollLeft) { this.$element.scrollLeft(scrollLeft); }
+  setValue(value) { this.domElement.value = value; }
+  
+  setSelectionStart(selectionStart) { this.domElement.selectionStart = selectionStart; }
+  
+  setSelectionEnd(selectionEnd) { this.domElement.selectionEnd = selectionEnd; }
+  
+  setScrollTop(scrollTop) { this.domElement.scrollTop = scrollTop; }
+  
+  setScrollLeft(scrollLeft) { this.domElement.scrollLeft = scrollLeft; }
 
-  select() { this.$element.select(); }
-
-  onChange(changeHandler, namespace) {
+  onChange(handler) {
     this.on('change', function() {
-      var value = this.getValue();
+      const value = this.getValue();
 
-      changeHandler(value);
-    }.bind(this), namespace);
+      handler(value);
+    }.bind(this));
   }
 
-  onScroll(handler, namespace) {
+  onScroll(handler) {
     this.on('scroll', function() {
-      var scrollTop = this.getScrollTop(),
-          scrollLeft = this.getScrollLeft();
+      const scrollTop = this.getScrollTop(),
+            scrollLeft = this.getScrollLeft();
 
       handler(scrollTop, scrollLeft);
-    }.bind(this), namespace);
+    }.bind(this));
   }
 
-  offChange(namespace) {
-    this.off('change', namespace);
+  offChange(handler) {
+    this.off('change', handler);
   }
   
-  offScroll(namespace) {
-    this.off('scroll', namespace)
+  offScroll(handler) {
+    this.off('scroll', handler)
   }
 
   onResize(resizeHandler) {}
+  
   offResize(resizeHandler) {}
 
-  static clone(selectorOrElement, changeHandler) {
-    return InputElement.clone(TextArea, selectorOrElement, changeHandler);
+  static clone(element, changeHandler) {
+    return InputElement.clone(TextArea, element, changeHandler);
   }
 
   static fromHTML(html, changeHandler) {
@@ -68,8 +75,9 @@ class TextArea extends InputElement {
   }
 
   static fromProperties(properties) {
-    var html = '<textarea></textarea>',
-        { changeHandler } = properties;
+    const html = '<textarea></textarea>',
+          { onChange } = properties,
+          changeHandler = onChange; ///
 
     return TextArea.fromHTML(html, changeHandler);
   }

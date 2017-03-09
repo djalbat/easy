@@ -40,137 +40,147 @@
                 TextArea = easyui.TextArea,
                 window = easyui.window;
 
-            var link = new Link('#link', function(href) {
-              console.log('Link click with href: ' + href);
-            });
+//            var link = new Link('#link', function(href) {
+//              console.log('Link click with href: ' + href);
+//            });
+//
+//            var input = new Input('#input', function(value) {
+//              console.log('Input changed with value: ' + value);
+//            });
 
-            var input = new Input('#input', function(value) {
-              console.log('Input changed with value: ' + value);
-            });
-
-            var button = new Button('#button', function(event) {
+            var button = new Button('#button', function() {
               console.log('Left mouse button click');
             });
 
-            var select = new Select('#select', function(selectedOptionValue) {
-              console.log('Select changed with selected option value: ' + selectedOptionValue);
-            });
+//            var select = new Select('#select', function(selectedOptionValue) {
+//              console.log('Select changed with selected option value: ' + selectedOptionValue);
+//            });
+//
+//            var checkbox = new Checkbox('#checkbox', function(checked) {
+//              console.log('Checkbox change with checked: ' + checked);
+//            });
+//
+//            var resizeableDiv = new Div('div#resizeable');
+//
+//            var textArea = new TextArea('#textarea');
+//
+//            button.onClick(function() {
+//                  console.log('Middle mouse button click');
+//              }, Element.MIDDLE_MOUSE_BUTTON);
+//
+//            resizeableDiv.onResize(function(width, height) {
+//                  console.log('The resizeable div has been resized and now has width ' + width + ' and height ' + height + '.');
+//              });
+//
+//            textArea.onFocus(function() {
+//              console.log('The text area has gained the focus');
+//            });
+//
+//            textArea.onBlur(function() {
+//              console.log('Text area has lost the focus');
+//            });
+//
+//            textArea.onChange(function(value) {
+//              console.log('The value of the text area has changed to: ' + value);
+//            });
+//
+//            textArea.onScroll(function(scrollTop, scrollLeft) {
+//              console.log('The text area has been scrolled to: (' + scrollTop + ',' + scrollLeft +')');
+//            });
+//
+//            var textAreaIsFocused = textArea.hasFocus();
+//
+//            textAreaIsFocused ?
+//              console.log('Initially the text area has the focus') :
+//                console.log('Initially the text area does not have the focus');
+//
+//            textArea.setValue('Initial value');
+//
+//            checkbox.check();
+//
+//            checkbox.focus();
+//
+//            var br1 = Element.fromHTML('<br/>'),
+//                br2 = br1.clone(),
+//                br3 = br2.clone(),
+//                br4 = br3.clone();
+//
+//            var clonedLink = Link.clone(link, function(href) {
+//              console.log('Cloned link click with href: ' + href);
+//            });
+//
+//            clonedLink.clearAttribute('id');
+//            clonedLink.html('Cloned link');
+//
+            var clonedButton = button.clone();
 
-            var checkbox = new Checkbox('#checkbox', function(checked) {
-              console.log('Checkbox change with checked: ' + checked);
-            });
+            clonedButton.clearAttribute('id');
 
-            var resizeableDiv = new Div('div#resizeable');
-
-            var textArea = new TextArea('#textarea');
-
-            button.onClick(function() {
-                  console.log('Middle mouse button click');
-              }, undefined, Element.MIDDLE_MOUSE_BUTTON);
-
-            resizeableDiv.onResize(function(width, height) {
-                  console.log('The resizeable div has been resized and now has width ' + width + ' and height ' + height + '.');
-              });
-
-            textArea.onFocus(function() {
-              console.log('The text area has gained the focus');
-            });
-
-            textArea.onBlur(function() {
-              console.log('Text area has lost the focus');
-            });
-
-            textArea.onChange(function(value) {
-              console.log('The value of the text area has changed to: ' + value);
-            });
-
-            textArea.onScroll(function(scrollTop, scrollLeft) {
-              console.log('The text area has been scrolled to: (' + scrollTop + ',' + scrollLeft +')');
-            });
-
-            var textAreaIsFocused = textArea.hasFocus();
-
-            textAreaIsFocused ?
-              console.log('Initially the text area has the focus') :
-                console.log('Initially the text area does not have the focus');
-
-            textArea.setValue('Initial value');
-
-            checkbox.check();
-
-            checkbox.focus();
-
-            var br1 = Element.fromHTML('<br/>'),
-              br2 = br1.clone(),
-              br3 = br2.clone(),
-              br4 = br3.clone();
-
-            var clonedLink = Link.clone('#link', function(href) {
-              console.log('Cloned link click with href: ' + href);
-            });
-
-            clonedLink.removeAttribute('id');
-            clonedLink.html('Cloned link');
-
-            var clonedButton = button.clone(function() {
-              console.log('Cloned button click');
-            });
-
-            clonedButton.removeAttribute('id');
             clonedButton.html('Cloned button');
 
-            var selectHTML = '<select><option>a</option><option>b</option><option>c</option></select>',
-                selectFromHTML = Select.fromHTML(selectHTML, function(selectedOptionValue) {
-              console.log('Select from HTML changed with selected option value: ' + selectedOptionValue);
-            });
+//            clonedButton.onClick(function() {
+//              console.log('cloned button middle mouse button click');
+//            }, Element.MIDDLE_MOUSE_BUTTON);
 
-            selectFromHTML.setSelectedOptionByValue('c');
+//            var selectHTML = '<select><option>a</option><option>b</option><option>c</option></select>',
+//                selectFromHTML = Select.fromHTML(selectHTML, function(selectedOptionValue) {
+//              console.log('Select from HTML changed with selected option value: ' + selectedOptionValue);
+//            });
+//
+//            selectFromHTML.setSelectedOptionByValue('c');
+//
+//            var checkboxFromHTML = Checkbox.fromHTML('<input type="checkbox"/>', function(checked) {
+//              console.log('Checkbox from HTML click with checked: ' + checked);
+//            });
+//
+//            br1.insertAfter(checkbox);
+//            clonedLink.insertAfter(br1);
+//            br2.insertAfter(clonedLink);
+//            clonedButton.insertAfter(br2);
+//            br3.insertAfter(clonedButton);
+//            selectFromHTML.insertAfter(br3);
+//            br4.insertAfter(selectFromHTML);
+//            checkboxFromHTML.insertAfter(br4);
+//
+//            var outerDivHTML = '<div><div id="firstDiv"></div><div id="secondDiv"><div id="fourthDiv"></div></div><div id="thirdDiv"><div id="fifthDiv"></div></div></div>',
+//                outerDiv = Div.fromHTML(outerDivHTML);
+//
+//            body.append(outerDiv);
+//
+//            new Div('#firstDiv');
+//            new Div('#thirdDiv');
+//
+//            var outerDivChildElements = outerDiv.getChildElements();
+//
+//            outerDivChildElements.forEach(function(outDivChildElement) {
+//              var outerDivChildElementId = outDivChildElement.getAttribute('id');
+//
+//              console.log('The outer div child element id is ' + outerDivChildElementId);
+//            });
+//
+//            var fourthDiv = new Div('#fourthDiv'),
+//                fifthDiv = new Div('#fifthDiv'),
+//                fourthDivParentElement = fourthDiv.getParentElement(),
+//                fourthDivAscendantElements = fourthDiv.getAscendantElements(),
+//                fifthDivParentElement = fifthDiv.getParentElement(),
+//                fourthDivAscendantElementsLength = fourthDivAscendantElements.length,
+//                fifthDivParentElementIdAttr = fifthDivParentElement.getAttribute('id');
+//
+//            console.log('The parent element of the fourth div is ' + fourthDivParentElement);
+//            console.log('The \'id\' attribute of the parent element of the fifth div is \'' + fifthDivParentElementIdAttr + '\'');
+//            console.log('There are ' + fourthDivAscendantElementsLength + ' ascendant elements of the fourth div');
+//
+//            window.onMouseUp(function(mouseTop, mouseLeft) {
+//             console.log('Window mouse up (' + mouseTop + ',' + mouseLeft + ')');
+//            });
 
-            var checkboxFromHTML = Checkbox.fromHTML('<input type="checkbox"/>', function(checked) {
-              console.log('Checkbox from HTML click with checked: ' + checked);
-            });
+            var body = Body.fromDOMElement(document.getElementsByTagName('body')[0]);
 
-            checkbox.appendAfter(br1);
-            br1.appendAfter(clonedLink);
-            clonedLink.appendAfter(br2);
-            br2.appendAfter(clonedButton);
-            clonedButton.appendAfter(br3);
-            br3.appendAfter(selectFromHTML);
-            selectFromHTML.appendAfter(br4);
-            br4.appendAfter(checkboxFromHTML);
+            body.append(clonedButton);
 
-            var body = Body.fromDOMElement(document.getElementsByTagName('body')[0]),
-                outerDivHTML = '<div><div id="firstDiv"></div><div id="secondDiv"><div id="fourthDiv"></div></div><div id="thirdDiv"><div id="fifthDiv"></div></div></div>',
-                outerDiv = Div.fromHTML(outerDivHTML);
-
-            body.append(outerDiv);
-
-            new Div('#firstDiv');
-            new Div('#thirdDiv');
-
-            var outerDivChildElements = outerDiv.childElements();
-
-            outerDivChildElements.forEach(function(outDivChildElement) {
-              var outerDivChildElementId = outDivChildElement.getAttribute('id');
-
-              console.log('The outer div child element id is ' + outerDivChildElementId);
-            });
-
-            var fourthDiv = new Div('#fourthDiv'),
-                fifthDiv = new Div('#fifthDiv'),
-                fourthDivParentElement = fourthDiv.parentElement(),
-                fourthDivParentElements = fourthDiv.parentElements(),
-                fifthDivParentElement = fifthDiv.parentElement(),
-                fourthDivParentElementsLength = fourthDivParentElements.length,
-                fifthDivParentElementIdAttr = fifthDivParentElement.getAttribute('id');
-
-            console.log('The parent element of the fourth div is ' + fourthDivParentElement);
-            console.log('The \'id\' attribute of the parent element of the fifth div is \'' + fifthDivParentElementIdAttr + '\'');
-            console.log('There are ' + fourthDivParentElementsLength + ' parent elements of the fourth div');
-
-            window.onMouseUp(function(mouseTop, mouseLeft) {
-             console.log('Window mouse up (' + mouseTop + ',' + mouseLeft + ')');
-            });
+            clonedButton.domElement.addEventListener('click', function() {
+              debugger
+            })
 
           })();
 

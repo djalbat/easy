@@ -1,6 +1,6 @@
 'use strict';
 
-class Position {
+class Offset {
   constructor(top, left) {
     this.top = top;
     this.left = left;
@@ -15,4 +15,4 @@ class Position {
   }
 }
 
-module.exports = Position;
+module.exports = Offset;

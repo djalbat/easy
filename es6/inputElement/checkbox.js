@@ -1,6 +1,6 @@
 'use strict';
 
-var InputElement = require('../inputElement');
+const InputElement = require('../inputElement');
 
 class Checkbox extends InputElement {
   constructor(selector, changeHandler) {
@@ -13,31 +13,27 @@ class Checkbox extends InputElement {
 
   clone(changeHandler) { return Checkbox.clone(this, changeHandler); }
 
-  onChange(changeHandler, namespace) {
-    var button = undefined,
-        allowDefault = true;
+  onChange(handler) {
+    const mouseButton = Element.LEFT_MOUSE_BUTTON,
+          allowDefault = true;
 
     this.onClick(function() {
-      var checked = this.isChecked();
+      const checked = this.isChecked();
 
-      changeHandler(checked);
-    }.bind(this), namespace, button, allowDefault)
+      handler(checked);
+    }.bind(this), mouseButton, allowDefault)
   }
 
   check(checked = true) {
     checked ?
-      this.addAttribute('checked', 'checked') :
-        this.removeAttribute('checked');
+      this.setAttribute('checked', 'checked') :
+        this.clearAttribute('checked');
   }
 
-  isChecked() {
-    var checked = this.$element.is(':checked'); ///
-    
-    return checked;
-  }
+  isChecked() { return this.domElement.checked; }
 
-  static clone(selectorOrElement, changeHandler) {
-    return InputElement.clone(Checkbox, selectorOrElement, changeHandler);
+  static clone(element, changeHandler) {
+    return InputElement.clone(Checkbox, element, changeHandler);
   }
 
   static fromHTML(html, changeHandler) {
@@ -49,8 +45,9 @@ class Checkbox extends InputElement {
   }
 
   static fromProperties(properties) {
-    var html = '<input type="checkbox" />',
-        { changeHandler } = properties;
+    const html = '<input type="checkbox" />',
+          { onChange } = properties,
+          changeHandler = onChange;  ///
 
     return Checkbox.fromHTML(html, changeHandler);
   }

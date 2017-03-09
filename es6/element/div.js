@@ -1,6 +1,6 @@
 'use strict';
 
-var Element = require('../element');
+const Element = require('../element');
 
 class Div extends Element {
   constructor(selector) {
@@ -9,8 +9,8 @@ class Div extends Element {
 
   clone() { return Div.clone(this); }
 
-  static clone(selectorOrElement) {
-    return Element.clone(Div, selectorOrElement);
+  static clone(element) {
+    return Element.clone(Div, element);
   }
 
   static fromHTML(html) {
@@ -22,7 +22,7 @@ class Div extends Element {
   }
 
   static fromProperties(properties) {
-    var html = '<div></div>';
+    const html = '<div></div>';
 
     return Div.fromHTML(html);
   }

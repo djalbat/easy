@@ -1,33 +1,34 @@
 'use strict';
 
-var InputElement = require('../inputElement');
+const InputElement = require('../inputElement');
 
 class Button extends InputElement {
-  constructor(selector, clickHandler, button, allowDefault) {
+  constructor(selector, clickHandler, mouseButton, allowDefault) {
     super(selector);
 
     if (clickHandler) {
-      this.onClick(clickHandler, button, allowDefault);
+      this.onClick(clickHandler, mouseButton, allowDefault);
     }
   }
 
-  clone(clickHandler, button, allowDefault) { return Button.clone(this, clickHandler, button, allowDefault); }
+  clone(clickHandler, mouseButton, allowDefault) { return Button.clone(this, clickHandler, mouseButton, allowDefault); }
 
-  static clone(selectorOrElement, clickHandler, button, allowDefault) {
-    return InputElement.clone(Button, selectorOrElement, clickHandler, button, allowDefault);
+  static clone(element, clickHandler, mouseButton, allowDefault) {
+    return InputElement.clone(Button, element, clickHandler, mouseButton, allowDefault);
   }
 
-  static fromHTML(html, clickHandler, button, allowDefault) {
-    return InputElement.fromHTML(Button, html, clickHandler, button, allowDefault);
+  static fromHTML(html, clickHandler, mouseButton, allowDefault) {
+    return InputElement.fromHTML(Button, html, clickHandler, mouseButton, allowDefault);
   }
 
-  static fromDOMElement(domElement, clickHandler, button, allowDefault) {
-    return InputElement.fromDOMElement(Button, domElement, clickHandler, button, allowDefault);
+  static fromDOMElement(domElement, clickHandler, mouseButton, allowDefault) {
+    return InputElement.fromDOMElement(Button, domElement, clickHandler, mouseButton, allowDefault);
   }
 
   static fromProperties(properties) {
-    var html = '<button></button>',
-        { clickHandler, button, allowDefault } = properties;
+    const html = '<button></button>',
+          { onClick, button, allowDefault } = properties,
+          clickHandler = onClick; ///
 
     return Button.fromHTML(html, clickHandler, button, allowDefault);
   }

@@ -1,6 +1,6 @@
 'use strict';
 
-var InputElement = require('../inputElement');
+const InputElement = require('../inputElement');
 
 class Select extends InputElement {
   constructor(selector, changeHandler) {
@@ -13,29 +13,24 @@ class Select extends InputElement {
 
   clone(changeHandler) { return Select.clone(this, changeHandler); }
 
-  onChange(changeHandler, namespace) {
+  onChange(handler) {
     this.on('change', function() {
-      var selectedOptionValue = this.getSelectedOptionValue();
+      const selectedOptionValue = this.getSelectedOptionValue();
 
-      changeHandler(selectedOptionValue);
-    }.bind(this), namespace);
+      handler(selectedOptionValue);
+    }.bind(this));
   }
   
-  offChange(namespace) {
-    this.off('change', namespace);
+  offChange(handler) {
+    this.off('change', handler);
   }
 
-  getSelectedOptionValue() {
-    var $selectedOption = this.$element.find(':selected'),  ///
-        selectedOptionValue = $selectedOption.val();  ///
+  getSelectedOptionValue() { return this.domElement.value; } ///
 
-    return selectedOptionValue;
-  }
+  setSelectedOptionByValue(value) { this.domElement.value = value; } ///
 
-  setSelectedOptionByValue(value) { this.$element.val(value); }
-
-  static clone(selectorOrElement, changeHandler) {
-    return InputElement.clone(Select, selectorOrElement, changeHandler);
+  static clone(element, changeHandler) {
+    return InputElement.clone(Select, element, changeHandler);
   }
 
   static fromHTML(html, changeHandler) {
@@ -47,8 +42,9 @@ class Select extends InputElement {
   }
 
   static fromProperties(properties) {
-    var html = '<select></select>',
-        { changeHandler } = properties;
+    const html = '<select></select>',
+          { onChange } = properties,
+          changeHandler = onChange; ///
 
     return Select.fromHTML(html, changeHandler);
   }

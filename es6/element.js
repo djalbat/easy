@@ -1,333 +1,385 @@
 'use strict';
 
-var $ = require('jquery');
-
-var Position = require('./misc/position'),
-    Bounds = require('./misc/bounds'),
-    event = require('./delegate/event'),
-    mouse = require('./delegate/mouse'),
-    resize = require('./delegate/resize');
+const mixin = require('./mixin'),
+      event = require('./mixin/event'),
+      click = require('./mixin/click'),
+      mouse = require('./mixin/mouse'),
+      resize = require('./mixin/resize'),
+      Offset = require('./misc/offset'),
+      Bounds = require('./misc/bounds');
 
 class Element {
-  constructor(selector) {
-    this.$element = $elementFromSelector(selector);
+  constructor(domElementOrSelector) {
+    this.domElement = domElementFromDOMElementOrSelector(domElementOrSelector);
 
-    var domElement = $(this.$element)[0]; ///
+    this.domElement.__element__ = this; ///
 
-    domElement.__element__ = this; ///
-
-    event.delegateTo(this, Element);
-    mouse.delegateTo(this, Element);
-    resize.delegateTo(this, Element);
+    mixin(event, this, Element);
+    mixin(click, this, Element);
+    mixin(mouse, this, Element);
+    mixin(resize, this, Element);
   }
 
   clone() { return Element.clone(this); }
 
-  getPosition() {
-    var $position = this.$element.position(),
-        top = $position.top,
-        left = $position.left,
-        position = new Position(top, left);
+  getOffset() {
+    const top = this.domElement.offsetTop,  ///
+          left = this.domElement.offsetLeft,  ///
+          offset = new Offset(top, left);
 
-    return position;
+    return offset;
   }
 
-  getBounds(includeBorder = false, includeMargin = false) {
-    var $offset = this.$element.offset(),
-        top = $offset.top,  ///
-        left = $offset.left,  ///
-        width = this.getWidth(includeBorder, includeMargin),
-        height = this.getHeight(includeBorder, includeMargin),
-        bottom = top + height,
-        right = left + width,
-        bounds = new Bounds(top, left, bottom, right);
+  getBounds(includeBorder = false) {
+    const top = this.domElement.offsetTop,  ///
+          left = this.domElement.offsetLeft,  ///
+          width = this.getWidth(includeBorder),
+          height = this.getHeight(includeBorder),
+          bottom = top + height,
+          right = left + width,
+          bounds = new Bounds(top, left, bottom, right);
 
     return bounds;
   }
 
-  getWidth(includeBorder = false, includeMargin = false) { 
-    var width = includeBorder ? 
-                  this.$element.outerWidth(includeMargin) :
-                    this.$element.width();
-    
+  getWidth(includeBorder = false) {
+    const width  = includeBorder ?
+                     this.domElement.offsetWidth :
+                       this.domElement.clientWidth;
+
     return width;
   }
-  
-  getHeight(includeBorder = false, includeMargin = false) {
-    var height = includeBorder ?
-                   this.$element.outerHeight(includeMargin) :
-                     this.$element.height();
-    
+
+  setWidth(width) { this.domElement.style.width = width; }
+
+  getHeight(includeBorder = false) {
+    const height  = includeBorder ?
+                      this.domElement.offsetHeight :
+                        this.domElement.clientHeight;
+
     return height;
   }
 
-  getAttribute(name) { return this.$element.attr(name); }
+  setHeight(height) { this.domElement.style.height = height; }
 
-  addAttribute(name, value) { this.$element.attr(name, value); }
+  getAttribute(name) { return this.domElement.getAttribute(name); }
 
-  removeAttribute(name) { this.$element.removeAttr(name); }
+  setAttribute(name, value) { this.domElement.setAttribute(name, value); }
 
-  hasClass(className) { return this.$element.hasClass(className); }
+  clearAttribute(name) { this.domElement.removeAttribute(name); }
 
-  addClass(className) { this.$element.addClass(className); }
+  addAttribute(name, value) { this.setAttribute(name, value); }
 
-  removeClass(className) { this.$element.removeClass(className); }
+  removeAttribute(name) { this.clearAttribute(name); }
 
-  removeClasses() { this.$element.removeClass(); }
+  setClass(className) { this.domElement.className = className; }
 
-  setWidth(width) { this.$element.width(width); }
+  addClass(className) { this.domElement.classList.add(className); }
 
-  setHeight(height) { this.$element.height(height); }
+  removeClass(className) { this.domElement.classList.remove(className); }
 
-  prependBefore(element) { this.$element.before(element.$element); }
+  toggleClass(className) { this.domElement.classList.toggle(className); }
 
-  appendAfter(element) { this.$element.after(element.$element); }
-  
+  hasClass(className) { return this.domElement.classList.contains(className); }
+
+  clearClasses() { this.domElement.className = ''; }
+
   prepend(elementOrString) {
-    if (typeof elementOrString === 'string') {
-      var string = elementOrString; ///
+    const domElement = domElementFromElementOrString(elementOrString),
+          firstChildDOMElement = this.domElement.firstChild;
 
-      this.$element.prepend(string);
-    } else {
-      var element = elementOrString,  ///
-          $element = element.$element;
-
-      this.$element.prepend($element);
-    }
+    this.domElement.insertBefore(domElement, firstChildDOMElement);
   }
   
   append(elementOrString) {
-    if (typeof elementOrString === 'string') {
-      var string = elementOrString; ///
+    const domElement = domElementFromElementOrString(elementOrString);
 
-      this.$element.append(string);
+    this.domElement.insertBefore(domElement, null); ///
+  }
+
+  appendTo(parentElement) {
+    const parentDOMElement = parentElement.domElement,
+          firstSiblingDOMElement = parentDOMElement.firstChild; ///
+
+    parentDOMElement.insertBefore(this.domElement, firstSiblingDOMElement);
+  }
+
+  prependTo(parentElement) {
+    const parentDOMElement = parentElement.domElement;
+
+    parentDOMElement.insertBefore(this.domElement, null); ///
+  }
+
+  removeFrom(parentElement) {
+    const parentDOMElement = parentElement.domElement;
+
+    parentDOMElement.removeChild(this.domElement);
+  }
+
+  remove(element) {
+    if (element) {
+      const domElement = element.domElement;
+
+      this.domElement.removeChild(domElement);
     } else {
-      var element = elementOrString,  ///
-          $element = element.$element;
-
-      this.$element.append($element);
+      this.domElement.remove();
     }
   }
 
-  appendTo(element) {
-    var $element = element.$element;
+  insertBefore(siblingElement) {
+    const parentDOMNode = siblingElement.domElement.parentNode,
+          siblingDOMElement = siblingElement.domElement;
 
-    $element.append(this.$element);
+    parentDOMNode.insertBefore(this.domElement, siblingDOMElement);
   }
 
-  prependTo(element) {
-    var $element = element.$element;
+  insertAfter(siblingElement) {
+    const parentDOMNode = siblingElement.domElement.parentNode,
+          siblingDOMElement = siblingElement.domElement;
 
-    $element.prepend(this.$element);
+    parentDOMNode.insertBefore(this.domElement, siblingDOMElement.nextSibling);  ///
   }
 
-  show() { this.$element.show(); }
+  show(displayStyle = 'block') { this.domElement.style.display = displayStyle; }
 
-  hide() { this.$element.hide(); }
+  hide() { this.domElement.style.display = 'none'; }
 
-  enable() { this.$element.removeAttr('disabled'); }
+  enable() { this.clearAttribute('disabled'); }
 
-  disable() { this.$element.attr('disabled', true); }
-
-  remove() { this.$element.remove(); }
-
-  detach() { this.$element.detach(); }
-
-  empty() { this.$element.empty(); }
+  disable() { this.setAttribute('disabled', 'disabled'); }
 
   html(html) {
-    if (html !== undefined) {
-      this.$element.html(html)
-    } else {
-      html = this.$element.html();
+    if (html === undefined) {
+      html = this.domElement.innerHTML; ///
 
       return html;
+    } else {
+      const innerHTML = html; ///
+
+      this.domElement.innerHTML = innerHTML
     }
   }
 
   css(css) {
-    if (typeof css === 'string') {
-      var propertyName = css;
+    if (css === undefined) {
+      const computedStyle = getComputedStyle(this.domElement),
+            css = {};
 
-      css = this.$element.css(propertyName);
+      for (let index = 0; index < computedStyle.length; index++) {
+        const name = computedStyle[0],  ///
+              value = computedStyle.getPropertyValue(name); ///
+
+        css[name] = value;
+      }
+
+      return css;
+    } else if (typeof css === 'string') {
+      let name = css; ///
+
+      const computedStyle = getComputedStyle(this.domElement),
+            value = computedStyle.getPropertyValue(name); ///
+
+      css = value;  ///
 
       return css;
     } else {
-      this.$element.css(css);
+      const names = Object.keys(css); ///
+
+      names.forEach(function(name) {
+        const value = css[name];
+
+        this.domElement.style[name] = value;
+      }.bind(this));
     }
   }
 
-  data(key, value) {
-    if (value !== undefined) {
-      this.$element.data(key, value);
-    } else {
-      value = this.$element.data(key);
+  getDescendantElements(selector = '*') {
+    const descendantDOMElements = this.domElement.querySelectorAll(selector),
+          descendantElements = elementsFromDOMElements(descendantDOMElements);
 
-      return value;
-    }
+    return descendantElements;
   }
 
-  findElements(selector) {
-    var foundDOMElements = this.$element.find(selector),
-        foundElements = elementsFromDOMElements(foundDOMElements);
-
-    return foundElements;
-  }
-
-  childElements(selector) {
-    var childDOMElements = this.$element.children(selector),
-        childElements = elementsFromDOMElements(childDOMElements);
+  getChildElements(selector = '*') {
+    const descendantDOMElements = this.domElement.querySelectorAll(selector),
+          allChildDOMElements = this.domElement.children,
+          childDOMElements = filter(allChildDOMElements, function(childDOMElement) {
+            return some(descendantDOMElements, function(descendantDOMElement) {
+              return (descendantDOMElement === childDOMElement);
+            });
+          }),
+          childElements = elementsFromDOMElements(childDOMElements);
 
     return childElements;
   }
 
-  parentElement(selector) {
-    var parentDOMElements = this.$element.parent(selector),
-        parentElements = elementsFromDOMElements(parentDOMElements),
-        firstParentElement = first(parentElements),
+  getParentElement(selector = '*') {
+    let parentElement = null;
+
+    const parentDOMElement = this.domElement.parentElement;
+
+    if (parentDOMElement !== null) {
+      if (parentDOMElement.matches(selector)) {
+        const parentDOMElements = [parentDOMElement],
+              parentElements = elementsFromDOMElements(parentDOMElements),
+              firstParentElement = first(parentElements);
+
         parentElement = firstParentElement || null;
+      }
+    }
 
     return parentElement;
   }
 
-  parentElements(selector) {
-    var parentDOMElements = this.$element.parents(selector),
-        parentElements = elementsFromDOMElements(parentDOMElements);
+  getAscendantElements(selector = '*') {
+    const ascendantDOMElements = [],
+          parentDOMElement = this.domElement.parentElement;
 
-    return parentElements;
-  }
-
-  onClick(clickHandler, namespace, button = Element.LEFT_MOUSE_BUTTON, allowDefault = false) {
-    this.on('click', function(event) {
-      switch (button) {
-        case Element.LEFT_MOUSE_BUTTON :
-          if (event.button === 0) { ///
-            clickHandler();
-          }
-          break;
-
-        case Element.MIDDLE_MOUSE_BUTTON :
-          if (event.button === 1) { ///
-            clickHandler();
-          }
-          break;
+    let ascendantDOMElement = parentDOMElement;  ///
+    while (ascendantDOMElement !== null) {
+      if (ascendantDOMElement.matches(selector)) {
+        ascendantDOMElements.push(ascendantDOMElement);
       }
 
-      return allowDefault;
-    }, namespace);
-  }
-  
-  offClick(namespace) { this.off('click', namespace); }
+      ascendantDOMElement = ascendantDOMElement.parentElement;
+    }
 
-  onDoubleClick(doubleClickHandler, namespace) {
+    const ascendantElements = elementsFromDOMElements(ascendantDOMElements);
+
+    return ascendantElements;
+  }
+
+  onDoubleClick(handler) {
     this.on('dblclick',function() {
-      doubleClickHandler();
+      handler();
 
       return false;
-    }, namespace)
+    })
   }
 
-  offDoubleClick(namespace) { this.off('dblclick', namespace); }
+  offDoubleClick(handler) { this.off('dblclick', handler); }
 
-  static clone(firstArgument, ...remainingArguments) {
-    return element(firstArgument, remainingArguments, isNotAClass, $elementFromSecondArgument);
-
-    function isNotAClass(firstArgument) {
-      return ((typeof firstArgument === 'string') || (firstArgument instanceof Element));
+  static clone(Class, element, ...remainingArguments) {
+    if (Class instanceof Element) {
+      element = Class;
+      remainingArguments.shift();
+      Class = Element;
     }
 
-    function $elementFromSecondArgument(secondArgument) {
-      var $element = (typeof secondArgument === 'string') ?
-                       $(secondArgument) :
-                          secondArgument.$element;
+    const deep = true,
+          domElement = element.domElement.cloneNode(deep);
 
-      return $element.clone();
-    }
+    remainingArguments.unshift(domElement);
+    remainingArguments.unshift(null);
+
+    return new (Function.prototype.bind.apply(Class, remainingArguments));
   }
 
-  static fromHTML(firstArgument, ...remainingArguments) {
-    return element(firstArgument, remainingArguments, isNotAClass, $elementFromSecondArgument);
-
-    function isNotAClass(firstArgument) {
-      return (typeof firstArgument === 'string');
+  static fromHTML(Class, html, ...remainingArguments) {
+    if (typeof Class === 'string') {
+      html = Class;
+      remainingArguments.shift();
+      Class = Element;
     }
 
-    function $elementFromSecondArgument(secondArgument) {
-      return $(secondArgument);
-    }
+    const outerDOMElelment = document.createElement('div');
+
+    outerDOMElelment.innerHTML = html;  ///
+
+    const domElement = outerDOMElelment.firstChild;
+
+    remainingArguments.unshift(domElement);
+    remainingArguments.unshift(null);
+
+    return new (Function.prototype.bind.apply(Class, remainingArguments));
   }
 
-  static fromDOMElement(firstArgument, ...remainingArguments) {
-    return element(firstArgument, remainingArguments, isNotAClass, $elementFromSecondArgument);
-
-    function isNotAClass(firstArgument) {
-      return (firstArgument instanceof HTMLElement);
+  static fromDOMElement(Class, domElement, ...remainingArguments) {
+    if (typeof Class === 'object') {
+      domElement = Class;
+      remainingArguments.shift();
+      Class = Element;
     }
 
-    function $elementFromSecondArgument(secondArgument) {
-      return $(secondArgument);
-    }
+    remainingArguments.unshift(domElement);
+    remainingArguments.unshift(null);
+
+    return new (Function.prototype.bind.apply(Class, remainingArguments));
   }
 }
 
-Element.LEFT_MOUSE_BUTTON = 1;
-Element.MIDDLE_MOUSE_BUTTON = 2;
-Element.RIGHT_MOUSE_BUTTON = 3;
+Element.LEFT_MOUSE_BUTTON = click.LEFT_MOUSE_BUTTON;
+Element.MIDDLE_MOUSE_BUTTON = click.MIDDLE_MOUSE_BUTTON;
+Element.RIGHT_MOUSE_BUTTON = click.RIGHT_MOUSE_BUTTON;
 
 module.exports = Element;
 
-function element(firstArgument, remainingArguments, isNotAClass, $elementFromSecondArgument) {
-  var firstArgumentNotAClass = isNotAClass(firstArgument);
+function domElementFromDOMElementOrSelector(domElementOrSelector) {
+  const domElement = (typeof domElementOrSelector === 'string') ?
+                       document.querySelectorAll(domElementOrSelector)[0] :  ///
+                         domElementOrSelector;
 
-  if (firstArgumentNotAClass) {
-    remainingArguments.unshift(firstArgument);
-    firstArgument = Element;
-  }
-
-  var Class = firstArgument,
-      secondArgument = remainingArguments.shift(),
-      $element = $elementFromSecondArgument(secondArgument);
-
-  remainingArguments.unshift($element);
-  remainingArguments.unshift(null); ///
-
-  return new (Function.prototype.bind.apply(Class, remainingArguments));  ///
+  return domElement;
 }
 
-function $elementFromSelector(selector) {
-  var $element;
+function domElementFromElementOrString(elementOrString) {
+  let domElement;
 
-  if (false) {
+  if (typeof elementOrString === 'string') {
+    const string = elementOrString; ///
 
-  } else if (typeof selector === 'string') {
-    $element = $(selector);
-  } else if (selector instanceof $) {
-    $element = selector;  ///
-  } else if (selector instanceof Array ) {
-    var parentElement = selector[0], ///
-        childSelector = selector[1],  ///
-        parent$Element = parentElement.$element;  ///
+    domElement = document.createTextNode(string); ///
+  } else {
+    const element = elementOrString;  ///
 
-    $element = parent$Element.find(childSelector);
+    domElement = element.domElement;
   }
 
-  return $element;
+  return domElement;
 }
 
 function elementsFromDOMElements(domElements) {
-  var elements = [],
-      domElementsLength = domElements.length;
+  const domElementsWithElements = filter(domElements, function(domElement) {
+          return (domElement.__element__ !== undefined);
+        }),
+        elements = domElementsWithElements.map(function(domElement) {
+          return domElement.__element__;
+        });
 
-  for (var i = 0; i < domElementsLength; i++) {
-    var domElement = domElements[i],
-        element = domElement.__element__;
+  return elements;
+}
 
-    if (element !== undefined) {
-      elements.push(element);
+function some(array, test) {
+  let result = false;
+
+  for (let index = 0; index < array.length; index++) {
+    const element = array[index];
+
+    result = test(element);
+
+    if (result) {
+      result = true;
+
+      break;
     }
   }
 
-  return elements;
+  return result;
+}
+
+function filter(array, test) {
+  const filteredArray = [];
+
+  for (let index = 0; index < array.length; index++) {
+    const element = array[index],
+          result = test(element);
+
+    if (result) {
+      filteredArray.push(element);
+    }
+  }
+
+  return filteredArray;
 }
 
 function first(array) { return array[0]; }
