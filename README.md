@@ -226,14 +226,14 @@ Each class bar the `window` and `document` singletons has the following methods.
 - `onClick(handler, preventDefault)`
 - `offClick(handler)`
 - `onMouseUp(handler, preventDefault)`
-- `offMouseUp(handler)`
 - `onMouseDown(handler, preventDefault)`
-- `offMouseDown(handler)`
 - `onMouseOver(handler, preventDefault)`
-- `offMouseOver(handler)`
 - `onMouseOut(handler, preventDefault)`
-- `offMouseOut(handler)`
 - `onMouseMove(handler, preventDefault)`
+- `offMouseUp(handler)`
+- `offMouseDown(handler)`
+- `offMouseOver(handler)`
+- `offMouseOut(handler)`
 - `offMouseMove(handler)`
 - `onResize(handler)`
 - `offResize(handler)`
@@ -301,16 +301,16 @@ Both the `window` and `document` singletons have the following methods:
 - `on(eventTypes, handler, preventDefault = true)`
 - `off(eventTypes, handler)`
 - `onClick(handler, preventDefault)`
-- `offClick(handler)`
 - `onMouseUp(handler, preventDefault)`
-- `offMouseUp(handler)`
 - `onMouseDown(handler, preventDefault)`
-- `offMouseDown(handler)`
 - `onMouseOver(handler, preventDefault)`
-- `offMouseOver(handler)`
 - `onMouseOut(handler, preventDefault)`
-- `offMouseOut(handler)`
 - `onMouseMove(handler, preventDefault)`
+- `offClick(handler)`
+- `offMouseUp(handler)`
+- `offMouseDown(handler)`
+- `offMouseOver(handler)`
+- `offMouseOut(handler)`
 - `offMouseMove(handler)`
 
 The `window` singleton, but not the `document` singleton, has the following methods:

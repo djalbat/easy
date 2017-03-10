@@ -2,34 +2,34 @@
 
 function onMouseUp(handler, preventDefault, intermediateHandler = topLeftButtonIntermediateHandler) { this.on('mouseup', handler, preventDefault, intermediateHandler); }
 
-function offMouseUp(handler) { this.off('mouseup', handler); }
-
 function onMouseDown(handler, preventDefault, intermediateHandler = topLeftButtonIntermediateHandler) { this.on('mousedown', handler, preventDefault, intermediateHandler); }
-
-function offMouseDown(handler) { this.off('mousedown', handler); }
 
 function onMouseOver(handler, preventDefault, intermediateHandler = topLeftIntermediateHandler) { this.on('mouseover', handler, preventDefault, intermediateHandler); }
 
-function offMouseOver(handler) { this.off('mouseover', handler); }
-
 function onMouseOut(handler, preventDefault, intermediateHandler = topLeftIntermediateHandler) { this.on('mouseout', handler, preventDefault, intermediateHandler); }
 
-function offMouseOut(handler) { this.off('mouseout', handler); }
-
 function onMouseMove(handler, preventDefault, intermediateHandler = topLeftIntermediateHandler) { this.on('mousemove', handler, preventDefault, intermediateHandler); }
+
+function offMouseUp(handler) { this.off('mouseup', handler); }
+
+function offMouseDown(handler) { this.off('mousedown', handler); }
+
+function offMouseOver(handler) { this.off('mouseover', handler); }
+
+function offMouseOut(handler) { this.off('mouseout', handler); }
 
 function offMouseMove(handler) { this.off('mousemove', handler); }
 
 const mouse = {
   onMouseUp: onMouseUp,
-  offMouseUp: offMouseUp,
   onMouseDown: onMouseDown,
-  offMouseDown: offMouseDown,
   onMouseOver: onMouseOver,
-  offMouseOver: offMouseOver,
   onMouseOut: onMouseOut,
-  offMouseOut: offMouseOut,
   onMouseMove: onMouseMove,
+  offMouseUp: offMouseUp,
+  offMouseDown: offMouseDown,
+  offMouseOver: offMouseOver,
+  offMouseOut: offMouseOut,
   offMouseMove: offMouseMove
 };
 
