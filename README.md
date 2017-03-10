@@ -74,7 +74,7 @@ Automation is done with [npm scripts](https://docs.npmjs.com/misc/scripts), have
 
 ### Creating elements
 
-You typically pass CSS-style selectors to constructors:
+You can pass CSS-style selectors to constructors:
 
 ```js
 var link = new Link('#link', function(href) {
@@ -87,12 +87,15 @@ Or you can use DOM elements or HTML snippets with the  static `fromDOMElement()`
 ```js
 var bodyDOMElements = document.getElementsByTagName('body'),
     firstBodyDOMElement = first(bodyDOMElements),
-    bodyDOMElement = firstBodyDOMElement,
-    body = Body.fromDOMElement(bodyDOMElement),
+    bodyDOMElement = firstBodyDOMElement;
+    
+var body = Body.fromDOMElement(bodyDOMElement),
     checkbox = Checkbox.fromHTML('<input type="checkbox" />');
 ```
 
-If constructors take handlers or other additional arguments, you can pass these to the corresponding `fromDOMElement()` or `fromHTML()` methods and they will be passed on the constructor. Note that `document` here is the global document reference, not EasyUI's `document` singleton.
+Note that `document` here is the global document reference, not EasyUI's `document` singleton.
+
+If constructors take handlers or other additional arguments, you can pass these to the corresponding `fromDOMElement()` or `fromHTML()` methods and they will be passed on the constructor. 
 
 ### Cloning elements
 
@@ -119,7 +122,7 @@ var body = new Body(),
 
 body.append(form); // what you want, the form element would become a child of the body element
 
-form.appendTo(body); // also what you would want, the form element becomes a child of the body element
+form.appendTo(body); // also what you want, the form element becomes a child of the body element
 ```
 
 Similarly for the prepend methods.
@@ -135,10 +138,13 @@ Similarly for the prepend methods.
 -  Link
 -  TextArea
 -  Select
+
 -  window
 -  document
 
-The `Window` and `Document` classes are not exported, only singletons, hence the lowercase. Obviously the list is incomplete. If you do not want to roll your own classes, use the `Element` class. For example:
+The `Window` and `Document` classes are not exported, only singletons, hence the lowercase. 
+
+Obviously the list is incomplete. If you do not want to roll your own classes, use the `Element` class:
 
 ```js
 var br = Element.fromHTML('<br />');
@@ -178,7 +184,7 @@ You can then use the private `domElement` property to create methods that abstra
     
 ## Standard methods
 
-Each element bar the `window` and `document` singletons has the following methods. They are taken from the Element class and may be overridden, so the signatures may change.
+Each class bar the `window` and `document` singletons has the following methods. They are taken from the `Element` class and may be overridden, so the signatures may change.
 
 - `getOffset()`
 - `getBounds(includeBorder = false)`
@@ -234,13 +240,13 @@ Each element bar the `window` and `document` singletons has the following method
 
 Aside from these there are the aforementioned static factory methods.
  
-- `clone(Class, element, ...remainingArguments)`
-- `fromHTML(Class, html, ...remainingArguments)`
-- `fromDOMElement(Class, domElement, ...remainingArguments)`
+- `static clone(Class, element, ...remainingArguments)`
+- `static fromHTML(Class, html, ...remainingArguments)`
+- `static fromDOMElement(Class, domElement, ...remainingArguments)`
 
 Again bear in mind that the signatures will change for classes that inherit from the `Element` class.
 
-Each input element, that is `Link`, `Input`, `Select`, `Button`, `Checkbox` or `Textarea` element, has the following additional methods:
+The `Link`, `Input`, `Select`, `Button`, `Checkbox` and `Textarea` classes have the following additional methods:
 
 - `hasFocus`
 - `focus`
@@ -288,7 +294,7 @@ The `TextArea` class has the following additional methods:
 - `onResize(resizeHandler)`
 - `offResize(resizeHandler)`
 
-Both the `window` and `document` singletons have the following methods, which are identical to the corresponding ones described above:
+Both the `window` and `document` singletons have the following methods:
 
 - `on(eventTypes, handler, preventDefault = true)`
 - `off(eventTypes, handler)`
