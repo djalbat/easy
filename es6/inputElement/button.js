@@ -3,34 +3,44 @@
 const InputElement = require('../inputElement');
 
 class Button extends InputElement {
-  constructor(selector, clickHandler, mouseButton, allowDefault) {
+  constructor(selector, clickHandler) {
     super(selector);
 
     if (clickHandler) {
-      this.onClick(clickHandler, mouseButton, allowDefault);
+      this.onClick(clickHandler);
     }
   }
 
-  clone(clickHandler, mouseButton, allowDefault) { return Button.clone(this, clickHandler, mouseButton, allowDefault); }
+  clone(clickHandler) { return Button.clone(this, clickHandler); }
 
-  static clone(element, clickHandler, mouseButton, allowDefault) {
-    return InputElement.clone(Button, element, clickHandler, mouseButton, allowDefault);
+  onClick(handler) {
+    const preventDefault = undefined; ///
+    
+    super.onClick(handler, preventDefault, function(handler, event) {
+      const mouseButton = event.button; ///
+
+      handler(mouseButton);
+    }.bind(this));
   }
 
-  static fromHTML(html, clickHandler, mouseButton, allowDefault) {
-    return InputElement.fromHTML(Button, html, clickHandler, mouseButton, allowDefault);
+  static clone(element, clickHandler) {
+    return InputElement.clone(Button, element, clickHandler);
   }
 
-  static fromDOMElement(domElement, clickHandler, mouseButton, allowDefault) {
-    return InputElement.fromDOMElement(Button, domElement, clickHandler, mouseButton, allowDefault);
+  static fromHTML(html, clickHandler) {
+    return InputElement.fromHTML(Button, html, clickHandler);
+  }
+
+  static fromDOMElement(domElement, clickHandler) {
+    return InputElement.fromDOMElement(Button, domElement, clickHandler);
   }
 
   static fromProperties(properties) {
     const html = '<button></button>',
-          { onClick, button, allowDefault } = properties,
+          { onClick } = properties,
           clickHandler = onClick; ///
 
-    return Button.fromHTML(html, clickHandler, button, allowDefault);
+    return Button.fromHTML(html, clickHandler);
   }
 }
 

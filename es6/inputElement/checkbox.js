@@ -14,14 +14,9 @@ class Checkbox extends InputElement {
   clone(changeHandler) { return Checkbox.clone(this, changeHandler); }
 
   onChange(handler) {
-    const mouseButton = Element.LEFT_MOUSE_BUTTON,
-          allowDefault = true;
+    const preventDefault = false;
 
-    this.onClick(function() {
-      const checked = this.isChecked();
-
-      handler(checked);
-    }.bind(this), mouseButton, allowDefault)
+    this.on('click', handler, preventDefault, intermediateChangeHandler.bind(this));  ///
   }
 
   check(checked = true) {
@@ -54,3 +49,9 @@ class Checkbox extends InputElement {
 }
 
 module.exports = Checkbox;
+
+function intermediateChangeHandler(handler, event) {
+  const checked = this.isChecked();
+
+  handler(checked);
+}

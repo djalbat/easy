@@ -1,39 +1,44 @@
 'use strict';
 
-function onMouseUp(handler) { this.on('mouseup', adjustMouseEvent(handler)); }
-function onMouseDown(handler) { this.on('mousedown', adjustMouseEvent(handler)); }
-function onMouseOver(handler) { this.on('mouseover', adjustMouseEvent(handler)); }
-function onMouseOut(handler) { this.on('mouseout', adjustMouseEvent(handler)); }
-function onMouseMove(handler) { this.on('mousemove', adjustMouseEvent(handler)); }
+function onMouseUp(handler, preventDefault, intermediateHandler = defaultIntermediateHandler) { this.on('mouseup', handler, preventDefault, intermediateHandler); }
 
 function offMouseUp(handler) { this.off('mouseup', handler); }
+
+function onMouseDown(handler, preventDefault, intermediateHandler = defaultIntermediateHandler) { this.on('mousedown', handler, preventDefault, intermediateHandler); }
+
 function offMouseDown(handler) { this.off('mousedown', handler); }
+
+function onMouseOver(handler, preventDefault, intermediateHandler = defaultIntermediateHandler) { this.on('mouseover', handler, preventDefault, intermediateHandler); }
+
 function offMouseOver(handler) { this.off('mouseover', handler); }
+
+function onMouseOut(handler, preventDefault, intermediateHandler = defaultIntermediateHandler) { this.on('mouseout', handler, preventDefault, intermediateHandler); }
+
 function offMouseOut(handler) { this.off('mouseout', handler); }
+
+function onMouseMove(handler, preventDefault, intermediateHandler = defaultIntermediateHandler) { this.on('mousemove', handler, preventDefault, intermediateHandler); }
+
 function offMouseMove(handler) { this.off('mousemove', handler); }
 
 const mouse = {
   onMouseUp: onMouseUp,
-  onMouseDown: onMouseDown,
-  onMouseOver: onMouseOver,
-  onMouseOut: onMouseOut,
-  onMouseMove: onMouseMove,
-  
   offMouseUp: offMouseUp,
+  onMouseDown: onMouseDown,
   offMouseDown: offMouseDown,
+  onMouseOver: onMouseOver,
   offMouseOver: offMouseOver,
+  onMouseOut: onMouseOut,
   offMouseOut: offMouseOut,
+  onMouseMove: onMouseMove,
   offMouseMove: offMouseMove
 };
 
 module.exports = mouse;
 
-function adjustMouseEvent(handler) {
-  return function(event) {
-    const mouseTop = event.pageY,  ///
-          mouseLeft = event.pageX, ///
-          mouseButton = event.which; ///
-
-    handler(mouseTop, mouseLeft, mouseButton);
-  };
+function defaultIntermediateHandler(event, handler) {
+  const mouseTop = event.pageY,  ///
+        mouseLeft = event.pageX, ///
+        mouseButton = event.button; ///
+  
+  handler(mouseTop, mouseLeft, mouseButton);
 }

@@ -13,10 +13,12 @@ class Element {
     this.domElement = domElementFromDOMElementOrSelector(domElementOrSelector);
 
     this.domElement.__element__ = this; ///
+    
+    this.handlersMap = {};
 
     mixin(event, this, Element);
-    mixin(click, this, Element);
     mixin(mouse, this, Element);
+    mixin(click, this, Element);
     mixin(resize, this, Element);
   }
 
@@ -249,16 +251,6 @@ class Element {
     return ascendantElements;
   }
 
-  onDoubleClick(handler) {
-    this.on('dblclick',function() {
-      handler();
-
-      return false;
-    })
-  }
-
-  offDoubleClick(handler) { this.off('dblclick', handler); }
-
   static clone(Class, element, ...remainingArguments) {
     if (Class instanceof Element) {
       element = Class;
@@ -307,10 +299,6 @@ class Element {
     return new (Function.prototype.bind.apply(Class, remainingArguments));
   }
 }
-
-Element.LEFT_MOUSE_BUTTON = click.LEFT_MOUSE_BUTTON;
-Element.MIDDLE_MOUSE_BUTTON = click.MIDDLE_MOUSE_BUTTON;
-Element.RIGHT_MOUSE_BUTTON = click.RIGHT_MOUSE_BUTTON;
 
 module.exports = Element;
 

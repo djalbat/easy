@@ -26,11 +26,9 @@ class Input extends InputElement {
   setSelectionEnd(selectionEnd) { this.domElement.selectionEnd = selectionEnd; }
 
   onChange(handler) {
-    this.on('change', function() {
-      const value = this.getValue();
+    const preventDefault = undefined; ///
 
-      handler(value);
-    }.bind(this));
+    this.on('change', handler, preventDefault, intermediateChangeHandler.bind(this));
   }
 
   offChange(handler) {
@@ -59,3 +57,9 @@ class Input extends InputElement {
 }
 
 module.exports = Input;
+
+function intermediateChangeHandler(handler, event) {
+  const value = this.getValue();
+
+  handler(value);
+}

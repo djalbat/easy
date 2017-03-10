@@ -13,12 +13,14 @@ class Link extends InputElement {
 
   clone(clickHandler) { return Link.clone(this, clickHandler); }
 
-  onClick(handler, mouseButton, allowDefault = false) {
-    super.onClick(function() {
-      const href = this.getAttribute('href');
+  onClick(handler) {
+    const preventDefault = undefined; ///
 
-      handler(href);
-    }.bind(this), mouseButton, allowDefault)
+    this.on('click', handler, preventDefault, intermediateChangeHandler.bind(this));  ///
+  }
+  
+  offClick(handler) {
+    this.off('click', handler);
   }
 
   static clone(element, clickHandler) {
@@ -43,3 +45,9 @@ class Link extends InputElement {
 }
 
 module.exports = Link;
+
+function intermediateChangeHandler(handler, event) {
+  const href = this.getAttribute('href');
+
+  handler(href);
+}

@@ -5,16 +5,9 @@ function mixin(object, element, Class) {
         names = Object.keys(object); ///
   
   names.forEach(function(name) {
-    
-    if (name === 'constructor') {
-      const constructor = object[name];
-      
-      constructor(element);
-    } else {
-      const method = object[name];
+    const method = object[name];
 
-      prototype[name] = method;
-    }
+    prototype[name] = method;
   });
 }
 

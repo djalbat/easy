@@ -13,14 +13,6 @@ class InputElement extends Element {
     return focus;
   }
 
-  onFocus(handler) {
-    this.on('focus', handler);
-  }
-
-  onBlur(handler) {
-    this.on('blur', handler);
-  }
-
   focus() {
     this.domElement.focus();
   }

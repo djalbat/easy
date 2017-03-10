@@ -13,21 +13,19 @@ class Select extends InputElement {
 
   clone(changeHandler) { return Select.clone(this, changeHandler); }
 
-  onChange(handler) {
-    this.on('change', function() {
-      const selectedOptionValue = this.getSelectedOptionValue();
+  getSelectedOptionValue() { return this.domElement.value; } ///
 
-      handler(selectedOptionValue);
-    }.bind(this));
+  setSelectedOptionByValue(value) { this.domElement.value = value; } ///
+
+  onChange(handler) {
+    const preventDefault = undefined; ///
+
+    this.on('change', handler, preventDefault, intermediateChangeHandler.bind(this));
   }
   
   offChange(handler) {
     this.off('change', handler);
   }
-
-  getSelectedOptionValue() { return this.domElement.value; } ///
-
-  setSelectedOptionByValue(value) { this.domElement.value = value; } ///
 
   static clone(element, changeHandler) {
     return InputElement.clone(Select, element, changeHandler);
@@ -51,3 +49,9 @@ class Select extends InputElement {
 }
 
 module.exports = Select;
+
+function intermediateChangeHandler(handler, event) {
+  const selectedOptionValue = this.getSelectedOptionValue();
+
+  handler(selectedOptionValue);
+}

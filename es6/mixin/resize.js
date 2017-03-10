@@ -1,55 +1,57 @@
 'use strict';
 
-function constructor(element) {
-  element.resizeHandlers = [];
-}
+function onResize(handler) {
+  const handlers = this.handlersMap['resize'];
 
-function onResize(resizeHandler) {
-  const resizeHandlers = hasResizeHandlers(this);
-
-  if (!resizeHandlers) {
+  if (handlers === undefined) {
     appendResizeObject(this);
   }
 
-  addResizeHandler(this, resizeHandler);
+  addResizeHandler(this, handler);
 }
 
-function offResize(resizeHandler) {
-  removeResizeHandler(this, resizeHandler);
+function offResize(handler) {
+  removeResizeHandler(this, handler);
 
-  const resizeHandlers = hasResizeHandlers(this);
+  const handlers = this.handlersMap['resize'];
 
-  if (!resizeHandlers) {
+  if (handlers === undefined) {
     removeResizeObject(this);
   }
 }
 
 const resize = {
-  constructor: constructor,
   onResize: onResize,
   offResize: offResize
 };
 
 module.exports = resize;
 
-function hasResizeHandlers(element) {
-  const resizeHandlersLength = element.resizeHandlers.length,
-        resizeHandlers = (resizeHandlersLength > 0);
+function addResizeHandler(element, handler) {
+  let handlers = element.handlersMap['resize'];
 
-  return resizeHandlers;
+  if ((handlers === undefined)) {
+    handlers = [];
+
+    element.handlersMap['resize'] = handlers;
+  }
+
+  handlers.push(handler);
 }
 
-function addResizeHandler(element, resizeHandler) {
-  element.resizeHandlers.push(resizeHandler);
-}
+function removeResizeHandler(element, handler) {
+  const handlers = element.handlersMap['resize'];
 
-function removeResizeHandler(element, resizeHandler) {
-  const index = element.resizeHandlers.indexOf(resizeHandler);
+  if ((handlers.length === 0)) {
+    delete (element.handlersMap[type]);
+  } else {
+    const index = handlers.indexOf(handler);
 
-  if (index > -1) {
-    const deleteCount = 1;
+    if (index > -1) {
+      const deleteCount = 1;
 
-    element.resizeHandlers.splice(index, deleteCount);
+      handlers.splice(index, deleteCount);
+    }
   }
 }
 
@@ -70,13 +72,13 @@ function appendResizeObject(element) {
   resizeObject.data = 'about:blank';
   resizeObject.type = 'text/html';
 
-  domElement.appendChild(resizeObject);
-
   element.__resizeObject__ = resizeObject;
 
   resizeObject.onload = function() {
     resizeObjectLoadHandler(element)
   };
+
+  domElement.appendChild(resizeObject);
 }
 
 function removeResizeObject(element) {
@@ -90,10 +92,20 @@ function removeResizeObject(element) {
 }
 
 function resizeObjectLoadHandler(element) {
-  const width = element.getWidth(),
-        height = element.getHeight();
+  const resizeObject = element.__resizeObject__,
+        resizeObjectWindow = resizeObject.contentDocument.defaultView;  ///
 
-  element.resizeHandlers.forEach(function(resizeHandler){
-    resizeHandler(width, height);
+  resizeObjectWindow.addEventListener('resize', function() {
+    intermediateHandler(element);
+  });
+}
+
+function intermediateHandler(element) {
+  const width = element.getWidth(),
+        height = element.getHeight(),
+        handlers = element.handlersMap['resize'];
+
+  handlers.forEach(function(handler){
+    handler(width, height);
   });
 }
