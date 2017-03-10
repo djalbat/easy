@@ -238,7 +238,9 @@ Each class bar the `window` and `document` singletons has the following methods.
 - `onResize(handler)`
 - `offResize(handler)`
 
-Aside from these there are the aforementioned static factory methods.
+The `html()` and `css()` methods allow you to both get and set HTML and CSS, respectively.
+
+Aside from the above methods there are the aforementioned static factory methods.
  
 - `static clone(Class, element, ...remainingArguments)`
 - `static fromHTML(Class, html, ...remainingArguments)`
