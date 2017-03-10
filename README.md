@@ -71,9 +71,7 @@ Automation is done with [npm scripts](https://docs.npmjs.com/misc/scripts), have
     npm run build-debug
     npm run watch-debug
 
-## Examples
-
-### Creating elements
+## Creating elements
 
 You can pass CSS-style selectors to constructors:
 
@@ -98,7 +96,7 @@ Note that `document` here is the global document reference, not EasyUI's `docume
 
 If constructors take handlers or other additional arguments, you can pass these to the corresponding `fromDOMElement()` or `fromHTML()` factory methods and they will be passed on the constructor. 
 
-### Cloning elements
+## Cloning elements
 
 You can call the `clone()` method of an element to clone it, or the equivalent static factory method. In either case, if the original element has an `id` attribute, it is best to remove this from the cloned element:
  
@@ -113,7 +111,7 @@ clonedButton2.removeAttribute('id');
 
 As in the case of `fromDOMElement()` and `fromHTML()` factory methods, the `clone()` methods will pass additional arguments on to the corresponding constructor. Note that when you clone an element you will need to re-register handlers. 
 
-### Adding elements to the DOM
+## Adding elements to the DOM
  
 The methods to add elements to the DOM are hopefully intuitive. Note the difference between the `append()` and `appendTo()` methods:
 
