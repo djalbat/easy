@@ -14,7 +14,7 @@ class Link extends InputElement {
   clone(clickHandler) { return Link.clone(this, clickHandler); }
 
   onClick(handler) {
-    const preventDefault = undefined; ///
+    const preventDefault = true;
 
     this.on('click', handler, preventDefault, intermediateChangeHandler.bind(this));  ///
   }

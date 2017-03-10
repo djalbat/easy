@@ -5,30 +5,29 @@
       <title>EasyUI Examples</title>
     </head>
     <body>
+        <div id="resizeable" style="background-color: lightgray; height: 1rem;"> </div>
+
+        <input type="text" value="Input" id="input">
+        <br/>
+        <a href="https://github.com/djalbat/EasyUI" id="link">Link</a>
+        <br/>
+        <button id="button">Button</button>
+        <br/>
+        Select
+        <select id="select">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+        </select>
+        <br/>
+        Checkbox
+        <input type="checkbox" id="checkbox"/>
+        <br/>
+        <textarea id="textarea" autofocus> </textarea>
+
         <script src="./dist/easyui.js"> </script>
 
         <script>
-
-          (function() {
-            var Element = easyui.Element,
-                Div = easyui.Div,
-                Body = easyui.Body,
-                Link = easyui.Link,
-                Input = easyui.Input,
-                Button = easyui.Button,
-                Select = easyui.Select,
-                Checkbox = easyui.Checkbox,
-                TextArea = easyui.TextArea,
-                window = easyui.window;
-
-//
-//            window.onMouseUp(function(mouseTop, mouseLeft) {
-//             console.log('Window mouse up (' + mouseTop + ',' + mouseLeft + ')');
-//            });
-
-            var body = Body.fromDOMElement(document.getElementsByTagName('body')[0]);
-
-          })();
 
         </script>
 

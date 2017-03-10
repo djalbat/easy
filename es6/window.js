@@ -9,9 +9,11 @@ class Window {
   constructor() {
     this.domElement = window;
 
-    // mixin(event, this, Window);
-    // mixin(click, this, Window);
-    // mixin(mouse, this, Window);
+    this.handlersMap = {};
+
+    mixin(event, this, Window);
+    mixin(click, this, Window);
+    mixin(mouse, this, Window);
   }
   
   getWidth() { return this.domElement.innerWidth; } ///
@@ -19,17 +21,33 @@ class Window {
   getHeight() { return this.domElement.innerHeight; } ///
   
   onResize(handler) {
-    this.domElement.onResize(function() {
-      const width = this.getWidth(),
-            height = this.getHeight();
-      
-      handler(width, height);
-    }.bind(this));
+    const type = 'resize',
+          addEventListener = this.addHandler(type, handler);
+
+    if (addEventListener) {
+      this.domElement.addEventListener(type, eventListener.bind(this));
+    }
   }
 
   offResize(handler) {
-    this.domElement.offResize(handler);
+    const type = 'resize',
+          removeEventListener = this.removeHandler(type, handler);
+
+    if (removeEventListener) {
+      this.domElement.removeEventListener(type, eventListener.bind(this));
+    }
   }
 }
 
 module.exports = new Window();  ///
+
+function eventListener(event) {
+  const type = event.type,
+        handlers = this.handlersMap[type],
+        width = this.getWidth(),
+        height = this.getHeight();
+
+  handlers.forEach(function(handler) {
+    handler(width, height);
+  });
+}

@@ -1,6 +1,6 @@
 'use strict';
 
-function onClick(handler, preventDefault, intermediateHandler = defaultIntermediateHandler) { this.on('click', handler, preventDefault, intermediateHandler); }
+function onClick(handler, preventDefault, intermediateHandler = topLeftButtonIntermediateHandler) { this.on('click', handler, preventDefault, intermediateHandler); }
 
 function offClick(handler) { this.off('click', handler); }
 
@@ -11,7 +11,7 @@ const click = {
 
 module.exports = click;
 
-function defaultIntermediateHandler(event, handler) {
+function topLeftButtonIntermediateHandler(handler, event) {
   const mouseTop = event.pageY,  ///
         mouseLeft = event.pageX, ///
         mouseButton = event.button; ///

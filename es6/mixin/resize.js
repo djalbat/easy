@@ -1,21 +1,19 @@
 'use strict';
 
 function onResize(handler) {
-  const handlers = this.handlersMap['resize'];
+  const type = 'resize',
+        addEventListener = this.addHandler(type, handler);
 
-  if (handlers === undefined) {
+  if (addEventListener) {
     appendResizeObject(this);
   }
-
-  addResizeHandler(this, handler);
 }
 
 function offResize(handler) {
-  removeResizeHandler(this, handler);
+  const type = 'resize',
+        removeEventListener = this.removeHandler(type, handler);
 
-  const handlers = this.handlersMap['resize'];
-
-  if (handlers === undefined) {
+  if (removeEventListener) {
     removeResizeObject(this);
   }
 }
@@ -26,34 +24,6 @@ const resize = {
 };
 
 module.exports = resize;
-
-function addResizeHandler(element, handler) {
-  let handlers = element.handlersMap['resize'];
-
-  if ((handlers === undefined)) {
-    handlers = [];
-
-    element.handlersMap['resize'] = handlers;
-  }
-
-  handlers.push(handler);
-}
-
-function removeResizeHandler(element, handler) {
-  const handlers = element.handlersMap['resize'];
-
-  if ((handlers.length === 0)) {
-    delete (element.handlersMap[type]);
-  } else {
-    const index = handlers.indexOf(handler);
-
-    if (index > -1) {
-      const deleteCount = 1;
-
-      handlers.splice(index, deleteCount);
-    }
-  }
-}
 
 function appendResizeObject(element) {
   const resizeObject = document.createElement('object'),
@@ -96,11 +66,11 @@ function resizeObjectLoadHandler(element) {
         resizeObjectWindow = resizeObject.contentDocument.defaultView;  ///
 
   resizeObjectWindow.addEventListener('resize', function() {
-    intermediateHandler(element);
+    eventListener(element);
   });
 }
 
-function intermediateHandler(element) {
+function eventListener(element) {
   const width = element.getWidth(),
         height = element.getHeight(),
         handlers = element.handlersMap['resize'];

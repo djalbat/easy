@@ -1,10 +1,14 @@
 'use strict';
 
-function on(types, handler, preventDefault, intermediateHandler) {
+function on(types, handler, preventDefault = true, intermediateHandler = function(handler, event) { handler(event); }) {
   types = types.split(' '); ///
 
   types.forEach(function(type) {
-    addHandler(this, type, handler, preventDefault, intermediateHandler);
+    const addEventListener = this.addHandler(type, handler, preventDefault, intermediateHandler);
+
+    if (addEventListener) {
+      this.domElement.addEventListener(type, eventListener.bind(this));
+    }
   }.bind(this));
 }
 
@@ -12,41 +16,47 @@ function off(types, handler) {
   types = types.split(' '); ///
 
   types.forEach(function(type) {
-    removeHandler(this, type, handler);
+    const removeEventListener = this.removeHandler(type, handler);
+    
+    if (removeEventListener) {
+      this.domElement.removeEventListener(type, eventListener.bind(this));
+    }
   }.bind(this));
 }
 
-const event = {
-  on: on,
-  off: off
-};
+function addHandler(type, handler, preventDefault, intermediateHandler ) {
+  if (preventDefault !== undefined) {
+    handler.preventDefault = preventDefault;
+  }
 
-module.exports = event;
+  if (intermediateHandler !== undefined) {
+    handler.intermediateHandler = intermediateHandler;
+  }
 
-function addHandler(element, type, handler, preventDefault = true, intermediateHandler = defaultIntermediateHandler) {
-  let handlers = element.handlersMap[type];
+  let addEventListener = false,
+      handlers = this.handlersMap[type];
 
   if ((handlers === undefined)) {
     handlers = [];
 
-    element.handlersMap[type] = handlers;
+    this.handlersMap[type] = handlers;
 
-    element.domElement.addEventListener(type, eventListener.bind(element));
+    addEventListener = true;
   }
 
-  handler.preventDefault = preventDefault;
-  handler.intermediateHandler = intermediateHandler;
-  
   handlers.push(handler);
+
+  return addEventListener;
 }
 
-function removeHandler(element, type, handler) {
-  const handlers = element.handlersMap[type];
+function removeHandler(type, handler) {
+  let removeEventListener = false,
+      handlers = this.handlersMap[type];
 
   if ((handlers.length === 0)) {
-    delete (element.handlersMap[type]);
-    
-    element.domElement.removeEventListener(type, eventListener.bind(element));
+    delete (this.handlersMap[type]);
+
+    removeEventListener = true;
   } else {
     const index = handlers.indexOf(handler);
 
@@ -56,7 +66,18 @@ function removeHandler(element, type, handler) {
       handlers.splice(index, deleteCount);
     }
   }
+
+  return removeEventListener;
 }
+
+const event = {
+  on: on,
+  off: off,
+  addHandler: addHandler,
+  removeHandler: removeHandler
+};
+
+module.exports = event;
 
 function eventListener(event) {
   const type = event.type,
@@ -69,8 +90,4 @@ function eventListener(event) {
       event.preventDefault();
     }
   });
-}
-
-function defaultIntermediateHandler(handler, event) {
-  handler(event);
 }

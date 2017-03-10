@@ -17,8 +17,8 @@ class Element {
     this.handlersMap = {};
 
     mixin(event, this, Element);
-    mixin(mouse, this, Element);
     mixin(click, this, Element);
+    mixin(mouse, this, Element);
     mixin(resize, this, Element);
   }
 

@@ -8,10 +8,12 @@ const mixin = require('./mixin'),
 class Document {
   constructor() {
     this.domElement = document;
+
+    this.handlersMap = {};
     
-    // mixin(event, this, Document);
-    // mixin(click, this, Document);
-    // mixin(mouse, this, Document);
+    mixin(event, this, Document);
+    mixin(click, this, Document);
+    mixin(mouse, this, Document);
   }
 }
 
