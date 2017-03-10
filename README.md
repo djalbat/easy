@@ -192,20 +192,17 @@ Each class bar the `Window` and `Document` classes has the following methods. Th
 - `setWidth(width)`
 - `getHeight(includeBorder = false)`
 - `setHeight(height)`
-
 - `getAttribute(name)`
 - `setAttribute(name, value)`
 - `clearAttribute(name)`
 - `addAttribute(name, value)`
 - `removeAttribute(name)`
-
 - `setClass(className)`
 - `addClass(className)`
 - `removeClass(className)`
 - `toggleClass(className)`
 - `hasClass(className)`
 - `clearClasses()`
-
 - `prepend(elementOrString)`
 - `append(elementOrString)`
 - `appendTo(parentElement)`
@@ -214,20 +211,16 @@ Each class bar the `Window` and `Document` classes has the following methods. Th
 - `remove(element)`
 - `insertBefore(siblingElement)`
 - `insertAfter(siblingElement)`
-
 - `show(displayStyle = 'block')`
 - `hide()`
 - `enable()`
 - `disable()`
-
 - `html(html)`
 - `css(css)`
-
 - `getDescendantElements(selector = '*')`
 - `getChildElements(selector = '*')`
 - `getParentElement(selector = '*')`
 - `getAscendantElements(selector = '*')`
-
 - `on(eventTypes, handler, preventDefault = true)`
 - `off(eventTypes, handler)`
 - `onClick(handler, preventDefault)`
@@ -274,7 +267,6 @@ The `Input` class has the following additional methods:
 - `setValue(value)`
 - `setSelectionStart(selectionStart)`
 - `setSelectionEnd(selectionEnd)`
-
 - `onChange(handler)`
 - `offChange(handler)`
 
@@ -282,7 +274,6 @@ The `Select` class has the following additional methods:
 
 - `getSelectedOptionValue()`
 - `setSelectedOptionByValue(value)`
-
 - `onChange(handler)`
 - `offChange(handler)`
   
@@ -298,7 +289,6 @@ The `TextArea` class has the following additional methods:
 - `setSelectionEnd(selectionEnd)`
 - `setScrollTop(scrollTop)`
 - `setScrollLeft(scrollLeft)`
-
 - `onChange(handler)`
 - `offChange(handler)`
 - `onScroll(handler)`
