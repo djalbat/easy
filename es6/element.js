@@ -274,11 +274,11 @@ class Element {
       Class = Element;
     }
 
-    const outerDOMElelment = document.createElement('div');
+    const outerDOMElement = document.createElement('div');
 
-    outerDOMElelment.innerHTML = html;  ///
+    outerDOMElement.innerHTML = html;  ///
 
-    const domElement = outerDOMElelment.firstChild;
+    const domElement = outerDOMElement.firstChild;
 
     remainingArguments.unshift(domElement);
     remainingArguments.unshift(null);
