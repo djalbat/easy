@@ -80,7 +80,7 @@ const event = {
 module.exports = event;
 
 function eventListener(event) {
-  const eventType = event.eventType,
+  const eventType = event.type,
         handlers = this.handlersMap[eventType];
 
   handlers.forEach(function(handler) {
