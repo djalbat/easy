@@ -4,7 +4,7 @@ A V-framework.
 
 EasyUI is an MVC framework without the M and without the C. It's without a model, only abstracting away from the view, namely the document object model. There is some irony here. It's without a controller, or whatever. It will not help you with the architecture of your large application. It is about the leaves of an application, not its branches. 
 
-It abstracts away from the DOM to provide a basic set of classes for elements such as buttons, links, etc. It covers up some of the browser APIs' more idiosyncratic syntax and is hopefully a bit more readable. 
+It abstracts away from the DOM to provide a set of classes for elements such as buttons, links, etc. It covers up some of the more idiosyncratic syntax from the JavaScript browser API and is hopefully a bit more readable. 
 
 ## Related projects
 
@@ -37,7 +37,7 @@ You will need to do this if you want to look at the examples.
 
 ## Usage
 
-If you're building with [Node.js](http://nodejs.org) the usage is as follows:
+If you are building with [Node.js](http://nodejs.org) the usage is as follows:
 
 ```js
 var easyui = require('easyui'),
@@ -57,7 +57,7 @@ To use EasyUI in the browser, take the `easyui.js` file from the project's `dist
 var Button = easyui.Button;
 ```
 
-Alternatively, if you're using an AMD style `require` the usage is similar to the Node.js case, only make sure that the path to the distribution file is correct. The following script should work, assuming it lives in the the `public/scripts/` directory:
+Alternatively, if you are using an AMD style `require` the usage is similar to the Node.js case, only make sure that the path to the distribution file is correct. The following script should work, assuming it lives in the the `public/scripts/` directory:
 
 ```js
 var easyui = require('lib/easyui'),
@@ -83,7 +83,7 @@ var link = new Link('#link', function(href) {
 });
 ```
 
-Or you can use DOM elements or HTML snippets with the  static `fromDOMElement()` or `fromHTML()` factory methods of any relevant class, respectively:
+You can also use existing DOM elements or HTML snippets with the static `fromDOMElement()` or `fromHTML()` factory methods of the relevant class, respectively:
 
 ```js
 var bodyDOMElements = document.getElementsByTagName('body'),
@@ -96,7 +96,7 @@ var body = Body.fromDOMElement(bodyDOMElement),
 
 Note that `document` here is the global document reference, not EasyUI's `document` singleton.
 
-If constructors take handlers or other additional arguments, you can pass these to the corresponding `fromDOMElement()` or `fromHTML()` methods and they will be passed on the constructor. 
+If constructors take handlers or other additional arguments, you can pass these to the corresponding `fromDOMElement()` or `fromHTML()` factory methods and they will be passed on the constructor. 
 
 ### Cloning elements
 
@@ -111,7 +111,7 @@ clonedButton1.removeAttribute('id');
 clonedButton2.removeAttribute('id');
 ```
 
-As in the case of `fromDOMElement()` or `fromHTML()` factory methods, the `clone()` methods will pass additional arguments on to the corresponding constructor. Note that when you clone an element you will need to re-register handlers. 
+As in the case of `fromDOMElement()` and `fromHTML()` factory methods, the `clone()` methods will pass additional arguments on to the corresponding constructor. Note that when you clone an element you will need to re-register handlers. 
 
 ### Adding elements to the DOM
  
@@ -121,7 +121,7 @@ The methods to add elements to the DOM are hopefully intuitive. Note the differe
 var body = new Body(),
     form = Element.fromHTML('<form></form>');
 
-body.append(form); // what you want, the form element would become a child of the body element
+body.append(form); // what you want, the form element becomes a child of the body element
 
 form.appendTo(body); // also what you want, the form element becomes a child of the body element
 ```
@@ -139,7 +139,6 @@ Similarly for the prepend methods.
 -  Link
 -  TextArea
 -  Select
-
 -  window
 -  document
 
@@ -185,7 +184,7 @@ You can then use the private `domElement` property to create methods that abstra
     
 ## Standard methods
 
-Each class bar the `window` and `document` singletons has the following methods. They are taken from the `Element` class and may be overridden, so the signatures may change.
+Each class bar the `Window` and `Document` classes has the following methods. They are taken from the `Element` class and are overridden in many cases, in which case the signatures may change:
 
 - `getOffset()`
 - `getBounds(includeBorder = false)`
@@ -193,17 +192,20 @@ Each class bar the `window` and `document` singletons has the following methods.
 - `setWidth(width)`
 - `getHeight(includeBorder = false)`
 - `setHeight(height)`
+
 - `getAttribute(name)`
 - `setAttribute(name, value)`
 - `clearAttribute(name)`
 - `addAttribute(name, value)`
 - `removeAttribute(name)`
+
 - `setClass(className)`
 - `addClass(className)`
 - `removeClass(className)`
 - `toggleClass(className)`
 - `hasClass(className)`
 - `clearClasses()`
+
 - `prepend(elementOrString)`
 - `append(elementOrString)`
 - `appendTo(parentElement)`
@@ -212,16 +214,20 @@ Each class bar the `window` and `document` singletons has the following methods.
 - `remove(element)`
 - `insertBefore(siblingElement)`
 - `insertAfter(siblingElement)`
+
 - `show(displayStyle = 'block')`
 - `hide()`
 - `enable()`
 - `disable()`
+
 - `html(html)`
 - `css(css)`
+
 - `getDescendantElements(selector = '*')`
 - `getChildElements(selector = '*')`
 - `getParentElement(selector = '*')`
 - `getAscendantElements(selector = '*')`
+
 - `on(eventTypes, handler, preventDefault = true)`
 - `off(eventTypes, handler)`
 - `onClick(handler, preventDefault)`
@@ -268,6 +274,7 @@ The `Input` class has the following additional methods:
 - `setValue(value)`
 - `setSelectionStart(selectionStart)`
 - `setSelectionEnd(selectionEnd)`
+
 - `onChange(handler)`
 - `offChange(handler)`
 
@@ -275,6 +282,7 @@ The `Select` class has the following additional methods:
 
 - `getSelectedOptionValue()`
 - `setSelectedOptionByValue(value)`
+
 - `onChange(handler)`
 - `offChange(handler)`
   
@@ -290,6 +298,7 @@ The `TextArea` class has the following additional methods:
 - `setSelectionEnd(selectionEnd)`
 - `setScrollTop(scrollTop)`
 - `setScrollLeft(scrollLeft)`
+
 - `onChange(handler)`
 - `offChange(handler)`
 - `onScroll(handler)`
@@ -297,7 +306,7 @@ The `TextArea` class has the following additional methods:
 - `onResize(resizeHandler)`
 - `offResize(resizeHandler)`
 
-Both the `window` and `document` singletons have the following methods:
+Both the `Window` and `Document` singletons have the following methods:
 
 - `on(eventTypes, handler, preventDefault = true)`
 - `off(eventTypes, handler)`
@@ -314,11 +323,12 @@ Both the `window` and `document` singletons have the following methods:
 - `offMouseOut(handler)`
 - `offMouseMove(handler)`
 
-The `window` singleton, but not the `document` singleton, has the following methods:
+The `Window` class, but not the `Document` class, has the following methods:
 
 - `onResize`
 - `offResize`
 
+Remember that the `Window` and `Document` classes are exported as singletons.
 
 ## Contact
 
