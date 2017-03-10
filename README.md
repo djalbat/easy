@@ -40,9 +40,9 @@ You will need to do this if you want to look at the examples.
 If you are building with [Node.js](http://nodejs.org) the usage is as follows:
 
 ```js
-var easyui = require('easyui'),
-    Select = easyui.Select,
-    Checkbox = easyui.Checkbox;
+const easyui = require('easyui'),
+      Select = easyui.Select,
+      Checkbox = easyui.Checkbox;
 ```
 
 To use EasyUI in the browser, take the `easyui.js` file from the project's `dist/` directory and put it somewhere such as a `public/scripts/lib` directory. Referencing this distribution file from a `script` element...
@@ -54,14 +54,14 @@ To use EasyUI in the browser, take the `easyui.js` file from the project's `dist
 ...will give you a global `easyui` variable which can be used directly:
 
 ```js
-var Button = easyui.Button;
+const Button = easyui.Button;
 ```
 
 Alternatively, if you are using an AMD style `require` the usage is similar to the Node.js case, only make sure that the path to the distribution file is correct. The following script should work, assuming it lives in the the `public/scripts/` directory:
 
 ```js
-var easyui = require('lib/easyui'),
-    Button = easyui.Button;
+const easyui = require('lib/easyui'),
+      Button = easyui.Button;
 ```
 
 ## Compiling from source
@@ -78,7 +78,7 @@ Automation is done with [npm scripts](https://docs.npmjs.com/misc/scripts), have
 You can pass CSS-style selectors to constructors:
 
 ```js
-var link = new Link('#link', function(href) {
+const link = new Link('#link', function(href) {
   console.log('Link click with href ' + href);
 });
 ```
@@ -86,12 +86,12 @@ var link = new Link('#link', function(href) {
 You can also use existing DOM elements or HTML snippets with the static `fromDOMElement()` or `fromHTML()` factory methods of the relevant class, respectively:
 
 ```js
-var bodyDOMElements = document.getElementsByTagName('body'),
-    firstBodyDOMElement = first(bodyDOMElements),
-    bodyDOMElement = firstBodyDOMElement;
+const bodyDOMElements = document.getElementsByTagName('body'),
+      firstBodyDOMElement = first(bodyDOMElements),
+      bodyDOMElement = firstBodyDOMElement;
     
-var body = Body.fromDOMElement(bodyDOMElement),
-    checkbox = Checkbox.fromHTML('<input type="checkbox" />');
+const body = Body.fromDOMElement(bodyDOMElement),
+      checkbox = Checkbox.fromHTML('<input type="checkbox" />');
 ```
 
 Note that `document` here is the global document reference, not EasyUI's `document` singleton.
@@ -103,9 +103,9 @@ If constructors take handlers or other additional arguments, you can pass these 
 You can call the `clone()` method of an element to clone it, or the equivalent static factory method. In either case, if the original element has an `id` attribute, it is best to remove this from the cloned element:
  
 ```js
-var button = new Button('#button'),
-    clonedButton1 = button.clone(),
-    clonedButton2 = Button.clone(button)
+const button = new Button('#button'),
+      clonedButton1 = button.clone(),
+      clonedButton2 = Button.clone(button)
      
 clonedButton1.removeAttribute('id');
 clonedButton2.removeAttribute('id');
@@ -118,8 +118,8 @@ As in the case of `fromDOMElement()` and `fromHTML()` factory methods, the `clon
 The methods to add elements to the DOM are hopefully intuitive. Note the difference between the `append()` and `appendTo()` methods:
 
 ```js
-var body = new Body(),
-    form = Element.fromHTML('<form></form>');
+const body = new Body(),
+      form = Element.fromHTML('<form></form>');
 
 body.append(form); // what you want, the form element becomes a child of the body element
 
@@ -147,7 +147,7 @@ The `Window` and `Document` classes are not exported, only singletons, hence the
 Obviously the list is incomplete. If you do not want to roll your own classes, use the `Element` class:
 
 ```js
-var br = Element.fromHTML('<br />');
+const br = Element.fromHTML('<br />');
 ```
 
 ## Rolling your own classes
