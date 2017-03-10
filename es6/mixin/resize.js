@@ -1,8 +1,8 @@
 'use strict';
 
 function onResize(handler) {
-  const type = 'resize',
-        addEventListener = this.addHandler(type, handler);
+  const eventType = 'resize',
+        addEventListener = this.addHandler(eventType, handler);
 
   if (addEventListener) {
     appendResizeObject(this);
@@ -10,8 +10,8 @@ function onResize(handler) {
 }
 
 function offResize(handler) {
-  const type = 'resize',
-        removeEventListener = this.removeHandler(type, handler);
+  const eventType = 'resize',
+        removeEventListener = this.removeHandler(eventType, handler);
 
   if (removeEventListener) {
     removeResizeObject(this);
