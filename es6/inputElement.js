@@ -13,8 +13,18 @@ class InputElement extends Element {
     return focus;
   }
 
-  focus() {
-    this.domElement.focus();
+  focus() { this.domElement.focus(); }
+
+  static clone(Class, element, ...remainingArguments) {
+    return Element.clone(Class, element, ...remainingArguments);
+  }
+
+  static fromHTML(Class, html, ...remainingArguments) {
+    return Element.fromHTML(Class, html, ...remainingArguments);
+  }
+
+  static fromDOMElement(Class, domElement, ...remainingArguments) {
+    return Element.fromDOMElement(Class, domElement, ...remainingArguments);
   }
 }
 

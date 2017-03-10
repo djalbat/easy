@@ -9,8 +9,8 @@ const mixin = require('./mixin'),
       Bounds = require('./misc/bounds');
 
 class Element {
-  constructor(domElementOrSelector) {
-    this.domElement = domElementFromDOMElementOrSelector(domElementOrSelector);
+  constructor(selector) {
+    this.domElement = domElementFromSelector(selector);
 
     this.domElement.__element__ = this; ///
     
@@ -302,10 +302,10 @@ class Element {
 
 module.exports = Element;
 
-function domElementFromDOMElementOrSelector(domElementOrSelector) {
-  const domElement = (typeof domElementOrSelector === 'string') ?
-                       document.querySelectorAll(domElementOrSelector)[0] :  ///
-                         domElementOrSelector;
+function domElementFromSelector(selector) {
+  const domElement = (typeof selector === 'string') ?
+                       document.querySelectorAll(selector)[0] :  ///
+                         selector;  ///
 
   return domElement;
 }
