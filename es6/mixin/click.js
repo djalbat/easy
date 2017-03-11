@@ -2,15 +2,9 @@
 
 function onClick(handler) {
   if (handler.intermediateHandler === undefined) {
-    handler.intermediateHandler = function(handler, event) {
-      const mouseTop = event.pageY,  ///
-            mouseLeft = event.pageX, ///
-            mouseButton = event.button, ///
-            preventDefault = handler(mouseTop, mouseLeft, mouseButton);
-      
-      return preventDefault;
-    }
+    handler.intermediateHandler = defaultIntermediateHandler;
   }
+  
   this.on('click', handler); 
 }
 
@@ -23,3 +17,11 @@ const click = {
 
 module.exports = click;
 
+function defaultIntermediateHandler(handler, event) {
+  const mouseTop = event.pageY,  ///
+        mouseLeft = event.pageX, ///
+        mouseButton = event.button, ///
+        preventDefault = handler(mouseTop, mouseLeft, mouseButton);
+
+  return preventDefault;
+}

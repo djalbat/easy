@@ -2,14 +2,7 @@
 
 function onMouseUp(handler) {
   if (handler.intermediateHandler === undefined) {
-    handler.intermediateHandler = function(handler, event) {
-      const mouseTop = event.pageY,  ///
-            mouseLeft = event.pageX, ///
-            mouseButton = event.button, ///
-            preventDefault = handler(mouseTop, mouseLeft, mouseButton);
-      
-      return preventDefault;
-    }
+    handler.intermediateHandler = defaultIntermediateHandler;
   }
   
   this.on('mouseup', handler); 
@@ -17,14 +10,7 @@ function onMouseUp(handler) {
 
 function onMouseDown(handler) {
   if (handler.intermediateHandler === undefined) {
-    handler.intermediateHandler = function(handler, event) {
-      const mouseTop = event.pageY,  ///
-            mouseLeft = event.pageX, ///
-            mouseButton = event.button, ///
-            preventDefault = handler(mouseTop, mouseLeft, mouseButton);
-
-      return preventDefault;
-    }
+    handler.intermediateHandler = defaultIntermediateHandler;
   }
 
   this.on('mousedown', handler); 
@@ -32,13 +18,7 @@ function onMouseDown(handler) {
 
 function onMouseOver(handler) {
   if (handler.intermediateHandler === undefined) {
-    handler.intermediateHandler = function(handler, event) {
-      const mouseTop = event.pageY,  ///
-            mouseLeft = event.pageX, ///
-            preventDefault = handler(mouseTop, mouseLeft);
-
-      return preventDefault;
-    }
+    handler.intermediateHandler = defaultIntermediateHandler;
   }
 
   this.on('mouseover', handler); 
@@ -46,13 +26,7 @@ function onMouseOver(handler) {
 
 function onMouseOut(handler) {
   if (handler.intermediateHandler === undefined) {
-    handler.intermediateHandler = function(handler, event) {
-      const mouseTop = event.pageY,  ///
-            mouseLeft = event.pageX, ///
-            preventDefault = handler(mouseTop, mouseLeft);
-
-      return preventDefault;
-    }
+    handler.intermediateHandler = defaultIntermediateHandler;
   }
 
   this.on('mouseout', handler); 
@@ -60,13 +34,7 @@ function onMouseOut(handler) {
 
 function onMouseMove(handler) {
   if (handler.intermediateHandler === undefined) {
-    handler.intermediateHandler = function(handler, event) {
-      const mouseTop = event.pageY,  ///
-            mouseLeft = event.pageX, ///
-            preventDefault = handler(mouseTop, mouseLeft);
-
-      return preventDefault;
-    }
+    handler.intermediateHandler = defaultIntermediateHandler;
   }
 
   this.on('mousemove', handler); 
@@ -96,3 +64,12 @@ const mouse = {
 };
 
 module.exports = mouse;
+
+function defaultIntermediateHandler(handler, event) {
+  const mouseTop = event.pageY,  ///
+        mouseLeft = event.pageX, ///
+        mouseButton = event.button, ///
+        preventDefault = handler(mouseTop, mouseLeft, mouseButton);
+
+  return preventDefault;
+}

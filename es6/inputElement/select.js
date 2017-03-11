@@ -19,12 +19,7 @@ class Select extends InputElement {
 
   onChange(handler) {
     if (handler.intermediateHandler === undefined) {
-      handler.intermediateHandler = function(handler, event) {
-        const selectedOptionValue = this.getSelectedOptionValue(),
-              preventDefault = handler(selectedOptionValue);
-        
-        return preventDefault;
-      }.bind(this)
+      handler.intermediateHandler = defaultIntermediateChangeHandler.bind(this);
     }
     
     this.on('change', handler);
@@ -56,3 +51,10 @@ class Select extends InputElement {
 }
 
 module.exports = Select;
+
+function defaultIntermediateChangeHandler(handler, event) {
+  const selectedOptionValue = this.getSelectedOptionValue(),
+        preventDefault = handler(selectedOptionValue);
+
+  return preventDefault;
+}

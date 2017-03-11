@@ -27,12 +27,7 @@ class Input extends InputElement {
 
   onChange(handler) {
     if (handler.intermediateHandler === undefined) {
-      handler.intermediateHandler = function(handler, event) {
-        const value = this.getValue(),
-              preventDefault = handler(value);
-        
-        return preventDefault;
-      }.bind(this);
+      handler.intermediateHandler = defaultIntermediateChangeHandler.bind(this);
     }
 
     this.on('change', handler);
@@ -64,3 +59,10 @@ class Input extends InputElement {
 }
 
 module.exports = Input;
+
+function defaultIntermediateChangeHandler(handler, event) {
+  const value = this.getValue(),
+      preventDefault = handler(value);
+
+  return preventDefault;
+}

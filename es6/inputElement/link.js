@@ -15,12 +15,7 @@ class Link extends InputElement {
 
   onClick(handler) {
     if (handler.intermediateHandler === undefined) {
-      handler.intermediateHandler = function(handler, event) {
-        const href = this.getAttribute('href'),
-              preventDefault = handler(href);
-        
-        return preventDefault;
-      }.bind(this);
+      handler.intermediateHandler = defaultIntermediateClickHandler.bind(this);
     }
     
     this.on('click', handler);
@@ -52,3 +47,10 @@ class Link extends InputElement {
 }
 
 module.exports = Link;
+
+function defaultIntermediateClickHandler(handler, event) {
+  const href = this.getAttribute('href'),
+        preventDefault = handler(href);
+
+  return preventDefault;
+}

@@ -15,12 +15,7 @@ class Button extends InputElement {
 
   onClick(handler) {
     if (handler.intermediateHandler === undefined) {
-      handler.intermediateHandler = function(handler, event) {
-        const mouseButton = event.button,
-              preventDefault = handler(mouseButton);
-
-        return preventDefault;
-      };
+      handler.intermediateHandler = defaultIntermediateClickHandler;
     }
     
     super.onClick(handler);
@@ -53,3 +48,9 @@ class Button extends InputElement {
 
 module.exports = Button;
 
+function defaultIntermediateClickHandler(handler, event) {
+  const mouseButton = event.button,
+        preventDefault = handler(mouseButton);
+
+  return preventDefault;
+}
