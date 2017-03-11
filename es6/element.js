@@ -300,6 +300,10 @@ class Element {
   }
 }
 
+Element.LEFT_MOUSE_BUTTON = 0;
+Element.MIDDLE_MOUSE_BUTTON = 1;
+Element.RIGHT_MOUSE_BUTTON = 2;
+
 module.exports = Element;
 
 function domElementFromSelector(selector) {
