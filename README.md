@@ -219,15 +219,15 @@ Each class bar the `Window` and `Document` classes has the following methods. Th
 - `getChildElements(selector = '*')`
 - `getParentElement(selector = '*')`
 - `getAscendantElements(selector = '*')`
-- `on(eventTypes, handler, preventDefault = false)`
+- `on(eventTypes, handler)`
 - `off(eventTypes, handler)`
-- `onClick(handler, preventDefault)`
+- `onClick(handler)`
 - `offClick(handler)`
-- `onMouseUp(handler, preventDefault)`
-- `onMouseDown(handler, preventDefault)`
-- `onMouseOver(handler, preventDefault)`
-- `onMouseOut(handler, preventDefault)`
-- `onMouseMove(handler, preventDefault)`
+- `onMouseUp(handler)`
+- `onMouseDown(handler)`
+- `onMouseOver(handler)`
+- `onMouseOut(handler)`
+- `onMouseMove(handler)`
 - `offMouseUp(handler)`
 - `offMouseDown(handler)`
 - `offMouseOver(handler)`
@@ -254,6 +254,7 @@ The `Link`, `Input`, `Select`, `Button`, `Checkbox` and `Textarea` classes have 
 The `Checkbox` class has the following additional methods:
 
 - `onChange(handler)`
+- `offChange(handler)`
 - `check(checked = true)`
 - `isChecked()`
 
@@ -296,14 +297,14 @@ The `TextArea` class has the following additional methods:
 
 Both the `Window` and `Document` singletons have the following methods:
 
-- `on(eventTypes, handler, preventDefault = false)`
+- `on(eventTypes, handler)`
 - `off(eventTypes, handler)`
-- `onClick(handler, preventDefault)`
-- `onMouseUp(handler, preventDefault)`
-- `onMouseDown(handler, preventDefault)`
-- `onMouseOver(handler, preventDefault)`
-- `onMouseOut(handler, preventDefault)`
-- `onMouseMove(handler, preventDefault)`
+- `onClick(handler)`
+- `onMouseUp(handler)`
+- `onMouseDown(handler)`
+- `onMouseOver(handler)`
+- `onMouseOut(handler)`
+- `onMouseMove(handler)`
 - `offClick(handler)`
 - `offMouseUp(handler)`
 - `offMouseDown(handler)`

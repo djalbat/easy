@@ -1,14 +1,76 @@
 'use strict';
 
-function onMouseUp(handler, preventDefault, intermediateHandler = topLeftButtonIntermediateHandler) { this.on('mouseup', handler, preventDefault, intermediateHandler); }
+function onMouseUp(handler) {
+  if (handler.intermediateHandler === undefined) {
+    handler.intermediateHandler = function(handler, event) {
+      const mouseTop = event.pageY,  ///
+            mouseLeft = event.pageX, ///
+            mouseButton = event.button, ///
+            preventDefault = handler(mouseTop, mouseLeft, mouseButton);
+      
+      return preventDefault;
+    }
+  }
+  
+  this.on('mouseup', handler); 
+}
 
-function onMouseDown(handler, preventDefault, intermediateHandler = topLeftButtonIntermediateHandler) { this.on('mousedown', handler, preventDefault, intermediateHandler); }
+function onMouseDown(handler) {
+  if (handler.intermediateHandler === undefined) {
+    handler.intermediateHandler = function(handler, event) {
+      const mouseTop = event.pageY,  ///
+            mouseLeft = event.pageX, ///
+            mouseButton = event.button, ///
+            preventDefault = handler(mouseTop, mouseLeft, mouseButton);
 
-function onMouseOver(handler, preventDefault, intermediateHandler = topLeftIntermediateHandler) { this.on('mouseover', handler, preventDefault, intermediateHandler); }
+      return preventDefault;
+    }
+  }
 
-function onMouseOut(handler, preventDefault, intermediateHandler = topLeftIntermediateHandler) { this.on('mouseout', handler, preventDefault, intermediateHandler); }
+  this.on('mousedown', handler); 
+}
 
-function onMouseMove(handler, preventDefault, intermediateHandler = topLeftIntermediateHandler) { this.on('mousemove', handler, preventDefault, intermediateHandler); }
+function onMouseOver(handler) {
+  if (handler.intermediateHandler === undefined) {
+    handler.intermediateHandler = function(handler, event) {
+      const mouseTop = event.pageY,  ///
+            mouseLeft = event.pageX, ///
+            preventDefault = handler(mouseTop, mouseLeft);
+
+      return preventDefault;
+    }
+  }
+
+  this.on('mouseover', handler); 
+}
+
+function onMouseOut(handler) {
+  if (handler.intermediateHandler === undefined) {
+    handler.intermediateHandler = function(handler, event) {
+      const mouseTop = event.pageY,  ///
+            mouseLeft = event.pageX, ///
+            preventDefault = handler(mouseTop, mouseLeft);
+
+      return preventDefault;
+    }
+  }
+
+  this.on('mouseout', handler); 
+}
+
+function onMouseMove(handler) {
+  if (handler.intermediateHandler === undefined) {
+    handler.intermediateHandler = function(handler, event) {
+      const mouseTop = event.pageY,  ///
+            mouseLeft = event.pageX, ///
+            preventDefault = handler(mouseTop, mouseLeft);
+
+      return preventDefault;
+    }
+  }
+
+  this.on('mousemove', handler); 
+}
 
 function offMouseUp(handler) { this.off('mouseup', handler); }
 
@@ -34,18 +96,3 @@ const mouse = {
 };
 
 module.exports = mouse;
-
-function topLeftIntermediateHandler(handler, event) {
-  const mouseTop = event.pageY,  ///
-        mouseLeft = event.pageX;  ///
-  
-  handler(mouseTop, mouseLeft);
-}
-
-function topLeftButtonIntermediateHandler(handler, event) {
-  const mouseTop = event.pageY,  ///
-        mouseLeft = event.pageX, ///
-        mouseButton = event.button; ///
-
-  handler(mouseTop, mouseLeft, mouseButton);
-}

@@ -13,8 +13,21 @@ class Button extends InputElement {
 
   clone(clickHandler) { return Button.clone(this, clickHandler); }
 
-  onClick(handler, preventDefault, intermediateChangeHandler = defaultIntermediateChangeHandler.bind(this)) {
-    super.onClick(handler, preventDefault, intermediateChangeHandler);
+  onClick(handler) {
+    if (handler.intermediateHandler === undefined) {
+      handler.intermediateHandler = function(handler, event) {
+        const mouseButton = event.button,
+              preventDefault = handler(mouseButton);
+
+        return preventDefault;
+      };
+    }
+    
+    super.onClick(handler);
+  }
+
+  offClick(handler) {
+    super.offClick(handler);
   }
 
   static clone(element, clickHandler) {
@@ -40,8 +53,3 @@ class Button extends InputElement {
 
 module.exports = Button;
 
-function defaultIntermediateChangeHandler(handler, event) {
-  const mouseButton = event.button; ///
-
-  handler(mouseButton);
-}

@@ -1,10 +1,10 @@
 'use strict';
 
-function on(eventTypes, handler, preventDefault = false, intermediateHandler = function(handler, event) { handler(event); }) {
+function on(eventTypes, handler) {
   eventTypes = eventTypes.split(' '); ///
 
   eventTypes.forEach(function(eventType) {
-    const addEventListener = this.addHandler(eventType, handler, preventDefault, intermediateHandler);
+    const addEventListener = this.addHandler(eventType, handler);
 
     if (addEventListener) {
       this.domElement.addEventListener(eventType, eventListener.bind(this));
@@ -24,19 +24,11 @@ function off(eventTypes, handler) {
   }.bind(this));
 }
 
-function addHandler(eventType, handler, preventDefault, intermediateHandler ) {
-  if (preventDefault !== undefined) {
-    handler.preventDefault = preventDefault;
-  }
-
-  if (intermediateHandler !== undefined) {
-    handler.intermediateHandler = intermediateHandler;
-  }
-
+function addHandler(eventType, handler) {
   let addEventListener = false,
       handlers = this.handlersMap[eventType];
 
-  if ((handlers === undefined)) {
+  if (handlers === undefined) {
     handlers = [];
 
     this.handlersMap[eventType] = handlers;
@@ -53,7 +45,7 @@ function removeHandler(eventType, handler) {
   let removeEventListener = false,
       handlers = this.handlersMap[eventType];
 
-  if ((handlers.length === 0)) {
+  if (handlers.length === 0) {
     delete (this.handlersMap[eventType]);
 
     removeEventListener = true;
@@ -83,11 +75,25 @@ function eventListener(event) {
   const eventType = event.type,
         handlers = this.handlersMap[eventType];
 
-  handlers.forEach(function(handler) {
-    handler.intermediateHandler(handler, event);
+  let preventEventDefault = false;
 
-    if (handler.preventDefault) {
-      event.preventDefault();
+  handlers.forEach(function(handler) {
+    if (handler.intermediateHandler !== undefined) {
+      const preventDefault = handler.intermediateHandler(handler, event);
+      
+      if (preventDefault === true) {
+        preventEventDefault = true;
+      }  
+    } else {
+      const preventDefault = handler(event);
+      
+      if (preventDefault === true) {
+        preventEventDefault = true;
+      }
     }
   });
+  
+  if (preventEventDefault) {
+    event.preventDefault();
+  }
 }

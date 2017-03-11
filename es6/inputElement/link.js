@@ -13,8 +13,17 @@ class Link extends InputElement {
 
   clone(clickHandler) { return Link.clone(this, clickHandler); }
 
-  onClick(handler, preventDefault, intermediateChangeHandler = defaultIntermediateChangeHandler.bind(this)) {
-    this.on('click', handler, preventDefault, intermediateChangeHandler);
+  onClick(handler) {
+    if (handler.intermediateHandler === undefined) {
+      handler.intermediateHandler = function(handler, event) {
+        const href = this.getAttribute('href'),
+              preventDefault = handler(href);
+        
+        return preventDefault;
+      }.bind(this);
+    }
+    
+    this.on('click', handler);
   }
   
   offClick(handler) {
@@ -43,9 +52,3 @@ class Link extends InputElement {
 }
 
 module.exports = Link;
-
-function defaultIntermediateChangeHandler(handler, event) {
-  const href = this.getAttribute('href');
-
-  handler(href);
-}
