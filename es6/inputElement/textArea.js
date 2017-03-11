@@ -33,20 +33,16 @@ class TextArea extends InputElement {
   
   setScrollLeft(scrollLeft) { this.domElement.scrollLeft = scrollLeft; }
 
-  onChange(handler) {
-    const preventDefault = undefined; ///
-
-    this.on('change', handler, preventDefault, intermediateChangeHandler.bind(this));
+  onChange(handler, preventDefault = false, intermediateChangeHandler = defaultIntermediateChangeHandler.bind(this)) {
+    this.on('change', handler, preventDefault, intermediateChangeHandler);
   }
 
   offChange(handler) {
     this.off('change', handler);
   }
 
-  onScroll(handler) {
-    const preventDefault = undefined; ///
-
-    this.on('scroll', handler, preventDefault, intermediateScrollHandler.bind(this));
+  onScroll(handler, preventDefault = false, intermediateChangeHandler = defaultIntermediateScrollHandler.bind(this)) {
+    this.on('scroll', handler, preventDefault, intermediateChangeHandler);
   }
 
   offScroll(handler) {
@@ -80,13 +76,13 @@ class TextArea extends InputElement {
 
 module.exports = TextArea;
 
-function intermediateChangeHandler(handler, event) {
+function defaultIntermediateChangeHandler(handler, event) {
   const value = this.getValue();
 
   handler(value);
 }
 
-function intermediateScrollHandler(handler, event) {
+function defaultIntermediateScrollHandler(handler, event) {
   const scrollTop = this.getScrollTop(),
         scrollLeft = this.getScrollLeft();
 

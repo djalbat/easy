@@ -13,10 +13,8 @@ class Checkbox extends InputElement {
 
   clone(changeHandler) { return Checkbox.clone(this, changeHandler); }
 
-  onChange(handler) {
-    const preventDefault = false;
-
-    this.on('click', handler, preventDefault, intermediateChangeHandler.bind(this));  ///
+  onChange(handler, preventDefault = false, intermediateChangeHandler = defaultIntermediateChangeHandler.bind(this)) {
+    this.on('click', handler, preventDefault, intermediateChangeHandler);
   }
 
   check(checked = true) {
@@ -50,7 +48,7 @@ class Checkbox extends InputElement {
 
 module.exports = Checkbox;
 
-function intermediateChangeHandler(handler, event) {
+function defaultIntermediateChangeHandler(handler, event) {
   const checked = this.isChecked();
 
   handler(checked);
