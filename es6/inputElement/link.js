@@ -13,7 +13,7 @@ class Link extends InputElement {
 
   clone(clickHandler) { return Link.clone(this, clickHandler); }
 
-  onClick(handler, preventDefault = true, intermediateChangeHandler = defaultIntermediateChangeHandler.bind(this)) {
+  onClick(handler, preventDefault, intermediateChangeHandler = defaultIntermediateChangeHandler.bind(this)) {
     this.on('click', handler, preventDefault, intermediateChangeHandler);
   }
   

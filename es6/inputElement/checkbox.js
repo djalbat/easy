@@ -13,7 +13,7 @@ class Checkbox extends InputElement {
 
   clone(changeHandler) { return Checkbox.clone(this, changeHandler); }
 
-  onChange(handler, preventDefault = false, intermediateChangeHandler = defaultIntermediateChangeHandler.bind(this)) {
+  onChange(handler, preventDefault, intermediateChangeHandler = defaultIntermediateChangeHandler.bind(this)) {
     this.on('click', handler, preventDefault, intermediateChangeHandler);
   }
 

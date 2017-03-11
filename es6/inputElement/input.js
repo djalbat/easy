@@ -25,7 +25,7 @@ class Input extends InputElement {
   
   setSelectionEnd(selectionEnd) { this.domElement.selectionEnd = selectionEnd; }
 
-  onChange(handler, preventDefault = true, intermediateChangeHandler = defaultIntermediateChangeHandler.bind(this)) {
+  onChange(handler, preventDefault, intermediateChangeHandler = defaultIntermediateChangeHandler.bind(this)) {
     this.on('change', handler, preventDefault, intermediateChangeHandler);
   }
 

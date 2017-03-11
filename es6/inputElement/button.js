@@ -13,7 +13,7 @@ class Button extends InputElement {
 
   clone(clickHandler) { return Button.clone(this, clickHandler); }
 
-  onClick(handler, preventDefault = true, intermediateChangeHandler = defaultIntermediateChangeHandler.bind(this)) {
+  onClick(handler, preventDefault, intermediateChangeHandler = defaultIntermediateChangeHandler.bind(this)) {
     super.onClick(handler, preventDefault, intermediateChangeHandler);
   }
 

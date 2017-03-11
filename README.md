@@ -219,7 +219,7 @@ Each class bar the `Window` and `Document` classes has the following methods. Th
 - `getChildElements(selector = '*')`
 - `getParentElement(selector = '*')`
 - `getAscendantElements(selector = '*')`
-- `on(eventTypes, handler, preventDefault = true)`
+- `on(eventTypes, handler, preventDefault = false)`
 - `off(eventTypes, handler)`
 - `onClick(handler, preventDefault)`
 - `offClick(handler)`
@@ -296,7 +296,7 @@ The `TextArea` class has the following additional methods:
 
 Both the `Window` and `Document` singletons have the following methods:
 
-- `on(eventTypes, handler, preventDefault = true)`
+- `on(eventTypes, handler, preventDefault = false)`
 - `off(eventTypes, handler)`
 - `onClick(handler, preventDefault)`
 - `onMouseUp(handler, preventDefault)`

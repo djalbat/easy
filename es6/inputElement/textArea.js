@@ -33,7 +33,7 @@ class TextArea extends InputElement {
   
   setScrollLeft(scrollLeft) { this.domElement.scrollLeft = scrollLeft; }
 
-  onChange(handler, preventDefault = false, intermediateChangeHandler = defaultIntermediateChangeHandler.bind(this)) {
+  onChange(handler, preventDefault, intermediateChangeHandler = defaultIntermediateChangeHandler.bind(this)) {
     this.on('change', handler, preventDefault, intermediateChangeHandler);
   }
 
@@ -41,7 +41,7 @@ class TextArea extends InputElement {
     this.off('change', handler);
   }
 
-  onScroll(handler, preventDefault = false, intermediateChangeHandler = defaultIntermediateScrollHandler.bind(this)) {
+  onScroll(handler, preventDefault, intermediateChangeHandler = defaultIntermediateScrollHandler.bind(this)) {
     this.on('scroll', handler, preventDefault, intermediateChangeHandler);
   }
 

@@ -1,6 +1,6 @@
 'use strict';
 
-function on(eventTypes, handler, preventDefault = true, intermediateHandler = function(handler, event) { handler(event); }) {
+function on(eventTypes, handler, preventDefault = false, intermediateHandler = function(handler, event) { handler(event); }) {
   eventTypes = eventTypes.split(' '); ///
 
   eventTypes.forEach(function(eventType) {

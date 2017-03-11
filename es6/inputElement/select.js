@@ -17,7 +17,7 @@ class Select extends InputElement {
 
   setSelectedOptionByValue(value) { this.domElement.value = value; } ///
 
-  onChange(handler, preventDefault = false, intermediateChangeHandler = defaultIntermediateChangeHandler.bind(this)) {
+  onChange(handler, preventDefault, intermediateChangeHandler = defaultIntermediateChangeHandler.bind(this)) {
     this.on('change', handler, preventDefault, intermediateChangeHandler);
   }
   
