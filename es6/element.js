@@ -33,13 +33,8 @@ class Element {
   }
 
   getBounds(includeBorder = false) {
-    const top = this.domElement.offsetTop,  ///
-          left = this.domElement.offsetLeft,  ///
-          width = this.getWidth(includeBorder),
-          height = this.getHeight(includeBorder),
-          bottom = top + height,
-          right = left + width,
-          bounds = new Bounds(top, left, bottom, right);
+    const boundingClientRect = this.domElement.getBoundingClientRect(),
+          bounds = Bounds.fromBoundingClientRect(boundingClientRect);
 
     return bounds;
   }

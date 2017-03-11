@@ -37,6 +37,16 @@ class Bounds {
               (this.bottom > bounds.top) &&
               (this.right > bounds.left)  );
   }
+
+  static fromBoundingClientRect(boundingClientRect) {
+    const top = boundingClientRect.top,
+          left = boundingClientRect.left,
+          bottom = boundingClientRect.bottom,
+          right = boundingClientRect.right,
+          bounds = new Bounds(top, left, bottom, right);
+
+    return bounds;
+  }
 }
 
 module.exports = Bounds;
