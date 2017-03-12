@@ -8,7 +8,7 @@ It abstracts away from the DOM to provide a set of classes for elements such as 
 
 ## Related projects
 
-- [EasyUI-JSX](https://github.com/djalbat/EasyUI-JSX) JSX support for Easy-UI.
+- [EasyUI-JSX](https://github.com/djalbat/EasyUI-JSX) JSX support for Easy-UI elements.
 - [EasyUI-Layout](https://github.com/djalbat/EasyUI-Layout) Layout elements that work with CSS flexbox.
 - [EasyUI-DragAndDrop](https://github.com/djalbat/EasyUI-DragAndDrop) Drag and drop elements including an explorer and a rubbish bin.
 - [EasyUI-RichTextarea](https://github.com/djalbat/EasyUI-RichTextarea) A textarea element that handles and hands off events well.
