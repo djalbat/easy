@@ -22,9 +22,12 @@ class Span extends Element {
   }
 
   static fromProperties(properties) {
-    const html = '<span></span>';
-
-    return Span.fromHTML(html);
+    const html = '<span></span>',
+          span = Span.fromHTML(html);
+    
+    span.applyProperties(properties);
+    
+    return span;
   }
 }
 

@@ -44,9 +44,12 @@ class Select extends InputElement {
   static fromProperties(properties) {
     const html = '<select></select>',
           { onChange } = properties,
-          changeHandler = onChange; ///
-
-    return Select.fromHTML(html, changeHandler);
+          changeHandler = onChange, ///
+          select = Select.fromHTML(html, changeHandler);
+    
+    select.applyProperties(properties);
+    
+    return select;
   }
 }
 

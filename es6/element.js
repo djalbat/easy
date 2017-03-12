@@ -1,6 +1,7 @@
 'use strict';
 
 const mixin = require('./mixin'),
+      jsx = require('./mixin/jsx'),
       event = require('./mixin/event'),
       click = require('./mixin/click'),
       mouse = require('./mixin/mouse'),
@@ -16,6 +17,7 @@ class Element {
     
     this.handlersMap = {};
 
+    mixin(jsx, this, Element);
     mixin(event, this, Element);
     mixin(click, this, Element);
     mixin(mouse, this, Element);
@@ -292,6 +294,15 @@ class Element {
     remainingArguments.unshift(null);
 
     return new (Function.prototype.bind.apply(Class, remainingArguments));
+  }
+
+  static fromTagNameAndProperties(tagName, properties) {
+    const html = `<${tagName}></${tagName}>`,
+          element = Element.fromHTML(html);
+
+    element.applyProperties(element, properties);
+
+    return element;
   }
 }
 

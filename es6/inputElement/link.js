@@ -40,9 +40,12 @@ class Link extends InputElement {
   static fromProperties(properties) {
     const html = '<a></a>',
           { onClick } = properties,
-          clickHandler = onClick; ///
-
-    return Link.fromHTML(html, clickHandler);
+          clickHandler = onClick, ///
+          link = Link.fromHTML(html, clickHandler);
+    
+    link.applyProperties(properties);
+    
+    return link;
   }
 }
 

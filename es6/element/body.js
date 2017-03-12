@@ -22,9 +22,12 @@ class Body extends Element {
   }
 
   static fromProperties(properties) {
-    const html = '<body></body>';
-
-    return Body.fromHTML(html);
+    const html = '<body></body>',
+          body = Body.fromHTML(html);
+    
+    body.applyProperties(properties);
+    
+    return body;
   }
 }
 

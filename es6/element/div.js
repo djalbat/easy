@@ -22,9 +22,12 @@ class Div extends Element {
   }
 
   static fromProperties(properties) {
-    const html = '<div></div>';
-
-    return Div.fromHTML(html);
+    const html = '<div></div>',
+          div = Div.fromHTML(html);
+    
+    div.applyProperties(properties);
+    
+    return div;
   }
 }
 

@@ -48,9 +48,12 @@ class Checkbox extends InputElement {
   static fromProperties(properties) {
     const html = '<input type="checkbox" />',
           { onChange } = properties,
-          changeHandler = onChange;  ///
-
-    return Checkbox.fromHTML(html, changeHandler);
+          changeHandler = onChange,  ///
+          checkbox = Checkbox.fromHTML(html, changeHandler);
+    
+    checkbox.applyProperties(properties);
+    
+    return checkbox;
   }
 }
 

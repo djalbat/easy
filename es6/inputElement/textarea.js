@@ -2,7 +2,7 @@
 
 const InputElement = require('../inputElement');
 
-class TextArea extends InputElement {
+class Textarea extends InputElement {
   constructor(selector, changeHandler) {
     super(selector);
 
@@ -11,7 +11,7 @@ class TextArea extends InputElement {
     }
   }
 
-  clone(changeHandler) { return TextArea.clone(this, changeHandler); }
+  clone(changeHandler) { return Textarea.clone(this, changeHandler); }
 
   getValue() { return this.domElement.value; }
   
@@ -62,27 +62,30 @@ class TextArea extends InputElement {
   offResize(resizeHandler) {}
 
   static clone(element, changeHandler) {
-    return InputElement.clone(TextArea, element, changeHandler);
+    return InputElement.clone(Textarea, element, changeHandler);
   }
 
   static fromHTML(html, changeHandler) {
-    return InputElement.fromHTML(TextArea, html, changeHandler);
+    return InputElement.fromHTML(Textarea, html, changeHandler);
   }
 
   static fromDOMElement(domElement, changeHandler) {
-    return InputElement.fromDOMElement(TextArea, domElement, changeHandler);
+    return InputElement.fromDOMElement(Textarea, domElement, changeHandler);
   }
 
   static fromProperties(properties) {
     const html = '<textarea></textarea>',
           { onChange } = properties,
-          changeHandler = onChange; ///
+          changeHandler = onChange, ///
+          textarea =  Textarea.fromHTML(html, changeHandler);
 
-    return TextArea.fromHTML(html, changeHandler);
+    textarea.applyProperties(properties);
+
+    return textarea;
   }
 }
 
-module.exports = TextArea;
+module.exports = Textarea;
 
 function defaultIntermediateChangeHandler(handler, event) {
   const value = this.getValue(),

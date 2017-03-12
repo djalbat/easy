@@ -11,7 +11,7 @@ It abstracts away from the DOM to provide a set of classes for elements such as 
 - [EasyUI-JSX](https://github.com/djalbat/EasyUI-JSX) JSX support for Easy-UI.
 - [EasyUI-Layout](https://github.com/djalbat/EasyUI-Layout) Layout elements that work with CSS flexbox.
 - [EasyUI-DragAndDrop](https://github.com/djalbat/EasyUI-DragAndDrop) Drag and drop elements including an explorer and a rubbish bin.
-- [EasyUI-RichTextArea](https://github.com/djalbat/EasyUI-RichTextArea) A textarea element that handles and hands off events well.
+- [EasyUI-RichTextarea](https://github.com/djalbat/EasyUI-RichTextarea) A textarea element that handles and hands off events well.
 
 ### Are these projects actually used anywhere?
 
@@ -133,7 +133,7 @@ Similarly for the prepend methods.
 -  Checkbox
 -  Input
 -  Link
--  TextArea
+-  Textarea
 -  Select
 -  window
 -  document
@@ -274,7 +274,7 @@ The `Select` class has the following additional methods:
 - `onChange(handler)`
 - `offChange(handler)`
   
-The `TextArea` class has the following additional methods:
+The `Textarea` class has the following additional methods:
   
 - `getValue()`
 - `getSelectionStart()`

@@ -15,5 +15,5 @@ module.exports = {
   Select: require('./lib/inputElement/select'),
   Button: require('./lib/inputElement/button'),
   Checkbox: require('./lib/inputElement/checkbox'),
-  TextArea: require('./lib/inputElement/textArea')
+  Textarea: require('./lib/inputElement/textarea')
 };
