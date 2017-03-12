@@ -74,14 +74,7 @@ class Textarea extends InputElement {
   }
 
   static fromProperties(properties) {
-    const html = '<textarea></textarea>',
-          { onChange } = properties,
-          changeHandler = onChange, ///
-          textarea =  Textarea.fromHTML(html, changeHandler);
-
-    textarea.applyProperties(properties);
-
-    return textarea;
+    return InputElement.fromTagNameAndProperties('textarea', properties);
   }
 }
 

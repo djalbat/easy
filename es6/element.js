@@ -296,11 +296,17 @@ class Element {
     return new (Function.prototype.bind.apply(Class, remainingArguments));
   }
 
-  static fromTagNameAndProperties(tagName, properties) {
-    const html = `<${tagName}></${tagName}>`,
-          element = Element.fromHTML(html);
+  static fromTagNameAndProperties(Class, tagName, properties) {
+    if (typeof Class === 'string') {
+      properties = tagName;
+      tagName = Class;
+      Class = Element;
+    }
 
-    element.applyProperties(element, properties);
+    const html = `<${tagName}></${tagName}>`,
+          element = Class.fromHTML(html);
+
+    element.applyProperties(properties);
 
     return element;
   }

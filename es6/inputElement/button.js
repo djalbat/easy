@@ -38,14 +38,7 @@ class Button extends InputElement {
   }
 
   static fromProperties(properties) {
-    const html = '<button></button>',
-          { onClick } = properties,
-          clickHandler = onClick, ///
-          button = Button.fromHTML(html, clickHandler);
-    
-    button.applyProperties(properties);
-    
-    return button;
+    return InputElement.fromTagNameAndProperties('button', properties);
   }
 }
 

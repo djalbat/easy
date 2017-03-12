@@ -50,14 +50,7 @@ class Input extends InputElement {
   }
 
   static fromProperties(properties) {
-    const html = '<input />',
-          { onChange } = properties,
-          changeHandler = onChange,  ///
-          input = Input.fromHTML(html, changeHandler);
-    
-    input.applyProperties(properties);
-    
-    return input;
+    return InputElement.fromTagNameAndProperties('input', properties);
   }
 }
 

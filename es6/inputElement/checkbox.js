@@ -46,14 +46,11 @@ class Checkbox extends InputElement {
   }
 
   static fromProperties(properties) {
-    const html = '<input type="checkbox" />',
-          { onChange } = properties,
-          changeHandler = onChange,  ///
-          checkbox = Checkbox.fromHTML(html, changeHandler);
-    
-    checkbox.applyProperties(properties);
-    
-    return checkbox;
+    Object.assign(properties, {
+      type: 'checkbox'
+    });
+
+    return InputElement.fromTagNameAndProperties('input', properties); ///
   }
 }
 
@@ -62,7 +59,7 @@ module.exports = Checkbox;
 
 function defaultIntermediateChangeHandler(handler, event) {
   const checked = this.isChecked(),
-       preventDefault = handler(checked);
+        preventDefault = handler(checked);
 
   return preventDefault;
 }
