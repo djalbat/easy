@@ -11,7 +11,7 @@ It abstracts away from the DOM to provide a set of classes for elements such as 
 - [EasyUI-JSX](https://github.com/djalbat/EasyUI-JSX) JSX support for Easy-UI.
 - [EasyUI-Layout](https://github.com/djalbat/EasyUI-Layout) Layout elements that work with CSS flexbox.
 - [EasyUI-DragAndDrop](https://github.com/djalbat/EasyUI-DragAndDrop) Drag and drop elements including an explorer and a rubbish bin.
-- [EasyUI-RichTextArea](https://github.com/djalbat/EasyUI-RichTextArea) A textarea component that handles and hands off events well.
+- [EasyUI-RichTextArea](https://github.com/djalbat/EasyUI-RichTextArea) A textarea element that handles and hands off events well.
 
 ### Are these projects actually used anywhere?
 
