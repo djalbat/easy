@@ -78,7 +78,7 @@ class Textarea extends InputElement {
   }
 }
 
-TextArea.tagName = 'textarea';
+Textarea.tagName = 'textarea';
 
 module.exports = Textarea;
 
