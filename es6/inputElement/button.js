@@ -37,8 +37,13 @@ class Button extends InputElement {
     return InputElement.fromDOMElement(Button, domElement, clickHandler);
   }
 
-  static fromProperties(properties) {
-    return InputElement.fromProperties(Button, properties);
+  static fromProperties(Class, properties) {
+    if (arguments.length === 1) {
+      properties = Class;
+      Class = Button;
+    }
+
+    return InputElement.fromProperties(Class, properties);
   }
 }
 

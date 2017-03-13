@@ -21,8 +21,13 @@ class Body extends Element {
     return Element.fromDOMElement(Body, domElement);
   }
 
-  static fromProperties(properties) {
-    return Element.fromProperties(Body, properties);
+  static fromProperties(Class, properties) {
+    if (arguments.length === 1) {
+      properties = Class;
+      Class = Body;
+    }
+
+    return Element.fromProperties(Class, properties);
   }
 }
 

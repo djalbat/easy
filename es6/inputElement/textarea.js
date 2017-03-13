@@ -73,8 +73,13 @@ class Textarea extends InputElement {
     return InputElement.fromDOMElement(Textarea, domElement, changeHandler);
   }
 
-  static fromProperties(properties) {
-    return InputElement.fromProperties(Textarea, properties);
+  static fromProperties(Class, properties) {
+    if (arguments.length === 1) {
+      properties = Class;
+      Class = Textarea;
+    }
+
+    return InputElement.fromProperties(Class, properties);
   }
 }
 

@@ -41,8 +41,13 @@ class Select extends InputElement {
     return InputElement.fromDOMElement(Select, domElement, changeHandler);
   }
 
-  static fromProperties(properties) {
-    return InputElement.fromProperties(Select, properties);
+  static fromProperties(Class, properties) {
+    if (arguments.length === 1) {
+      properties = Class;
+      Class = Select;
+    }
+
+    return InputElement.fromProperties(Class, properties);
   }
 }
 

@@ -21,8 +21,13 @@ class Span extends Element {
     return Element.fromDOMElement(Span, domElement);
   }
 
-  static fromProperties(properties) {
-    return Element.fromProperties(Span, properties);
+  static fromProperties(Class, properties) {
+    if (arguments.length === 1) {
+      properties = Class;
+      Class = Span;
+    }
+
+    return Element.fromProperties(Class, properties);
   }
 }
 

@@ -37,8 +37,13 @@ class Link extends InputElement {
     return InputElement.fromDOMElement(Link, domElement, clickHandler);
   }
 
-  static fromProperties(properties) {
-    return InputElement.fromProperties(Link, properties);
+  static fromProperties(Class, properties) {
+    if (arguments.length === 1) {
+      properties = Class;
+      Class = Link;
+    }
+
+    return InputElement.fromProperties(Class, properties);
   }
 }
 

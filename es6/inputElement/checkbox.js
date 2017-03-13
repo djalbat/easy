@@ -45,10 +45,17 @@ class Checkbox extends InputElement {
     return InputElement.fromDOMElement(Checkbox, domElement, changeHandler);
   }
 
-  static fromProperties(properties) {
-    Object.assign(properties, { type: 'checkbox' });  ///
+  static fromProperties(Class, properties) {
+    if (arguments.length === 1) {
+      properties = Class;
+      Class = Checkbox;
+    }
 
-    return InputElement.fromProperties(Checkbox, properties);
+    Object.assign(properties, { 
+      type: 'checkbox' 
+    });
+
+    return InputElement.fromProperties(Class, properties);
   }
 }
 
