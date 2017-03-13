@@ -38,7 +38,7 @@ class Button extends InputElement {
   }
 
   static fromProperties(properties) {
-    return InputElement.fromTagNameAndProperties('button', properties);
+    return InputElement.fromTagNameAndProperties(Button, 'button', properties);
   }
 }
 

@@ -22,7 +22,7 @@ class Span extends Element {
   }
 
   static fromProperties(properties) {
-    return Element.fromTagNameAndProperties('span', properties);
+    return Element.fromTagNameAndProperties(Span, 'span', properties);
   }
 }
 

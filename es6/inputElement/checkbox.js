@@ -50,7 +50,7 @@ class Checkbox extends InputElement {
       type: 'checkbox'
     });
 
-    return InputElement.fromTagNameAndProperties('input', properties); ///
+    return InputElement.fromTagNameAndProperties(Checkbox, 'input', properties); ///
   }
 }
 

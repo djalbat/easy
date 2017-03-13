@@ -22,7 +22,7 @@ class Body extends Element {
   }
 
   static fromProperties(properties) {
-    return Element.fromTagNameAndProperties('body', properties);
+    return Element.fromTagNameAndProperties(Body, 'body', properties);
   }
 }
 

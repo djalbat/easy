@@ -50,7 +50,7 @@ class Input extends InputElement {
   }
 
   static fromProperties(properties) {
-    return InputElement.fromTagNameAndProperties('input', properties);
+    return InputElement.fromTagNameAndProperties(Input, 'input', properties);
   }
 }
 

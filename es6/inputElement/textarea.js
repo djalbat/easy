@@ -74,7 +74,7 @@ class Textarea extends InputElement {
   }
 
   static fromProperties(properties) {
-    return InputElement.fromTagNameAndProperties('textarea', properties);
+    return InputElement.fromTagNameAndProperties(Textarea, 'textarea', properties);
   }
 }
 

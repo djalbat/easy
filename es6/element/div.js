@@ -22,7 +22,7 @@ class Div extends Element {
   }
 
   static fromProperties(properties) {
-    return Element.fromTagNameAndProperties('div', properties);
+    return Element.fromTagNameAndProperties(Div, 'div', properties);
   }
 }
 

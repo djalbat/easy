@@ -38,7 +38,7 @@ class Link extends InputElement {
   }
 
   static fromProperties(properties) {
-    return InputElement.fromTagNameAndProperties('a', properties); ///
+    return InputElement.fromTagNameAndProperties(Link, 'a', properties); ///
   }
 }
 
