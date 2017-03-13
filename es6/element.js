@@ -291,7 +291,13 @@ class Element {
 
   static fromProperties(Class, properties) {
     const tagName = Class.tagName,
-          html = `<${tagName}></${tagName}>`,
+          element = Element.fromPropertiesAndTagName(Class, properties, tagName);
+
+    return element;
+  }
+
+  static fromPropertiesAndTagName(Class, properties, tagName) {
+    const html = `<${tagName}></${tagName}>`,
           element = Element.fromHTML(Class, html);
 
     element.applyProperties(properties);
