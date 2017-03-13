@@ -297,7 +297,7 @@ class Element {
     }
 
     const html = `<${tagName}></${tagName}>`,
-          element = Class.fromHTML(html);
+          element = Element.fromHTML(Class, html);
 
     element.applyProperties(properties);
 
