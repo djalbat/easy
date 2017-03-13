@@ -1,19 +1,14 @@
 'use strict';
 
-const mixin = require('./mixin'),
-      event = require('./mixin/event'),
-      click = require('./mixin/click'),
-      mouse = require('./mixin/mouse');
+const eventMixin = require('./mixin/event'),
+      clickMixin = require('./mixin/click'),
+      mouseMixin = require('./mixin/mouse');
 
 class Window {
   constructor() {
     this.domElement = window;
 
     this.handlersMap = {};
-
-    mixin(event, this, Window);
-    mixin(click, this, Window);
-    mixin(mouse, this, Window);
   }
   
   getWidth() { return this.domElement.innerWidth; } ///
@@ -38,6 +33,10 @@ class Window {
     }
   }
 }
+
+Object.assign(Window.prototype, eventMixin);
+Object.assign(Window.prototype, clickMixin);
+Object.assign(Window.prototype, mouseMixin);
 
 module.exports = new Window();  ///
 

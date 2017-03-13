@@ -62,14 +62,14 @@ function removeHandler(eventType, handler) {
   return removeEventListener;
 }
 
-const event = {
+const eventMixin = {
   on: on,
   off: off,
   addHandler: addHandler,
   removeHandler: removeHandler
 };
 
-module.exports = event;
+module.exports = eventMixin;
 
 function eventListener(event) {
   const eventType = event.type,

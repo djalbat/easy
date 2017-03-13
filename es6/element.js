@@ -1,27 +1,20 @@
 'use strict';
 
-const mixin = require('./mixin'),
-      jsx = require('./mixin/jsx'),
-      event = require('./mixin/event'),
-      click = require('./mixin/click'),
-      mouse = require('./mixin/mouse'),
-      resize = require('./mixin/resize'),
-      Offset = require('./misc/offset'),
-      Bounds = require('./misc/bounds');
+const Offset = require('./misc/offset'),
+      Bounds = require('./misc/bounds'),
+      jsxMixin = require('./mixin/jsx'),
+      eventMixin = require('./mixin/event'),
+      clickMixin = require('./mixin/click'),
+      mouseMixin = require('./mixin/mouse'),
+      resizeMixin = require('./mixin/resize');
 
 class Element {
   constructor(selector) {
     this.domElement = domElementFromSelector(selector);
 
-    this.domElement.__element__ = this; ///
+    this.domElement.__element__ = this;
     
     this.handlersMap = {};
-
-    mixin(jsx, this, Element);
-    mixin(event, this, Element);
-    mixin(click, this, Element);
-    mixin(mouse, this, Element);
-    mixin(resize, this, Element);
   }
 
   clone() { return Element.clone(this); }
@@ -312,9 +305,11 @@ class Element {
   }
 }
 
-Element.LEFT_MOUSE_BUTTON = 0;
-Element.MIDDLE_MOUSE_BUTTON = 1;
-Element.RIGHT_MOUSE_BUTTON = 2;
+Object.assign(Element.prototype, jsxMixin);
+Object.assign(Element.prototype, eventMixin);
+Object.assign(Element.prototype, clickMixin);
+Object.assign(Element.prototype, mouseMixin);
+Object.assign(Element.prototype, resizeMixin);
 
 module.exports = Element;
 

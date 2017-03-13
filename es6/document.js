@@ -1,20 +1,19 @@
 'use strict';
 
-const mixin = require('./mixin'),
-      event = require('./mixin/event'),
-      click = require('./mixin/click'),
-      mouse = require('./mixin/mouse');
+const eventMixin = require('./mixin/event'),
+      clickMixin = require('./mixin/click'),
+      mouseMixin = require('./mixin/mouse');
 
 class Document {
   constructor() {
     this.domElement = document;
 
     this.handlersMap = {};
-    
-    mixin(event, this, Document);
-    mixin(click, this, Document);
-    mixin(mouse, this, Document);
   }
 }
+
+Object.assign(Document.prototype, eventMixin);
+Object.assign(Document.prototype, clickMixin);
+Object.assign(Document.prototype, mouseMixin);
 
 module.exports = new Document();  ///

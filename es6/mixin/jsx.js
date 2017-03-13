@@ -25,11 +25,11 @@ function applyProperties(properties) {
   }.bind(this));
 }
 
-const jsx = {
+const jsxMixin = {
   applyProperties: applyProperties
 };
 
-module.exports = jsx;
+module.exports = jsxMixin;
 
 function applyPropertyAsAttribute(element, name, value) {
   if (name === 'className') {

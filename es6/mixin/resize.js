@@ -18,12 +18,12 @@ function offResize(handler) {
   }
 }
 
-const resize = {
+const resizeMixin = {
   onResize: onResize,
   offResize: offResize
 };
 
-module.exports = resize;
+module.exports = resizeMixin;
 
 function appendResizeObject(element) {
   const resizeObject = document.createElement('object'),
