@@ -46,13 +46,13 @@ class Checkbox extends InputElement {
   }
 
   static fromProperties(properties) {
-    Object.assign(properties, {
-      type: 'checkbox'
-    });
+    Object.assign(properties, { type: 'checkbox' });  ///
 
-    return InputElement.fromTagNameAndProperties(Checkbox, 'input', properties); ///
+    return InputElement.fromProperties(Checkbox, properties);
   }
 }
+
+Checkbox.tagName = 'input'; ///
 
 module.exports = Checkbox;
 

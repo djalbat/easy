@@ -22,8 +22,10 @@ class Div extends Element {
   }
 
   static fromProperties(properties) {
-    return Element.fromTagNameAndProperties(Div, 'div', properties);
+    return Element.fromProperties(Div, properties);
   }
 }
+
+Div.tagName = 'div';
 
 module.exports = Div;

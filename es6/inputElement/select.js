@@ -42,9 +42,11 @@ class Select extends InputElement {
   }
 
   static fromProperties(properties) {
-    return InputElement.fromTagNameAndProperties(Select, 'select', properties);
+    return InputElement.fromProperties(Select, properties);
   }
 }
+
+Select.tagName = 'select';
 
 module.exports = Select;
 

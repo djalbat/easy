@@ -60,11 +60,7 @@ const mouseMixin = {
   offMouseDown: offMouseDown,
   offMouseOver: offMouseOver,
   offMouseOut: offMouseOut,
-  offMouseMove: offMouseMove,
-  
-  LEFT_MOUSE_BUTTON: 0,
-  MIDDLE_MOUSE_BUTTON: 1,
-  RIGHT_MOUSE_BUTTON: 2
+  offMouseMove: offMouseMove
 };
 
 module.exports = mouseMixin;

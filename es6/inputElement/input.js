@@ -50,15 +50,17 @@ class Input extends InputElement {
   }
 
   static fromProperties(properties) {
-    return InputElement.fromTagNameAndProperties(Input, 'input', properties);
+    return InputElement.fromProperties(Input, properties);
   }
 }
+
+Input.tagName = 'input';
 
 module.exports = Input;
 
 function defaultIntermediateChangeHandler(handler, event) {
   const value = this.getValue(),
-      preventDefault = handler(value);
+        preventDefault = handler(value);
 
   return preventDefault;
 }

@@ -38,9 +38,11 @@ class Button extends InputElement {
   }
 
   static fromProperties(properties) {
-    return InputElement.fromTagNameAndProperties(Button, 'button', properties);
+    return InputElement.fromProperties(Button, properties);
   }
 }
+
+Button.tagName = 'button';
 
 module.exports = Button;
 

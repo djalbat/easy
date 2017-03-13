@@ -22,8 +22,10 @@ class Body extends Element {
   }
 
   static fromProperties(properties) {
-    return Element.fromTagNameAndProperties(Body, 'body', properties);
+    return Element.fromProperties(Body, properties);
   }
 }
+
+Body.tagName = 'body';
 
 module.exports = Body;

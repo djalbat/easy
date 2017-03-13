@@ -22,8 +22,10 @@ class Span extends Element {
   }
 
   static fromProperties(properties) {
-    return Element.fromTagNameAndProperties(Span, 'span', properties);
+    return Element.fromProperties(Span, properties);
   }
 }
+
+Span.tagName = 'span';
 
 module.exports = Span;

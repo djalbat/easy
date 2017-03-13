@@ -289,14 +289,9 @@ class Element {
     return new (Function.prototype.bind.apply(Class, remainingArguments));
   }
 
-  static fromTagNameAndProperties(Class, tagName, properties) {
-    if (typeof Class === 'string') {
-      properties = tagName;
-      tagName = Class;
-      Class = Element;
-    }
-
-    const html = `<${tagName}></${tagName}>`,
+  static fromProperties(Class, properties) {
+    const tagName = Class.tagName,
+          html = `<${tagName}></${tagName}>`,
           element = Element.fromHTML(Class, html);
 
     element.applyProperties(properties);
@@ -310,6 +305,10 @@ Object.assign(Element.prototype, eventMixin);
 Object.assign(Element.prototype, clickMixin);
 Object.assign(Element.prototype, mouseMixin);
 Object.assign(Element.prototype, resizeMixin);
+
+Element.LEFT_MOUSE_BUTTON = 0;
+Element.MIDDLE_MOUSE_BUTTON = 1;
+Element.RIGHT_MOUSE_BUTTON = 2;
 
 module.exports = Element;
 
