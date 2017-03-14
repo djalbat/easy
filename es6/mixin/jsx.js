@@ -35,7 +35,7 @@ const jsxMixin = {
 module.exports = jsxMixin;
 
 function addHandler(element, name, value) {
-  const eventType = eventTypeFromName(name),
+  const eventType = name.substr(2).toLowerCase(), ///
         handler = value;  ///
 
   element.on(eventType, handler);
@@ -73,10 +73,6 @@ function isHandlerName(name) {
 
 function isAttributeName(name) {
   return attributeNames.includes(name);
-}
-
-function eventTypeFromName(name) {
-  return name.substr(2).toLowerCase();
 }
 
 const attributeNames = [
