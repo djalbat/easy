@@ -27,8 +27,24 @@ class InputElement extends Element {
     return Element.fromDOMElement(Class, domElement, ...remainingArguments);
   }
 
-  static fromProperties(Class, properties) {
-    return Element.fromProperties(Class, properties);
+  static fromProperties(Class, properties, ...handlers) {
+    const handlerNames = handlers.map(function(handler) {
+      const handlerName = handler.name; ///
+      
+      delete properties[handlerName];
+      
+      return handlerName;
+    });
+    
+    const inputElement = Element.fromProperties(Class, properties);
+    
+    handlers.forEach(function(handler, index) {
+      const handlerName = handlerNames[index];
+      
+      inputElement[handlerName](handler); ///
+    });
+    
+    return inputElement;
   }
 }
 

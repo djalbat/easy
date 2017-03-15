@@ -79,7 +79,10 @@ class Textarea extends InputElement {
       Class = Textarea;
     }
 
-    return InputElement.fromProperties(Class, properties);
+    const { onChange } = properties,
+          changeHandler = onChange;
+
+    return InputElement.fromProperties(Class, properties, changeHandler);
   }
 }
 

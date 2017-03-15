@@ -43,7 +43,10 @@ class Button extends InputElement {
       Class = Button;
     }
 
-    return InputElement.fromProperties(Class, properties);
+    const { onClick } = properties,
+          clickHandler = onClick;
+
+    return InputElement.fromProperties(Class, properties, clickHandler);
   }
 }
 

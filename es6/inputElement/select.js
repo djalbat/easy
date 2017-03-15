@@ -47,7 +47,10 @@ class Select extends InputElement {
       Class = Select;
     }
 
-    return InputElement.fromProperties(Class, properties);
+    const { onChange } = properties,
+          changeHandler = onChange;
+
+    return InputElement.fromProperties(Class, properties, changeHandler);
   }
 }
 
