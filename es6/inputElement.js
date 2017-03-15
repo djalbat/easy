@@ -29,19 +29,25 @@ class InputElement extends Element {
 
   static fromProperties(Class, properties, ...handlers) {
     const handlerNames = handlers.map(function(handler) {
-      const handlerName = handler.name; ///
-      
-      delete properties[handlerName];
-      
+      let handlerName;
+
+      if (handler !== undefined) {
+        handlerName = handler.name; ///
+
+        delete properties[handlerName];
+      }
+
       return handlerName;
     });
     
     const inputElement = Element.fromProperties(Class, properties);
     
     handlers.forEach(function(handler, index) {
-      const handlerName = handlerNames[index];
-      
-      inputElement[handlerName](handler); ///
+      if (handler !== undefined) {
+        const handlerName = handlerNames[index];
+
+        inputElement[handlerName](handler); ///
+      }
     });
     
     return inputElement;
