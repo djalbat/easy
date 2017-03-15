@@ -8,7 +8,7 @@ It abstracts away from the DOM to provide a set of classes for elements such as 
  
 ### Update
 
-There is now [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) support. What this means is that EasyUI *will* now help you with the architecture of your large application. JSX support also brings with it a host other benefits. So although EasyUI and its related projects will continue to work standalone, their use with JSX is *highly recommended*. The contents of this readme file will stay as a reference, however a much better place to start from now on is here:
+There is now [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) support. What this means is that EasyUI *will* now help you with the architecture of your large application. JSX support also brings with it a host of other benefits. So although EasyUI and its related projects will continue to work standalone, their use with JSX is *highly recommended*. The contents of this readme file will stay as a reference, however a much better place to start from now on is here:
 
 * [EasyUI-JSX Online documentation](https://djalbat.github.io/EasyUI-JSX/)
 
