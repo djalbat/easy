@@ -324,7 +324,7 @@ Remember that the `Window` and `Document` classes are exported as singletons.
 
 ## Acknowledgements
 
-The resize support is based on an idea from [this post](http://www.backalleycoder.com/2013/03/18/cross-browser-event-based-element-resize-detection/).
+The resize support is based on an idea from [this post](http://www.backalleycoder.com/2013/03/18/cross-browser-event-based-element-resize-detection/) by Daniel Buchner.
 
 ## Contact
 
