@@ -317,6 +317,10 @@ The `Window` class, but not the `Document` class, has the following methods:
 
 Remember that the `Window` and `Document` classes are exported as singletons.
 
+## Acknowledgements
+
+The resize support is based on idea from [this post](http://www.backalleycoder.com/2013/03/18/cross-browser-event-based-element-resize-detection/).
+
 ## Contact
 
 - james.smith@djalbat.com
