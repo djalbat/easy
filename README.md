@@ -4,11 +4,16 @@ A V-framework.
 
 EasyUI is an MVC framework without the M and without the C. It's without a model, only abstracting away from the view, namely the document object model. There is some irony here. It's without a controller, or whatever. It will not help you with the architecture of your large application. It is about the leaves of an application, not its branches. 
 
-It abstracts away from the DOM to provide a set of classes for elements such as buttons, links, etc. It covers up some of the more idiosyncratic syntax of the browser's DOM methods and properties and is hopefully a bit more readable. 
+It abstracts away from the DOM to provide a set of classes for elements such as buttons, links, etc. It covers up some of the more idiosyncratic syntax of the browser's DOM methods and properties and is hopefully a bit more readable.
+ 
+### Update
+
+There is now [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) support. What this means is that EasyUI *will* help you with the architecture of your large application. Although EasyUI and its related projects will continue to work standalone, their use with JSX is *highly recommended*. The contents of this readme file will stay as a reference, however a much better place to start from now on is here:
+
+* [EasyUI-JSX Online documentation](https://djalbat.github.io/EasyUI-JSX/)
 
 ## Related projects
 
-- [EasyUI-JSX](https://github.com/djalbat/EasyUI-JSX) JSX support for Easy-UI elements.
 - [EasyUI-Layout](https://github.com/djalbat/EasyUI-Layout) Layout elements that work with CSS flexbox.
 - [EasyUI-DragAndDrop](https://github.com/djalbat/EasyUI-DragAndDrop) Drag and drop elements including an explorer and a rubbish bin.
 - [EasyUI-RichTextarea](https://github.com/djalbat/EasyUI-RichTextarea) A textarea element that handles and hands off events well.
