@@ -4,7 +4,7 @@ A V-framework.
 
 EasyUI is an MVC framework without the M and without the C. It's without a model, only abstracting away from the view, namely the document object model. There is some irony here. It's without a controller, or whatever. It will not help you with the architecture of your large application. It is about the leaves of an application, not its branches. 
 
-It abstracts away from the DOM to provide a set of classes for elements such as buttons, links, etc. It covers up some of the more idiosyncratic syntax from the JavaScript browser API and is hopefully a bit more readable. 
+It abstracts away from the DOM to provide a set of classes for elements such as buttons, links, etc. It covers up some of the more idiosyncratic syntax of the browser's DOM methods and properties and is hopefully a bit more readable. 
 
 ## Related projects
 
