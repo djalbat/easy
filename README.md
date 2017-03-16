@@ -10,7 +10,7 @@ There is now support for [JSX](https://facebook.github.io/react/docs/jsx-in-dept
 
 * [EasyUI-JSX Online documentation](https://djalbat.github.io/EasyUI-JSX/)
 
-## Related projects
+### Related projects
 
 - [EasyUI-Layout](https://github.com/djalbat/EasyUI-Layout) Layout elements that work with CSS flexbox.
 - [EasyUI-DragAndDrop](https://github.com/djalbat/EasyUI-DragAndDrop) Drag and drop elements including an explorer and a rubbish bin.
