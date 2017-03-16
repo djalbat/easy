@@ -3,11 +3,15 @@
 const InputElement = require('../inputElement');
 
 class Textarea extends InputElement {
-  constructor(selector, changeHandler) {
+  constructor(selector, changeHandler, scrollHandler) {
     super(selector);
 
     if (changeHandler) {
       this.onChange(changeHandler);
+    }
+
+    if (scrollHandler) {
+      this.onScroll(scrollHandler);
     }
   }
 
@@ -61,16 +65,16 @@ class Textarea extends InputElement {
   
   offResize(resizeHandler) {}
 
-  static clone(element, changeHandler) {
-    return InputElement.clone(Textarea, element, changeHandler);
+  static clone(element, changeHandler, scrollHandler) {
+    return InputElement.clone(Textarea, element, changeHandler, scrollHandler);
   }
 
-  static fromHTML(html, changeHandler) {
-    return InputElement.fromHTML(Textarea, html, changeHandler);
+  static fromHTML(html, changeHandler, scrollHandler) {
+    return InputElement.fromHTML(Textarea, html, changeHandler, scrollHandler);
   }
 
-  static fromDOMElement(domElement, changeHandler) {
-    return InputElement.fromDOMElement(Textarea, domElement, changeHandler);
+  static fromDOMElement(domElement, changeHandler, scrollHandler) {
+    return InputElement.fromDOMElement(Textarea, domElement, changeHandler, scrollHandler);
   }
 
   static fromProperties(Class, properties) {
@@ -79,14 +83,17 @@ class Textarea extends InputElement {
       Class = Textarea;
     }
 
-    const { onChange } = properties,
-          changeHandler = onChange;
-
-    return InputElement.fromProperties(Class, properties, changeHandler);
+    return InputElement.fromProperties(Class, properties);
   }
 }
 
-Textarea.tagName = 'textarea';
+Object.assign(Textarea, {
+  tagName: 'textarea',
+  customHandlerNames: [
+    'onChange',
+    'onScroll'
+  ]
+});
 
 module.exports = Textarea;
 

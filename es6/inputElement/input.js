@@ -55,14 +55,16 @@ class Input extends InputElement {
       Class = Input;
     }
 
-    const { onChange } = properties,
-          changeHandler = onChange;
-
-    return InputElement.fromProperties(Class, properties, changeHandler);
+    return InputElement.fromProperties(Class, properties);
   }
 }
 
-Input.tagName = 'input';
+Object.assign(Input, {
+  tagName: 'input',
+  customHandlerNames: [
+    'onChange'
+  ]
+});
 
 module.exports = Input;
 

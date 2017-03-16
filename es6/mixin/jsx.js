@@ -1,7 +1,9 @@
 'use strict';
 
-function applyProperties(properties) {
+function applyProperties(properties, customHandlerNames, additionalProperties) {
   this.properties = {};
+  
+  Object.assign(properties, additionalProperties);
 
   const names = Object.keys(properties);
 
@@ -17,6 +19,8 @@ function applyProperties(properties) {
 
       if (false) {
 
+      } else if (isCustomHandlerName(name, customHandlerNames)) {
+        addCustomHandler(this, name, value);
       } else if (isHandlerName(name)) {
         addHandler(this, name, value);
       } else if (isAttributeName(name)) {
@@ -33,6 +37,13 @@ const jsxMixin = {
 };
 
 module.exports = jsxMixin;
+
+function addCustomHandler(element, name, value) {
+  const customHandlerName = name, ///
+        customHandler = value;  ///
+
+  element[customHandlerName](customHandler);
+}
 
 function addHandler(element, name, value) {
   const eventType = name.substr(2).toLowerCase(), ///
@@ -65,6 +76,10 @@ function addAttribute(element, name, value) {
   } else {
     element.addAttribute(name, value);
   }
+}
+
+function isCustomHandlerName(name, customHandlerNames) {
+  return (customHandlerNames && customHandlerNames.includes(name));
 }
 
 function isHandlerName(name) {

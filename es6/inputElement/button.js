@@ -43,14 +43,16 @@ class Button extends InputElement {
       Class = Button;
     }
 
-    const { onClick } = properties,
-          clickHandler = onClick;
-
-    return InputElement.fromProperties(Class, properties, clickHandler);
+    return InputElement.fromProperties(Class, properties);
   }
 }
 
-Button.tagName = 'button';
+Object.assign(Button, {
+  tagName: 'button',
+  customHandlerNames: [
+    'onClick'
+  ]
+});
 
 module.exports = Button;
 

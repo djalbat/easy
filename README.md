@@ -4,11 +4,9 @@ A V-framework.
 
 EasyUI is an MVC framework without the M and without the C. It's without a model, only abstracting away from the view, namely the document object model. There is some irony here. It's without a controller, or whatever. It will not help you with the architecture of your large application. It is about the leaves of an application, not its branches. 
 
-It abstracts away from the DOM to provide a set of classes for elements such as buttons, links, etc. It covers up some of the more idiosyncratic syntax of the browser's DOM methods and properties and is hopefully a bit more readable.
- 
-### Update
+### JSX support
 
-There is now [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) support. What this means is that EasyUI *will* now help you with the architecture of your large application. JSX support also brings with it a host other benefits. So although EasyUI and its related projects will continue to work standalone, their use with JSX is *highly recommended*. The contents of this readme file will stay as a reference, however a much better place to start from now on is here:
+There is now support for [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html). What this means is that EasyUI *will* now help you with the architecture of your large application. In fact JSX brings with it a [host of benefits](https://djalbat.github.io/EasyUI-JSX/#jsxIsGreat). So although EasyUI and its related projects will continue to work standalone, their use with JSX is *highly recommended*. The contents of this readme file will stay as a reference, however a much better place to start from now on is here:
 
 * [EasyUI-JSX Online documentation](https://djalbat.github.io/EasyUI-JSX/)
 

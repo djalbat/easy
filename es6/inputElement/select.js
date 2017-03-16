@@ -47,14 +47,16 @@ class Select extends InputElement {
       Class = Select;
     }
 
-    const { onChange } = properties,
-          changeHandler = onChange;
-
-    return InputElement.fromProperties(Class, properties, changeHandler);
+    return InputElement.fromProperties(Class, properties);
   }
 }
 
-Select.tagName = 'select';
+Object.assign(Select, {
+  tagName: 'select',
+  customHandlerNames: [
+    'onChange'
+  ]
+});
 
 module.exports = Select;
 

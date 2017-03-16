@@ -291,16 +291,17 @@ class Element {
 
   static fromProperties(Class, properties) {
     const tagName = Class.tagName,
-          element = Element.fromPropertiesAndTagName(Class, properties, tagName);
+          customHandlerNames = Class.customHandlerNames,
+          additionalProperties = Class.additionalPropertes;
 
-    return element;
+    return Element.fromPropertiesAndTagName(Class, properties, tagName, customHandlerNames, additionalProperties);
   }
 
-  static fromPropertiesAndTagName(Class, properties, tagName) {
+  static fromPropertiesAndTagName(Class, properties, tagName, customHandlerNames, additionalProperties) {
     const html = `<${tagName}></${tagName}>`,
           element = Element.fromHTML(Class, html);
 
-    element.applyProperties(properties);
+    element.applyProperties(properties, customHandlerNames, additionalProperties);
 
     return element;
   }

@@ -16,41 +16,19 @@ class InputElement extends Element {
   focus() { this.domElement.focus(); }
 
   static clone(Class, element, ...remainingArguments) {
-    return Element.clone(Class, element, ...remainingArguments);
+    return Element.clone(Class, element, remainingArguments);
   }
 
   static fromHTML(Class, html, ...remainingArguments) {
-    return Element.fromHTML(Class, html, ...remainingArguments);
+    return Element.fromHTML(Class, html, remainingArguments);
   }
 
   static fromDOMElement(Class, domElement, ...remainingArguments) {
-    return Element.fromDOMElement(Class, domElement, ...remainingArguments);
+    return Element.fromDOMElement(Class, domElement, remainingArguments);
   }
 
-  static fromProperties(Class, properties, ...handlers) {
-    const handlerNames = handlers.map(function(handler) {
-      let handlerName;
-
-      if (handler !== undefined) {
-        handlerName = handler.name; ///
-
-        delete properties[handlerName];
-      }
-
-      return handlerName;
-    });
-    
-    const inputElement = Element.fromProperties(Class, properties);
-    
-    handlers.forEach(function(handler, index) {
-      if (handler !== undefined) {
-        const handlerName = handlerNames[index];
-
-        inputElement[handlerName](handler); ///
-      }
-    });
-    
-    return inputElement;
+  static fromProperties(Class, properties) {
+    return Element.fromProperties(Class, properties);
   }
 }
 

@@ -51,21 +51,21 @@ class Checkbox extends InputElement {
       Class = Checkbox;
     }
 
-    Object.assign(properties, { /// 
-      type: 'checkbox' 
-    });
-
-    const { onChange } = properties,
-          changeHandler = onChange;
-
-    return InputElement.fromProperties(Class, properties, changeHandler);
+    return InputElement.fromProperties(Class, properties);
   }
 }
 
-Checkbox.tagName = 'input'; ///
+Object.assign(Checkbox, {
+  tagName: 'input',
+  customHandlerNames: [
+    'onChange'
+  ],
+  additionalProperties: {
+    type: 'checkbox'
+  }
+});
 
 module.exports = Checkbox;
-
 
 function defaultIntermediateChangeHandler(handler, event) {
   const checked = this.isChecked(),

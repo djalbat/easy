@@ -43,14 +43,16 @@ class Link extends InputElement {
       Class = Link;
     }
 
-    const { onClick } = properties,
-          clickHandler = onClick;
-
-    return InputElement.fromProperties(Class, properties, clickHandler);
+    return InputElement.fromProperties(Class, properties);
   }
 }
 
-Link.tagName = 'a'; ///
+Object.assign(Link, {
+  tagName: 'a',
+  customHandlerNames: [
+    'onClick'
+  ]
+});
 
 module.exports = Link;
 
