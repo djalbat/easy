@@ -289,17 +289,12 @@ class Element {
     return new (Function.prototype.bind.apply(Class, remainingArguments));
   }
 
-  static fromProperties(Class, properties) {
+  static fromProperties(Class, properties, ...remainingArguments) {
     const tagName = Class.tagName,
           customHandlerNames = Class.customHandlerNames,
-          additionalProperties = Class.additionalPropertes;
-
-    return Element.fromPropertiesAndTagName(Class, properties, tagName, customHandlerNames, additionalProperties);
-  }
-
-  static fromPropertiesAndTagName(Class, properties, tagName, customHandlerNames, additionalProperties) {
-    const html = `<${tagName}></${tagName}>`,
-          element = Element.fromHTML(Class, html);
+          additionalProperties = Class.additionalPropertes,
+          html = `<${tagName}></${tagName}>`,
+          element = Element.fromHTML(Class, html, ...remainingArguments);
 
     element.applyProperties(properties, customHandlerNames, additionalProperties);
 
