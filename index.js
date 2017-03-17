@@ -1,8 +1,7 @@
 'use strict';
 
 module.exports = {
-  Bounds: require('./lib/misc/bounds'),
-  Offset: require('./lib/misc/offset'),
+  React: require('./lib/react'),
   Element: require('./lib/element'),
   InputElement: require('./lib/inputElement'),
   document: require('./lib/document'),
@@ -15,5 +14,7 @@ module.exports = {
   Select: require('./lib/inputElement/select'),
   Button: require('./lib/inputElement/button'),
   Checkbox: require('./lib/inputElement/checkbox'),
-  Textarea: require('./lib/inputElement/textarea')
+  Textarea: require('./lib/inputElement/textarea'),
+  Bounds: require('./lib/misc/bounds'),
+  Offset: require('./lib/misc/offset')
 };
