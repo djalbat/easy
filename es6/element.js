@@ -35,9 +35,9 @@ class Element {
   }
 
   getWidth(includeBorder = false) {
-    const width  = includeBorder ?
-                     this.domElement.offsetWidth :
-                       this.domElement.clientWidth;
+    const width = includeBorder ?
+                    this.domElement.offsetWidth :
+                      this.domElement.clientWidth;
 
     return width;
   }
@@ -45,9 +45,9 @@ class Element {
   setWidth(width) { this.domElement.style.width = `${width}px`; }
 
   getHeight(includeBorder = false) {
-    const height  = includeBorder ?
-                      this.domElement.offsetHeight :
-                        this.domElement.clientHeight;
+    const height = includeBorder ?
+                     this.domElement.offsetHeight :
+                       this.domElement.clientHeight;
 
     return height;
   }
@@ -76,15 +76,15 @@ class Element {
 
   clearClasses() { this.domElement.className = ''; }
 
-  prepend(elementOrString) {
-    const domElement = domElementFromElementOrString(elementOrString),
+  prepend(element) {
+    const domElement = element.domElement,
           firstChildDOMElement = this.domElement.firstChild;
 
     this.domElement.insertBefore(domElement, firstChildDOMElement);
   }
   
-  append(elementOrString) {
-    const domElement = domElementFromElementOrString(elementOrString);
+  append(element) {
+    const domElement = element.domElement;
 
     this.domElement.insertBefore(domElement, null); ///
   }
@@ -318,22 +318,6 @@ function domElementFromSelector(selector) {
   const domElement = (typeof selector === 'string') ?
                        document.querySelectorAll(selector)[0] :  ///
                          selector;  ///
-
-  return domElement;
-}
-
-function domElementFromElementOrString(elementOrString) {
-  let domElement;
-
-  if (typeof elementOrString === 'string') {
-    const string = elementOrString; ///
-
-    domElement = document.createTextNode(string); ///
-  } else {
-    const element = elementOrString;  ///
-
-    domElement = element.domElement;
-  }
 
   return domElement;
 }

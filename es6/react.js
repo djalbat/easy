@@ -1,13 +1,14 @@
 'use strict';
 
-const Element = require('./element');
+const Element = require('./element'),
+      TextElement = require('./textElement');
 
 class React {
-  static createElement(firstArgument, properties, ...childElements) {
+  static createElement(firstArgument, properties, ...childArguments) {
     let element = null;
 
     if (firstArgument !== undefined) {
-      childElements = flattenChildElements(childElements);
+      const childElements = childElementsFromChildArguments(childArguments);
 
       properties = Object.assign({
         childElements: childElements
@@ -44,12 +45,27 @@ class React {
 
 module.exports = React;
 
-function flattenChildElements(childElements) {
-  childElements = childElements.reduce(function(childElements, childElement) {  ///
-    childElements = childElements.concat(childElement);
+function childElementsFromChildArguments(childArguments) {
+  childArguments = childArguments.reduce(function(childArguments, childArgument) {
+    childArguments = childArguments.concat(childArgument);
 
-    return childElements;
+    return childArguments;
   }, []);
+
+  const childElements = childArguments.map(function(childArgument) {
+    let childElement;
+
+    if (childArgument instanceof Element) {
+      childElement = childArgument;  ///
+    } else {
+      const text = childArgument, ///
+            textElement = new TextElement(text);
+
+      childElement = textElement;
+    }
+
+    return childElement;
+  });
 
   return childElements;
 }
