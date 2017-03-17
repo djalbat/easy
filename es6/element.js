@@ -186,20 +186,16 @@ class Element {
   }
 
   getDescendantElements(selector = '*') {
-    const descendantDOMElements = this.domElement.querySelectorAll(selector),
-          descendantElements = elementsFromDOMElements(descendantDOMElements);
+    const domNode = this.domElement,  ///
+          descendantDOMNodes = descendantDOMNodesFromDOMNode(domNode),
+          descendantElements = filterDOMNodes(descendantDOMNodes, selector);
 
     return descendantElements;
   }
 
   getChildElements(selector = '*') {
-    const descendantDOMElements = this.domElement.querySelectorAll(selector),
-          allChildDOMElements = this.domElement.children,
-          childDOMElements = filter(allChildDOMElements, function(childDOMElement) {
-            return some(descendantDOMElements, function(descendantDOMElement) {
-              return (descendantDOMElement === childDOMElement);
-            });
-          }),
+    const childDOMNodes = this.domElement.childNodes,
+          childDOMElements = filterDOMNodes(childDOMNodes, selector),
           childElements = elementsFromDOMElements(childDOMElements);
 
     return childElements;
@@ -333,22 +329,38 @@ function elementsFromDOMElements(domElements) {
   return elements;
 }
 
-function some(array, test) {
-  let result = false;
+function descendantDOMNodesFromDOMNode(domNode, descendantDOMNodes = []) {
+  const childDOMNodes = domNode.childNodes;  ///
 
-  for (let index = 0; index < array.length; index++) {
-    const element = array[index];
+  descendantDOMNodes.concat(childDOMNodes);
 
-    result = test(element);
+  childDOMNodes.forEach(function(childDOMNode) {
+    descendantDOMNodesFromDOMNode(childDOMNode, descendantDOMNodes);
+  });
 
-    if (result) {
-      result = true;
+  return descendantDOMNodes;
+}
 
-      break;
+function filterDOMNodes(domNodes, selector) {
+  filter(domNodes, function(domNode) {
+    const domNodeType = domNode.nodeType;
+
+    switch (domNodeType) {
+      case Node.ELEMENT_NODE : {
+        const domElement = domNode; ///
+
+        return domElement.matches(selector);
+      }
+
+      case Node.TEXT_NODE : {
+        if (selector === '*') {
+          return true;
+        }
+      }
     }
-  }
 
-  return result;
+    return false;
+  })
 }
 
 function filter(array, test) {
@@ -356,7 +368,7 @@ function filter(array, test) {
 
   for (let index = 0; index < array.length; index++) {
     const element = array[index],
-          result = test(element);
+        result = test(element);
 
     if (result) {
       filteredArray.push(element);

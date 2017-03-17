@@ -89,4 +89,4 @@ class TextElement {
   }
 }
 
-module.exports = Element;
+module.exports = TextElement;
