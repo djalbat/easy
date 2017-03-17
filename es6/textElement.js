@@ -12,6 +12,19 @@ class TextElement {
 
   clone() { return TextElement.clone(this); }
 
+  getText() {
+    const nodeValue = this.domElement.nodeValue,
+          text = nodeValue; ///
+
+    return text;
+  }
+
+  setText(text) {
+    const nodeValue = text; ///
+
+    this.domElement.nodeValue = nodeValue;
+  }
+
   getOffset() {
     const top = this.domElement.offsetTop,  ///
           left = this.domElement.offsetLeft,  ///
@@ -74,18 +87,6 @@ class TextElement {
           siblingDOMElement = siblingElement.domElement;
 
     parentDOMNode.insertBefore(this.domElement, siblingDOMElement.nextSibling);  ///
-  }
-
-  html(html) {
-    if (html === undefined) {
-      html = this.domElement.innerHTML; ///
-
-      return html;
-    } else {
-      const innerHTML = html; ///
-
-      this.domElement.innerHTML = innerHTML
-    }
   }
 }
 
