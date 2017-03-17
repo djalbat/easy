@@ -291,12 +291,12 @@ class Element {
 
   static fromProperties(Class, properties, ...remainingArguments) {
     const tagName = Class.tagName,
-          customHandlerNames = Class.customHandlerNames,
-          additionalProperties = Class.additionalPropertes,
+          ignoredProperties = Class.ignoredProperties,
+          additionalProperties = Class.additionalProperties,
           html = `<${tagName}></${tagName}>`,
           element = Element.fromHTML(Class, html, ...remainingArguments);
 
-    element.applyProperties(properties, customHandlerNames, additionalProperties);
+    element.applyProperties(properties, ignoredProperties, additionalProperties);
 
     return element;
   }

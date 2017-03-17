@@ -45,19 +45,17 @@ class Checkbox extends InputElement {
     return InputElement.fromDOMElement(Checkbox, domElement, changeHandler);
   }
 
-  static fromProperties(Class, properties) {
-    if (arguments.length === 1) {
-      properties = Class;
-      Class = Checkbox;
-    }
+  static fromProperties(properties) {
+    const { onChange } = properties,
+          changeHandler = onChange; ///    
 
-    return InputElement.fromProperties(Class, properties);
+    return InputElement.fromProperties(Checkbox, properties, changeHandler);
   }
 }
 
 Object.assign(Checkbox, {
   tagName: 'input',
-  customHandlerNames: [
+  ignoredProperties: [
     'onChange'
   ],
   additionalProperties: {

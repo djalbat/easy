@@ -77,19 +77,18 @@ class Textarea extends InputElement {
     return InputElement.fromDOMElement(Textarea, domElement, changeHandler, scrollHandler);
   }
 
-  static fromProperties(Class, properties) {
-    if (arguments.length === 1) {
-      properties = Class;
-      Class = Textarea;
-    }
-
-    return InputElement.fromProperties(Class, properties);
+  static fromProperties(properties) {
+    const { onChange, onScroll } = properties,
+          changeHandler = onChange, ///
+          scrollHandler = onScroll; ///
+    
+    return InputElement.fromProperties(Textarea, properties, changeHandler, scrollHandler);
   }
 }
 
 Object.assign(Textarea, {
   tagName: 'textarea',
-  customHandlerNames: [
+  ignoredProperties: [
     'onChange',
     'onScroll'
   ]

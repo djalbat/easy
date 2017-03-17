@@ -1,8 +1,12 @@
 'use strict';
 
-function applyProperties(properties, customHandlerNames, additionalProperties) {
+function applyProperties(properties, ignoredProperties, additionalProperties) {
   this.properties = {};
+
+  properties = Object.assign({}, properties); ///
   
+  unassign(properties, ignoredProperties);
+
   Object.assign(properties, additionalProperties);
 
   const names = Object.keys(properties);
@@ -19,8 +23,6 @@ function applyProperties(properties, customHandlerNames, additionalProperties) {
 
       if (false) {
 
-      } else if (isCustomHandlerName(name, customHandlerNames)) {
-        addCustomHandler(this, name, value);
       } else if (isHandlerName(name)) {
         addHandler(this, name, value);
       } else if (isAttributeName(name)) {
@@ -38,11 +40,14 @@ const jsxMixin = {
 
 module.exports = jsxMixin;
 
-function addCustomHandler(element, name, value) {
-  const customHandlerName = name, ///
-        customHandler = value;  ///
+function unassign(properties, ignoredProperties) {
+  if (ignoredProperties !== undefined) {
+    const ignoredPropertyNames = ignoredProperties; ///
 
-  element[customHandlerName](customHandler);
+    ignoredPropertyNames.forEach(function(ignoredPropertyName) {
+      delete properties[ignoredPropertyName];
+    });
+  }
 }
 
 function addHandler(element, name, value) {
@@ -78,10 +83,6 @@ function addAttribute(element, name, value) {
   }
 }
 
-function isCustomHandlerName(name, customHandlerNames) {
-  return (customHandlerNames && customHandlerNames.includes(name));
-}
-
 function isHandlerName(name) {
   return name.match(/^on/);
 }
@@ -113,3 +114,4 @@ const attributeNames = [
   'wmode',
   'wrap'
 ];
+

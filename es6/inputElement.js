@@ -27,8 +27,8 @@ class InputElement extends Element {
     return Element.fromDOMElement(Class, domElement, remainingArguments);
   }
 
-  static fromProperties(Class, properties) {
-    return Element.fromProperties(Class, properties);
+  static fromProperties(Class, properties, ...remainingArguments) {
+    return Element.fromProperties(Class, properties, remainingArguments);
   }
 }
 

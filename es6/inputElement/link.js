@@ -37,19 +37,17 @@ class Link extends InputElement {
     return InputElement.fromDOMElement(Link, domElement, clickHandler);
   }
 
-  static fromProperties(Class, properties) {
-    if (arguments.length === 1) {
-      properties = Class;
-      Class = Link;
-    }
+  static fromProperties(properties) {
+    const { onClick } = properties,
+          clickHandler = onClick; ///    
 
-    return InputElement.fromProperties(Class, properties);
+    return InputElement.fromProperties(Link, properties, clickHandler);
   }
 }
 
 Object.assign(Link, {
   tagName: 'a',
-  customHandlerNames: [
+  ignoredProperties: [
     'onClick'
   ]
 });

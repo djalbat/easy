@@ -41,19 +41,17 @@ class Select extends InputElement {
     return InputElement.fromDOMElement(Select, domElement, changeHandler);
   }
 
-  static fromProperties(Class, properties) {
-    if (arguments.length === 1) {
-      properties = Class;
-      Class = Select;
-    }
+  static fromProperties(properties) {
+    const { onChange } = properties,
+          changeHandler = onChange; ///    
 
-    return InputElement.fromProperties(Class, properties);
+    return InputElement.fromProperties(Select, properties, changeHandler);
   }
 }
 
 Object.assign(Select, {
   tagName: 'select',
-  customHandlerNames: [
+  ignoredProperties: [
     'onChange'
   ]
 });

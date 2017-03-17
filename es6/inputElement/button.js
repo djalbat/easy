@@ -37,19 +37,17 @@ class Button extends InputElement {
     return InputElement.fromDOMElement(Button, domElement, clickHandler);
   }
 
-  static fromProperties(Class, properties) {
-    if (arguments.length === 1) {
-      properties = Class;
-      Class = Button;
-    }
+  static fromProperties(properties) {
+    const { onClick } = properties,
+          clickHandler = onClick; ///
 
-    return InputElement.fromProperties(Class, properties);
+    return InputElement.fromProperties(Button, properties, clickHandler);
   }
 }
 
 Object.assign(Button, {
   tagName: 'button',
-  customHandlerNames: [
+  ignoredProperties: [
     'onClick'
   ]
 });
