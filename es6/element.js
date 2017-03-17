@@ -342,7 +342,7 @@ function descendantDOMNodesFromDOMNode(domNode, descendantDOMNodes = []) {
 }
 
 function filterDOMNodes(domNodes, selector) {
-  filter(domNodes, function(domNode) {
+  const filteredDOMNodes = filter(domNodes, function(domNode) {
     const domNodeType = domNode.nodeType;
 
     switch (domNodeType) {
@@ -360,7 +360,9 @@ function filterDOMNodes(domNodes, selector) {
     }
 
     return false;
-  })
+  });
+
+  return filteredDOMNodes;
 }
 
 function filter(array, test) {
@@ -368,7 +370,7 @@ function filter(array, test) {
 
   for (let index = 0; index < array.length; index++) {
     const element = array[index],
-        result = test(element);
+          result = test(element);
 
     if (result) {
       filteredArray.push(element);
