@@ -14,6 +14,10 @@ class Window {
   getWidth() { return this.domElement.innerWidth; } ///
   
   getHeight() { return this.domElement.innerHeight; } ///
+
+  getPageXOffset() { return this.domElement.pageXOffset; }
+
+  getPageYOffset() { return this.domElement.pageYOffset; }
   
   onResize(handler) {
     const type = 'resize',
