@@ -55,7 +55,8 @@ function childElementsFromChildArguments(childArguments) {
   const childElements = childArguments.map(function(childArgument) {
     let childElement;
 
-    if (childArgument instanceof Element) {
+    if (  (childArgument instanceof Element)
+       || (childArgument instanceof TextElement)  ) {
       childElement = childArgument;  ///
     } else {
       const text = childArgument, ///
