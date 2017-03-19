@@ -16,13 +16,6 @@ class React {
 
       if (false) {
 
-      } else if (typeof firstArgument === 'string') {
-        const tagName = firstArgument,  ///
-              html = `<${tagName}></${tagName}>`;
-
-        element = Element.fromHTML(html);
-
-        element.applyProperties(properties);
       } else if (isTypeOf(firstArgument, Element)) {
         const Class = firstArgument;  ///
 
@@ -31,6 +24,13 @@ class React {
         const elementFunction = firstArgument;  ///
 
         element = elementFunction(properties);
+      } else if (typeof firstArgument === 'string') {
+        const tagName = firstArgument,  ///
+              html = `<${tagName}></${tagName}>`;
+
+        element = Element.fromHTML(html);
+
+        element.applyProperties(properties);
       }
     }
 
