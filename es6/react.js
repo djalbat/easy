@@ -27,11 +27,6 @@ class React {
         const Class = firstArgument;  ///
 
         element = Class.fromProperties(properties);
-      } else if (firstArgument.prototype.render) {
-        const Class = firstArgument,  ///
-              instance = new Class(properties);
-
-        element = instance.render();
       } else if (typeof firstArgument === 'function') {
         const elementFunction = firstArgument;  ///
 
