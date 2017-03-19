@@ -39,10 +39,12 @@ class Bounds {
   }
 
   static fromBoundingClientRect(boundingClientRect) {
-    const top = boundingClientRect.top + window.pageYOffset,
-          left = boundingClientRect.left + window.pageXOffset,
-          bottom = boundingClientRect.bottom + window.pageYOffset,
-          right = boundingClientRect.right + window.pageXOffset,
+    const windowScrollTop = window.pageYOffset, ///
+          windowScrollLeft = window.pageXOffset,  ///
+          top = boundingClientRect.top + windowScrollTop,
+          left = boundingClientRect.left + windowScrollLeft,
+          bottom = boundingClientRect.bottom + windowScrollTop,
+          right = boundingClientRect.right + windowScrollLeft,
           bounds = new Bounds(top, left, bottom, right);
 
     return bounds;

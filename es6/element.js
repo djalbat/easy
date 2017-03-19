@@ -287,10 +287,11 @@ class Element {
 
   static fromProperties(Class, properties, ...remainingArguments) {
     const tagName = Class.tagName,
-          ignoredProperties = Class.ignoredProperties,
-          additionalProperties = Class.additionalProperties,
           html = `<${tagName}></${tagName}>`,
           element = Element.fromHTML(Class, html, ...remainingArguments);
+
+    const ignoredProperties = Class.ignoredProperties,
+          additionalProperties = Class.additionalProperties;
 
     element.applyProperties(properties, ignoredProperties, additionalProperties);
 

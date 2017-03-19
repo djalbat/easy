@@ -317,8 +317,8 @@ The `Window` class, but not the `Document` class, has the following methods:
 
 - `onResize`
 - `offResize`
-- `getPageXOffset`
-- `getPageYOffset`
+- `getScrollTop`
+- `getScrollLeft`
 
 Remember that the `Window` and `Document` classes are exported as singletons.
 

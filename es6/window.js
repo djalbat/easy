@@ -15,10 +15,10 @@ class Window {
   
   getHeight() { return this.domElement.innerHeight; } ///
 
-  getPageXOffset() { return this.domElement.pageXOffset; }
+  getScrollTop() { return this.domElement.pageYOffset; }  ///
 
-  getPageYOffset() { return this.domElement.pageYOffset; }
-  
+  getScrollLeft() { return this.domElement.pageXOffset; } ///
+
   onResize(handler) {
     const type = 'resize',
           addEventListener = this.addHandler(type, handler);
