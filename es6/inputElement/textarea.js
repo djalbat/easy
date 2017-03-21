@@ -77,7 +77,7 @@ class Textarea extends InputElement {
     return InputElement.fromDOMElement(Textarea, domElement, changeHandler, scrollHandler);
   }
 
-  static fromProperties(Class, properties, ) {
+  static fromProperties(properties, ) {
     const { onChange, onScroll } = properties,
           changeHandler = onChange, ///
           scrollHandler = onScroll; ///
