@@ -6,7 +6,7 @@ Easy is an MVC framework without the M and without the C. It's without a model, 
 
 ### JSX support
 
-There is now support for JSX in the form of [Juxtapose](https://github.com/djalbat/Juxtapose). What this means is that Easy *will* now help you with the architecture of your large application. In fact JSX brings with it a [host of benefits](https://djalbat.github.io/Easy-JSX/#jsxIsGreat). So although Easy and its related projects will continue to work standalone, their use with Juxtapose is *highly recommended*. The contents of this readme file will stay as a reference, however a much better place to start from now on is here:
+There is now support for JSX in the form of [Juxtapose](https://github.com/djalbat/Juxtapose). What this means is that Easy *will* now help you with the architecture of your large application. In fact JSX brings with it a [several benefits](http://djalbat.com/juxtapose#jsxIsGreat). So although Easy and its related projects will continue to work standalone, their use with Juxtapose is *highly recommended*. The contents of this readme file will stay as a reference, however a much better place to start from now on is here:
 
 * [Juxtapose online documentation](http://djablat.com/juxtapose/)
 
