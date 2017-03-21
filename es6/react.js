@@ -28,7 +28,7 @@ class React {
         const tagName = firstArgument,  ///
               html = `<${tagName}></${tagName}>`;
 
-        element = Element.fromHTML(html);
+        element = Element.fromHTML(Element, html);
 
         element.applyProperties(properties);
       }
