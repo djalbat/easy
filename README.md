@@ -6,9 +6,9 @@ Easy is an MVC framework without the M and without the C. It's without a model, 
 
 ### JSX support
 
-There is now support for [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html). What this means is that Easy *will* now help you with the architecture of your large application. In fact JSX brings with it a [host of benefits](https://djalbat.github.io/Easy-JSX/#jsxIsGreat). So although Easy and its related projects will continue to work standalone, their use with JSX is *highly recommended*. The contents of this readme file will stay as a reference, however a much better place to start from now on is here:
+There is now support for JSX in the form of [Juxtapose](https://github.com/djalbat/Juxtapose). What this means is that Easy *will* now help you with the architecture of your large application. In fact JSX brings with it a [host of benefits](https://djalbat.github.io/Easy-JSX/#jsxIsGreat). So although Easy and its related projects will continue to work standalone, their use with Juxtapose is *highly recommended*. The contents of this readme file will stay as a reference, however a much better place to start from now on is here:
 
-* [Easy-JSX Online documentation](https://djalbat.github.io/Easy-JSX/)
+* [Juxtapose Online documentation](http://djablat.com/juxtapose/)
 
 ### Related projects
 
@@ -118,7 +118,7 @@ The methods to add elements to the DOM are hopefully intuitive. Note the differe
 
 ```js
 const body = new Body(),
-      form = Element.fromHTML('<form></form>');
+      form = Element.fromHTML(Element, '<form></form>');
 
 body.append(form); // what you want, the form element becomes a child of the body element
 
@@ -146,7 +146,7 @@ The `Window` and `Document` classes are not exported, only singletons, hence the
 Obviously the list is incomplete. If you do not want to roll your own classes, use the `Element` class:
 
 ```js
-const br = Element.fromHTML('<br />');
+const br = Element.fromHTML(Element, '<br />');
 ```
 
 ## Rolling your own classes
