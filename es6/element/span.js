@@ -21,16 +21,13 @@ class Span extends Element {
     return Element.fromDOMElement(Span, domElement);
   }
 
-  static fromProperties(Class, properties) {
-    if (arguments.length === 1) {
-      properties = Class;
-      Class = Span;
-    }
-
-    return Element.fromProperties(Class, properties);
+  static fromProperties(properties) {
+    return Element.fromProperties(properties);
   }
 }
 
-Span.tagName = 'span';
+Object.assign(Span, {
+  tagName: 'span'
+});
 
 module.exports = Span;

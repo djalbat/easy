@@ -21,16 +21,13 @@ class Div extends Element {
     return Element.fromDOMElement(Div, domElement);
   }
 
-  static fromProperties(Class, properties) {
-    if (arguments.length === 1) {
-      properties = Class;
-      Class = Div;
-    }
-
-    return Element.fromProperties(Class, properties);
+  static fromProperties(properties) {
+    return Element.fromProperties(Div, properties);
   }
 }
 
-Div.tagName = 'div';
+Object.assign(Div, {
+  tagName: 'div'
+});
 
 module.exports = Div;
