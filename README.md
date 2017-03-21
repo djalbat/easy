@@ -1,20 +1,20 @@
-# EasyUI
+# Easy
 
 A V-framework.
 
-EasyUI is an MVC framework without the M and without the C. It's without a model, only abstracting away from the view, namely the document object model. There is some irony here. It's without a controller, or whatever. It will not help you with the architecture of your large application. It is about the leaves of an application, not its branches. 
+Easy is an MVC framework without the M and without the C. It's without a model, only abstracting away from the view, namely the document object model. There is some irony here. It's without a controller, or whatever. It will not help you with the architecture of your large application. It is about the leaves of an application, not its branches.
 
 ### JSX support
 
-There is now support for [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html). What this means is that EasyUI *will* now help you with the architecture of your large application. In fact JSX brings with it a [host of benefits](https://djalbat.github.io/EasyUI-JSX/#jsxIsGreat). So although EasyUI and its related projects will continue to work standalone, their use with JSX is *highly recommended*. The contents of this readme file will stay as a reference, however a much better place to start from now on is here:
+There is now support for [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html). What this means is that Easy *will* now help you with the architecture of your large application. In fact JSX brings with it a [host of benefits](https://djalbat.github.io/Easy-JSX/#jsxIsGreat). So although Easy and its related projects will continue to work standalone, their use with JSX is *highly recommended*. The contents of this readme file will stay as a reference, however a much better place to start from now on is here:
 
-* [EasyUI-JSX Online documentation](https://djalbat.github.io/EasyUI-JSX/)
+* [Easy-JSX Online documentation](https://djalbat.github.io/Easy-JSX/)
 
 ### Related projects
 
-- [EasyUI-Layout](https://github.com/djalbat/EasyUI-Layout) Layout elements that work with CSS flexbox.
-- [EasyUI-DragAndDrop](https://github.com/djalbat/EasyUI-DragAndDrop) Drag and drop elements including an explorer and a rubbish bin.
-- [EasyUI-RichTextarea](https://github.com/djalbat/EasyUI-RichTextarea) A textarea element that handles and hands off events well.
+- [Easy-Layout](https://github.com/djalbat/Easy-Layout) Layout elements that work with CSS flexbox.
+- [Easy-DragAndDrop](https://github.com/djalbat/Easy-DragAndDrop) Drag and drop elements including an explorer and a rubbish bin.
+- [Easy-RichTextarea](https://github.com/djalbat/Easy-RichTextarea) A textarea element that handles and hands off events well.
 
 ### Are these projects actually used anywhere?
 
@@ -24,13 +24,13 @@ Actually they are, here:
 
 ## Installation
 
-You can install EasyUI with [npm](https://www.npmjs.com/):
+You can install Easy with [npm](https://www.npmjs.com/):
 
-    npm install easyui
+    npm install easy
 
 You can also clone the repository with [Git](https://git-scm.com/)...
 
-    git clone https://github.com/djalbat/EasyUI.git
+    git clone https://github.com/djalbat/Easy.git
 
 ...and then install the necessary modules with npm from within the project's root directory:
 
@@ -41,28 +41,28 @@ You can also clone the repository with [Git](https://git-scm.com/)...
 If you are building with [Node.js](http://nodejs.org) the usage is as follows:
 
 ```js
-const easyui = require('easyui'),
-      Select = easyui.Select,
-      Checkbox = easyui.Checkbox;
+const easy = require('easy'),
+      Select = easy.Select,
+      Checkbox = easy.Checkbox;
 ```
 
-To use EasyUI in the browser, take the `easyui.js` file from the project's `dist/` directory and put it somewhere such as a `public/scripts/lib` directory. Referencing this distribution file from a `script` element...
+To use Easy in the browser, take the `easy.js` file from the project's `dist/` directory and put it somewhere such as a `public/scripts/lib` directory. Referencing this distribution file from a `script` element...
 
 ```html
-<script src="scripts/lib/easyui.js"> </script>
+<script src="scripts/lib/easy.js"> </script>
 ```
 
-...will give you a global `easyui` variable which can be used directly:
+...will give you a global `easy` variable which can be used directly:
 
 ```js
-const Button = easyui.Button;
+const Button = easy.Button;
 ```
 
 Alternatively, if you are using an AMD style `require` the usage is similar to the Node.js case, only make sure that the path to the distribution file is correct. The following script should work, assuming it lives in the the `public/scripts/` directory:
 
 ```js
-const easyui = require('lib/easyui'),
-      Button = easyui.Button;
+const easy = require('lib/easy'),
+      Button = easy.Button;
 ```
 
 ## Compiling from source
@@ -93,7 +93,7 @@ const body = Body.fromDOMElement(bodyDOMElement),
       checkbox = Checkbox.fromHTML('<input type="checkbox" />');
 ```
 
-Note that `document` here is the global document reference, not EasyUI's `document` singleton.
+Note that `document` here is the global document reference, not Easy's `document` singleton.
 
 If constructors take handlers or other additional arguments, you can pass these to the corresponding `fromDOMElement()` or `fromHTML()` factory methods and they will be passed on the constructor. 
 

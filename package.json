@@ -1,13 +1,13 @@
 {
-  "name": "easyui",
+  "name": "easy",
   "author": "James Smith",
-  "version": "7.2.10",
+  "version": "7.2.11",
   "license": "MIT",
-  "homepage": "https://github.com/djalbat/EasyUI",
+  "homepage": "https://github.com/djalbat/Easy",
   "description": "A V-framework.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/djalbat/EasyUI"
+    "url": "https://github.com/djalbat/Easy"
   },
   "dependencies": {},
   "devDependencies": {
@@ -21,8 +21,8 @@
     "clean": "rm -rf ./lib",
     "babel": "babel ./es6 --presets=es2015 --out-dir=./lib",
     "babel-debug": "babel ./es6 --presets=es2015 --source-maps inline --out-dir=./lib",
-    "browserify": "browserify ./index.js --standalone easyui > ./dist/easyui.js",
-    "browserify-debug": "browserify ./index.js --standalone easyui --debug > ./dist/easyui.js",
+    "browserify": "browserify ./index.js --standalone easy > ./dist/easy.js",
+    "browserify-debug": "browserify ./index.js --standalone easy --debug > ./dist/easy.js",
     "build": "npm run clean && npm run babel && npm run browserify",
     "build-debug": "npm run clean && npm run babel-debug && npm run browserify-debug",
     "watch": "npm run build && chokidar './index.js' './es6/**/*.js' -c 'npm run build'",
