@@ -238,12 +238,6 @@ class Element {
   }
 
   static clone(Class, element, ...remainingArguments) {
-    if (Class instanceof Element) {
-      element = Class;
-      remainingArguments.shift();
-      Class = Element;
-    }
-
     const deep = true,
           domElement = element.domElement.cloneNode(deep);
 
@@ -254,12 +248,6 @@ class Element {
   }
 
   static fromHTML(Class, html, ...remainingArguments) {
-    if (typeof Class === 'string') {
-      html = Class;
-      remainingArguments.shift();
-      Class = Element;
-    }
-
     const outerDOMElement = document.createElement('div');
 
     outerDOMElement.innerHTML = html;  ///
@@ -273,12 +261,6 @@ class Element {
   }
 
   static fromDOMElement(Class, domElement, ...remainingArguments) {
-    if (typeof Class === 'object') {
-      domElement = Class;
-      remainingArguments.shift();
-      Class = Element;
-    }
-
     remainingArguments.unshift(domElement);
     remainingArguments.unshift(null);
 
