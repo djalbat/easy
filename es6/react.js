@@ -80,4 +80,3 @@ function isTypeOf(argument, Class) {
 
   return typeOf;
 }
-x
