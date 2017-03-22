@@ -220,6 +220,8 @@ Each class bar the `Window` and `Document` classes has the following methods. Th
 - `getChildElements(selector = '*')`
 - `getParentElement(selector = '*')`
 - `getAscendantElements(selector = '*')`
+- `getPreviousSiblingElement(selector = '*')`
+- `getNextSiblingElement(selector = '*')`
 - `on(eventTypes, handler)`
 - `off(eventTypes, handler)`
 - `onClick(handler)`

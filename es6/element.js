@@ -237,6 +237,30 @@ class Element {
     return ascendantElements;
   }
 
+  getPreviousSiblingElement(selector = '*') {
+    let previousSiblingElement = null;
+
+    const previousSiblingDOMNode = this.domElement.previousSibling;  ///
+
+    if ((previousSiblingDOMNode !== null) && domNodeMatchesSelector(previousSiblingDOMNode, selector)) {
+      previousSiblingElement = previousSiblingDOMNode.__element__ || null;
+    }
+
+    return previousSiblingElement;
+  }
+
+  getNextSiblingElement(selector = '*') {
+    let nextSiblingElement = null;
+
+    const nextSiblingDOMNode = this.domElement.nextSibling;
+
+    if ((nextSiblingDOMNode !== null) && domNodeMatchesSelector(nextSiblingDOMNode, selector)) {
+      nextSiblingElement = nextSiblingDOMNode.__element__ || null;
+    }
+
+    return nextSiblingElement;
+  }
+
   static clone(Class, element, ...remainingArguments) {
     const deep = true,
           domElement = element.domElement.cloneNode(deep);
@@ -326,26 +350,30 @@ function descendantDOMNodesFromDOMNode(domNode, descendantDOMNodes = []) {
 
 function filterDOMNodes(domNodes, selector) {
   const filteredDOMNodes = filter(domNodes, function(domNode) {
-    const domNodeType = domNode.nodeType;
-
-    switch (domNodeType) {
-      case Node.ELEMENT_NODE : {
-        const domElement = domNode; ///
-
-        return domElement.matches(selector);
-      }
-
-      case Node.TEXT_NODE : {
-        if (selector === '*') {
-          return true;
-        }
-      }
-    }
-
-    return false;
+    return domNodeMatchesSelector(domNode, selector);
   });
 
   return filteredDOMNodes;
+}
+
+function domNodeMatchesSelector(domNode, selector) {
+  const domNodeType = domNode.nodeType;
+
+  switch (domNodeType) {
+    case Node.ELEMENT_NODE : {
+      const domElement = domNode; ///
+
+      return domElement.matches(selector);
+    }
+
+    case Node.TEXT_NODE : {
+      if (selector === '*') {
+        return true;
+      }
+    }
+  }
+
+  return false;
 }
 
 function filter(array, test) {

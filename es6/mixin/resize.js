@@ -28,15 +28,15 @@ module.exports = resizeMixin;
 function appendResizeObject(element) {
   const resizeObject = document.createElement('object'),
         domElement = element.domElement,
-        style = ` display: block; 
-                  position: absolute; 
-                  top: 0; 
-                  left: 0; 
-                  height: 100%; 
-                  width: 100%; 
-                  overflow: hidden; 
-                  pointer-events: none; 
-                  z-index: -1;`;
+        style = `display: block; 
+                 position: absolute; 
+                 top: 0; 
+                 left: 0; 
+                 height: 100%; 
+                 width: 100%; 
+                 overflow: hidden; 
+                 pointer-events: none; 
+                 z-index: -1;`;
 
   resizeObject.setAttribute('style', style);
   resizeObject.data = 'about:blank';
