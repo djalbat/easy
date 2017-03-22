@@ -49,15 +49,14 @@ function childElementsFromChildArguments(childArguments) {
 
   const childElements = childArguments.map(function(childArgument) {
     let childElement;
-
-    if (  (childArgument instanceof Element)
-       || (childArgument instanceof TextElement)  ) {
-      childElement = childArgument;  ///
-    } else {
+    
+    if (typeof childArgument === 'string') {
       const text = childArgument, ///
             textElement = new TextElement(text);
 
       childElement = textElement;
+    } else {
+      childElement = childArgument;  ///
     }
 
     return childElement;
@@ -81,3 +80,4 @@ function isTypeOf(argument, Class) {
 
   return typeOf;
 }
+x
