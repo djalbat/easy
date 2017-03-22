@@ -69,7 +69,7 @@ function childElementsFromChildArguments(childArguments) {
 function isTypeOf(argument, Class) {
   let typeOf = false;
 
-  if (argument === Class) { ///
+  if (argument.name === Class.name) { ///
     typeOf = true;
   } else {
     argument = Object.getPrototypeOf(argument); ///

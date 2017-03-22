@@ -311,9 +311,11 @@ Object.assign(Element.prototype, clickMixin);
 Object.assign(Element.prototype, mouseMixin);
 Object.assign(Element.prototype, resizeMixin);
 
-Element.LEFT_MOUSE_BUTTON = 0;
-Element.MIDDLE_MOUSE_BUTTON = 1;
-Element.RIGHT_MOUSE_BUTTON = 2;
+Object.assign(Element, {
+  LEFT_MOUSE_BUTTON: 0,
+  MIDDLE_MOUSE_BUTTON: 1,
+  RIGHT_MOUSE_BUTTON: 2
+});
 
 module.exports = Element;
 
