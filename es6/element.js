@@ -299,9 +299,9 @@ class Element {
           element = Element.fromHTML(Class, html, ...remainingArguments);
 
     const ignoredProperties = Class.ignoredProperties,
-          additionalProperties = Class.additionalProperties;
+          defaultProperties = Class.defaultProperties;
 
-    element.applyProperties(properties, ignoredProperties, additionalProperties);
+    element.applyProperties(properties, ignoredProperties, defaultProperties);
 
     return element;
   }

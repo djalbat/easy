@@ -58,7 +58,7 @@ Object.assign(Checkbox, {
   ignoredProperties: [
     'onChange'
   ],
-  additionalProperties: {
+  defaultProperties: {
     type: 'checkbox'
   }
 });

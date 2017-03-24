@@ -1,13 +1,13 @@
 'use strict';
 
-function applyProperties(properties, ignoredProperties, additionalProperties) {
+function applyProperties(properties, ignoredProperties, defaultProperties) {
   this.properties = {};
 
   properties = Object.assign({}, properties); ///
 
   unassign(properties, ignoredProperties);
 
-  Object.assign(properties, additionalProperties);
+  assign(properties, defaultProperties);
 
   const childElements = this.childElements ?
                           this.childElements(properties.childElements) :
@@ -49,7 +49,23 @@ function unassign(properties, ignoredProperties) {
     const ignoredPropertyNames = ignoredProperties; ///
 
     ignoredPropertyNames.forEach(function(ignoredPropertyName) {
-      delete properties[ignoredPropertyName];
+      if (properties.hasOwnProperty(ignoredPropertyName)) {
+        delete properties[ignoredPropertyName];
+      }
+    });
+  }
+}
+
+function assign(properties, defaultProperties) {
+  if (defaultProperties !== undefined) {
+    const defaultPropertyNames = Object.keys(defaultProperties);
+
+    defaultPropertyNames.forEach(function(defaultPropertyName) {
+      if (!properties.hasOwnProperty(defaultPropertyName)) {
+        const defaultPropertyValue = defaultProperties[defaultPropertyName];
+
+        properties[defaultPropertyName] = defaultPropertyValue;
+      }
     });
   }
 }
