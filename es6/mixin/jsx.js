@@ -10,7 +10,7 @@ function applyProperties(properties, ignoredProperties, defaultProperties) {
   assign(properties, defaultProperties);
 
   const childElements = this.childElements ?
-                          this.childElements(properties.childElements) :
+                          this.childElements(properties) :
                             properties.childElements;
 
   if (childElements) {
