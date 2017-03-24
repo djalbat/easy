@@ -4,32 +4,36 @@ function applyProperties(properties, ignoredProperties, additionalProperties) {
   this.properties = {};
 
   properties = Object.assign({}, properties); ///
-  
+
   unassign(properties, ignoredProperties);
 
   Object.assign(properties, additionalProperties);
 
+  const childElements = this.childElements ?
+                          this.childElements(properties.childElements) :
+                            properties.childElements;
+
+  if (childElements) {
+    childElements.forEach(function(childElement) {
+      this.append(childElement);
+    }.bind(this));
+  }
+
+  delete properties.childElements;
+
   const names = Object.keys(properties);
 
   names.forEach(function(name) {
-    if (name === 'childElements') {
-      const childElements = properties['childElements'];
+    const value = properties[name];
 
-      childElements.forEach(function(childElement) {
-        this.append(childElement);
-      }.bind(this));
+    if (false) {
+
+    } else if (isHandlerName(name)) {
+      addHandler(this, name, value);
+    } else if (isAttributeName(name)) {
+      addAttribute(this, name, value);
     } else {
-      const value = properties[name];
-
-      if (false) {
-
-      } else if (isHandlerName(name)) {
-        addHandler(this, name, value);
-      } else if (isAttributeName(name)) {
-        addAttribute(this, name, value);
-      } else {
-        this.properties[name] = value;
-      }
+      this.properties[name] = value;
     }
   }.bind(this));
 }
