@@ -222,10 +222,16 @@ Each class bar the `Window` and `Document` classes has the following methods. Th
 - `getAscendantElements(selector = '*')`
 - `getPreviousSiblingElement(selector = '*')`
 - `getNextSiblingElement(selector = '*')`
+- `getScrollTop()`
+- `getScrollLeft()`
+- `setScrollTop(scrollTop)`
+- `setScrollLeft(scrollLeft)`
 - `on(eventTypes, handler)`
 - `off(eventTypes, handler)`
 - `onClick(handler)`
 - `offClick(handler)`
+- `onKeyUp(handler)`
+- `onKeyDown(handler)`
 - `onMouseUp(handler)`
 - `onMouseDown(handler)`
 - `onMouseOver(handler)`
@@ -236,6 +242,8 @@ Each class bar the `Window` and `Document` classes has the following methods. Th
 - `offMouseOver(handler)`
 - `offMouseOut(handler)`
 - `offMouseMove(handler)`
+- `onScroll(handler)`
+- `offScroll(handler)`
 - `onResize(handler)`
 - `offResize(handler)`
 
@@ -284,17 +292,11 @@ The `Textarea` class has the following additional methods:
 - `getValue()`
 - `getSelectionStart()`
 - `getSelectionEnd()`
-- `getScrollTop()`
-- `getScrollLeft()`
 - `setValue(value)`
 - `setSelectionStart(selectionStart)`
 - `setSelectionEnd(selectionEnd)`
-- `setScrollTop(scrollTop)`
-- `setScrollLeft(scrollLeft)`
 - `onChange(handler)`
 - `offChange(handler)`
-- `onScroll(handler)`
-- `offScroll(handler)`
 - `onResize(resizeHandler)`
 - `offResize(resizeHandler)`
 

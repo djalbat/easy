@@ -4,8 +4,10 @@ const Offset = require('./misc/offset'),
       Bounds = require('./misc/bounds'),
       jsxMixin = require('./mixin/jsx'),
       eventMixin = require('./mixin/event'),
+      keyMixin = require('./mixin/key'),
       clickMixin = require('./mixin/click'),
       mouseMixin = require('./mixin/mouse'),
+      scrollMixin = require('./mixin/scroll'),
       resizeMixin = require('./mixin/resize');
 
 class Element {
@@ -308,7 +310,9 @@ class Element {
 Object.assign(Element.prototype, jsxMixin);
 Object.assign(Element.prototype, eventMixin);
 Object.assign(Element.prototype, clickMixin);
+Object.assign(Element.prototype, keyMixin);
 Object.assign(Element.prototype, mouseMixin);
+Object.assign(Element.prototype, scrollMixin);
 Object.assign(Element.prototype, resizeMixin);
 
 Object.assign(Element, {
