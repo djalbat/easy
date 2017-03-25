@@ -1,5 +1,7 @@
 'use strict';
 
+const TextElement = require('../textElement');
+
 function applyProperties(properties, ignoredProperties, defaultProperties) {
   this.properties = {};
 
