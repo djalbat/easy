@@ -10,6 +10,12 @@ class Window {
 
     this.handlersMap = {};
   }
+
+  assign(...sources) {
+    const target = this.domElement; ///
+
+    Object.assign(target, ...sources);
+  }
   
   getWidth() { return this.domElement.innerWidth; } ///
   
