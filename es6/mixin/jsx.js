@@ -9,17 +9,13 @@ function applyProperties(properties, ignoredProperties, defaultProperties) {
 
   assign(properties, defaultProperties);
 
-  const childElements = this.childElements ?
-                          this.childElements(properties) :
-                            properties.childElements;
-
-  if (childElements) {
-    childElements.forEach(function(childElement) {
-      this.append(childElement);
-    }.bind(this));
-  }
+  const childElements = childElementsFromElementAndProperties(this, properties);
 
   delete properties.childElements;
+
+  childElements.forEach(function(childElement) {
+    this.append(childElement);
+  }.bind(this));
 
   const names = Object.keys(properties);
 
@@ -43,6 +39,31 @@ const jsxMixin = {
 };
 
 module.exports = jsxMixin;
+
+function childElementsFromElementAndProperties(element, properties) {
+  let childElements = element.childElements ?
+                        element.childElements(properties) :
+                          properties.childElements;
+
+  childElements = (childElements !== undefined) ?
+                   ((childElements instanceof Array) ?
+                       childElements :
+                        [childElements]) :
+                          [];
+
+  childElements = childElements.map(function(childElement) {
+    if (typeof childElement === 'string') {
+      const text = childElement,  ///
+            textElement = new TextElement(text);
+
+      childElement = textElement; ///
+    }
+
+    return childElement;
+  });
+
+  return childElements;
+}
 
 function unassign(properties, ignoredProperties) {
   if (ignoredProperties !== undefined) {
@@ -134,4 +155,3 @@ const attributeNames = [
   'wmode',
   'wrap'
 ];
-
