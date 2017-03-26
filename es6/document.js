@@ -2,7 +2,8 @@
 
 const eventMixin = require('./mixin/event'),
       clickMixin = require('./mixin/click'),
-      mouseMixin = require('./mixin/mouse');
+      mouseMixin = require('./mixin/mouse'),
+      keyMixin = require('./mixin/key');
 
 class Document {
   constructor() {
@@ -15,5 +16,6 @@ class Document {
 Object.assign(Document.prototype, eventMixin);
 Object.assign(Document.prototype, clickMixin);
 Object.assign(Document.prototype, mouseMixin);
+Object.assign(Window.prototype, keyMixin);
 
 module.exports = new Document();  ///

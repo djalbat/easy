@@ -305,12 +305,14 @@ Both the `Window` and `Document` singletons have the following methods:
 - `on(eventTypes, handler)`
 - `off(eventTypes, handler)`
 - `onClick(handler)`
+- `offClick(handler)`
+- `onKeyUp(handler)`
+- `onKeyDown(handler)`
 - `onMouseUp(handler)`
 - `onMouseDown(handler)`
 - `onMouseOver(handler)`
 - `onMouseOut(handler)`
 - `onMouseMove(handler)`
-- `offClick(handler)`
 - `offMouseUp(handler)`
 - `offMouseDown(handler)`
 - `offMouseOver(handler)`
@@ -319,8 +321,11 @@ Both the `Window` and `Document` singletons have the following methods:
 
 The `Window` class, but not the `Document` class, has the following methods:
 
-- `onResize`
-- `offResize`
+- `assign(...sources)`
+- `onResize(handler)`
+- `offResize(handler)`
+- `getWidth`
+- `getHeight`
 - `getScrollTop`
 - `getScrollLeft`
 
