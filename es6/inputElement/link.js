@@ -6,7 +6,7 @@ class Link extends InputElement {
   constructor(selector, clickHandler) {
     super(selector);
 
-    if (clickHandler) {
+    if (clickHandler !== undefined) {
       this.onClick(clickHandler);
     }
   }
@@ -54,9 +54,9 @@ Object.assign(Link, {
 
 module.exports = Link;
 
-function defaultIntermediateClickHandler(handler, event) {
+function defaultIntermediateClickHandler(handler, event, targetElement) {
   const href = this.getAttribute('href'),
-        preventDefault = handler(href);
+        preventDefault = handler(href, targetElement);
 
   return preventDefault;
 }

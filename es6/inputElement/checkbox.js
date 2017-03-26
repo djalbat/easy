@@ -3,11 +3,15 @@
 const InputElement = require('../inputElement');
 
 class Checkbox extends InputElement {
-  constructor(selector, changeHandler) {
+  constructor(selector, changeHandler, checked) {
     super(selector);
 
-    if (changeHandler) {
+    if (changeHandler !== undefined) {
       this.onChange(changeHandler);
+    }
+    
+    if (checked !== undefined) {
+      this.check(checked);
     }
   }
 
@@ -46,10 +50,10 @@ class Checkbox extends InputElement {
   }
 
   static fromProperties(properties) {
-    const { onChange } = properties,
+    const { onChange, checked } = properties,
           changeHandler = onChange; ///    
 
-    return InputElement.fromProperties(Checkbox, properties, changeHandler);
+    return InputElement.fromProperties(Checkbox, properties, changeHandler, checked);
   }
 }
 
@@ -65,9 +69,9 @@ Object.assign(Checkbox, {
 
 module.exports = Checkbox;
 
-function defaultIntermediateChangeHandler(handler, event) {
+function defaultIntermediateChangeHandler(handler, event, targetElement) {
   const checked = this.isChecked(),
-        preventDefault = handler(checked);
+        preventDefault = handler(checked, targetElement);
 
   return preventDefault;
 }

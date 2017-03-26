@@ -6,7 +6,7 @@ class Input extends InputElement {
   constructor(selector, changeHandler) {
     super(selector);
 
-    if (changeHandler) {
+    if (changeHandler !== undefined) {
       this.onChange(changeHandler);
     }
   }
@@ -66,9 +66,9 @@ Object.assign(Input, {
 
 module.exports = Input;
 
-function defaultIntermediateChangeHandler(handler, event) {
+function defaultIntermediateChangeHandler(handler, event, targetElement) {
   const value = this.getValue(),
-        preventDefault = handler(value);
+        preventDefault = handler(value, targetElement);
 
   return preventDefault;
 }

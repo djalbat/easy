@@ -6,7 +6,7 @@ class Button extends InputElement {
   constructor(selector, clickHandler) {
     super(selector);
 
-    if (clickHandler) {
+    if (clickHandler !== undefined) {
       this.onClick(clickHandler);
     }
   }
@@ -54,9 +54,9 @@ Object.assign(Button, {
 
 module.exports = Button;
 
-function defaultIntermediateClickHandler(handler, event) {
+function defaultIntermediateClickHandler(handler, event, targetElement) {
   const mouseButton = event.button,
-        preventDefault = handler(mouseButton);
+        preventDefault = handler(mouseButton, targetElement);
 
   return preventDefault;
 }

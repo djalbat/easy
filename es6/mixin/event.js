@@ -73,19 +73,20 @@ module.exports = eventMixin;
 
 function eventListener(event) {
   const eventType = event.type,
+        targetElement = this,  ///
         handlers = this.handlersMap[eventType];
 
   let preventEventDefault = false;
 
   handlers.forEach(function(handler) {
     if (handler.intermediateHandler !== undefined) {
-      const preventDefault = handler.intermediateHandler(handler, event);
+      const preventDefault = handler.intermediateHandler(handler, event, targetElement);
       
       if (preventDefault === true) {
         preventEventDefault = true;
       }  
     } else {
-      const preventDefault = handler(event);
+      const preventDefault = handler(event, targetElement);
       
       if (preventDefault === true) {
         preventEventDefault = true;

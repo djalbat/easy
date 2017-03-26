@@ -3,19 +3,31 @@
 const InputElement = require('../inputElement');
 
 class Select extends InputElement {
-  constructor(selector, changeHandler) {
+  constructor(selector, changeHandler, selectedOptionValue) {
     super(selector);
 
-    if (changeHandler) {
+    if (changeHandler !== undefined) {
       this.onChange(changeHandler);
+    }
+    
+    if (selectedOptionValue !== undefined) {
+      this.setSelectedOptionByValue(selectedOptionValue);
     }
   }
 
   clone(changeHandler) { return Select.clone(this, changeHandler); }
 
-  getSelectedOptionValue() { return this.domElement.value; } ///
+  getSelectedOptionValue() { 
+    const selectedOptionValue = this.domElement.value;  ///
+    
+    return selectedOptionValue;
+  }
 
-  setSelectedOptionByValue(value) { this.domElement.value = value; } ///
+  setSelectedOptionByValue(selectedOptionValue) {
+    const value = selectedOptionValue;  ///
+    
+    this.domElement.value = value; 
+  }
 
   onChange(handler) {
     if (handler.intermediateHandler === undefined) {
@@ -42,10 +54,10 @@ class Select extends InputElement {
   }
 
   static fromProperties(properties) {
-    const { onChange } = properties,
+    const { onChange, selectedOptionValue } = properties,
           changeHandler = onChange; ///    
 
-    return InputElement.fromProperties(Select, properties, changeHandler);
+    return InputElement.fromProperties(Select, properties, changeHandler, selectedOptionValue);
   }
 }
 
@@ -58,9 +70,9 @@ Object.assign(Select, {
 
 module.exports = Select;
 
-function defaultIntermediateChangeHandler(handler, event) {
+function defaultIntermediateChangeHandler(handler, event, targetElement) {
   const selectedOptionValue = this.getSelectedOptionValue(),
-        preventDefault = handler(selectedOptionValue);
+        preventDefault = handler(selectedOptionValue, targetElement);
 
   return preventDefault;
 }

@@ -283,7 +283,7 @@ The `Input` class has the following additional methods:
 The `Select` class has the following additional methods:
 
 - `getSelectedOptionValue()`
-- `setSelectedOptionByValue(value)`
+- `setSelectedOptionByValue(selectedOptionValue)`
 - `onChange(handler)`
 - `offChange(handler)`
   

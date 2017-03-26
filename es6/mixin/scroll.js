@@ -29,10 +29,11 @@ const scrollMixin = {
 
 module.exports = scrollMixin;
 
-function defaultIntermediateHandler(handler, event) {
+function defaultIntermediateHandler(handler) {
   const scrollTop = this.getScrollTop(),
         scrollLeft = this.getScrollLeft(),
-        preventDefault = handler(scrollTop, scrollLeft);
+        targetElement = this, ///
+        preventDefault = handler(scrollTop, scrollLeft, targetElement);
 
   return preventDefault;
 }

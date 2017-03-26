@@ -73,9 +73,10 @@ function resizeObjectLoadHandler(element) {
 function eventListener(element) {
   const width = element.getWidth(),
         height = element.getHeight(),
+        targetElement = element, ///
         handlers = element.handlersMap['resize'];
 
   handlers.forEach(function(handler){
-    handler(width, height);
+    handler(width, height, targetElement);
   });
 }

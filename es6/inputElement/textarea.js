@@ -6,7 +6,7 @@ class Textarea extends InputElement {
   constructor(selector, changeHandler) {
     super(selector);
 
-    if (changeHandler) {
+    if (changeHandler !== undefined) {
       this.onChange(changeHandler);
     }
   }
@@ -71,9 +71,9 @@ Object.assign(Textarea, {
 
 module.exports = Textarea;
 
-function defaultIntermediateChangeHandler(handler, event) {
+function defaultIntermediateChangeHandler(handler, event, targetElement) {
   const value = this.getValue(),
-        preventDefault = handler(value);
+        preventDefault = handler(value, targetElement);
 
   return preventDefault;
 }
