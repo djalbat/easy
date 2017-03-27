@@ -44,7 +44,7 @@ class Element {
     return width;
   }
 
-  setWidth(width) { this.domElement.style.width = `${width}px`; }
+  setWidth(width) { this.domElement.style.width = width; }
 
   getHeight(includeBorder = false) {
     const height = includeBorder ?
@@ -54,7 +54,7 @@ class Element {
     return height;
   }
 
-  setHeight(height) { this.domElement.style.height = `${height}px`; }
+  setHeight(height) { this.domElement.style.height = height; }
 
   getAttribute(name) { return this.domElement.getAttribute(name); }
 
