@@ -3,40 +3,42 @@
 const Element = require('./element'),
       TextElement = require('./textElement');
 
-class React {
-  static createElement(firstArgument, properties, ...childArguments) {
-    let element = null;
+function createElement(firstArgument, properties, ...childArguments) {
+  let element = null;
 
-    if (firstArgument !== undefined) {
-      const childElements = childElementsFromChildArguments(childArguments);
+  if (firstArgument !== undefined) {
+    const childElements = childElementsFromChildArguments(childArguments);
 
-      properties = Object.assign({
-        childElements: childElements
-      }, properties);
+    properties = Object.assign({
+      childElements: childElements
+    }, properties);
 
-      if (false) {
+    if (false) {
 
-      } else if (isTypeOf(firstArgument, Element)) {
-        const Class = firstArgument;  ///
+    } else if (isTypeOf(firstArgument, Element)) {
+      const Class = firstArgument;  ///
 
-        element = Class.fromProperties(properties);
-      } else if (typeof firstArgument === 'function') {
-        const elementFunction = firstArgument;  ///
+      element = Class.fromProperties(properties);
+    } else if (typeof firstArgument === 'function') {
+      const elementFunction = firstArgument;  ///
 
-        element = elementFunction(properties);
-      } else if (typeof firstArgument === 'string') {
-        const tagName = firstArgument,  ///
-              html = `<${tagName}></${tagName}>`;
+      element = elementFunction(properties);
+    } else if (typeof firstArgument === 'string') {
+      const tagName = firstArgument,  ///
+            html = `<${tagName} />`;
 
-        element = Element.fromHTML(Element, html);
+      element = Element.fromHTML(Element, html);
 
-        element.applyProperties(properties);
-      }
+      element.applyProperties(properties);
     }
-
-    return element;
   }
+
+  return element;
 }
+
+const React = {
+  createElement: createElement
+};
 
 module.exports = React;
 
