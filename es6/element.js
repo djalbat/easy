@@ -144,7 +144,9 @@ class Element {
 
   html(html) {
     if (html === undefined) {
-      html = this.domElement.innerHTML; ///
+      const innerHTML = this.domElement.innerHTML;
+
+      html = innerHTML; ///
 
       return html;
     } else {
