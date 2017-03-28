@@ -3,15 +3,11 @@
 const InputElement = require('../inputElement');
 
 class Select extends InputElement {
-  constructor(selector, changeHandler, selectedOptionValue) {
+  constructor(selector, changeHandler) {
     super(selector);
 
     if (changeHandler !== undefined) {
       this.onChange(changeHandler);
-    }
-    
-    if (selectedOptionValue !== undefined) {
-      this.setSelectedOptionByValue(selectedOptionValue);
     }
   }
 
@@ -54,10 +50,10 @@ class Select extends InputElement {
   }
 
   static fromProperties(properties) {
-    const { onChange, selectedOptionValue } = properties,
+    const { onChange } = properties,
           changeHandler = onChange; ///    
 
-    return InputElement.fromProperties(Select, properties, changeHandler, selectedOptionValue);
+    return InputElement.fromProperties(Select, properties, changeHandler);
   }
 }
 
