@@ -78,47 +78,11 @@ class Element {
 
   clearClasses() { this.domElement.className = ''; }
 
-  prepend(element) {
-    const domElement = element.domElement,
-          firstChildDOMElement = this.domElement.firstChild;
+  prependTo(parentElement) { parentElement.prepend(this); }
 
-    this.domElement.insertBefore(domElement, firstChildDOMElement);
-  }
-  
-  append(element) {
-    const domElement = element.domElement;
+  appendTo(parentElement) { parentElement.append(this); }
 
-    this.domElement.insertBefore(domElement, null); ///
-  }
-
-  appendTo(parentElement) {
-    const parentDOMElement = parentElement.domElement,
-          firstSiblingDOMElement = parentDOMElement.firstChild; ///
-
-    parentDOMElement.insertBefore(this.domElement, firstSiblingDOMElement);
-  }
-
-  prependTo(parentElement) {
-    const parentDOMElement = parentElement.domElement;
-
-    parentDOMElement.insertBefore(this.domElement, null); ///
-  }
-
-  removeFrom(parentElement) {
-    const parentDOMElement = parentElement.domElement;
-
-    parentDOMElement.removeChild(this.domElement);
-  }
-
-  remove(element) {
-    if (element) {
-      const domElement = element.domElement;
-
-      this.domElement.removeChild(domElement);
-    } else {
-      this.domElement.remove();
-    }
-  }
+  removeFrom(parentElement) { parentElement.remove(this); }
 
   insertBefore(siblingElement) {
     const parentDOMNode = siblingElement.domElement.parentNode,
@@ -132,6 +96,29 @@ class Element {
           siblingDOMElement = siblingElement.domElement;
 
     parentDOMNode.insertBefore(this.domElement, siblingDOMElement.nextSibling);  ///
+  }
+
+  prepend(element) {
+    const domElement = element.domElement,
+          firstChildDOMElement = this.domElement.firstChild;
+
+    this.domElement.insertBefore(domElement, firstChildDOMElement);
+  }
+
+  append(element) {
+    const domElement = element.domElement;
+
+    this.domElement.insertBefore(domElement, null); ///
+  }
+
+  remove(element) {
+    if (element) {
+      const domElement = element.domElement;
+
+      this.domElement.removeChild(domElement);
+    } else {
+      this.domElement.remove();
+    }
   }
 
   show(displayStyle = 'block') { this.domElement.style.display = displayStyle; }

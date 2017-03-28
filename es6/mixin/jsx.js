@@ -11,13 +11,10 @@ function applyProperties(properties, ignoredProperties, defaultProperties) {
 
   assign(properties, defaultProperties);
 
-  const childElements = childElementsFromElementAndProperties(this, properties);
+  const parentElement = this, ///
+        childElements = childElementsFromElementAndProperties(this, properties);
 
   delete properties.childElements;
-
-  childElements.forEach(function(childElement) {
-    this.append(childElement);
-  }.bind(this));
 
   const names = Object.keys(properties);
 
@@ -34,9 +31,25 @@ function applyProperties(properties, ignoredProperties, defaultProperties) {
       this.properties[name] = value;
     }
   }.bind(this));
+
+  childElements.forEach(function(childElement) {
+    childElement.appendTo(parentElement);
+  }.bind(this));
+}
+
+function appendTo(parentElement) {
+  const context = this.context || {},
+        parentContext = this.parentContext ?
+                          this.parentContext(context) :
+                            context;
+
+  parentElement.context = parentContext;
+
+  parentElement.append(this);
 }
 
 const jsxMixin = {
+  appendTo: appendTo,
   applyProperties: applyProperties
 };
 

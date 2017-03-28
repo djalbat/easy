@@ -52,6 +52,12 @@ class TextElement {
     return height;
   }
 
+  prependTo(parentElement) {
+    const parentDOMElement = parentElement.domElement;
+
+    parentDOMElement.insertBefore(this.domElement, null); ///
+  }
+
   appendTo(parentElement) {
     const parentDOMElement = parentElement.domElement,
           firstSiblingDOMElement = parentDOMElement.firstChild; ///
@@ -59,20 +65,10 @@ class TextElement {
     parentDOMElement.insertBefore(this.domElement, firstSiblingDOMElement);
   }
 
-  prependTo(parentElement) {
-    const parentDOMElement = parentElement.domElement;
-
-    parentDOMElement.insertBefore(this.domElement, null); ///
-  }
-
   removeFrom(parentElement) {
     const parentDOMElement = parentElement.domElement;
 
     parentDOMElement.removeChild(this.domElement);
-  }
-
-  remove() {
-    this.domElement.remove();
   }
 
   insertBefore(siblingElement) {
@@ -87,6 +83,10 @@ class TextElement {
           siblingDOMElement = siblingElement.domElement;
 
     parentDOMNode.insertBefore(this.domElement, siblingDOMElement.nextSibling);  ///
+  }
+
+  remove() {
+    this.domElement.remove();
   }
 }
 

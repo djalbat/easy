@@ -183,8 +183,9 @@ You can then use the private `domElement` property to create methods that abstra
     
 ## Standard methods
 
-Each class bar the `Window` and `Document` classes has the following methods. They are taken from the `Element` class and are overridden in many cases, in which case the signatures may change:
+Each class bar the `Window`, `Document` and `TextElement` classes has the following methods. They are taken from the `Element` class and are overridden in many cases, in which case the signatures may change:
 
+- `clone()`
 - `getOffset()`
 - `getBounds(includeBorder = false)`
 - `getWidth(includeBorder = false)`
@@ -202,14 +203,14 @@ Each class bar the `Window` and `Document` classes has the following methods. Th
 - `toggleClass(className)`
 - `hasClass(className)`
 - `clearClasses()`
-- `prepend(elementOrString)`
-- `append(elementOrString)`
 - `appendTo(parentElement)`
 - `prependTo(parentElement)`
 - `removeFrom(parentElement)`
-- `remove(element)`
 - `insertBefore(siblingElement)`
 - `insertAfter(siblingElement)`
+- `prepend(element)`
+- `append(element)`
+- `remove(element)`
 - `show(displayStyle = 'block')`
 - `hide()`
 - `enable()`
@@ -256,6 +257,24 @@ Aside from the above methods there are the aforementioned static factory methods
 - `static fromDOMElement(Class, domElement, ...remainingArguments)`
 
 Again bear in mind that the signatures will change for classes that inherit from the `Element` class.
+
+The `TextElement` class has the following methods:
+
+- `clone()`
+- `getText()`
+- `setText(text)`
+- `getOffset()`
+- `getBounds()`
+- `getWidth()`
+- `getHeight()`
+- `appendTo(parentElement)`
+- `prependTo(parentElement)`
+- `removeFrom(parentElement)`
+- `insertBefore(siblingElement)`
+- `insertAfter(siblingElement)`
+- `remove()`
+
+It does not have any static factory methods.
 
 The `Link`, `Input`, `Select`, `Button`, `Checkbox` and `Textarea` classes have the following additional methods:
 
