@@ -37,19 +37,35 @@ function applyProperties(properties, ignoredProperties, defaultProperties) {
   }.bind(this));
 }
 
-function appendTo(parentElement) {
-  const context = this.context || {},
-        parentContext = this.parentContext ?
-                          this.parentContext(context) :
-                            context;
+function assignContext(names = Object.keys(this.context), thenDelete = true) {
+  const prototype = Object.getPrototypeOf(this);
 
-  parentElement.context = parentContext;
+  names.forEach(function(name) {
+    const property = this.context[name];
+
+    prototype[name] = property;
+
+    if (thenDelete) {
+      delete this.context[name];
+    }
+  }.bind(this));
+}
+
+function appendTo(parentElement) {
+  this.context = Object.assign({}, this.context);
+  
+  const parentContext = this.parentContext ?
+                          this.parentContext() :
+                            this.context;
+  
+  parentElement.context = Object.assign({}, parentElement.context, parentContext);
 
   parentElement.append(this);
 }
 
 const jsxMixin = {
   appendTo: appendTo,
+  assignContext: assignContext,
   applyProperties: applyProperties
 };
 
