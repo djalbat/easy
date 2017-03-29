@@ -2,12 +2,12 @@
 
 const TextElement = require('../textElement');
 
-function applyProperties(properties = {}, ignoredProperties, defaultProperties) {
+function applyProperties(properties = {}, defaultProperties, ignoredProperties) {
+  assign(properties, defaultProperties);
+
   const childElements = childElementsFromElementAndProperties(this, properties);
 
   unassign(properties, ignoredProperties);
-
-  assign(properties, defaultProperties);
 
   this.properties = {};
 

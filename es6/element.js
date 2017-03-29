@@ -287,10 +287,10 @@ class Element {
           html = `<${tagName} />`,
           element = Element.fromHTML(Class, html, ...remainingArguments);
 
-    const ignoredProperties = Class.ignoredProperties,
-          defaultProperties = Class.defaultProperties;
+    const defaultProperties = Class.defaultProperties,
+          ignoredProperties = Class.ignoredProperties;
 
-    element.applyProperties(properties, ignoredProperties, defaultProperties);
+    element.applyProperties(properties, defaultProperties, ignoredProperties);
 
     return element;
   }
