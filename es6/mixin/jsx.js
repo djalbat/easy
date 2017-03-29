@@ -3,16 +3,13 @@
 const TextElement = require('../textElement');
 
 function applyProperties(properties = {}, ignoredProperties, defaultProperties) {
-  this.properties = {};
+  const childElements = childElementsFromElementAndProperties(this, properties);
 
   unassign(properties, ignoredProperties);
 
   assign(properties, defaultProperties);
 
-  const parentElement = this, ///
-        childElements = childElementsFromElementAndProperties(this, properties);
-
-  delete properties.childElements;
+  this.properties = {};
 
   const names = Object.keys(properties);
 
@@ -29,6 +26,8 @@ function applyProperties(properties = {}, ignoredProperties, defaultProperties) 
       this.properties[name] = value;
     }
   }.bind(this));
+
+  const parentElement = this; ///
 
   childElements.forEach(function(childElement) {
     childElement.appendTo(parentElement);
