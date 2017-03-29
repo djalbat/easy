@@ -25,6 +25,8 @@ class Textarea extends InputElement {
   
   setSelectionEnd(selectionEnd) { this.domElement.selectionEnd = selectionEnd; }
 
+  select() { this.domElement.select(); }
+
   onChange(handler) {
     if (handler.intermediateHandler === undefined) {
       handler.intermediateHandler = defaultIntermediateChangeHandler.bind(this);
