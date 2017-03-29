@@ -2,10 +2,8 @@
 
 const TextElement = require('../textElement');
 
-function applyProperties(properties, ignoredProperties, defaultProperties) {
+function applyProperties(properties = {}, ignoredProperties, defaultProperties) {
   this.properties = {};
-
-  properties = Object.assign({}, properties); ///
 
   unassign(properties, ignoredProperties);
 
@@ -96,30 +94,26 @@ function childElementsFromElementAndProperties(element, properties) {
   return childElements;
 }
 
-function unassign(properties, ignoredProperties) {
-  if (ignoredProperties !== undefined) {
-    const ignoredPropertyNames = ignoredProperties; ///
+function unassign(properties, ignoredProperties = []) {
+  const ignoredPropertyNames = ignoredProperties; ///
 
-    ignoredPropertyNames.forEach(function(ignoredPropertyName) {
-      if (properties.hasOwnProperty(ignoredPropertyName)) {
-        delete properties[ignoredPropertyName];
-      }
-    });
-  }
+  ignoredPropertyNames.forEach(function(ignoredPropertyName) {
+    if (properties.hasOwnProperty(ignoredPropertyName)) {
+      delete properties[ignoredPropertyName];
+    }
+  });
 }
 
-function assign(properties, defaultProperties) {
-  if (defaultProperties !== undefined) {
-    const defaultPropertyNames = Object.keys(defaultProperties);
+function assign(properties, defaultProperties = {}) {
+  const defaultPropertyNames = Object.keys(defaultProperties);
 
-    defaultPropertyNames.forEach(function(defaultPropertyName) {
-      if (!properties.hasOwnProperty(defaultPropertyName)) {
-        const defaultPropertyValue = defaultProperties[defaultPropertyName];
+  defaultPropertyNames.forEach(function(defaultPropertyName) {
+    if (!properties.hasOwnProperty(defaultPropertyName)) {
+      const defaultPropertyValue = defaultProperties[defaultPropertyName];
 
-        properties[defaultPropertyName] = defaultPropertyValue;
-      }
-    });
-  }
+      properties[defaultPropertyName] = defaultPropertyValue;
+    }
+  });
 }
 
 function addHandler(element, name, value) {
