@@ -34,7 +34,7 @@ function applyProperties(properties = {}, defaultProperties, ignoredProperties) 
   }.bind(this));
 }
 
-function assignContext(names = Object.keys(this.context), thenDelete = true) {
+function assignContextToPrototype(names = Object.keys(this.context), thenDelete = true) {
   const prototype = Object.getPrototypeOf(this);
 
   names.forEach(function(name) {
@@ -62,8 +62,8 @@ function appendTo(parentElement) {
 
 const jsxMixin = {
   appendTo: appendTo,
-  assignContext: assignContext,
-  applyProperties: applyProperties
+  applyProperties: applyProperties,
+  assignContextToPrototype: assignContextToPrototype
 };
 
 module.exports = jsxMixin;
