@@ -64,7 +64,8 @@ class Checkbox extends Element {
 Object.assign(Checkbox, {
   tagName: 'input',
   ignoredProperties: [
-    'onChange'
+    'onChange',
+    'checked'
   ],
   defaultProperties: {
     type: 'checkbox'
