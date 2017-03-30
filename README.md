@@ -253,11 +253,11 @@ Each class bar the `Window`, `Document` and `TextElement` classes has the follow
 
 Please note the following:
 
-* The `html()` and `css()` methods allow you to both get and set HTML and CSS, respectively. Their functionality was based on the jQuery methods of the same name. 
+* The `html()` and `css()` methods allow you to both get and set HTML and CSS, respectively. Their functionality is based on the jQuery methods of the same name. 
 
 * The `blur()` and `focus()` events are defined on all elements, however they will not have an effect if the element in question cannot have the focus. 
 
-* The `onResize()` and `offResize()` methods are similarly define on all elements, by way of a mixin. The resize event functionality relies on attaching a child object to the element in question and therefore will not work for elements which cannot admit this. In these cases, the `onResize()` and `offResize()` methods simply do nothing. 
+* The `onResize()` and `offResize()` methods are similarly defined on all elements, by way of a mixin. The resize functionality relies on attaching a child object to the element in question and therefore will not work for elements which cannot have child elements. In these cases, the `onResize()` and `offResize()` methods simply do nothing. 
 
 Aside from the above methods there are the aforementioned static factory methods.
  
