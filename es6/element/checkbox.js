@@ -1,6 +1,6 @@
 'use strict';
 
-const Element = require('../inputElement');
+const Element = require('../element');
 
 class Checkbox extends Element {
   constructor(selector, changeHandler, checked) {
