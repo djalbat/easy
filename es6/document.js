@@ -16,6 +16,6 @@ class Document {
 Object.assign(Document.prototype, eventMixin);
 Object.assign(Document.prototype, clickMixin);
 Object.assign(Document.prototype, mouseMixin);
-Object.assign(Window.prototype, keyMixin);
+Object.assign(Document.prototype, keyMixin);
 
 module.exports = new Document();  ///
