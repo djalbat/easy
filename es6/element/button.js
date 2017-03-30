@@ -1,8 +1,8 @@
 'use strict';
 
-const InputElement = require('../inputElement');
+const Element = require('../element');
 
-class Button extends InputElement {
+class Button extends Element {
   constructor(selector, clickHandler) {
     super(selector);
 
@@ -26,22 +26,22 @@ class Button extends InputElement {
   }
 
   static clone(element, clickHandler) {
-    return InputElement.clone(Button, element, clickHandler);
+    return Element.clone(Button, element, clickHandler);
   }
 
   static fromHTML(html, clickHandler) {
-    return InputElement.fromHTML(Button, html, clickHandler);
+    return Element.fromHTML(Button, html, clickHandler);
   }
 
   static fromDOMElement(domElement, clickHandler) {
-    return InputElement.fromDOMElement(Button, domElement, clickHandler);
+    return Element.fromDOMElement(Button, domElement, clickHandler);
   }
 
   static fromProperties(properties) {
     const { onClick } = properties,
           clickHandler = onClick; ///
 
-    return InputElement.fromProperties(Button, properties, clickHandler);
+    return Element.fromProperties(Button, properties, clickHandler);
   }
 }
 

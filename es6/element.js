@@ -176,6 +176,16 @@ class Element {
     }
   }
 
+  blur() { this.domElement.blur(); }
+
+  focus() { this.domElement.focus(); }
+
+  hasFocus() {
+    const focus = (document.activeElement === this.domElement);  ///
+
+    return focus;
+  }
+
   getDescendantElements(selector = '*') {
     const domNode = this.domElement,  ///
           descendantDOMNodes = descendantDOMNodesFromDOMNode(domNode),

@@ -3,11 +3,11 @@
 const Element = require('../element');
 
 class Span extends Element {
-  constructor(selector) {
-    super(selector);
-  }
-
   clone() { return Span.clone(this); }
+
+  onResize() {}
+
+  offResize() {}
 
   static clone(element) {
     return Element.clone(Span, element);

@@ -217,6 +217,9 @@ Each class bar the `Window`, `Document` and `TextElement` classes has the follow
 - `disable()`
 - `html(html)`
 - `css(css)`
+- `blur()`
+- `focus()`
+- `hasFocus()`
 - `getDescendantElements(selector = '*')`
 - `getChildElements(selector = '*')`
 - `getParentElement(selector = '*')`
@@ -248,7 +251,13 @@ Each class bar the `Window`, `Document` and `TextElement` classes has the follow
 - `onResize(handler)`
 - `offResize(handler)`
 
-The `html()` and `css()` methods allow you to both get and set HTML and CSS, respectively.
+Please note the following:
+
+* The `html()` and `css()` methods allow you to both get and set HTML and CSS, respectively. Their functionality was based on the jQuery methods of the same name. 
+
+* The `blur()` and `focus()` events are defined on all elements, however they will not have an effect if the element in question cannot have the focus. 
+
+* The `onResize()` and `offResize()` methods are similarly define on all elements, by way of a mixin. The resize event functionality relies on attaching a child object to the element in question and therefore will not work for elements which cannot admit this. In these cases, the `onResize()` and `offResize()` methods simply do nothing. 
 
 Aside from the above methods there are the aforementioned static factory methods.
  
@@ -257,6 +266,18 @@ Aside from the above methods there are the aforementioned static factory methods
 - `static fromDOMElement(Class, domElement, ...remainingArguments)`
 
 Again bear in mind that the signatures will change for classes that inherit from the `Element` class.
+
+The `Input` and `Textarea` classes have the following methods, taken from the `InputElement` class:
+
+- `onChange(handler)`
+- `offChange(handler)`
+- `getValue()`
+- `getSelectionStart()`
+- `getSelectionEnd()`
+- `setValue(value)`
+- `setSelectionStart(selectionStart)`
+- `setSelectionEnd(selectionEnd)`
+- `select()`
 
 The `TextElement` class has the following methods:
 
@@ -275,11 +296,6 @@ The `TextElement` class has the following methods:
 - `remove()`
 
 It does not have any static factory methods.
-
-The `Link`, `Input`, `Select`, `Button`, `Checkbox` and `Textarea` classes have the following additional methods:
-
-- `hasFocus`
-- `focus`
 
 The `Checkbox` class has the following additional methods:
 
@@ -306,19 +322,6 @@ The `Select` class has the following additional methods:
 - `onChange(handler)`
 - `offChange(handler)`
   
-The `Textarea` class has the following additional methods:
-  
-- `getValue()`
-- `getSelectionStart()`
-- `getSelectionEnd()`
-- `setValue(value)`
-- `setSelectionStart(selectionStart)`
-- `setSelectionEnd(selectionEnd)`
-- `onChange(handler)`
-- `offChange(handler)`
-- `onResize(resizeHandler)`
-- `offResize(resizeHandler)`
-
 Both the `Window` and `Document` singletons have the following methods:
 
 - `on(eventTypes, handler)`

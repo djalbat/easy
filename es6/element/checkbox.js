@@ -1,8 +1,8 @@
 'use strict';
 
-const InputElement = require('../inputElement');
+const Element = require('../inputElement');
 
-class Checkbox extends InputElement {
+class Checkbox extends Element {
   constructor(selector, changeHandler, checked) {
     super(selector);
 
@@ -37,23 +37,27 @@ class Checkbox extends InputElement {
 
   isChecked() { return this.domElement.checked; }
 
+  onResize() {}
+
+  offResize() {}
+
   static clone(element, changeHandler) {
-    return InputElement.clone(Checkbox, element, changeHandler);
+    return Element.clone(Checkbox, element, changeHandler);
   }
 
   static fromHTML(html, changeHandler) {
-    return InputElement.fromHTML(Checkbox, html, changeHandler);
+    return Element.fromHTML(Checkbox, html, changeHandler);
   }
 
   static fromDOMElement(domElement, changeHandler) {
-    return InputElement.fromDOMElement(Checkbox, domElement, changeHandler);
+    return Element.fromDOMElement(Checkbox, domElement, changeHandler);
   }
 
   static fromProperties(properties) {
     const { onChange, checked } = properties,
           changeHandler = onChange; ///    
 
-    return InputElement.fromProperties(Checkbox, properties, changeHandler, checked);
+    return Element.fromProperties(Checkbox, properties, changeHandler, checked);
   }
 }
 
