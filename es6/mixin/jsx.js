@@ -34,13 +34,14 @@ function applyProperties(properties = {}, defaultProperties, ignoredProperties) 
   }.bind(this));
 }
 
-function assignContextToPrototype(names = Object.keys(this.context), thenDelete = true) {
-  const prototype = Object.getPrototypeOf(this);
-
+function assignContext(names = Object.keys(this.context), thenDelete = true) {
   names.forEach(function(name) {
-    const property = this.context[name];
+    const value = this.context[name],
+          descriptor = {
+            value: value
+          };
 
-    prototype[name] = property;
+    Object.defineProperty(this, name, descriptor);
 
     if (thenDelete) {
       delete this.context[name];
@@ -62,8 +63,8 @@ function appendTo(parentElement) {
 
 const jsxMixin = {
   appendTo: appendTo,
-  applyProperties: applyProperties,
-  assignContextToPrototype: assignContextToPrototype
+  assignContext: assignContext,
+  applyProperties: applyProperties
 };
 
 module.exports = jsxMixin;
