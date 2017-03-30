@@ -50,7 +50,10 @@ class InputElement extends Element {
   }
 
   static fromProperties(Class, properties, ...remainingArguments) {
-    return Element.fromProperties(Class, properties, ...remainingArguments);
+    const { onChange } = properties,
+          changeHandler = onChange; ///
+
+    return Element.fromProperties(Class, properties, changeHandler, ...remainingArguments);
   }
 }
 
