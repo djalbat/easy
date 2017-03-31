@@ -41,22 +41,25 @@ function addHandler(eventType, handler) {
   return addEventListener;
 }
 
-function removeHandler(eventType, handler) {
-  let removeEventListener = false,
-      handlers = this.handlersMap[eventType];
+function removeHandler(eventType, handler = null) {
+  let removeEventListener = false;
+
+  const handlers = this.handlersMap[eventType];
+
+  if (handler === null) {
+    handlers.splice(0);
+  } else {
+    const index = handlers.indexOf(handler);
+
+    if (index > -1) {
+      handlers.splice(index, -1);
+    }
+  }
 
   if (handlers.length === 0) {
     delete (this.handlersMap[eventType]);
 
     removeEventListener = true;
-  } else {
-    const index = handlers.indexOf(handler);
-
-    if (index > -1) {
-      const deleteCount = 1;
-
-      handlers.splice(index, deleteCount);
-    }
   }
 
   return removeEventListener;
@@ -97,6 +100,4 @@ function eventListener(event) {
   if (preventEventDefault) {
     event.preventDefault();
   }
-
-  event.stopPropagation();
 }
