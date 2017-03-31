@@ -47,16 +47,21 @@ function removeHandler(eventType, handler = null) {
   const handlers = this.handlersMap[eventType];
 
   if (handler === null) {
-    handlers.splice(0);
+    const start = 0;
+
+    handlers.splice(start);
   } else {
     const index = handlers.indexOf(handler);
 
     if (index > -1) {
-      handlers.splice(index, -1);
+      const start = index,  ///
+            deleteCount = 1;
+
+      handlers.splice(start, deleteCount);
     }
   }
 
-  if (handlers.length === 0) {
+  if (handlers.length === 0) {  ///
     delete (this.handlersMap[eventType]);
 
     removeEventListener = true;
