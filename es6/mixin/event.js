@@ -41,7 +41,7 @@ function onEvent(element, eventType, handler) {
 
 function offEvent(element, eventType, handler) {
   const eventObject = element.eventObjectMap[eventType],
-        noneRemaining = eventObject.removeHandler(eventType, handler);
+        noneRemaining = eventObject.removeHandler(element, eventType, handler);
 
   if (noneRemaining) {
     delete element.eventObjectMap[eventType];
@@ -66,7 +66,7 @@ function createEventObject() {
     eventListeners.push(eventListener);
   }
 
-  function removeHandler(eventType, handler = null) {
+  function removeHandler(element, eventType, handler = null) {
     if (handler === null) {
       eventListeners.forEach(function(eventListener) {
         element.domElement.removeEventListener(eventType, eventListener);
