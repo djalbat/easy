@@ -114,8 +114,7 @@ function indexOfEventListener(eventListeners, handler) {
 
 function createEventListener(handler, targetElement) {
   const eventListener = function(event) {
-    const handler = this.handler,
-          preventDefault = (handler.intermediateHandler !== undefined) ?
+    const preventDefault = (handler.intermediateHandler !== undefined) ?
                               handler.intermediateHandler(handler, event, targetElement) :
                                 handler(event, targetElement);
 
