@@ -33,10 +33,10 @@ function onEvent(element, eventType, handler) {
   if (!eventObject) {
     eventObject = createEventObject();
 
-    eventObject.addHandler(element, eventType, handler);
-
     element.eventObjectMap[eventType] = eventObject;
   }
+
+  eventObject.addHandler(element, eventType, handler);
 }
 
 function offEvent(element, eventType, handler) {
