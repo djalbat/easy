@@ -14,9 +14,7 @@ class Element {
   constructor(selector) {
     this.domElement = domElementFromSelector(selector);
 
-    this.domElement.__element__ = this;
-    
-    this.handlersMap = {};
+    this.domElement.__element__ = this; ///
   }
 
   clone() { return Element.clone(this); }

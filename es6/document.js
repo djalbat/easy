@@ -8,8 +8,6 @@ const eventMixin = require('./mixin/event'),
 class Document {
   constructor() {
     this.domElement = document;
-
-    this.handlersMap = {};
   }
 }
 

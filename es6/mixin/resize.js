@@ -2,7 +2,7 @@
 
 function onResize(handler) {
   const eventType = 'resize',
-        addEventListener = this.addHandler(eventType, handler);
+        addEventListener = this.on(eventType, handler);
 
   if (addEventListener) {
     appendResizeObject(this);
@@ -11,7 +11,7 @@ function onResize(handler) {
 
 function offResize(handler) {
   const eventType = 'resize',
-        removeEventListener = this.removeHandler(eventType, handler);
+        removeEventListener = this.off(eventType, handler);
 
   if (removeEventListener) {
     removeResizeObject(this);

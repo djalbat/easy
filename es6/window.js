@@ -8,8 +8,6 @@ const eventMixin = require('./mixin/event'),
 class Window {
   constructor() {
     this.domElement = window;
-
-    this.handlersMap = {};
   }
 
   assign(...sources) {
@@ -27,21 +25,19 @@ class Window {
   getScrollLeft() { return this.domElement.pageXOffset; } ///
 
   onResize(handler) {
-    const type = 'resize',
-          addEventListener = this.addHandler(type, handler);
-
-    if (addEventListener) {
-      this.domElement.addEventListener(type, eventListener.bind(this));
+    if (handler.intermediateHandler === undefined) {
+      handler.intermediateHandler = defaultIntermediateResizeHandler;
     }
+
+    const eventType = 'resize';
+    
+    this.on(eventType, handler);
   }
 
   offResize(handler) {
-    const type = 'resize',
-          removeEventListener = this.removeHandler(type, handler);
+    const eventType = 'resize';
 
-    if (removeEventListener) {
-      this.domElement.removeEventListener(type, eventListener.bind(this));
-    }
+    this.off(eventType, handler);
   }
 }
 
@@ -52,13 +48,11 @@ Object.assign(Window.prototype, keyMixin);
 
 module.exports = new Window();  ///
 
-function eventListener(event) {
-  const type = event.type,
-        handlers = this.handlersMap[type],
-        width = this.getWidth(),
-        height = this.getHeight();
+function defaultIntermediateResizeHandler(handler) {
+  const width = this.getWidth(),
+        height = this.getHeight(),
+        targetElement = this, ///
+        preventDefault = handler(width, height, targetElement);
 
-  handlers.forEach(function(handler) {
-    handler(width, height);
-  });
+  return preventDefault;
 }
