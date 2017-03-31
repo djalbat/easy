@@ -52,24 +52,11 @@ class TextElement {
     return height;
   }
 
-  prependTo(parentElement) {
-    const parentDOMElement = parentElement.domElement;
+  prependTo(parentElement) { parentElement.prepend(this); }
 
-    parentDOMElement.insertBefore(this.domElement, null); ///
-  }
+  appendTo(parentElement) { parentElement.append(this); }
 
-  appendTo(parentElement) {
-    const parentDOMElement = parentElement.domElement,
-          firstSiblingDOMElement = parentDOMElement.firstChild; ///
-
-    parentDOMElement.insertBefore(this.domElement, firstSiblingDOMElement);
-  }
-
-  removeFrom(parentElement) {
-    const parentDOMElement = parentElement.domElement;
-
-    parentDOMElement.removeChild(this.domElement);
-  }
+  removeFrom(parentElement) { parentElement.remove(this); }
 
   insertBefore(siblingElement) {
     const parentDOMNode = siblingElement.domElement.parentNode,

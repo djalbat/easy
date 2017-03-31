@@ -97,4 +97,6 @@ function eventListener(event) {
   if (preventEventDefault) {
     event.preventDefault();
   }
+
+  event.stopPropagation();
 }
