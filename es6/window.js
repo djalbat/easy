@@ -48,10 +48,10 @@ Object.assign(Window.prototype, keyMixin);
 
 module.exports = new Window();  ///
 
-function defaultIntermediateResizeHandler(handler) {
-  const width = this.getWidth(),
-        height = this.getHeight(),
-        targetElement = this, ///
+function defaultIntermediateResizeHandler(handler, event, targetElement) {
+  const window = targetElement, ///
+        width = window.getWidth(),
+        height = targetElement.getHeight(),
         preventDefault = handler(width, height, targetElement);
 
   return preventDefault;

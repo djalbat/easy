@@ -13,7 +13,7 @@ class InputElement extends Element {
 
   onChange(handler) {
     if (handler.intermediateHandler === undefined) {
-      handler.intermediateHandler = defaultIntermediateChangeHandler.bind(this);
+      handler.intermediateHandler = defaultIntermediateChangeHandler;
     }
 
     this.on('change', handler);
@@ -66,8 +66,9 @@ Object.assign(InputElement, {
 module.exports = InputElement;
 
 function defaultIntermediateChangeHandler(handler, event, targetElement) {
-  const value = this.getValue(),
-      preventDefault = handler(value, targetElement);
+  const inputElement = targetElement, ///
+        value = inputElement.getValue(),
+        preventDefault = handler(value, targetElement);
 
   return preventDefault;
 }

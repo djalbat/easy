@@ -26,7 +26,6 @@ module.exports = eventMixin;
 function onEvent(element, eventType, handler) {
   if (element.eventObjectMap === undefined) {
     element.eventObjectMap = {};
-
   }
 
   let eventObject = element.eventObjectMap[eventType];
@@ -34,22 +33,17 @@ function onEvent(element, eventType, handler) {
   if (!eventObject) {
     eventObject = createEventObject();
 
-    eventObject.addEventListener(element, eventType);
+    eventObject.addHandler(element, eventType, handler);
 
     element.eventObjectMap[eventType] = eventObject;
   }
-
-  eventObject.addHandler(handler);
 }
 
 function offEvent(element, eventType, handler) {
-  const eventObject = element.eventObjectMap[eventType];
+  const eventObject = element.eventObjectMap[eventType],
+        noneRemaining = eventObject.removeHandler(eventType, handler);
 
-  const empty = eventObject.removeHandler(handler);
-
-  if (empty) {
-    eventObject.removeEventListener(element, eventType);
-
+  if (noneRemaining) {
     delete element.eventObjectMap[eventType];
   }
 
@@ -61,74 +55,78 @@ function offEvent(element, eventType, handler) {
 }
 
 function createEventObject() {
-  const handlers = [];
+  const eventListeners = [];
 
-  function eventListener(event) {
-    const eventTarget = event.target,
-          targetElement = eventTarget.__element__;  ///
+  function addHandler(element, eventType, handler) {
+    const targetElement = element,  ///
+          eventListener = createEventListener(handler, targetElement);
 
-    let preventEventDefault = false;
+    element.domElement.addEventListener(eventType, eventListener);
 
-    handlers.forEach(function(handler) {
-      if (handler.intermediateHandler !== undefined) {
-        const preventDefault = handler.intermediateHandler(handler, event, targetElement);
-
-        if (preventDefault === true) {
-          preventEventDefault = true;
-        }
-      } else {
-        const preventDefault = handler(event, targetElement);
-
-        if (preventDefault === true) {
-          preventEventDefault = true;
-        }
-      }
-    });
-
-    if (preventEventDefault) {
-      event.preventDefault();
-    }
-
-    event.stopPropagation();
+    eventListeners.push(eventListener);
   }
 
-  function addHandler(handler) {
-    handlers.push(handler);
-  }
-
-  function removeHandler(handler = null) {
+  function removeHandler(eventType, handler = null) {
     if (handler === null) {
+      eventListeners.forEach(function(eventListener) {
+        element.domElement.removeEventListener(eventType, eventListener);
+      });
+
       const start = 0;
 
-      handlers.splice(start);
+      eventListeners.splice(start);
     } else {
-      const index = handlers.indexOf(handler);
+      const index = indexOfEventListener(eventListeners, handler),
+            eventListener = eventListeners[index];
 
-      if (index > -1) {
-        const start = index,  ///
-              deleteCount = 1;
+      element.domElement.removeEventListener(eventType, eventListener);
 
-        handlers.splice(start, deleteCount);
-      }
+      const start = index,  ///
+            deleteCount = 1;
+
+      eventListeners.splice(start, deleteCount);
     }
 
-    const empty = (handlers.length === 0);
+    const noneRemaining = (eventListeners.length === 0);  ///
 
-    return empty;
-  }
-
-  function addEventListener(element, eventType) {
-    element.domElement.addEventListener(eventType, eventListener);
-  }
-
-  function removeEventListener(element, eventType) {
-    element.domElement.removeEventListener(eventType, eventListener);
+    return noneRemaining;
   }
 
   return {
     addHandler: addHandler,
-    removeHandler: removeHandler,
-    addEventListener: addEventListener,
-    removeEventListener: removeEventListener
+    removeHandler: removeHandler
   };
+}
+
+function indexOfEventListener(eventListeners, handler) {
+  let foundIndex = undefined; ///
+
+  eventListeners.forEach(function(eventListener, index) {
+    if (eventListener.handler === handler) {
+      foundIndex = index;
+    }
+  });
+
+  const index = foundIndex; ///
+
+  return index;
+}
+
+function createEventListener(handler, targetElement) {
+  const eventListener = function(event) {
+    const handler = this.handler,
+          preventDefault = (handler.intermediateHandler !== undefined) ?
+                              handler.intermediateHandler(handler, event, targetElement) :
+                                handler(event, targetElement);
+
+    if (preventDefault === true) {
+      event.preventDefault();
+    }
+
+    event.stopPropagation();
+  };
+
+  eventListener.handler = handler;  ///
+
+  return eventListener;
 }

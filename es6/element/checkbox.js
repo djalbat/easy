@@ -19,7 +19,7 @@ class Checkbox extends Element {
 
   onChange(handler) {
     if (handler.intermediateHandler === undefined) {
-      handler.intermediateHandler = defaultIntermediateChangeHandler.bind(this);
+      handler.intermediateHandler = defaultIntermediateChangeHandler;
     }
 
     this.on('click', handler);  ///
@@ -75,7 +75,8 @@ Object.assign(Checkbox, {
 module.exports = Checkbox;
 
 function defaultIntermediateChangeHandler(handler, event, targetElement) {
-  const checked = this.isChecked(),
+  const checkbox = targetElement, ///
+        checked = checkbox.isChecked(),
         preventDefault = handler(checked, targetElement);
 
   return preventDefault;

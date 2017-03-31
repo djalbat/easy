@@ -30,7 +30,7 @@ const keyMixin = {
 module.exports = keyMixin;
 
 function defaultIntermediateHandler(handler, event, targetElement) {
-  const keyCode = event.keyCode || event.which,  ///
+  const keyCode = event.keyCode,
         preventDefault = handler(keyCode, targetElement);
 
   return preventDefault;

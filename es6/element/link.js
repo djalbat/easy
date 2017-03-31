@@ -15,7 +15,7 @@ class Link extends Element {
 
   onClick(handler) {
     if (handler.intermediateHandler === undefined) {
-      handler.intermediateHandler = defaultIntermediateClickHandler.bind(this);
+      handler.intermediateHandler = defaultIntermediateClickHandler;
     }
     
     this.on('click', handler);
@@ -55,7 +55,8 @@ Object.assign(Link, {
 module.exports = Link;
 
 function defaultIntermediateClickHandler(handler, event, targetElement) {
-  const href = this.getAttribute('href'),
+  const link = targetElement, ///
+        href = link.getAttribute('href'),
         preventDefault = handler(href, targetElement);
 
   return preventDefault;
