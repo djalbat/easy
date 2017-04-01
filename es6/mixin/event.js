@@ -24,8 +24,12 @@ const eventMixin = {
 module.exports = eventMixin;
 
 function onEvent(element, eventType, handler, intermediateHandler) {
-  if (element.eventObjectMap === undefined) {
-    element.eventObjectMap = {};
+  if (!Object.hasOwnProperty('eventObjectMap')) {
+    const eventObjectMap = {};
+
+    Object.assign(element, {
+      eventObjectMap: eventObjectMap
+    });
   }
 
   let eventObject = element.eventObjectMap[eventType];
@@ -102,7 +106,7 @@ function indexOfEventListener(eventListeners, handler) {
   let foundIndex = undefined; ///
 
   eventListeners.forEach(function(eventListener, index) {
-    if (eventListener.handler === handler) {
+    if (eventListener.handler === handler) {  ///
       foundIndex = index;
     }
   });
@@ -125,7 +129,9 @@ function createEventListener(handler, intermediateHandler, targetElement) {
     event.stopPropagation();
   };
 
-  eventListener.handler = handler;  ///
+  Object.assign(eventListener, {
+    handler: handler
+  });
 
   return eventListener;
 }
