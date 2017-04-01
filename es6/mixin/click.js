@@ -1,11 +1,7 @@
 'use strict';
 
-function onClick(handler) {
-  if (handler.intermediateHandler === undefined) {
-    handler.intermediateHandler = defaultIntermediateHandler;
-  }
-  
-  this.on('click', handler); 
+function onClick(handler, intermediateHandler = defaultIntermediateHandler) {
+  this.on('click', handler, intermediateHandler);
 }
 
 function offClick(handler) { this.off('click', handler); }

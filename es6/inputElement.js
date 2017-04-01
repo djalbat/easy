@@ -11,16 +11,12 @@ class InputElement extends Element {
     }
   }
 
-  onChange(handler) {
-    if (handler.intermediateHandler === undefined) {
-      handler.intermediateHandler = defaultIntermediateChangeHandler;
-    }
-
-    this.on('change', handler);
+  onChange(changeHandler, intermediateChangeHandler = defaultIntermediateChangeHandler) {
+    this.on('change', changeHandler, intermediateChangeHandler);
   }
 
-  offChange(handler) {
-    this.off('change', handler);
+  offChange(changeHandler) {
+    this.off('change', changeHandler);
   }
 
   getValue() { return this.domElement.value; }
@@ -65,10 +61,10 @@ Object.assign(InputElement, {
 
 module.exports = InputElement;
 
-function defaultIntermediateChangeHandler(handler, event, targetElement) {
+function defaultIntermediateChangeHandler(changeHandler, event, targetElement) {
   const inputElement = targetElement, ///
         value = inputElement.getValue(),
-        preventDefault = handler(value, targetElement);
+        preventDefault = changeHandler(value, targetElement);
 
   return preventDefault;
 }

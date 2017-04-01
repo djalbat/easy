@@ -13,16 +13,12 @@ class Button extends Element {
 
   clone(clickHandler) { return Button.clone(this, clickHandler); }
 
-  onClick(handler) {
-    if (handler.intermediateHandler === undefined) {
-      handler.intermediateHandler = defaultIntermediateClickHandler;
-    }
-    
-    super.onClick(handler);
+  onClick(clickHandler, intermediateClickHandler = defaultIntermediateClickHandler) {
+    super.onClick(clickHandler, intermediateClickHandler);
   }
 
-  offClick(handler) {
-    super.offClick(handler);
+  offClick(clickHandler) {
+    super.offClick(clickHandler);
   }
 
   static clone(element, clickHandler) {
@@ -54,9 +50,9 @@ Object.assign(Button, {
 
 module.exports = Button;
 
-function defaultIntermediateClickHandler(handler, event, targetElement) {
+function defaultIntermediateClickHandler(clickHandler, event, targetElement) {
   const mouseButton = event.button,
-        preventDefault = handler(mouseButton, targetElement);
+        preventDefault = clickHandler(mouseButton, targetElement);
 
   return preventDefault;
 }

@@ -1,43 +1,23 @@
 'use strict';
 
-function onMouseUp(handler) {
-  if (handler.intermediateHandler === undefined) {
-    handler.intermediateHandler = defaultIntermediateHandler;
-  }
-  
-  this.on('mouseup', handler); 
+function onMouseUp(handler, intermediateHandler = defaultIntermediateHandler) {
+  this.on('mouseup', handler, intermediateHandler);
 }
 
-function onMouseDown(handler) {
-  if (handler.intermediateHandler === undefined) {
-    handler.intermediateHandler = defaultIntermediateHandler;
-  }
-
-  this.on('mousedown', handler); 
+function onMouseDown(handler, intermediateHandler = defaultIntermediateHandler) {
+  this.on('mousedown', handler, intermediateHandler);
 }
 
-function onMouseOver(handler) {
-  if (handler.intermediateHandler === undefined) {
-    handler.intermediateHandler = defaultIntermediateHandler;
-  }
-
-  this.on('mouseover', handler); 
+function onMouseOver(handler, intermediateHandler = defaultIntermediateHandler) {
+  this.on('mouseover', handler, intermediateHandler);
 }
 
-function onMouseOut(handler) {
-  if (handler.intermediateHandler === undefined) {
-    handler.intermediateHandler = defaultIntermediateHandler;
-  }
-
-  this.on('mouseout', handler); 
+function onMouseOut(handler, intermediateHandler = defaultIntermediateHandler) {
+  this.on('mouseout', handler, intermediateHandler);
 }
 
-function onMouseMove(handler) {
-  if (handler.intermediateHandler === undefined) {
-    handler.intermediateHandler = defaultIntermediateHandler;
-  }
-
-  this.on('mousemove', handler); 
+function onMouseMove(handler, intermediateHandler = defaultIntermediateHandler) {
+  this.on('mousemove', handler, intermediateHandler);
 }
 
 function offMouseUp(handler) { this.off('mouseup', handler); }

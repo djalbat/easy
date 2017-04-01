@@ -1,11 +1,7 @@
 'use strict';
 
-function onScroll(handler) {
-  if (handler.intermediateHandler === undefined) {
-    handler.intermediateHandler = defaultIntermediateHandler;
-  }
-  
-  this.on('scroll', handler); 
+function onScroll(handler, intermediateHandler = defaultIntermediateHandler) {
+  this.on('scroll', handler, intermediateHandler);
 }
 
 function offScroll(handler) { this.off('scroll', handler); }

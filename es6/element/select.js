@@ -13,7 +13,15 @@ class Select extends Element {
 
   clone(changeHandler) { return Select.clone(this, changeHandler); }
 
-  getSelectedOptionValue() { 
+  onChange(changeHandler, intermediateChangeHandler = defaultIntermediateChangeHandler) {
+    this.on('change', changeHandler, intermediateChangeHandler);
+  }
+
+  offChange(changeHandler) {
+    this.off('change', changeHandler);
+  }
+
+  getSelectedOptionValue() {
     const selectedOptionValue = this.domElement.value;  ///
     
     return selectedOptionValue;
@@ -23,18 +31,6 @@ class Select extends Element {
     const value = selectedOptionValue;  ///
     
     this.domElement.value = value; 
-  }
-
-  onChange(handler) {
-    if (handler.intermediateHandler === undefined) {
-      handler.intermediateHandler = defaultIntermediateChangeHandler;
-    }
-    
-    this.on('change', handler);
-  }
-  
-  offChange(handler) {
-    this.off('change', handler);
   }
 
   static clone(element, changeHandler) {
@@ -66,10 +62,10 @@ Object.assign(Select, {
 
 module.exports = Select;
 
-function defaultIntermediateChangeHandler(handler, event, targetElement) {
+function defaultIntermediateChangeHandler(changeHandler, event, targetElement) {
   const select = targetElement, ///
         selectedOptionValue = select.getSelectedOptionValue(),
-        preventDefault = handler(selectedOptionValue, targetElement);
+        preventDefault = changeHandler(selectedOptionValue, targetElement);
 
   return preventDefault;
 }

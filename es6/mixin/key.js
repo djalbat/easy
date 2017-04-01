@@ -1,19 +1,11 @@
 'use strict';
 
-function onKeyUp(handler) {
-  if (handler.intermediateHandler === undefined) {
-    handler.intermediateHandler = defaultIntermediateHandler;
-  }
-  
-  this.on('keyup', handler); 
+function onKeyUp(handler, intermediateHandler = defaultIntermediateHandler) {
+  this.on('keyup', handler, intermediateHandler);
 }
 
-function onKeyDown(handler) {
-  if (handler.intermediateHandler === undefined) {
-    handler.intermediateHandler = defaultIntermediateHandler;
-  }
-
-  this.on('keydown', handler); 
+function onKeyDown(handler, intermediateHandler = defaultIntermediateHandler) {
+  this.on('keydown', handler, intermediateHandler);
 }
 
 function offKeyUp(handler) { this.off('keyup', handler); }

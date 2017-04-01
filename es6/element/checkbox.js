@@ -17,16 +17,12 @@ class Checkbox extends Element {
 
   clone(changeHandler) { return Checkbox.clone(this, changeHandler); }
 
-  onChange(handler) {
-    if (handler.intermediateHandler === undefined) {
-      handler.intermediateHandler = defaultIntermediateChangeHandler;
-    }
-
-    this.on('click', handler);  ///
+  onChange(changeHandler, intermediateChangeHandler = defaultIntermediateChangeHandler) {
+    this.on('click', changeHandler, intermediateChangeHandler);  ///
   }
   
-  offChange(handler) {
-    this.off('click', handler);  ///
+  offChange(changeHandler) {
+    this.off('click', changeHandler);  ///
   }
 
   check(checked = true) {
@@ -74,10 +70,10 @@ Object.assign(Checkbox, {
 
 module.exports = Checkbox;
 
-function defaultIntermediateChangeHandler(handler, event, targetElement) {
+function defaultIntermediateChangeHandler(changeHandler, event, targetElement) {
   const checkbox = targetElement, ///
         checked = checkbox.isChecked(),
-        preventDefault = handler(checked, targetElement);
+        preventDefault = changeHandler(checked, targetElement);
 
   return preventDefault;
 }

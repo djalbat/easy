@@ -13,16 +13,12 @@ class Link extends Element {
 
   clone(clickHandler) { return Link.clone(this, clickHandler); }
 
-  onClick(handler) {
-    if (handler.intermediateHandler === undefined) {
-      handler.intermediateHandler = defaultIntermediateClickHandler;
-    }
-    
-    this.on('click', handler);
+  onClick(clickHandler, intermediateClickHandler = defaultIntermediateClickHandler) {
+    this.on('click', clickHandler, intermediateClickHandler);
   }
   
-  offClick(handler) {
-    this.off('click', handler);
+  offClick(clickHandler) {
+    this.off('click', clickHandler);
   }
 
   static clone(element, clickHandler) {
@@ -54,10 +50,10 @@ Object.assign(Link, {
 
 module.exports = Link;
 
-function defaultIntermediateClickHandler(handler, event, targetElement) {
+function defaultIntermediateClickHandler(clickHandler, event, targetElement) {
   const link = targetElement, ///
         href = link.getAttribute('href'),
-        preventDefault = handler(href, targetElement);
+        preventDefault = clickHandler(href, targetElement);
 
   return preventDefault;
 }

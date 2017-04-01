@@ -1,10 +1,10 @@
 'use strict';
 
-function on(eventTypes, handler) {
+function on(eventTypes, handler, intermediateHandler) {
   eventTypes = eventTypes.split(' '); ///
 
   eventTypes.forEach(function(eventType) {
-    onEvent(this, eventType, handler);
+    onEvent(this, eventType, handler, intermediateHandler);
   }.bind(this));
 }
 
@@ -23,7 +23,7 @@ const eventMixin = {
 
 module.exports = eventMixin;
 
-function onEvent(element, eventType, handler) {
+function onEvent(element, eventType, handler, intermediateHandler) {
   if (element.eventObjectMap === undefined) {
     element.eventObjectMap = {};
   }
@@ -36,7 +36,7 @@ function onEvent(element, eventType, handler) {
     element.eventObjectMap[eventType] = eventObject;
   }
 
-  eventObject.addHandler(element, eventType, handler);
+  eventObject.addHandler(element, eventType, handler, intermediateHandler);
 }
 
 function offEvent(element, eventType, handler) {
@@ -57,9 +57,9 @@ function offEvent(element, eventType, handler) {
 function createEventObject() {
   const eventListeners = [];
 
-  function addHandler(element, eventType, handler) {
+  function addHandler(element, eventType, handler, intermediateHandler) {
     const targetElement = element,  ///
-          eventListener = createEventListener(handler, targetElement);
+          eventListener = createEventListener(handler, intermediateHandler, targetElement);
 
     element.domElement.addEventListener(eventType, eventListener);
 
@@ -112,10 +112,10 @@ function indexOfEventListener(eventListeners, handler) {
   return index;
 }
 
-function createEventListener(handler, targetElement) {
+function createEventListener(handler, intermediateHandler, targetElement) {
   const eventListener = function(event) {
-    const preventDefault = (handler.intermediateHandler !== undefined) ?
-                              handler.intermediateHandler(handler, event, targetElement) :
+    const preventDefault = (intermediateHandler !== undefined) ?
+                              intermediateHandler(handler, event, targetElement) :
                                 handler(event, targetElement);
 
     if (preventDefault === true) {
