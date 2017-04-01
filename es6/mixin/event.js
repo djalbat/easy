@@ -24,7 +24,7 @@ const eventMixin = {
 module.exports = eventMixin;
 
 function onEvent(element, eventType, handler, intermediateHandler) {
-  if (!Object.hasOwnProperty('eventObjectMap')) {
+  if (!element.hasOwnProperty('eventObjectMap')) {
     const eventObjectMap = {};
 
     Object.assign(element, {
@@ -102,21 +102,13 @@ function createEventObject() {
   };
 }
 
-function indexOfEventListener(eventListeners, handler) {
-  let foundIndex = undefined; ///
-
-  eventListeners.forEach(function(eventListener, index) {
-    if (eventListener.handler === handler) {  ///
-      foundIndex = index;
-    }
-  });
-
-  const index = foundIndex; ///
-
-  return index;
-}
-
 function createEventListener(handler, intermediateHandler, targetElement) {
+  if (typeof intermediateHandler === 'object') {
+    const object = intermediateHandler;  ///
+
+    intermediateHandler = createBindingIntermediateHandler(object); ///
+  }
+
   const eventListener = function(event) {
     const preventDefault = (intermediateHandler !== undefined) ?
                               intermediateHandler(handler, event, targetElement) :
@@ -134,4 +126,28 @@ function createEventListener(handler, intermediateHandler, targetElement) {
   });
 
   return eventListener;
+}
+
+function createBindingIntermediateHandler(object) {
+  const bindingIntermediateHandler = function(handler, event, targetElement) {
+    const preventDefault = handler.call(object, event, targetElement);
+
+    return preventDefault;
+  };
+
+  return bindingIntermediateHandler;
+}
+
+function indexOfEventListener(eventListeners, handler) {
+  let foundIndex = undefined; ///
+
+  eventListeners.forEach(function(eventListener, index) {
+    if (eventListener.handler === handler) {  ///
+      foundIndex = index;
+    }
+  });
+
+  const index = foundIndex; ///
+
+  return index;
 }
