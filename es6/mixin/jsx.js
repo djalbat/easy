@@ -2,36 +2,28 @@
 
 const TextElement = require('../textElement');
 
-function applyProperties(properties = {}, defaultProperties, ignoredProperties) {
-  assign(properties, defaultProperties);
+function appendTo(parentElement) {
+  const parentContext = this.parentContext ?
+                          this.parentContext() :
+                            this.context;
 
-  const childElements = childElementsFromElementAndProperties(this, properties);
+  if (parentContext !== undefined) {
+    if (!parentElement.hasOwnProperty('context')) {
+      const context = {};
 
-  unassign(properties, ignoredProperties);
-
-  this.properties = {};
-
-  const names = Object.keys(properties);
-
-  names.forEach(function(name) {
-    const value = properties[name];
-
-    if (false) {
-
-    } else if (isHandlerName(name)) {
-      addHandler(this, name, value);
-    } else if (isAttributeName(name)) {
-      addAttribute(this, name, value);
-    } else {
-      this.properties[name] = value;
+      Object.assign(parentElement, {
+        context: context
+      });
     }
-  }.bind(this));
 
-  const parentElement = this; ///
+    parentElement.context = Object.assign(parentElement.context, parentContext);
+  }
 
-  childElements.forEach(function(childElement) {
-    childElement.appendTo(parentElement);
-  }.bind(this));
+  parentElement.append(this);
+}
+
+function removeFrom(parentElement) {
+  parentElement.remove(this);
 }
 
 function assignContext(names = Object.keys(this.context), thenDelete = true) {
@@ -49,22 +41,69 @@ function assignContext(names = Object.keys(this.context), thenDelete = true) {
   }.bind(this));
 }
 
-function appendTo(parentElement) {
-  this.context = Object.assign({}, this.context);
-  
-  const parentContext = this.parentContext ?
-                          this.parentContext() :
-                            this.context;
-  
-  parentElement.context = Object.assign({}, parentElement.context, parentContext);
+function applyProperties(properties = {}, defaultProperties, ignoredProperties) {
+  assign(properties, defaultProperties);
 
-  parentElement.append(this);
+  const childElements = childElementsFromElementAndProperties(this, properties);
+
+  unassign(properties, ignoredProperties);
+
+  const names = Object.keys(properties);
+
+  names.forEach(function(name) {
+    const value = properties[name];
+
+    if (false) {
+
+    } else if (isHandlerName(name)) {
+      addHandler(this, name, value);
+    } else if (isAttributeName(name)) {
+      addAttribute(this, name, value);
+    } else {
+      if (!this.hasOwnProperty('properties')) {
+        const properties = {};
+
+        Object.assign(this, {
+          properties: properties
+        });
+      }
+
+      this.properties[name] = value;
+    }
+  }.bind(this));
+
+  const parentElement = this; ///
+
+  childElements.forEach(function(childElement) {
+    childElement.appendTo(parentElement);
+  }.bind(this));
+}
+
+function getProperties() {
+  return this.properties;
+}
+
+function getContext() {
+  return this.context;
+}
+
+function getState() {
+  return this.state;
+}
+
+function setState(state) {
+  this.state = state;
 }
 
 const jsxMixin = {
   appendTo: appendTo,
+  removeFrom: removeFrom,
   assignContext: assignContext,
-  applyProperties: applyProperties
+  applyProperties: applyProperties,
+  getProperties: getProperties,
+  getContext: getContext,
+  getState: getState,
+  setState: setState
 };
 
 module.exports = jsxMixin;
