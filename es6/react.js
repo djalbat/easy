@@ -15,7 +15,7 @@ function createElement(firstArgument, properties, ...childArguments) {
 
     if (false) {
 
-    } else if (isTypeOf(firstArgument, Element)) {
+    } else if (isSubclassOf(firstArgument, Element)) {
       const Class = firstArgument;  ///
 
       element = Class.fromProperties(properties);
@@ -67,7 +67,7 @@ function childElementsFromChildArguments(childArguments) {
   return childElements;
 }
 
-function isTypeOf(argument, Class) {
+function isSubclassOf(argument, Class) {
   let typeOf = false;
 
   if (argument.name === Class.name) { ///
@@ -76,7 +76,7 @@ function isTypeOf(argument, Class) {
     argument = Object.getPrototypeOf(argument); ///
 
     if (argument) {
-      typeOf = isTypeOf(argument, Class);
+      typeOf = isSubclassOf(argument, Class);
     }
   }
 

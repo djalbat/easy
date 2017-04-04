@@ -20,6 +20,14 @@ function appendTo(parentElement) {
   }
 
   parentElement.append(this);
+
+  const prototype = Object.getPrototypeOf(this),
+        prototypeConstructor = prototype.constructor, ///
+        prototypeConstructorName = prototypeConstructor.name; ///
+  
+  if (prototypeConstructorName === 'Element') {
+    delete this.context;
+  }
 }
 
 function removeFrom(parentElement) {
@@ -39,6 +47,15 @@ function assignContext(names = Object.keys(this.context), thenDelete = true) {
       delete this.context[name];
     }
   }.bind(this));
+  
+  if (thenDelete) {
+    const names = Object.keys(this.context),
+          namesLength = names.length; ///
+    
+    if (namesLength === 0) {
+      delete this.context;
+    } 
+  }
 }
 
 function applyProperties(properties = {}, defaultProperties, ignoredProperties) {
