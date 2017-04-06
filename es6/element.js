@@ -80,6 +80,8 @@ class Element {
 
   appendTo(parentElement) { parentElement.append(this); }
 
+  addTo(parentElement) { parentElement.add(this); }
+
   removeFrom(parentElement) { parentElement.remove(this); }
 
   insertBefore(siblingElement) {
@@ -108,6 +110,8 @@ class Element {
 
     this.domElement.insertBefore(domElement, null); ///
   }
+
+  add(element) { this.append(element); }
 
   remove(element) {
     if (element) {

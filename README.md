@@ -205,11 +205,13 @@ Each class bar the `Window`, `Document` and `TextElement` classes has the follow
 - `clearClasses()`
 - `appendTo(parentElement)`
 - `prependTo(parentElement)`
+- `addTo(parentElement)`
 - `removeFrom(parentElement)`
 - `insertBefore(siblingElement)`
 - `insertAfter(siblingElement)`
 - `prepend(element)`
 - `append(element)`
+- `add(element)`
 - `remove(element)`
 - `show(displayStyle = 'block')`
 - `hide()`
@@ -288,8 +290,9 @@ The `TextElement` class has the following methods:
 - `getBounds()`
 - `getWidth()`
 - `getHeight()`
-- `appendTo(parentElement)`
 - `prependTo(parentElement)`
+- `appendTo(parentElement)`
+- `addTo(parentElement)`
 - `removeFrom(parentElement)`
 - `insertBefore(siblingElement)`
 - `insertAfter(siblingElement)`

@@ -56,6 +56,8 @@ class TextElement {
 
   appendTo(parentElement) { parentElement.append(this); }
 
+  addTo(parentElement) { parentElement.add(this); }
+
   removeFrom(parentElement) { parentElement.remove(this); }
 
   insertBefore(siblingElement) {
