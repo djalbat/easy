@@ -5,10 +5,6 @@ const InputElement = require('../inputElement');
 class Textarea extends InputElement {
   clone(changeHandler) { return Textarea.clone(this, changeHandler); }
 
-  onResize() {}
-  
-  offResize() {}
-
   static clone(element, changeHandler) {
     return InputElement.clone(Textarea, element, changeHandler);
   }

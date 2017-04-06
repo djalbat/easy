@@ -5,10 +5,6 @@ const InputElement = require('../inputElement');
 class Input extends InputElement {
   clone(changeHandler) { return Input.clone(this, changeHandler); }
 
-  onResize() {}
-
-  offResize() {}
-  
   static clone(element, changeHandler) {
     return InputElement.clone(Input, element, changeHandler);
   }

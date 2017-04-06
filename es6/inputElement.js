@@ -11,6 +11,10 @@ class InputElement extends Element {
     }
   }
 
+  onResize() {}
+
+  offResize() {}
+
   onChange(changeHandler, intermediateChangeHandler = defaultIntermediateChangeHandler) {
     this.on('change', changeHandler, intermediateChangeHandler);
   }
