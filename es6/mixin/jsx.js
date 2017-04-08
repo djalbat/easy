@@ -2,32 +2,22 @@
 
 const TextElement = require('../textElement');
 
+function prependTo(parentElement) {
+  updateParentContext(this, parentElement);
+
+  parentElement.prepend(this);
+}
+
 function appendTo(parentElement) {
-  const parentContext = this.parentContext ?
-                          this.parentContext() :
-                            this.context;
-
-  if (parentContext !== undefined) {
-    if (!parentElement.hasOwnProperty('context')) {
-      const context = {};
-
-      Object.assign(parentElement, {
-        context: context
-      });
-    }
-
-    parentElement.context = Object.assign(parentElement.context, parentContext);
-  }
+  updateParentContext(this, parentElement);
 
   parentElement.append(this);
+}
 
-  const prototype = Object.getPrototypeOf(this),
-        prototypeConstructor = prototype.constructor, ///
-        prototypeConstructorName = prototypeConstructor.name; ///
-  
-  if (prototypeConstructorName === 'Element') {
-    delete this.context;
-  }
+function addTo(parentElement) {
+  updateParentContext(this, parentElement);
+
+  parentElement.add(this);
 }
 
 function removeFrom(parentElement) {
@@ -92,7 +82,7 @@ function applyProperties(properties = {}, defaultProperties, ignoredProperties) 
   const parentElement = this; ///
 
   childElements.forEach(function(childElement) {
-    childElement.appendTo(parentElement);
+    childElement.addTo(parentElement);
   }.bind(this));
 }
 
@@ -113,7 +103,9 @@ function setState(state) {
 }
 
 const jsxMixin = {
+  prependTo: prependTo,
   appendTo: appendTo,
+  addTo: addTo,
   removeFrom: removeFrom,
   assignContext: assignContext,
   applyProperties: applyProperties,
@@ -202,6 +194,32 @@ function addAttribute(element, name, value) {
     }
   } else {
     element.addAttribute(name, value);
+  }
+}
+
+function updateParentContext(element, parentElement) {
+  const parentContext = element.parentContext ?
+                          element.parentContext() :
+                            element.context;
+
+  if (parentContext !== undefined) {
+    if (!parentElement.hasOwnProperty('context')) {
+      const context = {};
+
+      Object.assign(parentElement, {
+        context: context
+      });
+    }
+
+    parentElement.context = Object.assign(parentElement.context, parentContext);
+  }
+
+  const prototype = Object.getPrototypeOf(element),
+        prototypeConstructor = prototype.constructor, ///
+        prototypeConstructorName = prototypeConstructor.name; ///
+
+  if (prototypeConstructorName === 'Element') {
+    delete element.context;
   }
 }
 
