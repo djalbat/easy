@@ -217,6 +217,8 @@ Each class bar the `Window`, `Document` and `TextElement` classes has the follow
 - `hide()`
 - `enable()`
 - `disable()`
+- `isEnabled()`
+- `isDisabled()`
 - `html(html)`
 - `css(css)`
 - `blur()`

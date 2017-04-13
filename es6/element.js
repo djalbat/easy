@@ -131,6 +131,19 @@ class Element {
 
   disable() { this.setAttribute('disabled', 'disabled'); }
 
+  isEnabled() {
+    const disabled = this.isDisabled(),
+          enabled = !disabled;
+
+    return enabled;
+  }
+
+  isDisabled() {
+    const disabled = this.hasAttribute('disabled');
+
+    return disabled;
+  }
+
   html(html) {
     if (html === undefined) {
       const innerHTML = this.domElement.innerHTML;
