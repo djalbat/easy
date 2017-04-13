@@ -192,6 +192,7 @@ Each class bar the `Window`, `Document` and `TextElement` classes has the follow
 - `setWidth(width)`
 - `getHeight(includeBorder = false)`
 - `setHeight(height)`
+- `hasAttribute(name)`
 - `getAttribute(name)`
 - `setAttribute(name, value)`
 - `clearAttribute(name)`

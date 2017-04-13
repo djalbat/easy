@@ -54,6 +54,8 @@ class Element {
 
   setHeight(height) { this.domElement.style.height = height; }
 
+  hasAttribute(name) { return this.domElement.hasAttribute(name); }
+
   getAttribute(name) { return this.domElement.getAttribute(name); }
 
   setAttribute(name, value) { this.domElement.setAttribute(name, value); }
