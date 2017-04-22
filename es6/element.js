@@ -27,14 +27,14 @@ class Element {
     return offset;
   }
 
-  getBounds(includeBorder = false) {
+  getBounds() {
     const boundingClientRect = this.domElement.getBoundingClientRect(),
           bounds = Bounds.fromBoundingClientRect(boundingClientRect);
 
     return bounds;
   }
 
-  getWidth(includeBorder = false) {
+  getWidth(includeBorder = true) {
     const width = includeBorder ?
                     this.domElement.offsetWidth :
                       this.domElement.clientWidth;
@@ -44,7 +44,7 @@ class Element {
 
   setWidth(width) { this.domElement.style.width = width; }
 
-  getHeight(includeBorder = false) {
+  getHeight(includeBorder = true) {
     const height = includeBorder ?
                      this.domElement.offsetHeight :
                        this.domElement.clientHeight;

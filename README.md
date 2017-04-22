@@ -187,10 +187,10 @@ Each class bar the `Window`, `Document` and `TextElement` classes has the follow
 
 - `clone()`
 - `getOffset()`
-- `getBounds(includeBorder = false)`
-- `getWidth(includeBorder = false)`
+- `getBounds()`
+- `getWidth(includeBorder = true)`
 - `setWidth(width)`
-- `getHeight(includeBorder = false)`
+- `getHeight(includeBorder = true)`
 - `setHeight(height)`
 - `hasAttribute(name)`
 - `getAttribute(name)`
