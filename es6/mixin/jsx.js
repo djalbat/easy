@@ -2,10 +2,10 @@
 
 const TextElement = require('../textElement');
 
-function prependTo(parentElement) {
+function addTo(parentElement) {
   updateParentContext(this, parentElement);
 
-  parentElement.prepend(this);
+  parentElement.add(this);
 }
 
 function appendTo(parentElement) {
@@ -14,10 +14,10 @@ function appendTo(parentElement) {
   parentElement.append(this);
 }
 
-function addTo(parentElement) {
+function prependTo(parentElement) {
   updateParentContext(this, parentElement);
 
-  parentElement.add(this);
+  parentElement.prepend(this);
 }
 
 function removeFrom(parentElement) {
@@ -103,9 +103,9 @@ function setState(state) {
 }
 
 const jsxMixin = {
-  prependTo: prependTo,
-  appendTo: appendTo,
   addTo: addTo,
+  appendTo: appendTo,
+  prependTo: prependTo,
   removeFrom: removeFrom,
   assignContext: assignContext,
   applyProperties: applyProperties,
