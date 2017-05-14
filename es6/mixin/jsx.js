@@ -102,6 +102,16 @@ function setState(state) {
   this.state = state;
 }
 
+function fromState(name) {
+  const value = this.state[name];
+
+  return value;
+}
+
+function updateState(update) {
+  Object.assign(this.state, update);
+}
+
 const jsxMixin = {
   addTo: addTo,
   appendTo: appendTo,
@@ -112,7 +122,9 @@ const jsxMixin = {
   getProperties: getProperties,
   getContext: getContext,
   getState: getState,
-  setState: setState
+  setState: setState,
+  fromState: fromState,
+  updateState: updateState
 };
 
 module.exports = jsxMixin;
