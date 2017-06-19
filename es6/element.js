@@ -8,7 +8,8 @@ const Offset = require('./misc/offset'),
       scrollMixin = require('./mixin/scroll'),
       resizeMixin = require('./mixin/resize'),
       mouseMixin = require('./mixin/mouse'),
-      keyMixin = require('./mixin/key');
+      keyMixin = require('./mixin/key'),
+      arrayUtil = require('./util/array');
 
 class Element {
   constructor(selector) {
@@ -228,7 +229,7 @@ class Element {
       if (parentDOMElement.matches(selector)) {
         const parentDOMElements = [parentDOMElement],
               parentElements = elementsFromDOMElements(parentDOMElements),
-              firstParentElement = first(parentElements);
+              firstParentElement = arrayUtil.first(parentElements);
 
         parentElement = firstParentElement || null;
       }
@@ -412,5 +413,3 @@ function filter(array, test) {
 
   return filteredArray;
 }
-
-function first(array) { return array[0]; }
