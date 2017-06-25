@@ -21,23 +21,18 @@ class Button extends Element {
     super.offClick(clickHandler);
   }
 
-  static clone(element, clickHandler) {
-    return Element.clone(Button, element, clickHandler);
-  }
+  static clone(element, clickHandler) { return Element.clone(Button, element, clickHandler); }
 
-  static fromHTML(html, clickHandler) {
-    return Element.fromHTML(Button, html, clickHandler);
-  }
+  static fromHTML(html, clickHandler) { return Element.fromHTML(Button, html, clickHandler); }
 
-  static fromDOMElement(domElement, clickHandler) {
-    return Element.fromDOMElement(Button, domElement, clickHandler);
-  }
+  static fromDOMElement(domElement, clickHandler) { return Element.fromDOMElement(Button, domElement, clickHandler); }
 
   static fromProperties(properties) {
     const { onClick } = properties,
-          clickHandler = onClick; ///
-
-    return Element.fromProperties(Button, properties, clickHandler);
+          clickHandler = onClick, ///
+          button = Element.fromProperties(Button, properties, clickHandler);
+    
+    return button;
   }
 }
 

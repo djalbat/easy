@@ -132,6 +132,7 @@ Similarly for the prepend methods.
 -  Body
 -  Div
 -  Span
+-  Section
 -  Button
 -  Checkbox
 -  Input

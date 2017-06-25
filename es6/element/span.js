@@ -9,21 +9,13 @@ class Span extends Element {
 
   offResize() {}
 
-  static clone(element) {
-    return Element.clone(Span, element);
-  }
+  static clone(element) { return Element.clone(Span, element); }
 
-  static fromHTML(html) {
-    return Element.fromHTML(Span, html);
-  }
+  static fromHTML(html) { return Element.fromHTML(Span, html); }
 
-  static fromDOMElement(domElement) {
-    return Element.fromDOMElement(Span, domElement);
-  }
+  static fromDOMElement(domElement) { return Element.fromDOMElement(Span, domElement); }
 
-  static fromProperties(properties) {
-    return Element.fromProperties(properties);
-  }
+  static fromProperties(properties) { return Element.fromProperties(properties); }
 }
 
 Object.assign(Span, {

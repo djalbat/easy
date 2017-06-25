@@ -1,6 +1,7 @@
 'use strict';
 
-const Offset = require('./misc/offset'),
+const arrayUtil = require('./util/array'),
+      Offset = require('./misc/offset'),
       Bounds = require('./misc/bounds'),
       jsxMixin = require('./mixin/jsx'),
       eventMixin = require('./mixin/event'),
@@ -8,8 +9,7 @@ const Offset = require('./misc/offset'),
       scrollMixin = require('./mixin/scroll'),
       resizeMixin = require('./mixin/resize'),
       mouseMixin = require('./mixin/mouse'),
-      keyMixin = require('./mixin/key'),
-      arrayUtil = require('./util/array');
+      keyMixin = require('./mixin/key');
 
 class Element {
   constructor(selector) {

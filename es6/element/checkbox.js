@@ -37,23 +37,18 @@ class Checkbox extends Element {
 
   offResize() {}
 
-  static clone(element, changeHandler) {
-    return Element.clone(Checkbox, element, changeHandler);
-  }
+  static clone(element, changeHandler) { return Element.clone(Checkbox, element, changeHandler); }
 
-  static fromHTML(html, changeHandler) {
-    return Element.fromHTML(Checkbox, html, changeHandler);
-  }
+  static fromHTML(html, changeHandler) { return Element.fromHTML(Checkbox, html, changeHandler); }
 
-  static fromDOMElement(domElement, changeHandler) {
-    return Element.fromDOMElement(Checkbox, domElement, changeHandler);
-  }
+  static fromDOMElement(domElement, changeHandler) { return Element.fromDOMElement(Checkbox, domElement, changeHandler); }
 
   static fromProperties(properties) {
     const { onChange, checked } = properties,
-          changeHandler = onChange; ///    
-
-    return Element.fromProperties(Checkbox, properties, changeHandler, checked);
+          changeHandler = onChange, ///    
+          checkbox = Element.fromProperties(Checkbox, properties, changeHandler, checked);
+    
+    return checkbox;
   }
 }
 

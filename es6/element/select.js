@@ -33,23 +33,18 @@ class Select extends Element {
     this.domElement.value = value; 
   }
 
-  static clone(element, changeHandler) {
-    return Element.clone(Select, element, changeHandler);
-  }
+  static clone(element, changeHandler) { return Element.clone(Select, element, changeHandler); }
 
-  static fromHTML(html, changeHandler) {
-    return Element.fromHTML(Select, html, changeHandler);
-  }
+  static fromHTML(html, changeHandler) { return Element.fromHTML(Select, html, changeHandler); }
 
-  static fromDOMElement(domElement, changeHandler) {
-    return Element.fromDOMElement(Select, domElement, changeHandler);
-  }
+  static fromDOMElement(domElement, changeHandler) { return Element.fromDOMElement(Select, domElement, changeHandler); }
 
   static fromProperties(properties) {
     const { onChange } = properties,
-          changeHandler = onChange; ///    
-
-    return Element.fromProperties(Select, properties, changeHandler);
+          changeHandler = onChange, ///
+          select = Element.fromProperties(Select, properties, changeHandler);
+    
+    return select;
   }
 }
 

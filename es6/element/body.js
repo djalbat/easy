@@ -9,21 +9,13 @@ class Body extends Element {
 
   clone() { return Body.clone(this); }
 
-  static clone(element) {
-    return Element.clone(Body, element);
-  }
+  static clone(element) { return Element.clone(Body, element); }
 
-  static fromHTML(html) {
-    return Element.fromHTML(Body, html);
-  }
+  static fromHTML(html) { return Element.fromHTML(Body, html); }
 
-  static fromDOMElement(domElement) {
-    return Element.fromDOMElement(Body, domElement);
-  }
+  static fromDOMElement(domElement) { return Element.fromDOMElement(Body, domElement); }
 
-  static fromProperties(properties) {
-    return Element.fromProperties(Body, properties);
-  }
+  static fromProperties(properties) { return Element.fromProperties(Body, properties); }
 }
 
 Object.assign(Body, {

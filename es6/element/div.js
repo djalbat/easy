@@ -9,21 +9,13 @@ class Div extends Element {
 
   clone() { return Div.clone(this); }
 
-  static clone(element) {
-    return Element.clone(Div, element);
-  }
+  static clone(element) { return Element.clone(Div, element); }
 
-  static fromHTML(html) {
-    return Element.fromHTML(Div, html);
-  }
+  static fromHTML(html) { return Element.fromHTML(Div, html); }
 
-  static fromDOMElement(domElement) {
-    return Element.fromDOMElement(Div, domElement);
-  }
+  static fromDOMElement(domElement) { return Element.fromDOMElement(Div, domElement); }
 
-  static fromProperties(properties) {
-    return Element.fromProperties(Div, properties);
-  }
+  static fromProperties(properties) { return Element.fromProperties(Div, properties); }
 }
 
 Object.assign(Div, {

@@ -21,23 +21,18 @@ class Link extends Element {
     this.off('click', clickHandler);
   }
 
-  static clone(element, clickHandler) {
-    return Element.clone(Link, element, clickHandler);
-  }
+  static clone(element, clickHandler) { return Element.clone(Link, element, clickHandler); }
 
-  static fromHTML(html, clickHandler) {
-    return Element.fromHTML(Link, html, clickHandler);
-  }
+  static fromHTML(html, clickHandler) { return Element.fromHTML(Link, html, clickHandler); }
 
-  static fromDOMElement(domElement, clickHandler) {
-    return Element.fromDOMElement(Link, domElement, clickHandler);
-  }
+  static fromDOMElement(domElement, clickHandler) { return Element.fromDOMElement(Link, domElement, clickHandler); }
 
   static fromProperties(properties) {
     const { onClick } = properties,
-          clickHandler = onClick; ///    
-
-    return Element.fromProperties(Link, properties, clickHandler);
+          clickHandler = onClick, ///
+          link = Element.fromProperties(Link, properties, clickHandler);
+    
+    return link;
   }
 }
 
