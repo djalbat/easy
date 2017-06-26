@@ -49,11 +49,11 @@ function assignContext(names = Object.keys(this.context), thenDelete = true) {
 }
 
 function applyProperties(properties = {}, defaultProperties, ignoredProperties) {
-  assign(properties, defaultProperties);
+  assignProperties(properties, defaultProperties);
 
   const childElements = childElementsFromElementAndProperties(this, properties);
 
-  unassign(properties, ignoredProperties);
+  unassignProperties(properties, ignoredProperties);
 
   const names = Object.keys(properties);
 
@@ -154,7 +154,7 @@ function childElementsFromElementAndProperties(element, properties) {
   return childElements;
 }
 
-function unassign(properties, ignoredProperties = []) {
+function unassignProperties(properties, ignoredProperties = []) {
   const ignoredPropertyNames = ignoredProperties; ///
 
   ignoredPropertyNames.forEach(function(ignoredPropertyName) {
@@ -164,7 +164,7 @@ function unassign(properties, ignoredProperties = []) {
   });
 }
 
-function assign(properties, defaultProperties = {}) {
+function assignProperties(properties, defaultProperties = {}) {
   const defaultPropertyNames = Object.keys(defaultProperties);
 
   defaultPropertyNames.forEach(function(defaultPropertyName) {

@@ -332,6 +332,8 @@ Object.assign(Element.prototype, resizeMixin);
 Object.assign(Element.prototype, mouseMixin);
 Object.assign(Element.prototype, keyMixin);
 
+Element.assignContext = jsxMixin
+
 Object.assign(Element, {
   LEFT_MOUSE_BUTTON: 0,
   MIDDLE_MOUSE_BUTTON: 1,
