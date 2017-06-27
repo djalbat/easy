@@ -362,9 +362,11 @@ function elementsFromDOMElements(domElements) {
 }
 
 function descendantDOMNodesFromDOMNode(domNode, descendantDOMNodes = []) {
-  const childDOMNodes = domNode.childNodes;  ///
+  const start = -1,
+        deleteCount = 0,
+        childDOMNodes = domNode.childNodes;  ///
 
-  descendantDOMNodes.concat(childDOMNodes);
+  arrayUtil.splice(descendantDOMNodes, start, deleteCount, childDOMNodes);
 
   childDOMNodes.forEach(function(childDOMNode) {
     descendantDOMNodesFromDOMNode(childDOMNode, descendantDOMNodes);
