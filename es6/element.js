@@ -207,7 +207,8 @@ class Element {
   getDescendantElements(selector = '*') {
     const domNode = this.domElement,  ///
           descendantDOMNodes = descendantDOMNodesFromDOMNode(domNode),
-          descendantElements = filterDOMNodes(descendantDOMNodes, selector);
+          descendantDOMElements = filterDOMNodes(descendantDOMNodes, selector),
+          descendantElements = elementsFromDOMElements(descendantDOMElements);
 
     return descendantElements;
   }
