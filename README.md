@@ -280,9 +280,11 @@ The `Input` and `Textarea` classes have the following methods, taken from the `I
 - `getValue()`
 - `getSelectionStart()`
 - `getSelectionEnd()`
+- `isReadOnly()`
 - `setValue(value)`
 - `setSelectionStart(selectionStart)`
 - `setSelectionEnd(selectionEnd)`
+- `setReadOnly(readOnly)`
 - `select()`
 
 The `TextElement` class has the following methods:
