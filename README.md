@@ -217,10 +217,12 @@ Each class bar the `Window`, `Document` and `TextElement` classes has the follow
 - `remove(element)`
 - `show(displayStyle = 'block')`
 - `hide()`
+- `display(displayStyle)`
 - `enable()`
 - `disable()`
 - `isEnabled()`
 - `isDisabled()`
+- `isDisplayed()`
 - `html(html)`
 - `css(css)`
 - `blur()`
@@ -265,11 +267,12 @@ Please note the following:
 
 * The `onResize()` and `offResize()` methods are similarly defined on all elements, by way of a mixin. The resize functionality relies on attaching a child object to the element in question and therefore will not work for elements which cannot have child elements. In these cases, the `onResize()` and `offResize()` methods simply do nothing. 
 
-Aside from the above methods there are the aforementioned static factory methods.
+Aside from the above methods there are the aforementioned static factory methods:
  
 - `static clone(Class, element, ...remainingArguments)`
 - `static fromHTML(Class, html, ...remainingArguments)`
 - `static fromDOMElement(Class, domElement, ...remainingArguments)`
+- `static fromProperties(Class, properties, ...remainingArguments)`
 
 Again bear in mind that the signatures will change for classes that inherit from the `Element` class.
 

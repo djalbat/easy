@@ -126,9 +126,11 @@ class Element {
     }
   }
 
-  show(displayStyle = 'block') { this.domElement.style.display = displayStyle; }
+  show(displayStyle = 'block') { this.display(displayStyle); }
 
   hide() { this.domElement.style.display = 'none'; }
+
+  display(displayStyle) { this.domElement.style.display = displayStyle; }
 
   enable() { this.clearAttribute('disabled'); }
 
@@ -146,6 +148,8 @@ class Element {
 
     return disabled;
   }
+  
+  isDisplayed() { return (this.domElement.style.display !== 'none'); }    
 
   html(html) {
     if (html === undefined) {
