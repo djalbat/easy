@@ -339,8 +339,8 @@ Object.assign(Element.prototype, keyMixin);
 
 Object.assign(Element, {
   LEFT_MOUSE_BUTTON: 0,
-  MIDDLE_MOUSE_BUTTON: 1,
-  RIGHT_MOUSE_BUTTON: 2
+  RIGHT_MOUSE_BUTTON: 2,
+  MIDDLE_MOUSE_BUTTON: 1
 });
 
 module.exports = Element;
