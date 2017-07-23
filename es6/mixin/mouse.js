@@ -48,8 +48,7 @@ module.exports = mouseMixin;
 function defaultIntermediateHandler(handler, event, targetElement) {
   const mouseTop = event.pageY,  ///
         mouseLeft = event.pageX, ///
-        mouseButton = event.button, ///
-        preventDefault = handler(mouseTop, mouseLeft, mouseButton, targetElement);
-
-  return preventDefault;
+        mouseButton = event.button; ///
+  
+  handler(mouseTop, mouseLeft, mouseButton, event, targetElement);
 }

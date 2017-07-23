@@ -27,8 +27,7 @@ module.exports = scrollMixin;
 
 function defaultIntermediateHandler(handler, event, targetElement) {
   const scrollTop = targetElement.getScrollTop(),
-        scrollLeft = targetElement.getScrollLeft(),
-        preventDefault = handler(scrollTop, scrollLeft, targetElement);
-
-  return preventDefault;
+        scrollLeft = targetElement.getScrollLeft();
+  
+  handler(scrollTop, scrollLeft, event, targetElement);
 }

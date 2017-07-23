@@ -46,8 +46,7 @@ Object.assign(Button, {
 module.exports = Button;
 
 function defaultIntermediateClickHandler(clickHandler, event, targetElement) {
-  const mouseButton = event.button,
-        preventDefault = clickHandler(mouseButton, targetElement);
-
-  return preventDefault;
+  const mouseButton = event.button;
+  
+  clickHandler(mouseButton, event, targetElement);
 }

@@ -61,8 +61,7 @@ module.exports = Select;
 
 function defaultIntermediateChangeHandler(changeHandler, event, targetElement) {
   const select = targetElement, ///
-        selectedOptionValue = select.getSelectedOptionValue(),
-        preventDefault = changeHandler(selectedOptionValue, targetElement);
-
-  return preventDefault;
+        selectedOptionValue = select.getSelectedOptionValue();
+  
+  changeHandler(selectedOptionValue, event, targetElement);
 }

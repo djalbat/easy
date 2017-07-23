@@ -71,8 +71,7 @@ module.exports = InputElement;
 
 function defaultIntermediateChangeHandler(changeHandler, event, targetElement) {
   const inputElement = targetElement, ///
-        value = inputElement.getValue(),
-        preventDefault = changeHandler(value, targetElement);
-
-  return preventDefault;
+        value = inputElement.getValue();
+  
+  changeHandler(value, event, targetElement);
 }

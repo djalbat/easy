@@ -72,8 +72,7 @@ module.exports = Checkbox;
 
 function defaultIntermediateChangeHandler(changeHandler, event, targetElement) {
   const checkbox = targetElement, ///
-        checked = checkbox.isChecked(),
-        preventDefault = changeHandler(checked, targetElement);
-
-  return preventDefault;
+        checked = checkbox.isChecked();
+  
+  changeHandler(checked, event, targetElement);
 }

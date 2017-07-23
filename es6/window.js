@@ -51,8 +51,7 @@ module.exports = new Window();  ///
 function defaultIntermediateResizeHandler(handler, event, targetElement) {
   const window = targetElement, ///
         width = window.getWidth(),
-        height = targetElement.getHeight(),
-        preventDefault = handler(width, height, targetElement);
-
-  return preventDefault;
+        height = targetElement.getHeight();
+  
+  handler(width, height, event, targetElement);
 }

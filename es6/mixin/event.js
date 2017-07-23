@@ -27,18 +27,18 @@ function onEvent(element, eventType, handler, intermediateHandler) {
   if (!element.hasOwnProperty('eventObjectMap')) {
     const eventObjectMap = {};
 
-    Object.assign(element, {
-      eventObjectMap: eventObjectMap
-    });
+    element.eventObjectMap = eventObjectMap;
   }
 
-  let eventObject = element.eventObjectMap[eventType];
+  const eventObjectMap = element.eventObjectMap;
 
-  if (!eventObject) {
-    eventObject = createEventObject();
+  if (!eventObjectMap.hasOwnProperty(eventType)) {
+    const eventObject = createEventObject();
 
-    element.eventObjectMap[eventType] = eventObject;
+    eventObjectMap[eventType] = eventObject;
   }
+
+  const eventObject = eventObjectMap[eventType];
 
   eventObject.addHandler(element, eventType, handler, intermediateHandler);
 }
@@ -110,15 +110,9 @@ function createEventListener(handler, intermediateHandler, targetElement) {
   }
 
   const eventListener = function(event) {
-    const preventDefault = (intermediateHandler !== undefined) ?
-                              intermediateHandler(handler, event, targetElement) :
-                                handler(event, targetElement);
-
-    if (preventDefault === true) {
-      event.preventDefault();
-    }
-
-    event.stopPropagation();
+    (intermediateHandler !== undefined) ?
+      intermediateHandler(handler, event, targetElement) :
+        handler(event, event, targetElement);
   };
 
   Object.assign(eventListener, {
@@ -130,9 +124,7 @@ function createEventListener(handler, intermediateHandler, targetElement) {
 
 function createBindingIntermediateHandler(object) {
   const bindingIntermediateHandler = function(handler, event, targetElement) {
-    const preventDefault = handler.call(object, event, targetElement);
-
-    return preventDefault;
+    handler.call(object, event, targetElement);
   };
 
   return bindingIntermediateHandler;

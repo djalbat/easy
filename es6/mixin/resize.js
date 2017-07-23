@@ -65,18 +65,18 @@ function resizeObjectLoadHandler(element) {
   const resizeObject = element.__resizeObject__,
         resizeObjectWindow = resizeObject.contentDocument.defaultView;  ///
 
-  resizeObjectWindow.addEventListener('resize', function() {
-    eventListener(element);
+  resizeObjectWindow.addEventListener('resize', function(event) {
+    eventListener(element, event);
   });
 }
 
-function eventListener(element) {
+function eventListener(element, event) {
   const width = element.getWidth(),
         height = element.getHeight(),
         targetElement = element, ///
         handlers = element.handlersMap['resize'];
 
   handlers.forEach(function(handler){
-    handler(width, height, targetElement);
+    handler(width, height, event, targetElement);
   });
 }

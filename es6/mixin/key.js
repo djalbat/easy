@@ -22,8 +22,7 @@ const keyMixin = {
 module.exports = keyMixin;
 
 function defaultIntermediateHandler(handler, event, targetElement) {
-  const keyCode = event.keyCode,
-        preventDefault = handler(keyCode, targetElement);
-
-  return preventDefault;
+  const keyCode = event.keyCode;
+  
+  handler(keyCode, event, targetElement);
 }
