@@ -187,6 +187,7 @@ You can then use the private `domElement` property to create methods that abstra
 Each class bar the `Window`, `Document` and `TextElement` classes has the following methods. They are taken from the `Element` class and are overridden in many cases, in which case the signatures may change:
 
 - `clone()`
+- `getDOMElement()`
 - `getOffset()`
 - `getBounds()`
 - `getWidth(includeBorder = true)`

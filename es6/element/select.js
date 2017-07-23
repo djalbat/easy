@@ -22,15 +22,17 @@ class Select extends Element {
   }
 
   getSelectedOptionValue() {
-    const selectedOptionValue = this.domElement.value;  ///
+    const domElement = this.getDOMElement(),
+          selectedOptionValue = domElement.value;  ///
     
     return selectedOptionValue;
   }
 
   setSelectedOptionByValue(selectedOptionValue) {
-    const value = selectedOptionValue;  ///
+    const value = selectedOptionValue,  ///
+          domElement = this.getDOMElement();
     
-    this.domElement.value = value; 
+    domElement.value = value; 
   }
 
   static clone(element, changeHandler) { return Element.clone(Select, element, changeHandler); }

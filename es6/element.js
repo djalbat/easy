@@ -19,6 +19,10 @@ class Element {
   }
 
   clone() { return Element.clone(this); }
+  
+  getDOMElement() {
+    return this.domElement;
+  }
 
   getOffset() {
     const top = this.domElement.offsetTop,  ///

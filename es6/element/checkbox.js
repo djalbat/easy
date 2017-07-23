@@ -31,7 +31,12 @@ class Checkbox extends Element {
         this.clearAttribute('checked');
   }
 
-  isChecked() { return this.domElement.checked; }
+  isChecked() {
+    const domElement = this.getDOMElement(),
+        checked = domElement.checked;
+
+    return checked;
+  }
 
   onResize() {}
 

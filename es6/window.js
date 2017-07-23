@@ -7,7 +7,7 @@ const eventMixin = require('./mixin/event'),
 
 class Window {
   constructor() {
-    this.domElement = window;
+    this.domElement = window; ///
   }
 
   assign(...sources) {
