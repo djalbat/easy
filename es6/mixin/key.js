@@ -1,16 +1,16 @@
 'use strict';
 
-function onKeyUp(handler, intermediateHandler = defaultIntermediateHandler) {
-  this.on('keyup', handler, intermediateHandler);
+function onKeyUp(handler, object, intermediateHandler = defaultIntermediateHandler) {
+  this.on('keyup', handler, object, intermediateHandler);
 }
 
-function onKeyDown(handler, intermediateHandler = defaultIntermediateHandler) {
-  this.on('keydown', handler, intermediateHandler);
+function onKeyDown(handler, object, intermediateHandler = defaultIntermediateHandler) {
+  this.on('keydown', handler, object, intermediateHandler);
 }
 
-function offKeyUp(handler) { this.off('keyup', handler); }
+function offKeyUp(handler, object) { this.off('keyup', handler, object); }
 
-function offKeyDown(handler) { this.off('keydown', handler); }
+function offKeyDown(handler, object) { this.off('keydown', handler, object); }
 
 const keyMixin = {
   onKeyUp: onKeyUp,

@@ -1,10 +1,10 @@
 'use strict';
 
-function onClick(handler, intermediateHandler = defaultIntermediateHandler) {
-  this.on('click', handler, intermediateHandler);
+function onClick(handler, object, intermediateHandler = defaultIntermediateHandler) {
+  this.on('click', handler, object, intermediateHandler);
 }
 
-function offClick(handler) { this.off('click', handler); }
+function offClick(handler, object) { this.off('click', handler, object); }
 
 const clickMixin = {
   onClick: onClick,

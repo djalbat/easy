@@ -24,20 +24,16 @@ class Window {
 
   getScrollLeft() { return this.domElement.pageXOffset; } ///
 
-  onResize(handler) {
-    if (handler.intermediateHandler === undefined) {
-      handler.intermediateHandler = defaultIntermediateResizeHandler;
-    }
-
-    const eventType = 'resize';
+  onResize(handler, object, intermediateHandler = defaultIntermediateResizeHandler) {
+    const eventTypes = 'resize';
     
-    this.on(eventType, handler);
+    this.on(eventTypes, handler, object, intermediateHandler);
   }
 
-  offResize(handler) {
-    const eventType = 'resize';
+  offResize(handler, object) {
+    const eventTypes = 'resize';
 
-    this.off(eventType, handler);
+    this.off(eventTypes, handler, object);
   }
 }
 
@@ -51,7 +47,7 @@ module.exports = new Window();  ///
 function defaultIntermediateResizeHandler(handler, event, targetElement) {
   const window = targetElement, ///
         width = window.getWidth(),
-        height = targetElement.getHeight();
+        height = window.getHeight();
   
   handler(width, height, event, targetElement);
 }

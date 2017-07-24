@@ -1,34 +1,34 @@
 'use strict';
 
-function onMouseUp(handler, intermediateHandler = defaultIntermediateHandler) {
-  this.on('mouseup', handler, intermediateHandler);
+function onMouseUp(handler, object, intermediateHandler = defaultIntermediateHandler) {
+  this.on('mouseup', handler, object, intermediateHandler);
 }
 
-function onMouseDown(handler, intermediateHandler = defaultIntermediateHandler) {
-  this.on('mousedown', handler, intermediateHandler);
+function onMouseDown(handler, object, intermediateHandler = defaultIntermediateHandler) {
+  this.on('mousedown', handler, object, intermediateHandler);
 }
 
-function onMouseOver(handler, intermediateHandler = defaultIntermediateHandler) {
-  this.on('mouseover', handler, intermediateHandler);
+function onMouseOver(handler, object, intermediateHandler = defaultIntermediateHandler) {
+  this.on('mouseover', handler, object, intermediateHandler);
 }
 
-function onMouseOut(handler, intermediateHandler = defaultIntermediateHandler) {
-  this.on('mouseout', handler, intermediateHandler);
+function onMouseOut(handler, object, intermediateHandler = defaultIntermediateHandler) {
+  this.on('mouseout', handler, object, intermediateHandler);
 }
 
-function onMouseMove(handler, intermediateHandler = defaultIntermediateHandler) {
-  this.on('mousemove', handler, intermediateHandler);
+function onMouseMove(handler, object, intermediateHandler = defaultIntermediateHandler) {
+  this.on('mousemove', handler, object, intermediateHandler);
 }
 
-function offMouseUp(handler) { this.off('mouseup', handler); }
+function offMouseUp(handler, object) { this.off('mouseup', handler, object); }
 
-function offMouseDown(handler) { this.off('mousedown', handler); }
+function offMouseDown(handler, object) { this.off('mousedown', handler, object); }
 
-function offMouseOver(handler) { this.off('mouseover', handler); }
+function offMouseOver(handler, object) { this.off('mouseover', handler, object); }
 
-function offMouseOut(handler) { this.off('mouseout', handler); }
+function offMouseOut(handler, object) { this.off('mouseout', handler, object); }
 
-function offMouseMove(handler) { this.off('mousemove', handler); }
+function offMouseMove(handler, object) { this.off('mousemove', handler, object); }
 
 const mouseMixin = {
   onMouseUp: onMouseUp,

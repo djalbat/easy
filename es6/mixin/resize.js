@@ -1,20 +1,28 @@
 'use strict';
 
-function onResize(handler) {
-  const eventType = 'resize',
-        addEventListener = this.on(eventType, handler);
+function onResize(handler, object, intermediateHandler = defaultIntermediateResizeHandler) {
+  const element = this, ///
+        resizeEventListeners = findResizeEventListeners(element);
 
-  if (addEventListener) {
-    appendResizeObject(this);
+  if (resizeEventListeners.length === 0) {
+    addResizeObject(element);
   }
+
+  const eventType = 'resize';
+
+  this.addEventListener(eventType, handler, object, intermediateHandler);
 }
 
-function offResize(handler) {
-  const eventType = 'resize',
-        removeEventListener = this.off(eventType, handler);
+function offResize(handler, object) {
+  const eventType = 'resize';
 
-  if (removeEventListener) {
-    removeResizeObject(this);
+  this.removeEventListener(eventType, handler, object);
+
+  const element = this, ///
+        resizeEventListeners = findResizeEventListeners(element);
+  
+  if (resizeEventListeners.length === 0) {
+    removeResizeObject(element);
   }
 }
 
@@ -25,9 +33,9 @@ const resizeMixin = {
 
 module.exports = resizeMixin;
 
-function appendResizeObject(element) {
+function addResizeObject(element) {
   const resizeObject = document.createElement('object'),
-        domElement = element.domElement,
+        domElement = element.getDOMElement(),
         style = `display: block; 
                  position: absolute; 
                  top: 0; 
@@ -36,11 +44,13 @@ function appendResizeObject(element) {
                  width: 100%; 
                  overflow: hidden; 
                  pointer-events: none; 
-                 z-index: -1;`;
+                 z-index: -1;`,
+        data = 'about:blank',
+        type = 'text/html';
 
   resizeObject.setAttribute('style', style);
-  resizeObject.data = 'about:blank';
-  resizeObject.type = 'text/html';
+  resizeObject.data = data;
+  resizeObject.type = type;
 
   element.__resizeObject__ = resizeObject;
 
@@ -52,11 +62,11 @@ function appendResizeObject(element) {
 }
 
 function removeResizeObject(element) {
-  const domElement = element.domElement,
+  const domElement = element.getDOMElement(),
         resizeObject = element.__resizeObject__,
         objectWindow = resizeObject.contentDocument.defaultView;  ///
 
-  objectWindow.removeEventListener('resize', resizeListener);
+  objectWindow.removeEventListener('resize', resizeEventListener);
 
   domElement.removeChild(resizeObject);
 }
@@ -66,17 +76,36 @@ function resizeObjectLoadHandler(element) {
         resizeObjectWindow = resizeObject.contentDocument.defaultView;  ///
 
   resizeObjectWindow.addEventListener('resize', function(event) {
-    eventListener(element, event);
+    const resizeEventListeners = findResizeEventListeners(element);
+
+    resizeEventListeners.forEach(function(resizeEventListener){
+      resizeEventListener(event);
+    });
   });
 }
 
-function eventListener(element, event) {
-  const width = element.getWidth(),
-        height = element.getHeight(),
-        targetElement = element, ///
-        handlers = element.handlersMap['resize'];
+function defaultIntermediateResizeHandler(handler, event, targetElement) {
+  const window = targetElement, ///
+        width = window.getWidth(),
+        height = window.getHeight();
 
-  handlers.forEach(function(handler){
-    handler(width, height, event, targetElement);
-  });
+  handler(width, height, event, targetElement);
+}
+
+function findResizeEventListeners(element) {
+  const resizeEventListeners = [];
+  
+  if (element.hasOwnProperty('eventListeners')) {
+    const eventListeners = element.eventListeners;  ///
+
+    eventListeners.forEach(function(eventListener) {
+      if (eventListener.eventType === 'resize') {
+        const resizeEventListener = eventListener;
+
+        resizeEventListeners.push(resizeEventListener);
+      }      
+    });
+  }  
+  
+  return resizeEventListeners;
 }

@@ -1,145 +1,98 @@
 'use strict';
 
-function on(eventTypes, handler, intermediateHandler) {
+const arrayUtil = require('../util/array');
+
+function on(eventTypes, handler, object = null, intermediateHandler = null) {
   eventTypes = eventTypes.split(' '); ///
 
   eventTypes.forEach(function(eventType) {
-    onEvent(this, eventType, handler, intermediateHandler);
+    const eventListener = this.addEventListener(eventType, handler, object, intermediateHandler);
+    
+    this.domElement.addEventListener(eventType, eventListener);
   }.bind(this));
 }
 
-function off(eventTypes, handler) {
+function off(eventTypes, handler, object = null) {
   eventTypes = eventTypes.split(' '); ///
 
   eventTypes.forEach(function(eventType) {
-    offEvent(this, eventType, handler);
+    const eventListener = this.removeEventListener(eventType, handler, object);
+
+    this.domElement.removeEventListener(eventType, eventListener);
   }.bind(this));
 }
 
 const eventMixin = {
   on: on,
-  off: off
+  off: off,
+  addEventListener: addEventListener,
+  removeEventListener: removeEventListener
 };
 
 module.exports = eventMixin;
 
-function onEvent(element, eventType, handler, intermediateHandler) {
-  if (!element.hasOwnProperty('eventObjectMap')) {
-    const eventObjectMap = {};
-
-    element.eventObjectMap = eventObjectMap;
+function addEventListener(eventType, handler, object, intermediateHandler) {
+  if (!this.hasOwnProperty('eventListeners')) {
+    this.eventListeners = [];
   }
+  
+  const targetElement = this, ///
+        eventListeners = this.eventListeners,
+        eventListener = createEventListener(targetElement, eventType, handler, object, intermediateHandler);
 
-  const eventObjectMap = element.eventObjectMap;
+  eventListeners.push(eventListener);
 
-  if (!eventObjectMap.hasOwnProperty(eventType)) {
-    const eventObject = createEventObject();
-
-    eventObjectMap[eventType] = eventObject;
-  }
-
-  const eventObject = eventObjectMap[eventType];
-
-  eventObject.addHandler(element, eventType, handler, intermediateHandler);
+  return eventListeners;
 }
 
-function offEvent(element, eventType, handler) {
-  const eventObject = element.eventObjectMap[eventType],
-        noneRemaining = eventObject.removeHandler(element, eventType, handler);
+function removeEventListener(eventType, handler, object) {
+  const eventListeners = this.eventListeners,
+        eventListener = findEventListener(eventListeners, eventType, handler, object),
+        index = eventListeners.indexOf(eventListener),
+        start = index,  ///
+        deleteCount = 1;
 
-  if (noneRemaining) {
-    delete element.eventObjectMap[eventType];
+  eventListeners.splice(start, deleteCount);
+
+  if (eventListeners.length === 0) {
+    delete this.eventListeners;
   }
-
-  const eventTypes = Object.keys(element.eventObjectMap);
-
-  if (eventTypes.length === 0) {
-    delete element.eventObjectMap;
-  }
+  
+  return eventListener;
 }
 
-function createEventObject() {
-  const eventListeners = [];
-
-  function addHandler(element, eventType, handler, intermediateHandler) {
-    const targetElement = element,  ///
-          eventListener = createEventListener(handler, intermediateHandler, targetElement);
-
-    element.domElement.addEventListener(eventType, eventListener);
-
-    eventListeners.push(eventListener);
-  }
-
-  function removeHandler(element, eventType, handler = null) {
-    if (handler === null) {
-      eventListeners.forEach(function(eventListener) {
-        element.domElement.removeEventListener(eventType, eventListener);
-      });
-
-      const start = 0;
-
-      eventListeners.splice(start);
-    } else {
-      const index = indexOfEventListener(eventListeners, handler),
-            eventListener = eventListeners[index];
-
-      element.domElement.removeEventListener(eventType, eventListener);
-
-      const start = index,  ///
-            deleteCount = 1;
-
-      eventListeners.splice(start, deleteCount);
+function createEventListener(targetElement, eventType, handler, object, intermediateHandler) {
+  let eventListener;
+  
+  if (intermediateHandler === null) {
+    eventListener = function(event) {
+      handler.call(object, event, targetElement)
+    };
+  } else {
+    eventListener = function(event) {
+      intermediateHandler(function(event) {
+        handler.call(object, ...arguments);
+      }, event, targetElement);
     }
-
-    const noneRemaining = (eventListeners.length === 0);  ///
-
-    return noneRemaining;
   }
-
-  return {
-    addHandler: addHandler,
-    removeHandler: removeHandler
-  };
-}
-
-function createEventListener(handler, intermediateHandler, targetElement) {
-  if (typeof intermediateHandler === 'object') {
-    const object = intermediateHandler;  ///
-
-    intermediateHandler = createBindingIntermediateHandler(object); ///
-  }
-
-  const eventListener = function(event) {
-    (intermediateHandler !== undefined) ?
-      intermediateHandler(handler, event, targetElement) :
-        handler(event, event, targetElement);
-  };
 
   Object.assign(eventListener, {
-    handler: handler
+    eventType: eventType,
+    handler: handler,
+    object: object
   });
 
   return eventListener;
 }
 
-function createBindingIntermediateHandler(object) {
-  const bindingIntermediateHandler = function(handler, event, targetElement) {
-    handler.call(object, event, targetElement);
-  };
-
-  return bindingIntermediateHandler;
-}
-
-function indexOfEventListener(eventListeners, handler) {
-  let foundIndex = undefined; ///
-
-  eventListeners.forEach(function(eventListener, index) {
-    if (eventListener.handler === handler) {  ///
-      foundIndex = index;
-    }
+function findEventListener(eventListeners, eventType, handler, object) {
+  const eventListener = arrayUtil.find(eventListeners, function(eventListener) {
+    const found = ( (eventListener.object === object) && 
+                    (eventListener.handler === handler) && 
+                    (eventListener.eventType === eventType) );  ///
+    
+    return found;
   });
-
-  const index = foundIndex; ///
-
-  return index;
+  
+  return eventListener;
 }

@@ -23,6 +23,24 @@ class arrayUtil {
 
     return targetArray;
   }
+  
+  static find(array, test) {
+    let foundElement = null;
+
+    array.some(function(element) {
+      const found = test(element);
+      
+      if (found === true) {
+        foundElement = element;
+
+        return true;
+      }
+    });
+
+    const element = foundElement; ///
+
+    return element;
+  }
 }
 
 module.exports = arrayUtil;
