@@ -42,7 +42,7 @@ function addEventListener(eventType, handler, object, intermediateHandler) {
 
   eventListeners.push(eventListener);
 
-  return eventListeners;
+  return eventListener;
 }
 
 function removeEventListener(eventType, handler, object) {
