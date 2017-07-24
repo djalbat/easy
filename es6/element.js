@@ -353,10 +353,9 @@ module.exports = Element;
 function defaultPropertiesFromClass(Class, defaultProperties = {}) {
   objectUtil.combine(defaultProperties, Class.defaultProperties);
 
-  const superClass = Object.getPrototypeOf(Class),
-        superClassName = superClass.name;
+  const superClass = Object.getPrototypeOf(Class);
 
-  if (superClassName !== 'Element') {  ///
+  if (superClass !== null) {
     defaultPropertiesFromClass(superClass, defaultProperties);
   }
 
@@ -366,10 +365,9 @@ function defaultPropertiesFromClass(Class, defaultProperties = {}) {
 function ignoredPropertiesFromClass(Class, ignoredProperties = []) {
   arrayUtil.combine(ignoredProperties, Class.ignoredProperties);
 
-  const superClass = Object.getPrototypeOf(Class),
-        superClassName = superClass.name;
+  const superClass = Object.getPrototypeOf(Class);
 
-  if (superClassName !== 'Element') {  ///
+  if (superClass !== null) {
     ignoredPropertiesFromClass(superClass, ignoredProperties);
   }
 
