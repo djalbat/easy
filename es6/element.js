@@ -1,6 +1,8 @@
 'use strict';
 
-const arrayUtil = require('./util/array'),
+const objectUtil = require('./util/object'),
+      arrayUtil = require('./util/array'),
+      domUtil = require('./util/dom'),
       Offset = require('./misc/offset'),
       Bounds = require('./misc/bounds'),
       jsxMixin = require('./mixin/jsx'),
@@ -13,7 +15,7 @@ const arrayUtil = require('./util/array'),
 
 class Element {
   constructor(selector) {
-    this.domElement = domElementFromSelector(selector);
+    this.domElement = domUtil.domElementFromSelector(selector);
 
     this.domElement.__element__ = this; ///
   }
@@ -214,17 +216,17 @@ class Element {
 
   getDescendantElements(selector = '*') {
     const domNode = this.domElement,  ///
-          descendantDOMNodes = descendantDOMNodesFromDOMNode(domNode),
-          descendantDOMElements = filterDOMNodes(descendantDOMNodes, selector),
-          descendantElements = elementsFromDOMElements(descendantDOMElements);
+          descendantDOMNodes = domUtil.descendantDOMNodesFromDOMNode(domNode),
+          descendantDOMElements = domUtil.filterDOMNodesBySelector(descendantDOMNodes, selector),
+          descendantElements = domUtil.elementsFromDOMElements(descendantDOMElements);
 
     return descendantElements;
   }
 
   getChildElements(selector = '*') {
     const childDOMNodes = this.domElement.childNodes,
-          childDOMElements = filterDOMNodes(childDOMNodes, selector),
-          childElements = elementsFromDOMElements(childDOMElements);
+          childDOMElements = domUtil.filterDOMNodesBySelector(childDOMNodes, selector),
+          childElements = domUtil.elementsFromDOMElements(childDOMElements);
 
     return childElements;
   }
@@ -237,7 +239,7 @@ class Element {
     if (parentDOMElement !== null) {
       if (parentDOMElement.matches(selector)) {
         const parentDOMElements = [parentDOMElement],
-              parentElements = elementsFromDOMElements(parentDOMElements),
+              parentElements = domUtil.elementsFromDOMElements(parentDOMElements),
               firstParentElement = arrayUtil.first(parentElements);
 
         parentElement = firstParentElement || null;
@@ -260,7 +262,7 @@ class Element {
       ascendantDOMElement = ascendantDOMElement.parentElement;
     }
 
-    const ascendantElements = elementsFromDOMElements(ascendantDOMElements);
+    const ascendantElements = domUtil.elementsFromDOMElements(ascendantDOMElements);
 
     return ascendantElements;
   }
@@ -270,7 +272,7 @@ class Element {
 
     const previousSiblingDOMNode = this.domElement.previousSibling;  ///
 
-    if ((previousSiblingDOMNode !== null) && domNodeMatchesSelector(previousSiblingDOMNode, selector)) {
+    if ((previousSiblingDOMNode !== null) && domUtil.domNodeMatchesSelector(previousSiblingDOMNode, selector)) {
       previousSiblingElement = previousSiblingDOMNode.__element__ || null;
     }
 
@@ -282,7 +284,7 @@ class Element {
 
     const nextSiblingDOMNode = this.domElement.nextSibling;
 
-    if ((nextSiblingDOMNode !== null) && domNodeMatchesSelector(nextSiblingDOMNode, selector)) {
+    if ((nextSiblingDOMNode !== null) && domUtil.domNodeMatchesSelector(nextSiblingDOMNode, selector)) {
       nextSiblingElement = nextSiblingDOMNode.__element__ || null;
     }
 
@@ -322,10 +324,9 @@ class Element {
   static fromProperties(Class, properties, ...remainingArguments) {
     const tagName = Class.tagName,
           html = `<${tagName} />`,
-          element = Element.fromHTML(Class, html, ...remainingArguments);
-
-    const defaultProperties = Class.defaultProperties,
-          ignoredProperties = Class.ignoredProperties;
+          element = Element.fromHTML(Class, html, ...remainingArguments),
+          defaultProperties = defaultPropertiesFromClass(Class),
+          ignoredProperties = ignoredPropertiesFromClass(Class);
 
     element.applyProperties(properties, defaultProperties, ignoredProperties);
 
@@ -349,78 +350,28 @@ Object.assign(Element, {
 
 module.exports = Element;
 
-function domElementFromSelector(selector) {
-  const domElement = (typeof selector === 'string') ?
-                       document.querySelectorAll(selector)[0] :  ///
-                         selector;  ///
+function defaultPropertiesFromClass(Class, defaultProperties = {}) {
+  objectUtil.combine(defaultProperties, Class.defaultProperties);
 
-  return domElement;
-}
+  const superClass = Object.getPrototypeOf(Class),
+        superClassName = superClass.name;
 
-function elementsFromDOMElements(domElements) {
-  const domElementsWithElements = filter(domElements, function(domElement) {
-          return (domElement.__element__ !== undefined);
-        }),
-        elements = domElementsWithElements.map(function(domElement) {
-          return domElement.__element__;
-        });
-
-  return elements;
-}
-
-function descendantDOMNodesFromDOMNode(domNode, descendantDOMNodes = []) {
-  const start = -1,
-        deleteCount = 0,
-        childDOMNodes = domNode.childNodes;  ///
-
-  arrayUtil.splice(descendantDOMNodes, start, deleteCount, childDOMNodes);
-
-  childDOMNodes.forEach(function(childDOMNode) {
-    descendantDOMNodesFromDOMNode(childDOMNode, descendantDOMNodes);
-  });
-
-  return descendantDOMNodes;
-}
-
-function filterDOMNodes(domNodes, selector) {
-  const filteredDOMNodes = filter(domNodes, function(domNode) {
-    return domNodeMatchesSelector(domNode, selector);
-  });
-
-  return filteredDOMNodes;
-}
-
-function domNodeMatchesSelector(domNode, selector) {
-  const domNodeType = domNode.nodeType;
-
-  switch (domNodeType) {
-    case Node.ELEMENT_NODE : {
-      const domElement = domNode; ///
-
-      return domElement.matches(selector);
-    }
-
-    case Node.TEXT_NODE : {
-      if (selector === '*') {
-        return true;
-      }
-    }
+  if (superClassName !== 'Element') {  ///
+    defaultPropertiesFromClass(superClass, defaultProperties);
   }
 
-  return false;
+  return defaultProperties;
 }
 
-function filter(array, test) {
-  const filteredArray = [];
+function ignoredPropertiesFromClass(Class, ignoredProperties = []) {
+  arrayUtil.combine(ignoredProperties, Class.ignoredProperties);
 
-  for (let index = 0; index < array.length; index++) {
-    const element = array[index],
-          result = test(element);
+  const superClass = Object.getPrototypeOf(Class),
+        superClassName = superClass.name;
 
-    if (result) {
-      filteredArray.push(element);
-    }
+  if (superClassName !== 'Element') {  ///
+    ignoredPropertiesFromClass(superClass, ignoredProperties);
   }
 
-  return filteredArray;
+  return ignoredProperties;
 }

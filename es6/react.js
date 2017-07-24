@@ -25,11 +25,13 @@ function createElement(firstArgument, properties, ...childArguments) {
       element = elementFunction(properties);
     } else if (typeof firstArgument === 'string') {
       const tagName = firstArgument,  ///
-            html = `<${tagName} />`;
+            html = `<${tagName} />`,
+            defaultProperties = {}, ///
+            ignoredProperties = []; ///
 
       element = Element.fromHTML(Element, html);
 
-      element.applyProperties(properties);
+      element.applyProperties(properties, defaultProperties, ignoredProperties);
     }
   }
 

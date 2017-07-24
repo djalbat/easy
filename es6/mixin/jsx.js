@@ -1,6 +1,7 @@
 'use strict';
 
-const TextElement = require('../textElement');
+const objectUtil = require('../util/object'),
+      TextElement = require('../textElement');
 
 function addTo(parentElement) {
   updateParentContext(this, parentElement);
@@ -49,13 +50,13 @@ function assignContext(names = Object.keys(this.context), thenDelete = true) {
 }
 
 function applyProperties(properties = {}, defaultProperties, ignoredProperties) {
-  assignProperties(properties, defaultProperties);
+  objectUtil.combine(properties, defaultProperties);
 
   const childElements = childElementsFromElementAndProperties(this, properties);
 
-  unassignProperties(properties, ignoredProperties);
+  objectUtil.prune(properties, ignoredProperties);
 
-  const names = Object.keys(properties);
+  const names = Object.keys(properties);  ///
 
   names.forEach(function(name) {
     const value = properties[name];
@@ -152,28 +153,6 @@ function childElementsFromElementAndProperties(element, properties) {
   });
 
   return childElements;
-}
-
-function unassignProperties(properties, ignoredProperties = []) {
-  const ignoredPropertyNames = ignoredProperties; ///
-
-  ignoredPropertyNames.forEach(function(ignoredPropertyName) {
-    if (properties.hasOwnProperty(ignoredPropertyName)) {
-      delete properties[ignoredPropertyName];
-    }
-  });
-}
-
-function assignProperties(properties, defaultProperties = {}) {
-  const defaultPropertyNames = Object.keys(defaultProperties);
-
-  defaultPropertyNames.forEach(function(defaultPropertyName) {
-    if (!properties.hasOwnProperty(defaultPropertyName)) {
-      const defaultPropertyValue = defaultProperties[defaultPropertyName];
-
-      properties[defaultPropertyName] = defaultPropertyValue;
-    }
-  });
 }
 
 function addHandler(element, name, value) {
