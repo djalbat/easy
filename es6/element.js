@@ -320,7 +320,7 @@ class Element {
 
     return new (Function.prototype.bind.apply(Class, remainingArguments));
   }
-
+  
   static fromProperties(Class, properties, ...remainingArguments) {
     const tagName = Class.tagName,
           html = `<${tagName} />`,

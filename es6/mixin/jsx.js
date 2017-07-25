@@ -3,52 +3,6 @@
 const objectUtil = require('../util/object'),
       TextElement = require('../textElement');
 
-function addTo(parentElement) {
-  updateParentContext(this, parentElement);
-
-  parentElement.add(this);
-}
-
-function appendTo(parentElement) {
-  updateParentContext(this, parentElement);
-
-  parentElement.append(this);
-}
-
-function prependTo(parentElement) {
-  updateParentContext(this, parentElement);
-
-  parentElement.prepend(this);
-}
-
-function removeFrom(parentElement) {
-  parentElement.remove(this);
-}
-
-function assignContext(names = Object.keys(this.context), thenDelete = true) {
-  names.forEach(function(name) {
-    const value = this.context[name],
-          descriptor = {
-            value: value
-          };
-
-    Object.defineProperty(this, name, descriptor);
-
-    if (thenDelete) {
-      delete this.context[name];
-    }
-  }.bind(this));
-  
-  if (thenDelete) {
-    const names = Object.keys(this.context),
-          namesLength = names.length; ///
-    
-    if (namesLength === 0) {
-      delete this.context;
-    } 
-  }
-}
-
 function applyProperties(properties = {}, defaultProperties, ignoredProperties) {
   objectUtil.combine(properties, defaultProperties);
 
@@ -84,6 +38,8 @@ function applyProperties(properties = {}, defaultProperties, ignoredProperties) 
 
   childElements.forEach(function(childElement) {
     childElement.addTo(parentElement);
+
+    updateParentContext(childElement, parentElement);
   }.bind(this));
 }
 
@@ -113,22 +69,75 @@ function updateState(update) {
   Object.assign(this.state, update);
 }
 
+function assignContext(names = Object.keys(this.context), thenDelete = true) {
+  if (typeof names === 'boolean') {
+    thenDelete = names;
+
+    names = Object.keys(this.context);
+  }
+
+  const propertyNames = names.reduce(function(propertyNames, name) {
+    const value = this.context[name],
+          propertyName = name,
+          descriptor = {
+            value: value
+          },
+          success = Reflect.defineProperty(this, propertyName, descriptor);
+
+    if (success) {
+      propertyNames.push(propertyName);
+    }
+
+    if (thenDelete) {
+      delete this.context[name];
+    }
+
+    return propertyNames;
+  }.bind(this), []);
+
+  if (thenDelete) {
+    const names = Object.keys(this.context),  ///
+          namesLength = names.length; ///
+
+    if (namesLength === 0) {
+      delete this.context;
+    }
+  }
+
+  return propertyNames;
+}
+
 const jsxMixin = {
-  addTo: addTo,
-  appendTo: appendTo,
-  prependTo: prependTo,
-  removeFrom: removeFrom,
-  assignContext: assignContext,
   applyProperties: applyProperties,
   getProperties: getProperties,
   getContext: getContext,
   getState: getState,
   setState: setState,
   fromState: fromState,
-  updateState: updateState
+  updateState: updateState,
+  assignContext: assignContext
 };
 
 module.exports = jsxMixin;
+
+function updateParentContext(element, parentElement) {
+  const elementVirtualElement = isElementVirtualElement(element),
+        parentContext = element.parentContext ? ///
+                          element.parentContext() :
+                            element.context;
+
+  if (elementVirtualElement) {
+    delete element.context;
+  }
+
+  if (parentContext !== undefined) {
+    if (!parentElement.hasOwnProperty('context')) {
+      parentElement.context = {};
+    }
+
+    parentElement.context = Object.assign(parentElement.context, parentContext);
+  }
+}
 
 function childElementsFromElementAndProperties(element, properties) {
   let childElements = element.childElements ?
@@ -188,38 +197,21 @@ function addAttribute(element, name, value) {
   }
 }
 
-function updateParentContext(element, parentElement) {
-  const parentContext = element.parentContext ?
-                          element.parentContext() :
-                            element.context;
-
-  if (parentContext !== undefined) {
-    if (!parentElement.hasOwnProperty('context')) {
-      const context = {};
-
-      Object.assign(parentElement, {
-        context: context
-      });
-    }
-
-    parentElement.context = Object.assign(parentElement.context, parentContext);
-  }
-
-  const prototype = Object.getPrototypeOf(element),
-        prototypeConstructor = prototype.constructor, ///
-        prototypeConstructorName = prototypeConstructor.name; ///
-
-  if (prototypeConstructorName === 'Element') {
-    delete element.context;
-  }
-}
-
 function isHandlerName(name) {
   return name.match(/^on/);
 }
 
 function isAttributeName(name) {
   return attributeNames.includes(name);
+}
+
+function isElementVirtualElement(element) {
+  const prototype = Object.getPrototypeOf(element),
+        prototypeConstructor = prototype.constructor, ///
+        prototypeConstructorName = prototypeConstructor.name, ///
+        elementVirtualElement = (prototypeConstructorName === 'Element'); ///
+  
+  return elementVirtualElement;
 }
 
 const attributeNames = [
