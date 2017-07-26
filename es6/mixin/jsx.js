@@ -121,26 +121,15 @@ const jsxMixin = {
 module.exports = jsxMixin;
 
 function updateParentContext(element, parentElement) {
-  const elementVirtualElement = isElementVirtualElement(element),
-        parentContext = element.parentContext ? ///
+  const parentContext = (typeof element.parentContext === 'function') ?
                           element.parentContext() :
                             element.context;
 
-  if (elementVirtualElement) {
-    delete element.context;
-  }
-
-  if (parentContext !== undefined) {
-    if (!parentElement.hasOwnProperty('context')) {
-      parentElement.context = {};
-    }
-
-    parentElement.context = Object.assign(parentElement.context, parentContext);
-  }
+  parentElement.context = Object.assign({}, parentElement.context, parentContext);
 }
 
 function childElementsFromElementAndProperties(element, properties) {
-  let childElements = element.childElements ?
+  let childElements = (typeof element.childElements === 'function') ?
                         element.childElements(properties) :
                           properties.childElements;
 
@@ -203,15 +192,6 @@ function isHandlerName(name) {
 
 function isAttributeName(name) {
   return attributeNames.includes(name);
-}
-
-function isElementVirtualElement(element) {
-  const prototype = Object.getPrototypeOf(element),
-        prototypeConstructor = prototype.constructor, ///
-        prototypeConstructorName = prototypeConstructor.name, ///
-        elementVirtualElement = (prototypeConstructorName === 'Element'); ///
-  
-  return elementVirtualElement;
 }
 
 const attributeNames = [
