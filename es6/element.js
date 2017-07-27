@@ -333,10 +333,10 @@ class Element {
     return element;
   }
 
-  static fromString(string, properties) {
+  static fromString(string, properties, ...remainingArguments) {
     const tagName = string,  ///
           html = `<${tagName} />`,
-          element = Element.fromHTML(Element, html),
+          element = Element.fromHTML(Element, html, ...remainingArguments),
           defaultProperties = {}, ///
           ignoredProperties = []; ///
 
