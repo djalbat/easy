@@ -320,13 +320,25 @@ class Element {
 
     return new (Function.prototype.bind.apply(Class, remainingArguments));
   }
-  
+
   static fromProperties(Class, properties, ...remainingArguments) {
     const tagName = Class.tagName,
           html = `<${tagName} />`,
           element = Element.fromHTML(Class, html, ...remainingArguments),
           defaultProperties = defaultPropertiesFromClass(Class),
           ignoredProperties = ignoredPropertiesFromClass(Class);
+
+    element.applyProperties(properties, defaultProperties, ignoredProperties);
+
+    return element;
+  }
+
+  static fromString(string, properties) {
+    const tagName = string,  ///
+          html = `<${tagName} />`,
+          element = Element.fromHTML(Element, html),
+          defaultProperties = {}, ///
+          ignoredProperties = []; ///
 
     element.applyProperties(properties, defaultProperties, ignoredProperties);
 

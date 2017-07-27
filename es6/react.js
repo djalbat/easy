@@ -19,19 +19,14 @@ function createElement(firstArgument, properties, ...childArguments) {
       const Class = firstArgument;  ///
 
       element = Class.fromProperties(properties);
+    } else if (typeof firstArgument === 'string') {
+      const string = firstArgument; ///
+
+      element = Element.fromString(string, properties);
     } else if (typeof firstArgument === 'function') {
       const elementFunction = firstArgument;  ///
 
       element = elementFunction(properties);
-    } else if (typeof firstArgument === 'string') {
-      const tagName = firstArgument,  ///
-            html = `<${tagName} />`,
-            defaultProperties = {}, ///
-            ignoredProperties = []; ///
-
-      element = Element.fromHTML(Element, html);
-
-      element.applyProperties(properties, defaultProperties, ignoredProperties);
     }
   }
 

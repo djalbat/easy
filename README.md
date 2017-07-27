@@ -274,8 +274,9 @@ Aside from the above methods there are the aforementioned static factory methods
 - `static fromHTML(Class, html, ...remainingArguments)`
 - `static fromDOMElement(Class, domElement, ...remainingArguments)`
 - `static fromProperties(Class, properties, ...remainingArguments)`
+- `static fromString(Class, properties)`
 
-Again bear in mind that the signatures will change for classes that inherit from the `Element` class.
+The `InputElement` class has all of these methods bar the last. Again bear in mind that the signatures will change for classes that inherit from the `Element` class.
 
 The `Input` and `Textarea` classes have the following methods, taken from the `InputElement` class:
 
