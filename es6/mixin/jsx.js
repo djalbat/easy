@@ -69,7 +69,7 @@ function updateState(update) {
   Object.assign(this.state, update);
 }
 
-function assignContext(names = Object.keys(this.context), thenDelete = true) {
+function assignContext(names = Object.keys(this.context), thenDelete = false) {
   if (typeof names === 'boolean') {
     thenDelete = names;
 
