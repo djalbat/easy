@@ -88,20 +88,11 @@ function assignContext(names = Object.keys(this.context), thenDelete = false) {
       propertyNames.push(propertyName);
     }
 
-    if (thenDelete) {
-      delete this.context[name];
-    }
-
     return propertyNames;
   }.bind(this), []);
 
   if (thenDelete) {
-    const names = Object.keys(this.context),  ///
-          namesLength = names.length; ///
-
-    if (namesLength === 0) {
-      delete this.context;
-    }
+    delete this.context;
   }
 
   return propertyNames;
