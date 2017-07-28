@@ -13,12 +13,12 @@ class Link extends Element {
 
   clone(clickHandler) { return Link.clone(this, clickHandler); }
 
-  onClick(clickHandler, intermediateClickHandler = defaultIntermediateClickHandler) {
-    this.on('click', clickHandler, intermediateClickHandler);
+  onClick(clickHandler, object, intermediateClickHandler = defaultIntermediateClickHandler) {
+    this.on('click', clickHandler, object, intermediateClickHandler);
   }
   
-  offClick(clickHandler) {
-    this.off('click', clickHandler);
+  offClick(clickHandler, object) {
+    this.off('click', clickHandler, object);
   }
 
   static clone(element, clickHandler) { return Element.clone(Link, element, clickHandler); }

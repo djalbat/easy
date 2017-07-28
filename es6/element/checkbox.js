@@ -17,12 +17,12 @@ class Checkbox extends Element {
 
   clone(changeHandler) { return Checkbox.clone(this, changeHandler); }
 
-  onChange(changeHandler, intermediateChangeHandler = defaultIntermediateChangeHandler) {
-    this.on('click', changeHandler, intermediateChangeHandler);  ///
+  onChange(changeHandler, object, intermediateChangeHandler = defaultIntermediateChangeHandler) {
+    this.on('click', changeHandler, object, intermediateChangeHandler);  ///
   }
   
-  offChange(changeHandler) {
-    this.off('click', changeHandler);  ///
+  offChange(changeHandler, object) {
+    this.off('click', changeHandler, object);  ///
   }
 
   check(checked = true) {

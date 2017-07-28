@@ -13,12 +13,12 @@ class Select extends Element {
 
   clone(changeHandler) { return Select.clone(this, changeHandler); }
 
-  onChange(changeHandler, intermediateChangeHandler = defaultIntermediateChangeHandler) {
-    this.on('change', changeHandler, intermediateChangeHandler);
+  onChange(changeHandler, object, intermediateChangeHandler = defaultIntermediateChangeHandler) {
+    this.on('change', changeHandler, object, intermediateChangeHandler);
   }
 
-  offChange(changeHandler) {
-    this.off('change', changeHandler);
+  offChange(changeHandler, object) {
+    this.off('change', changeHandler, object);
   }
 
   getSelectedOptionValue() {

@@ -120,12 +120,14 @@ const jsxMixin = {
 
 module.exports = jsxMixin;
 
-function updateParentContext(element, parentElement) {
-  const parentContext = (typeof element.parentContext === 'function') ?
-                          element.parentContext() :
-                            element.context;
+function updateParentContext(childElement, parentElement) {
+  const parentContext = (typeof childElement.parentContext === 'function') ?
+                          childElement.parentContext() :
+                            childElement.context;
 
   parentElement.context = Object.assign({}, parentElement.context, parentContext);
+
+  delete childElement.context;
 }
 
 function childElementsFromElementAndProperties(element, properties) {

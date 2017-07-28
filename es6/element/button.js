@@ -13,12 +13,12 @@ class Button extends Element {
 
   clone(clickHandler) { return Button.clone(this, clickHandler); }
 
-  onClick(clickHandler, intermediateClickHandler = defaultIntermediateClickHandler) {
-    super.onClick(clickHandler, intermediateClickHandler);
+  onClick(clickHandler, object, intermediateClickHandler = defaultIntermediateClickHandler) {
+    super.onClick(clickHandler, object, intermediateClickHandler);
   }
 
-  offClick(clickHandler) {
-    super.offClick(clickHandler);
+  offClick(clickHandler, object) {
+    super.offClick(clickHandler, object);
   }
 
   static clone(element, clickHandler) { return Element.clone(Button, element, clickHandler); }
