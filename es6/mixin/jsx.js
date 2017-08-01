@@ -111,7 +111,7 @@ function assignContext(names, thenDelete) {
     const names = Object.keys(this.context),
           namesLength = names.length;  ///
 
-    if (namesLength) {
+    if (namesLength === 0) {
       delete this.context;
     }
   }
