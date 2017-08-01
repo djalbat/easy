@@ -1,6 +1,7 @@
 'use strict';
 
-const objectUtil = require('../util/object'),
+const arrayUtil = require('../util/array'),
+      objectUtil = require('../util/object'),
       TextElement = require('../textElement');
 
 function applyProperties(properties = {}, defaultProperties, ignoredProperties) {
@@ -69,33 +70,42 @@ function updateState(update) {
   Object.assign(this.state, update);
 }
 
-function assignContext(names = Object.keys(this.context), thenDelete = false) {
-  if (typeof names === 'boolean') {
-    thenDelete = names;
+function assignContext(names, thenDelete) {
+  const argumentsLength = arguments.length;
 
+  if (false) {
+
+  } else if (argumentsLength === 2) {
+    ///
+  } else if (argumentsLength === 1) {
+    const firstArgument = arrayUtil.first(arguments);
+
+    if (typeof firstArgument === 'boolean') {
+      names = Object.keys(this.context);
+
+      thenDelete = firstArgument;
+    } else {
+      thenDelete = true;
+    }
+  } else if (argumentsLength === 0) {
     names = Object.keys(this.context);
+
+    thenDelete = true;
   }
 
-  const propertyNames = names.reduce(function(propertyNames, name) {
+  names.forEach(function(propertyNames, name) {
     const value = this.context[name],
-          propertyName = name,
+          propertyName = name,  ///
           descriptor = {
             value: value
-          },
-          success = Reflect.defineProperty(this, propertyName, descriptor);
+          };
 
-    if (success) {
-      propertyNames.push(propertyName);
-    }
-
-    return propertyNames;
+    Object.defineProperty(this, propertyName, descriptor);
   }.bind(this), []);
 
   if (thenDelete) {
     delete this.context;
   }
-
-  return propertyNames;
 }
 
 const jsxMixin = {

@@ -1,7 +1,5 @@
 'use strict';
 
-const arrayUtil = require('../util/array');
-
 function on(eventTypes, handler, object = null, intermediateHandler = null) {
   eventTypes = eventTypes.split(' '); ///
 
@@ -86,7 +84,7 @@ function createEventListener(targetElement, eventType, handler, object, intermed
 }
 
 function findEventListener(eventListeners, eventType, handler, object) {
-  const eventListener = arrayUtil.find(eventListeners, function(eventListener) {
+  const eventListener = eventListeners.find(function(eventListener) {
     const found = ( (eventListener.object === object) && 
                     (eventListener.handler === handler) && 
                     (eventListener.eventType === eventType) );  ///
