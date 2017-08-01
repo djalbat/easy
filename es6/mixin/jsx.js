@@ -101,10 +101,19 @@ function assignContext(names, thenDelete) {
           };
 
     Object.defineProperty(this, propertyName, descriptor);
+
+    if (thenDelete) {
+      delete this.context[name];
+    }
   }.bind(this), []);
 
   if (thenDelete) {
-    delete this.context;
+    const names = Object.keys(this.context),
+          namesLength = names.length;  ///
+
+    if (namesLength) {
+      delete this.context;
+    }
   }
 }
 
