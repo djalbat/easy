@@ -93,7 +93,7 @@ function assignContext(names, thenDelete) {
     thenDelete = true;
   }
 
-  names.forEach(function(propertyNames, name) {
+  names.forEach(function(name) {
     const value = this.context[name],
           propertyName = name,  ///
           descriptor = {
