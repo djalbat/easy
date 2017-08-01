@@ -16,12 +16,6 @@ There is now support for JSX in the form of [Juxtapose](https://github.com/djalb
 - [Easy-DragAndDrop](https://github.com/djalbat/Easy-DragAndDrop) Drag and drop elements including an explorer and a rubbish bin.
 - [Easy-RichTextarea](https://github.com/djalbat/Easy-RichTextarea) A textarea element that handles and hands off events well.
 
-### Are these projects actually used anywhere?
-
-Actually they are, here:
-
-- [Occam Proof Assistant](http://djalbat.com/occam)
-
 ## Installation
 
 You can install Easy with [npm](https://www.npmjs.com/):
