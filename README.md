@@ -1,8 +1,8 @@
 # Easy
 
-A V-framework.
+Abstracts away from the DOM.
 
-Easy is an MVC framework without the M and without the C. It's without a model, only abstracting away from the view, namely the document object model. There is some irony here. It's without a controller, or whatever. It will not help you with the architecture of your large application. It is about the leaves of an application, not its branches.
+Classes that abstract away from the browser's document object model so that you can easily create objects with underlying DOM elements and methods to manipulate them. It will not help you with the architecture of your large application. It is about the leaves of an application, not its branches.
 
 ### JSX support
 
