@@ -73,11 +73,7 @@ function updateState(update) {
 function assignContext(names, thenDelete) {
   const argumentsLength = arguments.length;
 
-  if (false) {
-
-  } else if (argumentsLength === 2) {
-    ///
-  } else if (argumentsLength === 1) {
+  if (argumentsLength === 1) {
     const firstArgument = arrayUtil.first(arguments);
 
     if (typeof firstArgument === 'boolean') {
@@ -87,7 +83,9 @@ function assignContext(names, thenDelete) {
     } else {
       thenDelete = true;
     }
-  } else if (argumentsLength === 0) {
+  }
+
+  if (argumentsLength === 0) {
     names = Object.keys(this.context);
 
     thenDelete = true;
@@ -106,15 +104,6 @@ function assignContext(names, thenDelete) {
       delete this.context[name];
     }
   }.bind(this), []);
-
-  if (thenDelete) {
-    const names = Object.keys(this.context),
-          namesLength = names.length;  ///
-
-    if (namesLength === 0) {
-      delete this.context;
-    }
-  }
 }
 
 const jsxMixin = {
