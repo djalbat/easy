@@ -4,7 +4,7 @@
   "version": "7.12.15",
   "license": "MIT",
   "homepage": "https://github.com/djalbat/Easy",
-  "description": "A V-framework.",
+  "description": "Abstracts away from the DOM.",
   "repository": {
     "type": "git",
     "url": "https://github.com/djalbat/Easy"
