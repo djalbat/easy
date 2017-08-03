@@ -1,8 +1,8 @@
 # Easy
 
-Abstracts away from the DOM.
+Elements that abstract away from the DOM.
 
-Classes that abstract away from the browser's document object model so that you can easily create objects with underlying DOM elements and methods to manipulate them. It will not help you with the architecture of your large application. It is about the leaves of an application, not its branches.
+A set of classes that abstract away from the browser's document object model so that you can easily create elements with underlying DOM elements and the methods to manipulate them. It will not help you with the architecture of your large application. It is about the leaves of an application, not its branches.
 
 ### JSX support
 
