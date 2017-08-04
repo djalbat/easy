@@ -1,6 +1,6 @@
 'use strict';
 
-class objectUtil {
+class objectUtilities {
   static combine(targetObject, sourceObject = {}) {
     const sourceKeys = Object.keys(sourceObject);
 
@@ -23,4 +23,4 @@ class objectUtil {
   }
 }
 
-module.exports = objectUtil;
+module.exports = objectUtilities;

@@ -1,9 +1,8 @@
 'use strict';
 
-const objectUtil = require('./util/object'),
-      arrayUtil = require('./util/array'),
-      domUtil = require('./util/dom'),
-      Offset = require('./misc/offset'),
+const necessary = require('necessary');
+
+const Offset = require('./misc/offset'),
       Bounds = require('./misc/bounds'),
       jsxMixin = require('./mixin/jsx'),
       eventMixin = require('./mixin/event'),
@@ -11,11 +10,15 @@ const objectUtil = require('./util/object'),
       scrollMixin = require('./mixin/scroll'),
       resizeMixin = require('./mixin/resize'),
       mouseMixin = require('./mixin/mouse'),
-      keyMixin = require('./mixin/key');
+      keyMixin = require('./mixin/key'),
+      domUtilities = require('./utilities/dom'),
+      objectUtilities = require('./utilities/object');
+
+const { array } = necessary;
 
 class Element {
   constructor(selector) {
-    this.domElement = domUtil.domElementFromSelector(selector);
+    this.domElement = domUtilities.domElementFromSelector(selector);
 
     this.domElement.__element__ = this; ///
   }
@@ -216,17 +219,17 @@ class Element {
 
   getDescendantElements(selector = '*') {
     const domNode = this.domElement,  ///
-          descendantDOMNodes = domUtil.descendantDOMNodesFromDOMNode(domNode),
-          descendantDOMElements = domUtil.filterDOMNodesBySelector(descendantDOMNodes, selector),
-          descendantElements = domUtil.elementsFromDOMElements(descendantDOMElements);
+          descendantDOMNodes = domUtilities.descendantDOMNodesFromDOMNode(domNode),
+          descendantDOMElements = domUtilities.filterDOMNodesBySelector(descendantDOMNodes, selector),
+          descendantElements = domUtilities.elementsFromDOMElements(descendantDOMElements);
 
     return descendantElements;
   }
 
   getChildElements(selector = '*') {
     const childDOMNodes = this.domElement.childNodes,
-          childDOMElements = domUtil.filterDOMNodesBySelector(childDOMNodes, selector),
-          childElements = domUtil.elementsFromDOMElements(childDOMElements);
+          childDOMElements = domUtilities.filterDOMNodesBySelector(childDOMNodes, selector),
+          childElements = domUtilities.elementsFromDOMElements(childDOMElements);
 
     return childElements;
   }
@@ -239,8 +242,8 @@ class Element {
     if (parentDOMElement !== null) {
       if (parentDOMElement.matches(selector)) {
         const parentDOMElements = [parentDOMElement],
-              parentElements = domUtil.elementsFromDOMElements(parentDOMElements),
-              firstParentElement = arrayUtil.first(parentElements);
+              parentElements = domUtilities.elementsFromDOMElements(parentDOMElements),
+              firstParentElement = array.first(parentElements);
 
         parentElement = firstParentElement || null;
       }
@@ -262,7 +265,7 @@ class Element {
       ascendantDOMElement = ascendantDOMElement.parentElement;
     }
 
-    const ascendantElements = domUtil.elementsFromDOMElements(ascendantDOMElements);
+    const ascendantElements = domUtilities.elementsFromDOMElements(ascendantDOMElements);
 
     return ascendantElements;
   }
@@ -272,7 +275,7 @@ class Element {
 
     const previousSiblingDOMNode = this.domElement.previousSibling;  ///
 
-    if ((previousSiblingDOMNode !== null) && domUtil.domNodeMatchesSelector(previousSiblingDOMNode, selector)) {
+    if ((previousSiblingDOMNode !== null) && domUtilities.domNodeMatchesSelector(previousSiblingDOMNode, selector)) {
       previousSiblingElement = previousSiblingDOMNode.__element__ || null;
     }
 
@@ -284,7 +287,7 @@ class Element {
 
     const nextSiblingDOMNode = this.domElement.nextSibling;
 
-    if ((nextSiblingDOMNode !== null) && domUtil.domNodeMatchesSelector(nextSiblingDOMNode, selector)) {
+    if ((nextSiblingDOMNode !== null) && domUtilities.domNodeMatchesSelector(nextSiblingDOMNode, selector)) {
       nextSiblingElement = nextSiblingDOMNode.__element__ || null;
     }
 
@@ -363,7 +366,7 @@ Object.assign(Element, {
 module.exports = Element;
 
 function defaultPropertiesFromClass(Class, defaultProperties = {}) {
-  objectUtil.combine(defaultProperties, Class.defaultProperties);
+  objectUtilities.combine(defaultProperties, Class.defaultProperties);
 
   const superClass = Object.getPrototypeOf(Class);
 
@@ -375,8 +378,10 @@ function defaultPropertiesFromClass(Class, defaultProperties = {}) {
 }
 
 function ignoredPropertiesFromClass(Class, ignoredProperties = []) {
-  arrayUtil.combine(ignoredProperties, Class.ignoredProperties);
-
+  array.combine(ignoredProperties, Class.ignoredProperties, function(ignoredProperty) {
+    return !Class.ignoredProperties.includes(ignoredProperty);
+  });
+  
   const superClass = Object.getPrototypeOf(Class);
 
   if (superClass !== null) {

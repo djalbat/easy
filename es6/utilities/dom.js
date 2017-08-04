@@ -1,6 +1,10 @@
 'use strict';
 
-class domUtil {
+const necessary = require('necessary');
+
+const { array } = necessary;
+
+class domUtilities {
   static domElementFromSelector(selector) {
   const domElement = (typeof selector === 'string') ?
                        document.querySelectorAll(selector)[0] :  ///
@@ -10,7 +14,7 @@ class domUtil {
 }
 
   static elementsFromDOMElements(domElements) {
-    const domElementsWithElements = domUtil.filterDOMNodes(domElements, function(domElement) {
+    const domElementsWithElements = domUtilities.filterDOMNodes(domElements, function(domElement) {
             return (domElement.__element__ !== undefined);
           }),
           elements = domElementsWithElements.map(function(domElement) {
@@ -25,18 +29,18 @@ class domUtil {
           deleteCount = 0,
           childDOMNodes = domNode.childNodes;  ///
   
-    arrayUtil.splice(descendantDOMNodes, start, deleteCount, childDOMNodes);
+    array.splice(descendantDOMNodes, start, deleteCount, childDOMNodes);
   
     childDOMNodes.forEach(function(childDOMNode) {
-      domUtil.descendantDOMNodesFromDOMNode(childDOMNode, descendantDOMNodes);
+      domUtilities.descendantDOMNodesFromDOMNode(childDOMNode, descendantDOMNodes);
     });
   
     return descendantDOMNodes;
   }
 
   static filterDOMNodesBySelector(domNodes, selector) {
-    const filteredDOMNodes = domUtil.filterDOMNodes(domNodes, function(domNode) {
-      return domUtil.domNodeMatchesSelector(domNode, selector);
+    const filteredDOMNodes = domUtilities.filterDOMNodes(domNodes, function(domNode) {
+      return domUtilities.domNodeMatchesSelector(domNode, selector);
     });
   
     return filteredDOMNodes;
@@ -79,4 +83,4 @@ class domUtil {
   }
 }
 
-module.exports = domUtil;
+module.exports = domUtilities;

@@ -1,15 +1,18 @@
 'use strict';
 
-const arrayUtil = require('../util/array'),
-      objectUtil = require('../util/object'),
-      TextElement = require('../textElement');
+const necessary = require('necessary');
+
+const TextElement = require('../textElement'),
+      objectUtilities = require('../utilities/object');
+
+const { array } = necessary;
 
 function applyProperties(properties = {}, defaultProperties, ignoredProperties) {
-  objectUtil.combine(properties, defaultProperties);
+  objectUtilities.combine(properties, defaultProperties);
 
   const childElements = childElementsFromElementAndProperties(this, properties);
 
-  objectUtil.prune(properties, ignoredProperties);
+  objectUtilities.prune(properties, ignoredProperties);
 
   const names = Object.keys(properties);  ///
 
@@ -74,7 +77,7 @@ function assignContext(names, thenDelete) {
   const argumentsLength = arguments.length;
 
   if (argumentsLength === 1) {
-    const firstArgument = arrayUtil.first(arguments);
+    const firstArgument = array.first(arguments);
 
     if (typeof firstArgument === 'boolean') {
       names = Object.keys(this.context);
