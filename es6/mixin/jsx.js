@@ -5,7 +5,8 @@ const necessary = require('necessary');
 const TextElement = require('../textElement'),
       objectUtilities = require('../utilities/object');
 
-const { array } = necessary;
+const { array } = necessary,
+      { first } = array;
 
 function applyProperties(properties = {}, defaultProperties, ignoredProperties) {
   objectUtilities.combine(properties, defaultProperties);
@@ -77,7 +78,7 @@ function assignContext(names, thenDelete) {
   const argumentsLength = arguments.length;
 
   if (argumentsLength === 1) {
-    const firstArgument = array.first(arguments);
+    const firstArgument = first(arguments);
 
     if (typeof firstArgument === 'boolean') {
       names = Object.keys(this.context);

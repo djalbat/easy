@@ -14,7 +14,8 @@ const Offset = require('./misc/offset'),
       domUtilities = require('./utilities/dom'),
       objectUtilities = require('./utilities/object');
 
-const { array } = necessary;
+const { array } = necessary,
+      { first, combine } = array;
 
 class Element {
   constructor(selector) {
@@ -243,7 +244,7 @@ class Element {
       if (parentDOMElement.matches(selector)) {
         const parentDOMElements = [parentDOMElement],
               parentElements = domUtilities.elementsFromDOMElements(parentDOMElements),
-              firstParentElement = array.first(parentElements);
+              firstParentElement = first(parentElements);
 
         parentElement = firstParentElement || null;
       }
@@ -378,7 +379,7 @@ function defaultPropertiesFromClass(Class, defaultProperties = {}) {
 }
 
 function ignoredPropertiesFromClass(Class, ignoredProperties = []) {
-  array.combine(ignoredProperties, Class.ignoredProperties, function(ignoredProperty) {
+  combine(ignoredProperties, Class.ignoredProperties, function(ignoredProperty) {
     return !Class.ignoredProperties.includes(ignoredProperty);
   });
   

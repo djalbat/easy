@@ -2,7 +2,8 @@
 
 const necessary = require('necessary');
 
-const { array } = necessary;
+const { array } = necessary,
+      { splice } = array;
 
 class domUtilities {
   static domElementFromSelector(selector) {
@@ -29,7 +30,7 @@ class domUtilities {
           deleteCount = 0,
           childDOMNodes = domNode.childNodes;  ///
   
-    array.splice(descendantDOMNodes, start, deleteCount, childDOMNodes);
+    splice(descendantDOMNodes, start, deleteCount, childDOMNodes);
   
     childDOMNodes.forEach(function(childDOMNode) {
       domUtilities.descendantDOMNodesFromDOMNode(childDOMNode, descendantDOMNodes);
