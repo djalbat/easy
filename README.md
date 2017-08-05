@@ -36,8 +36,7 @@ If you are building with [Node.js](http://nodejs.org) the usage is as follows:
 
 ```js
 const easy = require('easy'),
-      Select = easy.Select,
-      Checkbox = easy.Checkbox;
+      { Select, Checkbox } = easy;
 ```
 
 To use Easy in the browser, take the `easy.js` file from the project's `dist/` directory and put it somewhere such as a `public/scripts/lib` directory. Referencing this distribution file from a `script` element...
