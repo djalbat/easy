@@ -380,7 +380,7 @@ function defaultPropertiesFromClass(Class, defaultProperties = {}) {
 
 function ignoredPropertiesFromClass(Class, ignoredProperties = []) {
   augment(ignoredProperties, Class.ignoredProperties || [], function(ignoredProperty) {
-    return !Class.ignoredProperties.includes(ignoredProperty);
+    return !ignoredProperties.includes(ignoredProperty);
   });
   
   const superClass = Object.getPrototypeOf(Class);
