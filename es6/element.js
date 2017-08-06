@@ -15,7 +15,7 @@ const Offset = require('./misc/offset'),
       objectUtilities = require('./utilities/object');
 
 const { array } = necessary,
-      { first, combine } = array;
+      { first, augment } = array;
 
 class Element {
   constructor(selector) {
@@ -379,7 +379,7 @@ function defaultPropertiesFromClass(Class, defaultProperties = {}) {
 }
 
 function ignoredPropertiesFromClass(Class, ignoredProperties = []) {
-  combine(ignoredProperties, Class.ignoredProperties, function(ignoredProperty) {
+  augment(ignoredProperties, Class.ignoredProperties || [], function(ignoredProperty) {
     return !Class.ignoredProperties.includes(ignoredProperty);
   });
   

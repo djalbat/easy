@@ -1,7 +1,7 @@
 {
   "name": "easy",
   "author": "James Smith",
-  "version": "7.12.19",
+  "version": "7.12.20",
   "license": "MIT",
   "homepage": "https://github.com/djalbat/Easy",
   "description": "Elements that abstract away from the DOM.",
