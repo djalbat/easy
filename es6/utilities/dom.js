@@ -2,11 +2,10 @@
 
 const necessary = require('necessary');
 
-const { array } = necessary,
-      { splice } = array;
+const { arrayUtilities } = necessary,
+      { splice } = arrayUtilities;
 
-class domUtilities {
-  static domElementFromSelector(selector) {
+function domElementFromSelector(selector) {
   const domElement = (typeof selector === 'string') ?
                        document.querySelectorAll(selector)[0] :  ///
                          selector;  ///
@@ -14,74 +13,80 @@ class domUtilities {
   return domElement;
 }
 
-  static elementsFromDOMElements(domElements) {
-    const domElementsWithElements = domUtilities.filterDOMNodes(domElements, function(domElement) {
-            return (domElement.__element__ !== undefined);
-          }),
-          elements = domElementsWithElements.map(function(domElement) {
-            return domElement.__element__;
-          });
-  
-    return elements;
-  }
+function elementsFromDOMElements(domElements) {
+  const domElementsWithElements = filterDOMNodes(domElements, function(domElement) {
+          return (domElement.__element__ !== undefined);
+        }),
+        elements = domElementsWithElements.map(function(domElement) {
+          return domElement.__element__;
+        });
 
-  static descendantDOMNodesFromDOMNode(domNode, descendantDOMNodes = []) {
-    const start = -1,
-          deleteCount = 0,
-          childDOMNodes = domNode.childNodes;  ///
-  
-    splice(descendantDOMNodes, start, deleteCount, childDOMNodes);
-  
-    childDOMNodes.forEach(function(childDOMNode) {
-      domUtilities.descendantDOMNodesFromDOMNode(childDOMNode, descendantDOMNodes);
-    });
-  
-    return descendantDOMNodes;
-  }
-
-  static filterDOMNodesBySelector(domNodes, selector) {
-    const filteredDOMNodes = domUtilities.filterDOMNodes(domNodes, function(domNode) {
-      return domUtilities.domNodeMatchesSelector(domNode, selector);
-    });
-  
-    return filteredDOMNodes;
-  }
-
-  static domNodeMatchesSelector(domNode, selector) {
-    const domNodeType = domNode.nodeType;
-  
-    switch (domNodeType) {
-      case Node.ELEMENT_NODE : {
-        const domElement = domNode; ///
-  
-        return domElement.matches(selector);
-      }
-  
-      case Node.TEXT_NODE : {
-        if (selector === '*') {
-          return true;
-        }
-      }
-    }
-  
-    return false;
-  }
-
-  static filterDOMNodes(domNodes, test) {
-    const filteredDOMNodes = [],
-          domNodesLength = domNodes.length;
-  
-    for (let index = 0; index < domNodesLength; index++) {
-      const domNode = domNodes[index],
-            result = test(domNode);
-  
-      if (result) {
-        filteredDOMNodes.push(domNode);
-      }
-    }
-  
-    return filteredDOMNodes;
-  }
+  return elements;
 }
 
-module.exports = domUtilities;
+function descendantDOMNodesFromDOMNode(domNode, descendantDOMNodes = []) {
+  const start = -1,
+        deleteCount = 0,
+        childDOMNodes = domNode.childNodes;  ///
+
+  splice(descendantDOMNodes, start, deleteCount, childDOMNodes);
+
+  childDOMNodes.forEach(function(childDOMNode) {
+    descendantDOMNodesFromDOMNode(childDOMNode, descendantDOMNodes);
+  });
+
+  return descendantDOMNodes;
+}
+
+function filterDOMNodesBySelector(domNodes, selector) {
+  const filteredDOMNodes = filterDOMNodes(domNodes, function(domNode) {
+    return domNodeMatchesSelector(domNode, selector);
+  });
+
+  return filteredDOMNodes;
+}
+
+function domNodeMatchesSelector(domNode, selector) {
+  const domNodeType = domNode.nodeType;
+
+  switch (domNodeType) {
+    case Node.ELEMENT_NODE : {
+      const domElement = domNode; ///
+
+      return domElement.matches(selector);
+    }
+
+    case Node.TEXT_NODE : {
+      if (selector === '*') {
+        return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+function filterDOMNodes(domNodes, test) {
+  const filteredDOMNodes = [],
+        domNodesLength = domNodes.length;
+
+  for (let index = 0; index < domNodesLength; index++) {
+    const domNode = domNodes[index],
+          result = test(domNode);
+
+    if (result) {
+      filteredDOMNodes.push(domNode);
+    }
+  }
+
+  return filteredDOMNodes;
+}
+
+module.exports = {
+  domElementFromSelector: domElementFromSelector,
+  elementsFromDOMElements: elementsFromDOMElements,
+  descendantDOMNodesFromDOMNode: descendantDOMNodesFromDOMNode,
+  filterDOMNodesBySelector: filterDOMNodesBySelector,
+  domNodeMatchesSelector: domNodeMatchesSelector,
+  filterDOMNodes: filterDOMNodes
+};

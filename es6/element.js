@@ -14,12 +14,14 @@ const Offset = require('./misc/offset'),
       domUtilities = require('./utilities/dom'),
       objectUtilities = require('./utilities/object');
 
-const { array } = necessary,
-      { first, augment } = array;
+const { arrayUtilities } = necessary,
+      { combine } = objectUtilities,
+      { first, augment } = arrayUtilities,
+      { domNodeMatchesSelector, domElementFromSelector, elementsFromDOMElements, filterDOMNodesBySelector, descendantDOMNodesFromDOMNode } = domUtilities;
 
 class Element {
   constructor(selector) {
-    this.domElement = domUtilities.domElementFromSelector(selector);
+    this.domElement = domElementFromSelector(selector);
 
     this.domElement.__element__ = this; ///
   }
@@ -220,17 +222,17 @@ class Element {
 
   getDescendantElements(selector = '*') {
     const domNode = this.domElement,  ///
-          descendantDOMNodes = domUtilities.descendantDOMNodesFromDOMNode(domNode),
-          descendantDOMElements = domUtilities.filterDOMNodesBySelector(descendantDOMNodes, selector),
-          descendantElements = domUtilities.elementsFromDOMElements(descendantDOMElements);
+          descendantDOMNodes = descendantDOMNodesFromDOMNode(domNode),
+          descendantDOMElements = filterDOMNodesBySelector(descendantDOMNodes, selector),
+          descendantElements = elementsFromDOMElements(descendantDOMElements);
 
     return descendantElements;
   }
 
   getChildElements(selector = '*') {
     const childDOMNodes = this.domElement.childNodes,
-          childDOMElements = domUtilities.filterDOMNodesBySelector(childDOMNodes, selector),
-          childElements = domUtilities.elementsFromDOMElements(childDOMElements);
+          childDOMElements = filterDOMNodesBySelector(childDOMNodes, selector),
+          childElements = elementsFromDOMElements(childDOMElements);
 
     return childElements;
   }
@@ -243,7 +245,7 @@ class Element {
     if (parentDOMElement !== null) {
       if (parentDOMElement.matches(selector)) {
         const parentDOMElements = [parentDOMElement],
-              parentElements = domUtilities.elementsFromDOMElements(parentDOMElements),
+              parentElements = elementsFromDOMElements(parentDOMElements),
               firstParentElement = first(parentElements);
 
         parentElement = firstParentElement || null;
@@ -266,7 +268,7 @@ class Element {
       ascendantDOMElement = ascendantDOMElement.parentElement;
     }
 
-    const ascendantElements = domUtilities.elementsFromDOMElements(ascendantDOMElements);
+    const ascendantElements = elementsFromDOMElements(ascendantDOMElements);
 
     return ascendantElements;
   }
@@ -276,7 +278,7 @@ class Element {
 
     const previousSiblingDOMNode = this.domElement.previousSibling;  ///
 
-    if ((previousSiblingDOMNode !== null) && domUtilities.domNodeMatchesSelector(previousSiblingDOMNode, selector)) {
+    if ((previousSiblingDOMNode !== null) && domNodeMatchesSelector(previousSiblingDOMNode, selector)) {
       previousSiblingElement = previousSiblingDOMNode.__element__ || null;
     }
 
@@ -288,7 +290,7 @@ class Element {
 
     const nextSiblingDOMNode = this.domElement.nextSibling;
 
-    if ((nextSiblingDOMNode !== null) && domUtilities.domNodeMatchesSelector(nextSiblingDOMNode, selector)) {
+    if ((nextSiblingDOMNode !== null) && domNodeMatchesSelector(nextSiblingDOMNode, selector)) {
       nextSiblingElement = nextSiblingDOMNode.__element__ || null;
     }
 
@@ -367,7 +369,7 @@ Object.assign(Element, {
 module.exports = Element;
 
 function defaultPropertiesFromClass(Class, defaultProperties = {}) {
-  objectUtilities.combine(defaultProperties, Class.defaultProperties);
+  combine(defaultProperties, Class.defaultProperties);
 
   const superClass = Object.getPrototypeOf(Class);
 

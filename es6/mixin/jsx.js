@@ -5,15 +5,16 @@ const necessary = require('necessary');
 const TextElement = require('../textElement'),
       objectUtilities = require('../utilities/object');
 
-const { array } = necessary,
-      { first } = array;
+const { arrayUtilities } = necessary,
+      { first } = arrayUtilities,
+      { combine, prune } = objectUtilities;
 
 function applyProperties(properties = {}, defaultProperties, ignoredProperties) {
-  objectUtilities.combine(properties, defaultProperties);
+  combine(properties, defaultProperties);
 
   const childElements = childElementsFromElementAndProperties(this, properties);
 
-  objectUtilities.prune(properties, ignoredProperties);
+  prune(properties, ignoredProperties);
 
   const names = Object.keys(properties);  ///
 
