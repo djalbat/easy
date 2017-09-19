@@ -217,6 +217,7 @@ Each class bar the `Window`, `Document` and `TextElement` classes has the follow
 - `isEnabled()`
 - `isDisabled()`
 - `isDisplayed()`
+- `style(style)`
 - `html(html)`
 - `css(css)`
 - `blur()`
@@ -255,7 +256,7 @@ Each class bar the `Window`, `Document` and `TextElement` classes has the follow
 
 Please note the following:
 
-* The `html()` and `css()` methods allow you to both get and set HTML and CSS, respectively. Their functionality is based on the jQuery methods of the same name. 
+* The `html()` and `css()` methods allow you to both get and set HTML and CSS, respectively. Their functionality is based on the jQuery methods of the same name. The `style()` method behaves similarly.
 
 * The `blur()` and `focus()` events are defined on all elements, however they will not have an effect if the element in question cannot have the focus. 
 

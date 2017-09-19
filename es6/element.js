@@ -55,7 +55,7 @@ class Element {
     return width;
   }
 
-  setWidth(width) { this.domElement.style.width = width; }
+  setWidth(width) { this.style('width', width); }
 
   getHeight(includeBorder = true) {
     const height = includeBorder ?
@@ -65,7 +65,7 @@ class Element {
     return height;
   }
 
-  setHeight(height) { this.domElement.style.height = height; }
+  setHeight(height) { this.style('height', height); }
 
   hasAttribute(name) { return this.domElement.hasAttribute(name); }
 
@@ -140,9 +140,9 @@ class Element {
 
   show(displayStyle = 'block') { this.display(displayStyle); }
 
-  hide() { this.domElement.style.display = 'none'; }
+  hide() { this.style('display', 'none'); }
 
-  display(displayStyle) { this.domElement.style.display = displayStyle; }
+  display(display) { this.style('display', display); }
 
   enable() { this.clearAttribute('disabled'); }
 
@@ -161,7 +161,22 @@ class Element {
     return disabled;
   }
   
-  isDisplayed() { return (this.domElement.style.display !== 'none'); }    
+  isDisplayed() {
+    const display = this.style('display'),
+          displayed = (display !== 'none');
+    
+    return displayed;
+  }
+
+  style(name, value) {
+    if (value !== undefined) {
+      this.domElement.style[name] = value;
+    } else {
+      const style = this.domElement.style[name];
+
+      return style;
+    }
+  }
 
   html(html) {
     if (html === undefined) {
@@ -205,11 +220,11 @@ class Element {
       names.forEach(function(name) {
         const value = css[name];
 
-        this.domElement.style[name] = value;
+        this.style(name, value);
       }.bind(this));
     }
   }
-
+  
   blur() { this.domElement.blur(); }
 
   focus() { this.domElement.focus(); }
