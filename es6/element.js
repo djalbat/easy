@@ -168,7 +168,7 @@ class Element {
     return displayed;
   }
 
-  style(name, value) {
+ style(name, value) {
     if (value !== undefined) {
       this.domElement.style[name] = value;
     } else {
