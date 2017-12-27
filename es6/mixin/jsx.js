@@ -12,7 +12,8 @@ const { arrayUtilities } = necessary,
 function applyProperties(properties = {}, defaultProperties, ignoredProperties) {
   combine(properties, defaultProperties);
 
-  const childElements = childElementsFromElementAndProperties(this, properties);
+  const element = this, ///
+        childElements = childElementsFromElementAndProperties(element, properties);
 
   prune(properties, ignoredProperties);
 
