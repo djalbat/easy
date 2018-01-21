@@ -2,15 +2,15 @@
 
 const necessary = require('necessary');
 
-const Offset = require('./misc/offset'),
-      Bounds = require('./misc/bounds'),
-      jsxMixin = require('./mixin/jsx'),
+const jsxMixin = require('./mixin/jsx'),
       eventMixin = require('./mixin/event'),
       clickMixin = require('./mixin/click'),
       scrollMixin = require('./mixin/scroll'),
       resizeMixin = require('./mixin/resize'),
       mouseMixin = require('./mixin/mouse'),
       keyMixin = require('./mixin/key'),
+      Offset = require('./miscellaneous/offset'),
+      Bounds = require('./miscellaneous/bounds'),
       domUtilities = require('./utilities/dom'),
       objectUtilities = require('./utilities/object');
 
@@ -168,7 +168,7 @@ class Element {
     return displayed;
   }
 
- style(name, value) {
+  style(name, value) {
     if (value !== undefined) {
       this.domElement.style[name] = value;
     } else {

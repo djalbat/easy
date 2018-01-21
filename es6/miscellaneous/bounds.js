@@ -24,18 +24,30 @@ class Bounds {
     return this.right;
   }
 
+  getWidth() {
+    const width = this.right - this.left;
+
+    return width;
+  }
+
+  getHeight() {
+    const height = this.bottom - this.top;
+
+    return height;
+  }
+
   isOverlappingMouse(mouseTop, mouseLeft) {
-    return (  (this.top < mouseTop) &&
-              (this.left < mouseLeft) &&
-              (this.bottom > mouseTop) &&
-              (this.right > mouseLeft)  );
+    return (  (this.top < mouseTop)
+           && (this.left < mouseLeft)
+           && (this.bottom > mouseTop)
+           && (this.right > mouseLeft)  );
   }
 
   areOverlapping(bounds) {
-    return (  (this.top < bounds.bottom) &&
-              (this.left < bounds.right) &&
-              (this.bottom > bounds.top) &&
-              (this.right > bounds.left)  );
+    return (  (this.top < bounds.bottom)
+           && (this.left < bounds.right)
+           && (this.bottom > bounds.top)
+           && (this.right > bounds.left)  );
   }
 
   static fromBoundingClientRect(boundingClientRect) {
@@ -45,6 +57,14 @@ class Bounds {
           left = boundingClientRect.left + windowScrollLeft,
           bottom = boundingClientRect.bottom + windowScrollTop,
           right = boundingClientRect.right + windowScrollLeft,
+          bounds = new Bounds(top, left, bottom, right);
+
+    return bounds;
+  }
+
+  static fromTopLeftWidthAndHeight(top, left, width, height) {
+    const bottom = top + height,
+          right = left + width,
           bounds = new Bounds(top, left, bottom, right);
 
     return bounds;

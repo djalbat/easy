@@ -15,7 +15,7 @@ module.exports = {
   Input: require('./lib/inputElement/input'),
   Textarea: require('./lib/inputElement/textarea'),
   InputElement: require('./lib/inputElement'),
-  Bounds: require('./lib/misc/bounds'),
-  Offset: require('./lib/misc/offset'),
+  Bounds: require('./lib/miscellaneous/bounds'),
+  Offset: require('./lib/miscellaneous/offset'),
   React: require('./lib/react')
 };
