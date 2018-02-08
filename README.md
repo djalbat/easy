@@ -256,6 +256,8 @@ Each class bar the `Window`, `Document` and `TextElement` classes has the follow
 
 Please note the following:
 
+* The `setWidth()` and `setHeight()` methods take number arguments and prepend 'px' to them. If you want to set the widths and heights of elements using something other than pixels, use the `style()` method.
+
 * The `html()` and `css()` methods allow you to both get and set HTML and CSS, respectively. Their functionality is based on the jQuery methods of the same name. The `style()` method behaves similarly.
 
 * The `blur()` and `focus()` events are defined on all elements, however they will not have an effect if the element in question cannot have the focus. 
