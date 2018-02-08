@@ -176,6 +176,20 @@ class Element {
     return displayed;
   }
 
+  isShowing() {
+    const displayed = this.isDisplayed(),
+          showing = displayed;  ///
+
+    return showing;
+  }
+
+  isHidden() {
+    const displayed = this.isDisplayed(),
+          hidden = !displayed;
+
+    return hidden;
+  }
+
   style(name, value) {
     if (value !== undefined) {
       this.domElement.style[name] = value;

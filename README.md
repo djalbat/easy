@@ -217,6 +217,8 @@ Each class bar the `Window`, `Document` and `TextElement` classes has the follow
 - `isEnabled()`
 - `isDisabled()`
 - `isDisplayed()`
+- `isShowing()`
+- `isHidden()`
 - `style(style)`
 - `html(html)`
 - `css(css)`
