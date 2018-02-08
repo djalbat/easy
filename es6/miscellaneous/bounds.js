@@ -35,6 +35,22 @@ class Bounds {
 
     return height;
   }
+  
+  setTop(top) {
+    this.top = top;
+  }
+
+  setLeft(left) {
+    this.left = left;
+  }
+
+  setBottom(bottom) {
+    this.bottom = bottom;
+  }
+
+  setRight(right) {
+    this.right = right;
+  }
 
   isOverlappingMouse(mouseTop, mouseLeft) {
     return (  (this.top < mouseTop)
