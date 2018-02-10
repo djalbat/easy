@@ -32,30 +32,13 @@ You can also clone the repository with [Git](https://git-scm.com/)...
 
 ## Usage
 
-If you are building with [Node.js](http://nodejs.org) the usage is as follows:
+Only building with [Node.js](http://nodejs.org) (or equivalent) is supported, there is no support for the browser anymore. The usage is as follows:
 
 ```js
 const easy = require('easy'),
       { Select, Checkbox } = easy;
-```
 
-To use Easy in the browser, take the `easy.js` file from the project's `dist/` directory and put it somewhere such as a `public/scripts/lib` directory. Referencing this distribution file from a `script` element...
-
-```html
-<script src="scripts/lib/easy.js"> </script>
-```
-
-...will give you a global `easy` variable which can be used directly:
-
-```js
-const Button = easy.Button;
-```
-
-Alternatively, if you are using an AMD style `require` the usage is similar to the Node.js case, only make sure that the path to the distribution file is correct. The following script should work, assuming it lives in the the `public/scripts/` directory:
-
-```js
-const easy = require('lib/easy'),
-      Button = easy.Button;
+...
 ```
 
 ## Compiling from source
