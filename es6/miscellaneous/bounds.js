@@ -52,6 +52,13 @@ class Bounds {
     this.right = right;
   }
 
+  shift(horizontalOffset, verticalOffset) {
+    this.top += verticalOffset;
+    this.left += horizontalOffset;
+    this.bottom += verticalOffset;
+    this.right += horizontalOffset;
+  }
+
   isOverlappingMouse(mouseTop, mouseLeft) {
     return (  (this.top < mouseTop)
            && (this.left < mouseLeft)
