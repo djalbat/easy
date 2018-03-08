@@ -1,7 +1,7 @@
 {
   "name": "easy",
   "author": "James Smith",
-  "version": "8.2.2",
+  "version": "8.2.3",
   "license": "MIT",
   "homepage": "https://github.com/djalbat/Easy",
   "description": "Elements that abstract away from the DOM.",
@@ -10,7 +10,7 @@
     "url": "https://github.com/djalbat/Easy"
   },
   "dependencies": {
-    "necessary": "^1.7.5"
+    "necessary": "^2.6.4"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
