@@ -406,7 +406,7 @@ Object.assign(Element, {
 module.exports = Element;
 
 function defaultPropertiesFromClass(Class, defaultProperties = {}) {
-  if (Class.hasOwnProperty(defaultProperties)) {
+  if (Class.hasOwnProperty('defaultProperties')) {
     combine(defaultProperties, Class.defaultProperties);
   }
 
@@ -420,7 +420,7 @@ function defaultPropertiesFromClass(Class, defaultProperties = {}) {
 }
 
 function ignoredPropertiesFromClass(Class, ignoredProperties = []) {
-  if (Class.hasOwnProperty(ignoredProperties)) {
+  if (Class.hasOwnProperty('ignoredProperties')) {
     augment(ignoredProperties, Class.ignoredProperties, function(ignoredProperty) {
       return !ignoredProperties.includes(ignoredProperty);
     });
