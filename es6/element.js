@@ -406,7 +406,9 @@ Object.assign(Element, {
 module.exports = Element;
 
 function defaultPropertiesFromClass(Class, defaultProperties = {}) {
-  combine(defaultProperties, Class.defaultProperties);
+  if (Class.hasOwnProperty(defaultProperties)) {
+    combine(defaultProperties, Class.defaultProperties);
+  }
 
   const superClass = Object.getPrototypeOf(Class);
 
@@ -418,9 +420,11 @@ function defaultPropertiesFromClass(Class, defaultProperties = {}) {
 }
 
 function ignoredPropertiesFromClass(Class, ignoredProperties = []) {
-  augment(ignoredProperties, Class.ignoredProperties || [], function(ignoredProperty) {
-    return !ignoredProperties.includes(ignoredProperty);
-  });
+  if (Class.hasOwnProperty(ignoredProperties)) {
+    augment(ignoredProperties, Class.ignoredProperties, function(ignoredProperty) {
+      return !ignoredProperties.includes(ignoredProperty);
+    });
+  }
 
   const superClass = Object.getPrototypeOf(Class);
 
