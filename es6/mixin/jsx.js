@@ -44,9 +44,9 @@ function applyProperties(properties = {}, defaultProperties, ignoredProperties) 
   const parentElement = this; ///
 
   childElements.forEach(function(childElement) {
-    childElement.addTo(parentElement);
+    updateParentElementContext(childElement, parentElement);
 
-    updateParentContext(childElement, parentElement);
+    childElement.addTo(parentElement);
   }.bind(this));
 }
 
@@ -125,7 +125,7 @@ const jsxMixin = {
 
 module.exports = jsxMixin;
 
-function updateParentContext(childElement, parentElement) {
+function updateParentElementContext(childElement, parentElement) {
   const parentContext = (typeof childElement.parentContext === 'function') ?
                           childElement.parentContext() :
                             childElement.context;
