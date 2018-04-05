@@ -14,7 +14,7 @@ function setScrollTop(scrollTop) { this.domElement.scrollTop = scrollTop; }
 
 function setScrollLeft(scrollLeft) { this.domElement.scrollLeft = scrollLeft; }
 
-const scrollMixin = {
+module.exports = {
   onScroll: onScroll,
   offScroll: offScroll,
   getScrollTop: getScrollTop,
@@ -22,8 +22,6 @@ const scrollMixin = {
   setScrollTop: setScrollTop,
   setScrollLeft: setScrollLeft
 };
-
-module.exports = scrollMixin;
 
 function defaultIntermediateHandler(handler, event, targetElement) {
   const scrollTop = targetElement.getScrollTop(),

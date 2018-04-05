@@ -6,12 +6,10 @@ function onClick(handler, object, intermediateHandler = defaultIntermediateHandl
 
 function offClick(handler, object) { this.off('click', handler, object); }
 
-const clickMixin = {
+module.exports = {
   onClick: onClick,
   offClick: offClick
 };
-
-module.exports = clickMixin;
 
 function defaultIntermediateHandler(handler, event, targetElement) {
   const mouseTop = event.pageY,  ///

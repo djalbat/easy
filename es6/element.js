@@ -1,21 +1,19 @@
 'use strict';
 
-const necessary = require('necessary');
-
-const jsxMixin = require('./mixin/jsx'),
-      eventMixin = require('./mixin/event'),
-      clickMixin = require('./mixin/click'),
-      scrollMixin = require('./mixin/scroll'),
-      resizeMixin = require('./mixin/resize'),
-      mouseMixin = require('./mixin/mouse'),
-      keyMixin = require('./mixin/key'),
+const jsxMixins = require('./mixins/jsx'),
+      keyMixins = require('./mixins/key'),
+      mouseMixins = require('./mixins/mouse'),
+      eventMixins = require('./mixins/event'),
+      clickMixins = require('./mixins/click'),
+      scrollMixins = require('./mixins/scroll'),
+      resizeMixins = require('./mixins/resize'),
       Offset = require('./miscellaneous/offset'),
       Bounds = require('./miscellaneous/bounds'),
       domUtilities = require('./utilities/dom'),
+      arrayUtilities = require('./utilities/array'),
       objectUtilities = require('./utilities/object');
 
-const { arrayUtilities } = necessary,
-      { combine } = objectUtilities,
+const { combine } = objectUtilities,
       { first, augment } = arrayUtilities,
       { domNodeMatchesSelector, domElementFromSelector, elementsFromDOMElements, filterDOMNodesBySelector, descendantDOMNodesFromDOMNode } = domUtilities;
 
@@ -389,13 +387,13 @@ class Element {
   }
 }
 
-Object.assign(Element.prototype, jsxMixin);
-Object.assign(Element.prototype, eventMixin);
-Object.assign(Element.prototype, clickMixin);
-Object.assign(Element.prototype, scrollMixin);
-Object.assign(Element.prototype, resizeMixin);
-Object.assign(Element.prototype, mouseMixin);
-Object.assign(Element.prototype, keyMixin);
+Object.assign(Element.prototype, jsxMixins);
+Object.assign(Element.prototype, keyMixins);
+Object.assign(Element.prototype, mouseMixins);
+Object.assign(Element.prototype, eventMixins);
+Object.assign(Element.prototype, clickMixins);
+Object.assign(Element.prototype, scrollMixins);
+Object.assign(Element.prototype, resizeMixins);
 
 Object.assign(Element, {
   LEFT_MOUSE_BUTTON: 0,

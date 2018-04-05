@@ -20,14 +20,12 @@ function off(eventTypes, handler, object = null) {
   }.bind(this));
 }
 
-const eventMixin = {
+module.exports = {
   on: on,
   off: off,
   addEventListener: addEventListener,
   removeEventListener: removeEventListener
 };
-
-module.exports = eventMixin;
 
 function addEventListener(eventType, handler, object, intermediateHandler) {
   if (!this.hasOwnProperty('eventListeners')) {

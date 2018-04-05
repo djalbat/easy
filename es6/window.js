@@ -1,9 +1,9 @@
 'use strict';
 
-const eventMixin = require('./mixin/event'),
-      clickMixin = require('./mixin/click'),
-      mouseMixin = require('./mixin/mouse'),
-      keyMixin = require('./mixin/key');
+const keyMixins = require('./mixins/key'),
+      eventMixins = require('./mixins/event'),
+      clickMixins = require('./mixins/click'),
+      mouseMixins = require('./mixins/mouse');
 
 class Window {
   constructor() {
@@ -37,10 +37,10 @@ class Window {
   }
 }
 
-Object.assign(Window.prototype, eventMixin);
-Object.assign(Window.prototype, clickMixin);
-Object.assign(Window.prototype, mouseMixin);
-Object.assign(Window.prototype, keyMixin);
+Object.assign(Window.prototype, keyMixins);
+Object.assign(Window.prototype, eventMixins);
+Object.assign(Window.prototype, clickMixins);
+Object.assign(Window.prototype, mouseMixins);
 
 module.exports = new Window();  ///
 

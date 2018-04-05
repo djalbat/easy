@@ -1,9 +1,9 @@
 'use strict';
 
-const eventMixin = require('./mixin/event'),
-      clickMixin = require('./mixin/click'),
-      mouseMixin = require('./mixin/mouse'),
-      keyMixin = require('./mixin/key');
+const keyMixins = require('./mixins/key'),
+      eventMixins = require('./mixins/event'),
+      clickMixins = require('./mixins/click'),
+      mouseMixins = require('./mixins/mouse');
 
 class Document {
   constructor() {
@@ -11,9 +11,9 @@ class Document {
   }
 }
 
-Object.assign(Document.prototype, eventMixin);
-Object.assign(Document.prototype, clickMixin);
-Object.assign(Document.prototype, mouseMixin);
-Object.assign(Document.prototype, keyMixin);
+Object.assign(Document.prototype, keyMixins);
+Object.assign(Document.prototype, eventMixins);
+Object.assign(Document.prototype, clickMixins);
+Object.assign(Document.prototype, mouseMixins);
 
 module.exports = new Document();  ///

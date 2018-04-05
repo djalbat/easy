@@ -30,7 +30,7 @@ function offMouseOut(handler, object) { this.off('mouseout', handler, object); }
 
 function offMouseMove(handler, object) { this.off('mousemove', handler, object); }
 
-const mouseMixin = {
+module.exports = {
   onMouseUp: onMouseUp,
   onMouseDown: onMouseDown,
   onMouseOver: onMouseOver,
@@ -42,8 +42,6 @@ const mouseMixin = {
   offMouseOut: offMouseOut,
   offMouseMove: offMouseMove
 };
-
-module.exports = mouseMixin;
 
 function defaultIntermediateHandler(handler, event, targetElement) {
   const mouseTop = event.pageY,  ///

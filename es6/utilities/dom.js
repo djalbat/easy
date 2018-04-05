@@ -1,9 +1,8 @@
 'use strict';
 
-const necessary = require('necessary');
+const arrayUtilities = require('../utilities/array');
 
-const { arrayUtilities } = necessary,
-      { splice } = arrayUtilities;
+const { splice } = arrayUtilities;
 
 function domElementFromSelector(selector) {
   const domElement = (typeof selector === 'string') ?

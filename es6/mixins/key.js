@@ -12,14 +12,12 @@ function offKeyUp(handler, object) { this.off('keyup', handler, object); }
 
 function offKeyDown(handler, object) { this.off('keydown', handler, object); }
 
-const keyMixin = {
+module.exports = {
   onKeyUp: onKeyUp,
   onKeyDown: onKeyDown,
   offKeyUp: offKeyUp,
   offKeyDown: offKeyDown
 };
-
-module.exports = keyMixin;
 
 function defaultIntermediateHandler(handler, event, targetElement) {
   const keyCode = event.keyCode;

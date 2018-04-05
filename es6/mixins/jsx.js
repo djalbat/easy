@@ -1,12 +1,10 @@
 'use strict';
 
-const necessary = require('necessary');
-
 const TextElement = require('../textElement'),
+      arrayUtilities = require('../utilities/array'),
       objectUtilities = require('../utilities/object');
 
-const { arrayUtilities } = necessary,
-      { first } = arrayUtilities,
+const { first } = arrayUtilities,
       { combine, prune } = objectUtilities;
 
 function applyProperties(properties = {}, defaultProperties, ignoredProperties) {
@@ -112,7 +110,7 @@ function assignContext(names, thenDelete) {
   }.bind(this), []);
 }
 
-const jsxMixin = {
+module.exports = {
   applyProperties: applyProperties,
   getProperties: getProperties,
   getContext: getContext,
@@ -122,8 +120,6 @@ const jsxMixin = {
   updateState: updateState,
   assignContext: assignContext
 };
-
-module.exports = jsxMixin;
 
 function updateParentElementContext(childElement, parentElement) {
   const parentContext = (typeof childElement.parentContext === 'function') ?
