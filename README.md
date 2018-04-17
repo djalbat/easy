@@ -120,7 +120,7 @@ Similarly for the prepend methods.
 
 The `Window` and `Document` classes are not exported, only singletons, hence the lowercase. 
 
-Obviously the list is incomplete. If you do not want to roll your own classes, use the `Element` class:
+Obviously the list is incomplete. If you want to create other elements, use the `Element` class directly:
 
 ```js
 const br = Element.fromHTML(Element, '<br />');
