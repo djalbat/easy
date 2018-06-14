@@ -7,8 +7,8 @@ function onClick(handler, object, intermediateHandler = defaultIntermediateHandl
 function offClick(handler, object) { this.off('click', handler, object); }
 
 module.exports = {
-  onClick: onClick,
-  offClick: offClick
+  onClick,
+  offClick
 };
 
 function defaultIntermediateHandler(handler, event, targetElement) {

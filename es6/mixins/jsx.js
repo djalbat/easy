@@ -31,7 +31,7 @@ function applyProperties(properties = {}, defaultProperties, ignoredProperties) 
         const properties = {};
 
         Object.assign(this, {
-          properties: properties
+          properties
         });
       }
 
@@ -111,14 +111,14 @@ function assignContext(names, thenDelete) {
 }
 
 module.exports = {
-  applyProperties: applyProperties,
-  getProperties: getProperties,
-  getContext: getContext,
-  getState: getState,
-  setState: setState,
-  fromState: fromState,
-  updateState: updateState,
-  assignContext: assignContext
+  applyProperties,
+  getProperties,
+  getContext,
+  getState,
+  setState,
+  fromState,
+  updateState,
+  assignContext
 };
 
 function updateParentElementContext(childElement, parentElement) {

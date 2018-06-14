@@ -27,8 +27,8 @@ function offResize(handler, object) {
 }
 
 module.exports = {
-  onResize: onResize,
-  offResize: offResize
+  onResize,
+  offResize
 };
 
 function addResizeObject(element) {

@@ -20,7 +20,7 @@ function augment(array1, array2, test) {
 }
 
 module.exports = {
-  first: first,
-  splice: splice,
-  augment: augment
+  first,
+  splice,
+  augment
 };

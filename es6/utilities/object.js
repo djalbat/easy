@@ -22,6 +22,6 @@ function prune(targetObject, sourceKeys) {
 }
 
 module.exports = {
-  combine: combine,
-  prune: prune
+  combine,
+  prune
 };

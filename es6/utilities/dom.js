@@ -82,10 +82,10 @@ function filterDOMNodes(domNodes, test) {
 }
 
 module.exports = {
-  domElementFromSelector: domElementFromSelector,
-  elementsFromDOMElements: elementsFromDOMElements,
-  descendantDOMNodesFromDOMNode: descendantDOMNodesFromDOMNode,
-  filterDOMNodesBySelector: filterDOMNodesBySelector,
-  domNodeMatchesSelector: domNodeMatchesSelector,
-  filterDOMNodes: filterDOMNodes
+  domElementFromSelector,
+  elementsFromDOMElements,
+  descendantDOMNodesFromDOMNode,
+  filterDOMNodesBySelector,
+  domNodeMatchesSelector,
+  filterDOMNodes
 };

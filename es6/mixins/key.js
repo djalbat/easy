@@ -13,10 +13,10 @@ function offKeyUp(handler, object) { this.off('keyup', handler, object); }
 function offKeyDown(handler, object) { this.off('keydown', handler, object); }
 
 module.exports = {
-  onKeyUp: onKeyUp,
-  onKeyDown: onKeyDown,
-  offKeyUp: offKeyUp,
-  offKeyDown: offKeyDown
+  onKeyUp,
+  onKeyDown,
+  offKeyUp,
+  offKeyDown
 };
 
 function defaultIntermediateHandler(handler, event, targetElement) {

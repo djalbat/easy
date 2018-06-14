@@ -10,7 +10,7 @@ function createElement(firstArgument, properties, ...childArguments) {
     const childElements = childElementsFromChildArguments(childArguments);
 
     properties = Object.assign({
-      childElements: childElements
+      childElements
     }, properties);
 
     if (false) {

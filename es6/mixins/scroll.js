@@ -15,12 +15,12 @@ function setScrollTop(scrollTop) { this.domElement.scrollTop = scrollTop; }
 function setScrollLeft(scrollLeft) { this.domElement.scrollLeft = scrollLeft; }
 
 module.exports = {
-  onScroll: onScroll,
-  offScroll: offScroll,
-  getScrollTop: getScrollTop,
-  getScrollLeft: getScrollLeft,
-  setScrollTop: setScrollTop,
-  setScrollLeft: setScrollLeft
+  onScroll,
+  offScroll,
+  getScrollTop,
+  getScrollLeft,
+  setScrollTop,
+  setScrollLeft
 };
 
 function defaultIntermediateHandler(handler, event, targetElement) {

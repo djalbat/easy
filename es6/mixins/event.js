@@ -21,10 +21,10 @@ function off(eventTypes, handler, object = null) {
 }
 
 module.exports = {
-  on: on,
-  off: off,
-  addEventListener: addEventListener,
-  removeEventListener: removeEventListener
+  on,
+  off,
+  addEventListener,
+  removeEventListener
 };
 
 function addEventListener(eventType, handler, object, intermediateHandler) {
@@ -73,9 +73,9 @@ function createEventListener(targetElement, eventType, handler, object, intermed
   }
 
   Object.assign(eventListener, {
-    eventType: eventType,
-    handler: handler,
-    object: object
+    eventType,
+    handler,
+    object
   });
 
   return eventListener;

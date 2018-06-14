@@ -31,16 +31,16 @@ function offMouseOut(handler, object) { this.off('mouseout', handler, object); }
 function offMouseMove(handler, object) { this.off('mousemove', handler, object); }
 
 module.exports = {
-  onMouseUp: onMouseUp,
-  onMouseDown: onMouseDown,
-  onMouseOver: onMouseOver,
-  onMouseOut: onMouseOut,
-  onMouseMove: onMouseMove,
-  offMouseUp: offMouseUp,
-  offMouseDown: offMouseDown,
-  offMouseOver: offMouseOver,
-  offMouseOut: offMouseOut,
-  offMouseMove: offMouseMove
+  onMouseUp,
+  onMouseDown,
+  onMouseOver,
+  onMouseOut,
+  onMouseMove,
+  offMouseUp,
+  offMouseDown,
+  offMouseOver,
+  offMouseOut,
+  offMouseMove
 };
 
 function defaultIntermediateHandler(handler, event, targetElement) {
