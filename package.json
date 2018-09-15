@@ -1,13 +1,13 @@
 {
   "name": "easy",
   "author": "James Smith",
-  "version": "8.2.10",
+  "version": "8.2.11",
   "license": "MIT",
-  "homepage": "https://github.com/djalbat/Easy",
+  "homepage": "https://github.com/djalbat/easy",
   "description": "Elements that abstract away from the DOM.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/djalbat/Easy"
+    "url": "https://github.com/djalbat/easy"
   },
   "dependencies": {},
   "devDependencies": {
