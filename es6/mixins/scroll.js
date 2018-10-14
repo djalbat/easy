@@ -1,10 +1,10 @@
 'use strict';
 
-function onScroll(handler, object, intermediateHandler = defaultIntermediateHandler) {
-  this.on('scroll', handler, object, intermediateHandler);
+function onScroll(handler, element, intermediateHandler = defaultIntermediateHandler) {
+  this.on('scroll', handler, element, intermediateHandler);
 }
 
-function offScroll(handler, object) { this.off('scroll', handler, object); }
+function offScroll(handler, element) { this.off('scroll', handler, element); }
 
 function getScrollTop() { return this.domElement.scrollTop; }
 

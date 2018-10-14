@@ -1,34 +1,34 @@
 'use strict';
 
-function onMouseUp(handler, object, intermediateHandler = defaultIntermediateHandler) {
-  this.on('mouseup', handler, object, intermediateHandler);
+function onMouseUp(handler, element, intermediateHandler = defaultIntermediateHandler) {
+  this.on('mouseup', handler, element, intermediateHandler);
 }
 
-function onMouseDown(handler, object, intermediateHandler = defaultIntermediateHandler) {
-  this.on('mousedown', handler, object, intermediateHandler);
+function onMouseDown(handler, element, intermediateHandler = defaultIntermediateHandler) {
+  this.on('mousedown', handler, element, intermediateHandler);
 }
 
-function onMouseOver(handler, object, intermediateHandler = defaultIntermediateHandler) {
-  this.on('mouseover', handler, object, intermediateHandler);
+function onMouseOver(handler, element, intermediateHandler = defaultIntermediateHandler) {
+  this.on('mouseover', handler, element, intermediateHandler);
 }
 
-function onMouseOut(handler, object, intermediateHandler = defaultIntermediateHandler) {
-  this.on('mouseout', handler, object, intermediateHandler);
+function onMouseOut(handler, element, intermediateHandler = defaultIntermediateHandler) {
+  this.on('mouseout', handler, element, intermediateHandler);
 }
 
-function onMouseMove(handler, object, intermediateHandler = defaultIntermediateHandler) {
-  this.on('mousemove', handler, object, intermediateHandler);
+function onMouseMove(handler, element, intermediateHandler = defaultIntermediateHandler) {
+  this.on('mousemove', handler, element, intermediateHandler);
 }
 
-function offMouseUp(handler, object) { this.off('mouseup', handler, object); }
+function offMouseUp(handler, element) { this.off('mouseup', handler, element); }
 
-function offMouseDown(handler, object) { this.off('mousedown', handler, object); }
+function offMouseDown(handler, element) { this.off('mousedown', handler, element); }
 
-function offMouseOver(handler, object) { this.off('mouseover', handler, object); }
+function offMouseOver(handler, element) { this.off('mouseover', handler, element); }
 
-function offMouseOut(handler, object) { this.off('mouseout', handler, object); }
+function offMouseOut(handler, element) { this.off('mouseout', handler, element); }
 
-function offMouseMove(handler, object) { this.off('mousemove', handler, object); }
+function offMouseMove(handler, element) { this.off('mousemove', handler, element); }
 
 module.exports = {
   onMouseUp,

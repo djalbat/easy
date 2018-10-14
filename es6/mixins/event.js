@@ -1,20 +1,20 @@
 'use strict';
 
-function on(eventTypes, handler, object = null, intermediateHandler = null) {
+function on(eventTypes, handler, element = this, intermediateHandler = null) {
   eventTypes = eventTypes.split(' '); ///
 
   eventTypes.forEach(function(eventType) {
-    const eventListener = this.addEventListener(eventType, handler, object, intermediateHandler);
+    const eventListener = this.addEventListener(eventType, handler, element, intermediateHandler);
     
     this.domElement.addEventListener(eventType, eventListener);
   }.bind(this));
 }
 
-function off(eventTypes, handler, object = null) {
+function off(eventTypes, handler, element = this) {
   eventTypes = eventTypes.split(' '); ///
 
   eventTypes.forEach(function(eventType) {
-    const eventListener = this.removeEventListener(eventType, handler, object);
+    const eventListener = this.removeEventListener(eventType, handler, element);
 
     this.domElement.removeEventListener(eventType, eventListener);
   }.bind(this));
@@ -27,23 +27,23 @@ module.exports = {
   removeEventListener
 };
 
-function addEventListener(eventType, handler, object, intermediateHandler) {
+function addEventListener(eventType, handler, element, intermediateHandler) {
   if (!this.hasOwnProperty('eventListeners')) {
     this.eventListeners = [];
   }
   
   const targetElement = this, ///
         eventListeners = this.eventListeners,
-        eventListener = createEventListener(targetElement, eventType, handler, object, intermediateHandler);
+        eventListener = createEventListener(targetElement, eventType, handler, element, intermediateHandler);
 
   eventListeners.push(eventListener);
 
   return eventListener;
 }
 
-function removeEventListener(eventType, handler, object) {
+function removeEventListener(eventType, handler, element) {
   const eventListeners = this.eventListeners,
-        eventListener = findEventListener(eventListeners, eventType, handler, object),
+        eventListener = findEventListener(eventListeners, eventType, handler, element),
         index = eventListeners.indexOf(eventListener),
         start = index,  ///
         deleteCount = 1;
@@ -57,17 +57,17 @@ function removeEventListener(eventType, handler, object) {
   return eventListener;
 }
 
-function createEventListener(targetElement, eventType, handler, object, intermediateHandler) {
+function createEventListener(targetElement, eventType, handler, element, intermediateHandler) {
   let eventListener;
   
   if (intermediateHandler === null) {
     eventListener = function(event) {
-      handler.call(object, event, targetElement)
+      handler.call(element, event, targetElement)
     };
   } else {
     eventListener = function(event) {
       intermediateHandler(function(event) {
-        handler.call(object, ...arguments);
+        handler.call(element, ...arguments);
       }, event, targetElement);
     }
   }
@@ -75,15 +75,15 @@ function createEventListener(targetElement, eventType, handler, object, intermed
   Object.assign(eventListener, {
     eventType,
     handler,
-    object
+    element
   });
 
   return eventListener;
 }
 
-function findEventListener(eventListeners, eventType, handler, object) {
+function findEventListener(eventListeners, eventType, handler, element) {
   const eventListener = eventListeners.find(function(eventListener) {
-    const found = ( (eventListener.object === object) && 
+    const found = ( (eventListener.element === element) &&
                     (eventListener.handler === handler) && 
                     (eventListener.eventType === eventType) );  ///
     

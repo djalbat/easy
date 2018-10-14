@@ -1,16 +1,16 @@
 'use strict';
 
-function onKeyUp(handler, object, intermediateHandler = defaultIntermediateHandler) {
-  this.on('keyup', handler, object, intermediateHandler);
+function onKeyUp(handler, element, intermediateHandler = defaultIntermediateHandler) {
+  this.on('keyup', handler, element, intermediateHandler);
 }
 
-function onKeyDown(handler, object, intermediateHandler = defaultIntermediateHandler) {
-  this.on('keydown', handler, object, intermediateHandler);
+function onKeyDown(handler, element, intermediateHandler = defaultIntermediateHandler) {
+  this.on('keydown', handler, element, intermediateHandler);
 }
 
-function offKeyUp(handler, object) { this.off('keyup', handler, object); }
+function offKeyUp(handler, element) { this.off('keyup', handler, element); }
 
-function offKeyDown(handler, object) { this.off('keydown', handler, object); }
+function offKeyDown(handler, element) { this.off('keydown', handler, element); }
 
 module.exports = {
   onKeyUp,
