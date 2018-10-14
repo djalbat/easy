@@ -58,16 +58,14 @@ function removeEventListener(eventType, handler, element) {
 
 function createEventListener(eventType, handler, element, intermediateHandler) {
   let eventListener;
-  
+
   if (intermediateHandler === null) {
     eventListener = function(event) {
       handler.call(element, event)
     };
   } else {
     eventListener = function(event) {
-      intermediateHandler(function(event) {
-        handler.call(element, ...arguments);
-      }, event, element);
+      intermediateHandler(handler, event, element);
     }
   }
 
