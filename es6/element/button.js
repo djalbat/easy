@@ -49,5 +49,5 @@ function defaultIntermediateClickHandler(clickHandler, event, element) {
   const { button } = event,
 				mouseButton = button;	///
   
-  clickHandler.apply(element, mouseButton, event);
+  clickHandler.call(element, mouseButton, event);
 }

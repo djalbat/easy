@@ -49,5 +49,5 @@ function defaultIntermediateClickHandler(clickHandler, event, element) {
   const link = element, ///
         href = link.getAttribute('href');
   
-  clickHandler.apply(link, href, event);
+  clickHandler.call(link, href, event);
 }

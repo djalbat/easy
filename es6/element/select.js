@@ -63,5 +63,5 @@ function defaultIntermediateChangeHandler(changeHandler, event, element) {
   const select = element, ///
         selectedOptionValue = select.getSelectedOptionValue();
   
-  changeHandler.apply(element, selectedOptionValue, event);
+  changeHandler.call(element, selectedOptionValue, event);
 }

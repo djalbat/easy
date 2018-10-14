@@ -80,5 +80,5 @@ function defaultIntermediateChangeHandler(changeHandler, event, element) {
   const inputElement = element, ///
         value = inputElement.getValue();
   
-  changeHandler.apply(inputElement, value, event);
+  changeHandler.call(inputElement, value, event);
 }

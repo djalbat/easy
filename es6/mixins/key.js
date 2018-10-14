@@ -22,5 +22,5 @@ module.exports = {
 function defaultIntermediateHandler(handler, event, element) {
   const { keyCode } = event;
   
-  handler.apply(element, keyCode, event);
+  handler.call(element, keyCode, event);
 }

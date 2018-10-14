@@ -27,5 +27,5 @@ function defaultIntermediateHandler(handler, event, element) {
   const scrollTop = element.getScrollTop(),
         scrollLeft = element.getScrollLeft();
   
-  handler.apply(element, scrollTop, scrollLeft, event);
+  handler.call(element, scrollTop, scrollLeft, event);
 }
