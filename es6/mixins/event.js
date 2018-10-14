@@ -32,9 +32,8 @@ function addEventListener(eventType, handler, element, intermediateHandler) {
     this.eventListeners = [];
   }
   
-  const targetElement = this, ///
-        eventListeners = this.eventListeners,
-        eventListener = createEventListener(targetElement, eventType, handler, element, intermediateHandler);
+  const eventListeners = this.eventListeners,
+        eventListener = createEventListener(eventType, handler, element, intermediateHandler);
 
   eventListeners.push(eventListener);
 
@@ -57,18 +56,18 @@ function removeEventListener(eventType, handler, element) {
   return eventListener;
 }
 
-function createEventListener(targetElement, eventType, handler, element, intermediateHandler) {
+function createEventListener(eventType, handler, element, intermediateHandler) {
   let eventListener;
   
   if (intermediateHandler === null) {
     eventListener = function(event) {
-      handler.call(element, event, targetElement)
+      handler.call(element, event)
     };
   } else {
     eventListener = function(event) {
       intermediateHandler(function(event) {
         handler.call(element, ...arguments);
-      }, event, targetElement);
+      }, event, element);
     }
   }
 
@@ -84,7 +83,7 @@ function createEventListener(targetElement, eventType, handler, element, interme
 function findEventListener(eventListeners, eventType, handler, element) {
   const eventListener = eventListeners.find(function(eventListener) {
     const found = ( (eventListener.element === element) &&
-                    (eventListener.handler === handler) && 
+                    (eventListener.handler === handler) &&
                     (eventListener.eventType === eventType) );  ///
     
     return found;

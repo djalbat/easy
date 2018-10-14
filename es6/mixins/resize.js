@@ -98,10 +98,10 @@ function findResizeEventListeners(element) {
   return resizeEventListeners;
 }
 
-function defaultIntermediateResizeHandler(handler, event, targetElement) {
-  const window = targetElement, ///
+function defaultIntermediateResizeHandler(handler, event, element) {
+  const window = element, ///
         width = window.getWidth(),
         height = window.getHeight();
 
-  handler(width, height, event, targetElement);
+  handler.apply(element, width, height, event);
 }

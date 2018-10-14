@@ -45,9 +45,9 @@ Object.assign(Link, {
 
 module.exports = Link;
 
-function defaultIntermediateClickHandler(clickHandler, event, targetElement) {
-  const link = targetElement, ///
+function defaultIntermediateClickHandler(clickHandler, event, element) {
+  const link = element, ///
         href = link.getAttribute('href');
   
-  clickHandler(href, event, targetElement);
+  clickHandler.apply(link, href, event);
 }

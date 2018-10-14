@@ -59,9 +59,9 @@ Object.assign(Select, {
 
 module.exports = Select;
 
-function defaultIntermediateChangeHandler(changeHandler, event, targetElement) {
-  const select = targetElement, ///
+function defaultIntermediateChangeHandler(changeHandler, event, element) {
+  const select = element, ///
         selectedOptionValue = select.getSelectedOptionValue();
   
-  changeHandler(selectedOptionValue, event, targetElement);
+  changeHandler.apply(element, selectedOptionValue, event);
 }

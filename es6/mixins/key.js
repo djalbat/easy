@@ -19,8 +19,8 @@ module.exports = {
   offKeyDown
 };
 
-function defaultIntermediateHandler(handler, event, targetElement) {
+function defaultIntermediateHandler(handler, event, element) {
   const keyCode = event.keyCode;
   
-  handler(keyCode, event, targetElement);
+  handler.apply(element, keyCode, event);
 }

@@ -43,10 +43,10 @@ module.exports = {
   offMouseMove
 };
 
-function defaultIntermediateHandler(handler, event, targetElement) {
+function defaultIntermediateHandler(handler, event, element) {
   const mouseTop = event.pageY,  ///
         mouseLeft = event.pageX, ///
         mouseButton = event.button; ///
   
-  handler(mouseTop, mouseLeft, mouseButton, event, targetElement);
+  handler.apply(element, mouseTop, mouseLeft, mouseButton, event);
 }

@@ -70,9 +70,9 @@ Object.assign(Checkbox, {
 
 module.exports = Checkbox;
 
-function defaultIntermediateChangeHandler(changeHandler, event, targetElement) {
-  const checkbox = targetElement, ///
+function defaultIntermediateChangeHandler(changeHandler, event, element) {
+  const checkbox = element, ///
         checked = checkbox.isChecked();
   
-  changeHandler(checked, event, targetElement);
+  changeHandler.apply(checkbox, checked, event);
 }

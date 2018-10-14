@@ -23,9 +23,9 @@ module.exports = {
   setScrollLeft
 };
 
-function defaultIntermediateHandler(handler, event, targetElement) {
-  const scrollTop = targetElement.getScrollTop(),
-        scrollLeft = targetElement.getScrollLeft();
+function defaultIntermediateHandler(handler, event, element) {
+  const scrollTop = element.getScrollTop(),
+        scrollLeft = element.getScrollLeft();
   
-  handler(scrollTop, scrollLeft, event, targetElement);
+  handler.apply(element, scrollTop, scrollLeft, event);
 }

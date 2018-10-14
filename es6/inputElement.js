@@ -76,9 +76,9 @@ Object.assign(InputElement, {
 
 module.exports = InputElement;
 
-function defaultIntermediateChangeHandler(changeHandler, event, targetElement) {
-  const inputElement = targetElement, ///
+function defaultIntermediateChangeHandler(changeHandler, event, element) {
+  const inputElement = element, ///
         value = inputElement.getValue();
   
-  changeHandler(value, event, targetElement);
+  changeHandler.apply(inputElement, value, event);
 }
