@@ -339,7 +339,7 @@ class Element {
     remainingArguments.unshift(domElement);
     remainingArguments.unshift(null);
 
-    return new (Function.prototype.bind.apply(Class, remainingArguments));
+    return new (Function.prototype.bind.call(Class, ...remainingArguments));
   }
 
   static fromHTML(Class, html, ...remainingArguments) {
@@ -352,14 +352,14 @@ class Element {
     remainingArguments.unshift(domElement);
     remainingArguments.unshift(null);
 
-    return new (Function.prototype.bind.apply(Class, remainingArguments));
+    return new (Function.prototype.bind.call(Class, ...remainingArguments));
   }
 
   static fromDOMElement(Class, domElement, ...remainingArguments) {
     remainingArguments.unshift(domElement);
     remainingArguments.unshift(null);
 
-    return new (Function.prototype.bind.apply(Class, remainingArguments));
+    return new (Function.prototype.bind.call(Class, ...remainingArguments));
   }
 
   static fromProperties(Class, properties, ...remainingArguments) {
