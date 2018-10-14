@@ -46,7 +46,8 @@ Object.assign(Button, {
 module.exports = Button;
 
 function defaultIntermediateClickHandler(clickHandler, event, element) {
-  const mouseButton = event.button;
+  const { button } = event,
+				mouseButton = button;	///
   
   clickHandler.apply(element, mouseButton, event);
 }

@@ -20,7 +20,7 @@ module.exports = {
 };
 
 function defaultIntermediateHandler(handler, event, element) {
-  const keyCode = event.keyCode;
+  const { keyCode } = event;
   
   handler.apply(element, keyCode, event);
 }

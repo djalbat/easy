@@ -12,9 +12,10 @@ module.exports = {
 };
 
 function defaultIntermediateHandler(handler, event, element) {
-  const mouseTop = event.pageY,  ///
-        mouseLeft = event.pageX, ///
-        mouseButton = event.button; ///
+  const { pageY, pageX, button } = event,
+				mouseTop = pageY,  ///
+        mouseLeft = pageX, ///
+        mouseButton = button; ///
   
   handler.apply(element, mouseTop, mouseLeft, mouseButton, event);
 }
