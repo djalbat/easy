@@ -24,7 +24,7 @@ You can install Easy with [npm](https://www.npmjs.com/):
 
 You can also clone the repository with [Git](https://git-scm.com/)...
 
-    git clone https://github.com/djalbat/Easy.git
+    git clone https://github.com/djalbat/easy.git
 
 ...and then install the necessary modules with npm from within the project's root directory:
 
