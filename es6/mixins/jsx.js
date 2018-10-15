@@ -64,12 +64,6 @@ function setState(state) {
   this.state = state;
 }
 
-function fromState(name) {
-  const value = this.state[name];
-
-  return value;
-}
-
 function updateState(update) {
   Object.assign(this.state, update);
 }
@@ -116,7 +110,6 @@ module.exports = {
   getContext,
   getState,
   setState,
-  fromState,
   updateState,
   assignContext
 };
