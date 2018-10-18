@@ -16,4 +16,4 @@ Object.assign(Document.prototype, eventMixins);
 Object.assign(Document.prototype, clickMixins);
 Object.assign(Document.prototype, mouseMixins);
 
-module.exports = typeof document && new Document();  ///
+module.exports = (typeof document === 'undefined') ? undefined : new Document();  ///
