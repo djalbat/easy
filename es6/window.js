@@ -36,7 +36,7 @@ Object.assign(Window.prototype, eventMixins);
 Object.assign(Window.prototype, clickMixins);
 Object.assign(Window.prototype, mouseMixins);
 
-module.exports = window && new Window();  ///
+module.exports = typeof window && new Window();  ///
 
 function defaultIntermediateResizeHandler(handler, event, element) {
   const window = element, ///
