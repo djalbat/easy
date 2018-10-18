@@ -118,7 +118,7 @@ Similarly for the prepend methods.
 -  window
 -  document
 
-The `Window` and `Document` classes are not exported, only singletons, hence the lowercase. 
+The `Window` and `Document` classes are not exported, only singletons, hence the lowercase. Note also that if the underlying `window` and `document` global objects are not defined (for whatever reason), then these singletons will also be undefined.
 
 Obviously the list is incomplete. If you want to create other elements, use the `Element` class directly:
 
@@ -338,7 +338,6 @@ Both the `Window` and `Document` singletons have the following methods:
 
 The `Window` class, but not the `Document` class, has the following methods:
 
-- `assign(...sources)`
 - `onResize(handler)`
 - `offResize(handler)`
 - `getWidth`

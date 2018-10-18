@@ -10,12 +10,6 @@ class Window {
     this.domElement = window; ///
   }
 
-  assign(...sources) {
-    const target = this.domElement; ///
-
-    Object.assign(target, ...sources);
-  }
-  
   getWidth() { return this.domElement.innerWidth; } ///
   
   getHeight() { return this.domElement.innerHeight; } ///
@@ -42,7 +36,7 @@ Object.assign(Window.prototype, eventMixins);
 Object.assign(Window.prototype, clickMixins);
 Object.assign(Window.prototype, mouseMixins);
 
-module.exports = new Window();  ///
+module.exports = window && new Window();  ///
 
 function defaultIntermediateResizeHandler(handler, event, element) {
   const window = element, ///
