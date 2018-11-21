@@ -1,6 +1,6 @@
 'use strict';
 
-function onResize(handler, element, intermediateHandler = defaultIntermediateResizeHandler) {
+function onResize(handler, element = this, intermediateHandler = defaultIntermediateResizeHandler) {
   const resizeEventListeners = findResizeEventListeners(element);
 
   if (resizeEventListeners.length === 0) {
@@ -12,7 +12,7 @@ function onResize(handler, element, intermediateHandler = defaultIntermediateRes
   this.addEventListener(eventType, handler, element, intermediateHandler);
 }
 
-function offResize(handler, element) {
+function offResize(handler, element = this) {
   const eventType = 'resize';
 
   this.removeEventListener(eventType, handler, element);
