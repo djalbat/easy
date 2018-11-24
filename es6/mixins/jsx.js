@@ -203,13 +203,13 @@ const attributeNames = [
   'manifest', 'marginHeight', 'marginWidth', 'max', 'maxLength', 'media', 'mediaGroup', 'method', 'min', 'minLength', 'multiple', 'muted',
   'name', 'noValidate', 'nonce',
   'open', 'optimum',
-  'pattern', 'placeholder', 'poster', 'preload', 'profile',
+  'pattern', 'placeholder', 'poster', 'preload', 'preserveAspectRatio', 'profile',
   'radioGroup', 'readOnly', 'rel', 'required', 'reversed', 'role', 'rowSpan', 'rows',
   'sandbox', 'scope', 'scoped', 'scrolling', 'seamless', 'selected', 'shape', 'size', 'sizes', 'span', 'spellCheck', 'src', 'srcDoc', 'srcLang', 'srcSet', 'start', 'step', 'stroke', 'style', 'summary',
   'tabIndex', 'target', 'title', 'transform', 'type',
   'useMap',
-  'value',
-  'width',
-  'wmode',
+  'value', 'version', 'viewBox',
+  'width', 'wmode',
+  'xmlns',
   'wrap'
 ];
