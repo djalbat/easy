@@ -336,10 +336,7 @@ class Element {
     const deep = true,
           domElement = element.domElement.cloneNode(deep);
 
-    remainingArguments.unshift(domElement);
-    remainingArguments.unshift(null);
-
-    return new (Function.prototype.bind.call(Class, ...remainingArguments));
+    return fromDOMElement(Class, domElement, ...remainingArguments);
   }
 
   static fromHTML(Class, html, ...remainingArguments) {
@@ -349,23 +346,16 @@ class Element {
 
     const domElement = outerDOMElement.firstChild;
 
-    remainingArguments.unshift(domElement);
-    remainingArguments.unshift(null);
-
-    return new (Function.prototype.bind.call(Class, ...remainingArguments));
+    return fromDOMElement(Class, domElement, ...remainingArguments);
   }
 
   static fromDOMElement(Class, domElement, ...remainingArguments) {
-    remainingArguments.unshift(domElement);
-    remainingArguments.unshift(null);
-
-    return new (Function.prototype.bind.call(Class, ...remainingArguments));
+    return fromDOMElement(Class, domElement, ...remainingArguments);
   }
 
   static fromProperties(Class, properties, ...remainingArguments) {
     const tagName = Class.tagName,
-          html = `<${tagName} />`,
-          element = Element.fromHTML(Class, html, ...remainingArguments),
+          element = fromTagName(Class, tagName, ...remainingArguments),
           defaultProperties = defaultPropertiesFromClass(Class),
           ignoredProperties = ignoredPropertiesFromClass(Class);
 
@@ -374,10 +364,8 @@ class Element {
     return element;
   }
 
-  static fromString(string, properties, ...remainingArguments) {
-    const tagName = string,  ///
-          html = `<${tagName} />`,
-          element = Element.fromHTML(Element, html, ...remainingArguments),
+  static fromTagName(tagName, properties, ...remainingArguments) {
+    const element = fromTagName(Element, tagName, ...remainingArguments),
           defaultProperties = {}, ///
           ignoredProperties = []; ///
 
@@ -402,6 +390,20 @@ Object.assign(Element, {
 });
 
 module.exports = Element;
+
+function fromTagName(Class, tagName, ...remainingArguments) {
+  const domElement = document.createElement(tagName);
+
+  return fromDOMElement(Class, domElement, ...remainingArguments);
+}
+
+function fromDOMElement(Class, domElement, ...remainingArguments) {
+  remainingArguments.unshift(domElement);
+
+  remainingArguments.unshift(null);
+
+  return new (Function.prototype.bind.call(Class, ...remainingArguments));
+}
 
 function defaultPropertiesFromClass(Class, defaultProperties = {}) {
   if (Class.hasOwnProperty('defaultProperties')) {

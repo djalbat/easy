@@ -59,13 +59,6 @@ class InputElement extends Element {
 
     return Element.fromProperties(Class, properties, changeHandler, ...remainingArguments);
   }
-
-  static fromString(string, properties, ...remainingArguments) {
-    const { onChange } = properties,
-          changeHandler = onChange; ///
-
-    return Element.fromString(string, properties, changeHandler, ...remainingArguments);
-  }
 }
 
 Object.assign(InputElement, {

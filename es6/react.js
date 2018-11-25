@@ -20,9 +20,9 @@ function createElement(firstArgument, properties, ...childArguments) {
 
       element = Class.fromProperties(properties);
     } else if (typeof firstArgument === 'string') {
-      const string = firstArgument; ///
+      const tagName = firstArgument; ///
 
-      element = Element.fromString(string, properties);
+      element = Element.fromTagName(tagName, properties);
     } else if (typeof firstArgument === 'function') {
       const elementFunction = firstArgument;  ///
 
