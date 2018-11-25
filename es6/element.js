@@ -11,9 +11,11 @@ const jsxMixins = require('./mixins/jsx'),
       Bounds = require('./miscellaneous/bounds'),
       domUtilities = require('./utilities/dom'),
       arrayUtilities = require('./utilities/array'),
-      objectUtilities = require('./utilities/object');
+      objectUtilities = require('./utilities/object'),
+      tagNameUtilities = require('./utilities/tagName');
 
 const { combine } = objectUtilities,
+      { isSVGTagName } = tagNameUtilities,
       { first, augment } = arrayUtilities,
       { domNodeMatchesSelector, domElementFromSelector, elementsFromDOMElements, filterDOMNodesBySelector, descendantDOMNodesFromDOMNode } = domUtilities;
 
@@ -392,7 +394,9 @@ Object.assign(Element, {
 module.exports = Element;
 
 function fromTagName(Class, tagName, ...remainingArguments) {
-  const domElement = document.createElement(tagName);
+  const domElement = isSVGTagName(tagName) ?
+                       document.createElementNS('http://www.w3.org/2000/svg', tagName) :
+                         document.createElement(tagName);
 
   return fromDOMElement(Class, domElement, ...remainingArguments);
 }
