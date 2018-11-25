@@ -1,22 +1,24 @@
 'use strict';
 
-const jsxMixins = require('./mixins/jsx'),
+const Offset = require('./miscellaneous/offset'),
+      Bounds = require('./miscellaneous/bounds'),
+      constants = require('./constants'),
+      jsxMixins = require('./mixins/jsx'),
       keyMixins = require('./mixins/key'),
       mouseMixins = require('./mixins/mouse'),
       eventMixins = require('./mixins/event'),
       clickMixins = require('./mixins/click'),
       scrollMixins = require('./mixins/scroll'),
       resizeMixins = require('./mixins/resize'),
-      Offset = require('./miscellaneous/offset'),
-      Bounds = require('./miscellaneous/bounds'),
       domUtilities = require('./utilities/dom'),
+      nameUtilities = require('./utilities/name'),
       arrayUtilities = require('./utilities/array'),
-      objectUtilities = require('./utilities/object'),
-      tagNameUtilities = require('./utilities/tagName');
+      objectUtilities = require('./utilities/object');
 
 const { combine } = objectUtilities,
-      { isSVGTagName } = tagNameUtilities,
+      { isSVGTagName } = nameUtilities,
       { first, augment } = arrayUtilities,
+      { SVG_NAMESPACE_URI } = constants,
       { domNodeMatchesSelector, domElementFromSelector, elementsFromDOMElements, filterDOMNodesBySelector, descendantDOMNodesFromDOMNode } = domUtilities;
 
 class Element {
@@ -395,7 +397,7 @@ module.exports = Element;
 
 function fromTagName(Class, tagName, ...remainingArguments) {
   const domElement = isSVGTagName(tagName) ?
-                       document.createElementNS('http://www.w3.org/2000/svg', tagName) :
+                       document.createElementNS(SVG_NAMESPACE_URI, tagName) :
                          document.createElement(tagName);
 
   return fromDOMElement(Class, domElement, ...remainingArguments);

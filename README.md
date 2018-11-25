@@ -351,7 +351,7 @@ Remember that the `Window` and `Document` classes are exported as singletons.
 
 * The resize support is based on an idea from [this post](http://www.backalleycoder.com/2013/03/18/cross-browser-event-based-element-resize-detection/) by Daniel Buchner.
 
-* The SVG tag names were taken from Titus Wormer's [svg-element-attributes](https://github.com/wooorm/svg-element-attributes) package.
+* The SVG tag and attribute names were taken from Titus Wormer's [svg-element-attributes](https://github.com/wooorm/svg-element-attributes) package.
 
 ## Contact
 
