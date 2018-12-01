@@ -52,7 +52,9 @@ function applyProperties(properties = {}, defaultProperties, ignoredProperties) 
     childElement.addTo(this);
   }.bind(this));
 
-  Object.assign(this, context);
+  Object.assign(this, {
+    context
+  });
 }
 
 function getProperties() {
