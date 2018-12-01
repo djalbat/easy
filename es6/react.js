@@ -1,7 +1,11 @@
 'use strict';
 
 const Element = require('./element'),
-      TextElement = require('./textElement');
+      arrayUtilities = require('./utilities/array'),
+      elementsUtilities = require('./utilities/elements');
+
+const { flatten } = arrayUtilities,
+      { removeFalseyElements, replaceStringsWithTextElements } = elementsUtilities;
 
 function createElement(firstArgument, properties, ...childArguments) {
   let element = null;
@@ -40,26 +44,13 @@ const React = {
 module.exports = React;
 
 function childElementsFromChildArguments(childArguments) {
-  childArguments = childArguments.reduce(function(childArguments, childArgument) {
-    childArguments = childArguments.concat(childArgument);
+  childArguments = flatten(childArguments); ///
 
-    return childArguments;
-  }, []);
+  const childElements = childArguments; ///
 
-  const childElements = childArguments.map(function(childArgument) {
-    let childElement;
-    
-    if (typeof childArgument === 'string') {
-      const text = childArgument, ///
-            textElement = new TextElement(text);
+  removeFalseyElements(childElements);
 
-      childElement = textElement;
-    } else {
-      childElement = childArgument;  ///
-    }
-
-    return childElement;
-  });
+  replaceStringsWithTextElements(childElements);
 
   return childElements;
 }

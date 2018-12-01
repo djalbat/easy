@@ -9,6 +9,14 @@ function splice(array1, start, deleteCount = Infinity, array2 = []) {
   return deletedItemsArray;
 }
 
+function flatten(array) {
+  return array.reduce(function(array, element) {
+    array = array.concat(element);  ///
+
+    return array;
+  }, []);
+}
+
 function augment(array1, array2, test) {
   array2.forEach(function(element, index) {
     const passed = test(element, index);
@@ -22,5 +30,6 @@ function augment(array1, array2, test) {
 module.exports = {
   first,
   splice,
+  flatten,
   augment
 };

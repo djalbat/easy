@@ -1,15 +1,16 @@
 'use strict';
 
 const constants = require('../constants'),
-      TextElement = require('../textElement'),
       nameUtilities = require('../utilities/name'),
       arrayUtilities = require('../utilities/array'),
-      objectUtilities = require('../utilities/object');
+      objectUtilities = require('../utilities/object'),
+      elementsUtilities = require('../utilities/elements');
 
 const { first } = arrayUtilities,
       { combine, prune } = objectUtilities,
       { SVG_NAMESPACE_URI } = constants,
-      { isHTMLAttributeName, isSVGAttributeName } = nameUtilities;
+      { isHTMLAttributeName, isSVGAttributeName } = nameUtilities,
+      { removeFalseyElements, replaceStringsWithTextElements } = elementsUtilities;
 
 function applyProperties(properties = {}, defaultProperties, ignoredProperties) {
   combine(properties, defaultProperties);
@@ -134,22 +135,13 @@ function childElementsFromElementAndProperties(element, properties) {
                         element.childElements(properties) :
                           properties.childElements;
 
-  childElements = (childElements !== undefined) ?
-                   ((childElements instanceof Array) ?
-                       childElements :
-                        [childElements]) :
-                          [];
+  if (!(childElements instanceof Array)) {
+    childElements = [childElements];
+  }
 
-  childElements = childElements.map(function(childElement) {
-    if (typeof childElement === 'string') {
-      const text = childElement,  ///
-            textElement = new TextElement(text);
+  removeFalseyElements(childElements);
 
-      childElement = textElement; ///
-    }
-
-    return childElement;
-  });
+  replaceStringsWithTextElements(childElements);
 
   return childElements;
 }
