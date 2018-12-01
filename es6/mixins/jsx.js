@@ -139,9 +139,9 @@ function childElementsFromElementAndProperties(element, properties) {
     childElements = [childElements];
   }
 
-  removeFalseyElements(childElements);
+  childElements = removeFalseyElements(childElements);
 
-  replaceStringsWithTextElements(childElements);
+  childElements = replaceStringsWithTextElements(childElements);
 
   return childElements;
 }

@@ -46,11 +46,11 @@ module.exports = React;
 function childElementsFromChildArguments(childArguments) {
   childArguments = flatten(childArguments); ///
 
-  const childElements = childArguments; ///
+  let childElements = childArguments; ///
 
-  removeFalseyElements(childElements);
+  childElements = removeFalseyElements(childElements);
 
-  replaceStringsWithTextElements(childElements);
+  childElements = replaceStringsWithTextElements(childElements);
 
   return childElements;
 }
