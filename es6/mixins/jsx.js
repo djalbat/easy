@@ -15,13 +15,12 @@ const { first } = arrayUtilities,
 function applyProperties(properties = {}, defaultProperties, ignoredProperties) {
   combine(properties, defaultProperties);
 
-  const svg = (this.domElement.namespaceURI === SVG_NAMESPACE_URI),
-        element = this, ///
-        childElements = childElementsFromElementAndProperties(element, properties);
+  const childElements = childElementsFromElementAndProperties(this, properties);
 
   prune(properties, ignoredProperties);
 
-  const names = Object.keys(properties);  ///
+  const svg = (this.domElement.namespaceURI === SVG_NAMESPACE_URI),
+        names = Object.keys(properties);  ///
 
   names.forEach(function(name) {
     const value = properties[name];
@@ -45,13 +44,15 @@ function applyProperties(properties = {}, defaultProperties, ignoredProperties) 
     }
   }.bind(this));
 
-  const parentElement = this; ///
+  const context = {};
 
   childElements.forEach(function(childElement) {
-    updateParentElementContext(childElement, parentElement);
+    updateContext(childElement, context);
 
-    childElement.addTo(parentElement);
+    childElement.addTo(this);
   }.bind(this));
+
+  Object.assign(this, context);
 }
 
 function getProperties() {
@@ -120,16 +121,6 @@ module.exports = {
   assignContext
 };
 
-function updateParentElementContext(childElement, parentElement) {
-  const parentContext = (typeof childElement.parentContext === 'function') ?
-                          childElement.parentContext() :
-                            childElement.context;
-
-  parentElement.context = Object.assign({}, parentElement.context, parentContext);
-
-  delete childElement.context;
-}
-
 function childElementsFromElementAndProperties(element, properties) {
   let childElements = (typeof element.childElements === 'function') ?
                         element.childElements(properties) :
@@ -144,6 +135,16 @@ function childElementsFromElementAndProperties(element, properties) {
   childElements = replaceStringsWithTextElements(childElements);
 
   return childElements;
+}
+
+function updateContext(childElement, context) {
+  const parentContext = (typeof childElement.parentContext === 'function') ?
+                          childElement.parentContext() :
+                            childElement.context; ///
+
+  Object.assign(context, parentContext);
+
+  delete childElement.context;
 }
 
 function addHandler(element, name, value) {
