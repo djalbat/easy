@@ -65,18 +65,6 @@ function getContext() {
   return this.context;
 }
 
-function getState() {
-  return this.state;
-}
-
-function setState(state) {
-  this.state = state;
-}
-
-function updateState(update) {
-  Object.assign(this.state, update);
-}
-
 function assignContext(names, thenDelete) {
   const argumentsLength = arguments.length;
 
@@ -117,9 +105,6 @@ module.exports = {
   applyProperties,
   getProperties,
   getContext,
-  getState,
-  setState,
-  updateState,
   assignContext
 };
 

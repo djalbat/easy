@@ -5,6 +5,7 @@ const Offset = require('./miscellaneous/offset'),
       constants = require('./constants'),
       jsxMixins = require('./mixins/jsx'),
       keyMixins = require('./mixins/key'),
+      stateMixins = require('./mixins/state'),
       mouseMixins = require('./mixins/mouse'),
       eventMixins = require('./mixins/event'),
       clickMixins = require('./mixins/click'),
@@ -381,6 +382,7 @@ class Element {
 
 Object.assign(Element.prototype, jsxMixins);
 Object.assign(Element.prototype, keyMixins);
+Object.assign(Element.prototype, stateMixins);
 Object.assign(Element.prototype, mouseMixins);
 Object.assign(Element.prototype, eventMixins);
 Object.assign(Element.prototype, clickMixins);
