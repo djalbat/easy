@@ -26,9 +26,9 @@ class Checkbox extends Element {
   }
 
   check(checked = true) {
-    checked ?
-      this.setAttribute('checked', 'checked') :
-        this.clearAttribute('checked');
+    const domElement = this.getDOMElement();
+
+    domElement.checked = checked;
   }
 
   isChecked() {
