@@ -10,6 +10,12 @@ class Window {
     this.domElement = window; ///
   }
 
+  assign(...sources) {
+    const target = this.domElement; ///
+
+    Object.assign(target, ...sources);
+  }
+
   getWidth() { return this.domElement.innerWidth; } ///
   
   getHeight() { return this.domElement.innerHeight; } ///
