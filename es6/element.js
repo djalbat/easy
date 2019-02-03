@@ -242,11 +242,11 @@ class Element {
     } else {
       const names = Object.keys(css); ///
 
-      names.forEach(function(name) {
+      names.forEach((name) => {
         const value = css[name];
 
         this.style(name, value);
-      }.bind(this));
+      });
     }
   }
   

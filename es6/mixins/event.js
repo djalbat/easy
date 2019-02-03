@@ -3,21 +3,21 @@
 function on(eventTypes, handler, element = this, intermediateHandler = null) {
   eventTypes = eventTypes.split(' '); ///
 
-  eventTypes.forEach(function(eventType) {
+  eventTypes.forEach((eventType) => {
     const eventListener = this.addEventListener(eventType, handler, element, intermediateHandler);
     
     this.domElement.addEventListener(eventType, eventListener);
-  }.bind(this));
+  });
 }
 
 function off(eventTypes, handler, element = this) {
   eventTypes = eventTypes.split(' '); ///
 
-  eventTypes.forEach(function(eventType) {
+  eventTypes.forEach((eventType) => {
     const eventListener = this.removeEventListener(eventType, handler, element);
 
     this.domElement.removeEventListener(eventType, eventListener);
-  }.bind(this));
+  });
 }
 
 module.exports = {
@@ -61,7 +61,7 @@ function createEventListener(eventType, handler, element, intermediateHandler) {
 
   if (intermediateHandler === null) {
     eventListener = function(event) {
-      handler.call(element, event)
+      handler.call(element, event, element)
     };
   } else {
     eventListener = function(event) {
@@ -80,11 +80,9 @@ function createEventListener(eventType, handler, element, intermediateHandler) {
 
 function findEventListener(eventListeners, eventType, handler, element) {
   const eventListener = eventListeners.find(function(eventListener) {
-    const found = ( (eventListener.element === element) &&
-                    (eventListener.handler === handler) &&
-                    (eventListener.eventType === eventType) );  ///
-    
-    return found;
+    if ( (eventListener.eventType === eventType) && (eventListener.element === element) && (eventListener.handler === handler) ) {
+      return true;
+    }
   });
   
   return eventListener;

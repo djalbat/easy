@@ -47,7 +47,8 @@ module.exports = Link;
 
 function defaultIntermediateClickHandler(clickHandler, event, element) {
   const link = element, ///
-        href = link.getAttribute('href');
+        hrefAttribute = link.getAttribute('href'),
+        href = hrefAttribute; ///
   
-  clickHandler.call(link, href, event);
+  clickHandler.call(element, href, event, element);
 }

@@ -103,5 +103,5 @@ function defaultIntermediateResizeHandler(handler, event, element) {
         width = window.getWidth(),
         height = window.getHeight();
 
-  handler.call(element, width, height, event);
+  handler.call(element, width, height, event, element);
 }

@@ -17,5 +17,5 @@ function defaultIntermediateHandler(handler, event, element) {
         mouseLeft = pageX, ///
         mouseButton = button; ///
   
-  handler.call(element, mouseTop, mouseLeft, mouseButton, event);
+  handler.call(element, mouseTop, mouseLeft, mouseButton, event, element);
 }

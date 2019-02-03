@@ -22,7 +22,7 @@ function applyProperties(properties = {}, defaultProperties, ignoredProperties) 
   const svg = (this.domElement.namespaceURI === SVG_NAMESPACE_URI),
         names = Object.keys(properties);  ///
 
-  names.forEach(function(name) {
+  names.forEach((name) => {
     const value = properties[name];
 
     if (false) {
@@ -42,15 +42,15 @@ function applyProperties(properties = {}, defaultProperties, ignoredProperties) 
 
       this.properties[name] = value;
     }
-  }.bind(this));
+  });
 
   const context = {};
 
-  childElements.forEach(function(childElement) {
+  childElements.forEach((childElement) => {
     updateContext(childElement, context);
 
     childElement.addTo(this);
-  }.bind(this));
+  });
 
   Object.assign(this, {
     context
@@ -86,7 +86,7 @@ function assignContext(names, thenDelete) {
     thenDelete = true;
   }
 
-  names.forEach(function(name) {
+  names.forEach((name) => {
     const value = this.context[name],
           propertyName = name,  ///
           descriptor = {
@@ -98,7 +98,7 @@ function assignContext(names, thenDelete) {
     if (thenDelete) {
       delete this.context[name];
     }
-  }.bind(this), []);
+  }, []);
 }
 
 module.exports = {
@@ -153,9 +153,9 @@ function addAttribute(element, name, value) {
   if (typeof value === 'object') {
     const keys = Object.keys(value);
 
-    keys.forEach(function (key) {
+    keys.forEach(function(key) {
       element.domElement[name][key] = value[key];
-    }.bind(this));
+    });
   } else if (typeof value === 'boolean') {
     if (value) {
       value = name; ///

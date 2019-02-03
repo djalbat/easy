@@ -74,5 +74,5 @@ function defaultIntermediateChangeHandler(changeHandler, event, element) {
   const checkbox = element, ///
         checked = checkbox.isChecked();
   
-  changeHandler.call(checkbox, checked, event);
+  changeHandler.call(element, checked, event, element);
 }

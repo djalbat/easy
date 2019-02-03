@@ -49,5 +49,5 @@ function defaultIntermediateResizeHandler(handler, event, element) {
         width = window.getWidth(),
         height = window.getHeight();
   
-  handler.call(window, width, height, event);
+  handler.call(element, width, height, event, element);
 }
