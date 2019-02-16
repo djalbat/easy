@@ -15,12 +15,12 @@ const { first } = arrayUtilities,
 function applyProperties(properties = {}, defaultProperties, ignoredProperties) {
   combine(properties, defaultProperties);
 
-  const childElements = childElementsFromElementAndProperties(this, properties);
+  const childElements = childElementsFromElementAndProperties(this, properties) || properties.childElements;  ///
 
   prune(properties, ignoredProperties);
 
-  const svg = (this.domElement.namespaceURI === SVG_NAMESPACE_URI),
-        names = Object.keys(properties);  ///
+  const names = Object.keys(properties),  ///
+        svg = (this.domElement.namespaceURI === SVG_NAMESPACE_URI);
 
   names.forEach((name) => {
     const value = properties[name];
@@ -109,17 +109,19 @@ module.exports = {
 };
 
 function childElementsFromElementAndProperties(element, properties) {
-  let childElements = (typeof element.childElements === 'function') ?
-                        element.childElements(properties) :
-                          properties.childElements;
+  let childElements = null;
 
-  if (!(childElements instanceof Array)) {
-    childElements = [childElements];
+  if (typeof element.childElements === 'function') {
+    childElements = element.childElements(properties);
+
+    if (!(childElements instanceof Array)) {
+      childElements = [childElements];
+    }
+
+    childElements = removeFalseyElements(childElements);
+
+    childElements = replaceStringsWithTextElements(childElements);
   }
-
-  childElements = removeFalseyElements(childElements);
-
-  childElements = replaceStringsWithTextElements(childElements);
 
   return childElements;
 }
