@@ -6,8 +6,8 @@ const constants = require('../constants'),
       objectUtilities = require('../utilities/object'),
       elementsUtilities = require('../utilities/elements');
 
-const { first } = arrayUtilities,
-      { combine, prune } = objectUtilities,
+const { combine, prune } = objectUtilities,
+      { first, guarantee } = arrayUtilities,
       { SVG_NAMESPACE_URI } = constants,
       { isHTMLAttributeName, isSVGAttributeName } = nameUtilities,
       { removeFalseyElements, replaceStringsWithTextElements } = elementsUtilities;
@@ -114,9 +114,7 @@ function childElementsFromElementAndProperties(element, properties) {
   if (typeof element.childElements === 'function') {
     childElements = element.childElements(properties);
 
-    if (!(childElements instanceof Array)) {
-      childElements = [childElements];
-    }
+    childElements = guarantee(childElements);
 
     childElements = removeFalseyElements(childElements);
 

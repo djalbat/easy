@@ -17,6 +17,14 @@ function flatten(array) {
   }, []);
 }
 
+function guarantee(arrayOrElement) {
+  arrayOrElement = arrayOrElement || [];
+
+  return (arrayOrElement instanceof Array) ?
+            arrayOrElement :
+              [arrayOrElement];
+}
+
 function augment(array1, array2, test) {
   array2.forEach(function(element, index) {
     const passed = test(element, index);
@@ -31,5 +39,6 @@ module.exports = {
   first,
   splice,
   flatten,
+  guarantee,
   augment
 };
