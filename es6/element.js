@@ -364,7 +364,7 @@ class Element {
           defaultProperties = defaultPropertiesFromClass(Class),
           ignoredProperties = ignoredPropertiesFromClass(Class);
 
-    element.applyProperties(properties, tagName, defaultProperties, ignoredProperties);
+    element.applyProperties(properties, defaultProperties, ignoredProperties);
 
     return element;
   }
@@ -374,7 +374,7 @@ class Element {
           defaultProperties = {}, ///
           ignoredProperties = []; ///
 
-    element.applyProperties(properties, tagName, defaultProperties, ignoredProperties);
+    element.applyProperties(properties, defaultProperties, ignoredProperties);
 
     return element;
   }
