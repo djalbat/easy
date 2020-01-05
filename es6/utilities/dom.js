@@ -6,7 +6,7 @@ const { splice } = arrayUtilities;
 
 function domElementFromSelector(selector) {
   const domElement = (typeof selector === 'string') ?
-                       document.querySelectorAll(selector)[0] :  ///
+                       document.querySelector(selector) :
                          selector;  ///
 
   return domElement;
