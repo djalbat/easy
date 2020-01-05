@@ -12,15 +12,15 @@ const { combine, prune } = objectUtilities,
       { isHTMLAttributeName, isSVGAttributeName } = nameUtilities,
       { removeFalseyElements, replaceStringsWithTextElements } = elementsUtilities;
 
-function applyProperties(properties = {}, defaultProperties, ignoredProperties) {
+function applyProperties(properties = {}, tagName, defaultProperties, ignoredProperties) {
   combine(properties, defaultProperties);
 
   const childElements = childElementsFromElementAndProperties(this, properties) || properties.childElements;  ///
 
   prune(properties, ignoredProperties);
 
-  const names = Object.keys(properties),  ///
-        svg = (this.domElement.namespaceURI === SVG_NAMESPACE_URI);
+  const svg = (tagName !== 'iframe') && (this.domElement.namespaceURI === SVG_NAMESPACE_URI), ///
+        names = Object.keys(properties);  ///
 
   names.forEach((name) => {
     const value = properties[name];

@@ -18,7 +18,7 @@ function createElement(firstArgument, properties, ...childArguments) {
     }, properties);
 
     if (false) {
-
+      ///
     } else if (isSubclassOf(firstArgument, Element)) {
       const Class = firstArgument;  ///
 

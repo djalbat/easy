@@ -63,7 +63,7 @@ const svgTagNames = [
       'z', 'zoomAndPan'
     ],
     htmlAttributeNames = [
-      'accept', 'acceptCharset', 'accessKey', 'action', 'allowFullScreen', 'allowTransparency', 'alt', 'async', 'autoComplete', 'autoFocus', 'autoPlay',
+      'accept', 'acceptCharset', 'accessKey', 'action', 'allow', 'allowFullScreen', 'allowTransparency', 'alt', 'async', 'autoComplete', 'autoFocus', 'autoPlay',
       'capture', 'cellPadding', 'cellSpacing', 'challenge', 'charSet', 'checked', 'cite', 'classID', 'className', 'colSpan', 'cols', 'content', 'contentEditable', 'contextMenu', 'controls', 'coords', 'crossOrigin',
       'data', 'dateTime', 'default', 'defer', 'dir', 'disabled', 'download', 'draggable',
       'encType',
