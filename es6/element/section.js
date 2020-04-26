@@ -1,6 +1,6 @@
 "use strict";
 
-const Element = require("../element");
+import Element from "../element";
 
 class Section extends Element {
   constructor(selector) {

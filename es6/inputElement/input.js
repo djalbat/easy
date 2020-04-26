@@ -1,6 +1,6 @@
 "use strict";
 
-const InputElement = require("../inputElement");
+import InputElement from "../inputElement";
 
 class Input extends InputElement {
   clone(changeHandler) { return Input.clone(this, changeHandler); }

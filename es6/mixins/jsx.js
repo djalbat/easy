@@ -1,16 +1,10 @@
 "use strict";
 
-const constants = require("../constants"),
-      nameUtilities = require("../utilities/name"),
-      arrayUtilities = require("../utilities/array"),
-      objectUtilities = require("../utilities/object"),
-      elementsUtilities = require("../utilities/elements");
-
-const { combine, prune } = objectUtilities,
-      { first, guarantee } = arrayUtilities,
-      { SVG_NAMESPACE_URI } = constants,
-      { isHTMLAttributeName, isSVGAttributeName } = nameUtilities,
-      { removeFalseyElements, replaceStringsWithTextElements } = elementsUtilities;
+import { combine, prune } from "../utilities/object";
+import { first, guarantee } from "../utilities/array";
+import { SVG_NAMESPACE_URI } from "../constants";
+import { isHTMLAttributeName, isSVGAttributeName } from "../utilities/name";
+import { removeFalseyElements, replaceStringsWithTextElements } from "../utilities/elements";
 
 function applyProperties(properties = {}, defaultProperties, ignoredProperties) {
   combine(properties, defaultProperties);

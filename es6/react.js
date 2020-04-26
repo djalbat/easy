@@ -1,11 +1,9 @@
 "use strict";
 
-const Element = require("./element"),
-      arrayUtilities = require("./utilities/array"),
-      elementsUtilities = require("./utilities/elements");
+import Element from "./element";
 
-const { flatten } = arrayUtilities,
-      { removeFalseyElements, replaceStringsWithTextElements } = elementsUtilities;
+import { flatten } from "./utilities/array";
+import { removeFalseyElements, replaceStringsWithTextElements } from "./utilities/elements";
 
 function createElement(firstArgument, properties, ...childArguments) {
   let element = null;

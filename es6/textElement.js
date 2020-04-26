@@ -1,7 +1,7 @@
 "use strict";
 
-const Offset = require("./miscellaneous/offset"),
-      Bounds = require("./miscellaneous/bounds");
+import Offset from "./miscellaneous/offset";
+import Bounds from "./miscellaneous/bounds";
 
 class TextElement {
   constructor(text) {

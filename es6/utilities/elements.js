@@ -1,6 +1,6 @@
 "use strict";
 
-const TextElement = require("../textElement");
+import TextElement from "../textElement";
 
 function removeFalseyElements(elements) {
   elements = elements.reduce(function(elements, element) {

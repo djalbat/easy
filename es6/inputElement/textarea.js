@@ -1,6 +1,6 @@
 "use strict";
 
-const InputElement = require("../inputElement");
+import InputElement from "../inputElement";
 
 class Textarea extends InputElement {
   clone(changeHandler) { return Textarea.clone(this, changeHandler); }

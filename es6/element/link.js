@@ -1,6 +1,6 @@
 "use strict";
 
-const Element = require("../element");
+import Element from "../element";
 
 class Link extends Element {
   constructor(selector, clickHandler) {

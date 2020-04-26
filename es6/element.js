@@ -2,7 +2,6 @@
 
 const Offset = require("./miscellaneous/offset"),
       Bounds = require("./miscellaneous/bounds"),
-      constants = require("./constants"),
       jsxMixins = require("./mixins/jsx"),
       keyMixins = require("./mixins/key"),
       stateMixins = require("./mixins/state"),
@@ -10,17 +9,13 @@ const Offset = require("./miscellaneous/offset"),
       eventMixins = require("./mixins/event"),
       clickMixins = require("./mixins/click"),
       scrollMixins = require("./mixins/scroll"),
-      resizeMixins = require("./mixins/resize"),
-      domUtilities = require("./utilities/dom"),
-      nameUtilities = require("./utilities/name"),
-      arrayUtilities = require("./utilities/array"),
-      objectUtilities = require("./utilities/object");
+      resizeMixins = require("./mixins/resize");
 
-const { combine } = objectUtilities,
-      { isSVGTagName } = nameUtilities,
-      { first, augment } = arrayUtilities,
-      { SVG_NAMESPACE_URI } = constants,
-      { domNodeMatchesSelector, domElementFromSelector, elementsFromDOMElements, filterDOMNodesBySelector, descendantDOMNodesFromDOMNode } = domUtilities;
+import { combine } from "./utilities/object";
+import { isSVGTagName } from "./utilities/name";
+import { first, augment } from "./utilities/array";
+import { SVG_NAMESPACE_URI } from "./constants";
+import { domNodeMatchesSelector, domElementFromSelector, elementsFromDOMElements, filterDOMNodesBySelector, descendantDOMNodesFromDOMNode } from "./utilities/dom";
 
 class Element {
   constructor(selector) {

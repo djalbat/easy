@@ -1,6 +1,6 @@
 "use strict";
 
-const Element = require("../element");
+import Element from "../element";
 
 class Span extends Element {
   clone() { return Span.clone(this); }

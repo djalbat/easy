@@ -1,9 +1,9 @@
 "use strict";
 
-const keyMixins = require("./mixins/key"),
-      eventMixins = require("./mixins/event"),
-      clickMixins = require("./mixins/click"),
-      mouseMixins = require("./mixins/mouse");
+import keyMixins from "./mixins/key";
+import eventMixins from "./mixins/event";
+import clickMixins from "./mixins/click";
+import mouseMixins from "./mixins/mouse";
 
 class Window {
   constructor() {
