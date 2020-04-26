@@ -32,9 +32,8 @@ You can also clone the repository with [Git](https://git-scm.com/)...
 
 ## Usage
 
-```js
-const easy = require('easy'),
-      { Select, Checkbox } = easy;
+```
+import { Select, Checkbox } from "easy";
 
 ...
 ```
@@ -50,49 +49,21 @@ Automation is done with [npm scripts](https://docs.npmjs.com/misc/scripts), have
 
 You can pass CSS-style selectors to constructors:
 
-```js
-const link = new Link('#link', function(href) {
-  console.log('Link click with href ' + href);
+```
+const link = new Link("#link", function(href) {
+  console.log(`Link click with href '${href}'.`);
 });
 ```
 
-You can also use existing DOM elements or HTML snippets with the static `fromDOMElement()` or `fromHTML()` factory methods of the relevant class, respectively:
-
-```js
-const bodyDOMElements = document.getElementsByTagName('body'),
-      firstBodyDOMElement = first(bodyDOMElements),
-      bodyDOMElement = firstBodyDOMElement;
-    
-const body = Body.fromDOMElement(bodyDOMElement),
-      checkbox = Checkbox.fromHTML('<input type="checkbox" />');
-```
-
-Note that `document` here is the global document reference, not Easy's `document` singleton.
-
-If constructors take handlers or other additional arguments, you can pass these to the corresponding `fromDOMElement()` or `fromHTML()` factory methods and they will be passed on the constructor. 
-
-## Cloning elements
-
-You can call the `clone()` method of an element to clone it, or the equivalent static factory method. In either case, if the original element has an `id` attribute, it is best to remove this from the cloned element:
- 
-```js
-const button = new Button('#button'),
-      clonedButton1 = button.clone(),
-      clonedButton2 = Button.clone(button)
-     
-clonedButton1.removeAttribute('id');
-clonedButton2.removeAttribute('id');
-```
-
-As in the case of `fromDOMElement()` and `fromHTML()` factory methods, the `clone()` methods will pass additional arguments on to the corresponding constructor. Note that when you clone an element you will need to re-register handlers. 
+If constructors take handlers or other additional arguments, you can pass these to the corresponding `fromDOMElement()` factory method and they will be passed on the constructor.
 
 ## Adding elements to the DOM
  
 The methods to add elements to the DOM are hopefully intuitive. Note the difference between the `append()` and `appendTo()` methods:
 
-```js
+```
 const body = new Body(),
-      form = Element.fromHTML(Element, '<form></form>');
+      form = ... ;
 
 body.append(form); // what you want, the form element becomes a child of the body element
 
@@ -104,63 +75,23 @@ Similarly for the prepend methods.
 ## Supported elements
 
 -  Body
--  Div
--  Span
--  Section
 -  Button
 -  Checkbox
--  Input
 -  Link
--  Textarea
 -  Select
+-  Input
+-  Textarea
 -  window
 -  document
 
 The `Window` and `Document` classes are not exported, only singletons, hence the lowercase. Note also that if the underlying `window` and `document` global objects are not defined (for whatever reason), then these singletons will also be undefined.
 
-Obviously the list is incomplete. If you want to create other elements, use the `Element` class directly:
+Obviously the list is incomplete. If you want to create other elements, use the `Element` class directly.
 
-```js
-const br = Element.fromHTML(Element, '<br />');
-```
-
-## Rolling your own classes
-
-Using the existing `Div` class as an example:
-
-```js
-const Element = require('../element');
-
-class Div extends Element {
-  constructor(selector) {
-    super(selector);
-  }
-
-  clone() { return Div.clone(this); }
-  
-  ...
-
-  static clone(element) {
-    return Element.clone(Div, element);
-  }
-
-  static fromHTML(html) {
-    return Element.fromHTML(Div, html);
-  }
-
-  static fromDOMElement(domElement) {
-    return Element.fromDOMElement(Div, domElement);
-  }
-}
-```
-
-You can then use the private `domElement` property to create methods that abstract away from DOM functionality.
-    
 ## Standard methods
 
 Each class bar the `Window`, `Document` and `TextElement` classes has the following methods. They are taken from the `Element` class and are overridden in many cases, in which case the signatures may change:
 
-- `clone()`
 - `getDOMElement()`
 - `getOffset()`
 - `getBounds()`
@@ -206,12 +137,12 @@ Each class bar the `Window`, `Document` and `TextElement` classes has the follow
 - `blur()`
 - `focus()`
 - `hasFocus()`
-- `getDescendantElements(selector = '*')`
-- `getChildElements(selector = '*')`
-- `getParentElement(selector = '*')`
-- `getAscendantElements(selector = '*')`
-- `getPreviousSiblingElement(selector = '*')`
-- `getNextSiblingElement(selector = '*')`
+- `getDescendantElements(selector = "*")`
+- `getChildElements(selector = "*")`
+- `getParentElement(selector = "*")`
+- `getAscendantElements(selector = "*")`
+- `getPreviousSiblingElement(selector = "*")`
+- `getNextSiblingElement(selector = "*")`
 - `getScrollTop()`
 - `getScrollLeft()`
 - `setScrollTop(scrollTop)`
@@ -239,7 +170,7 @@ Each class bar the `Window`, `Document` and `TextElement` classes has the follow
 
 Please note the following:
 
-* The `setWidth()` and `setHeight()` methods take number arguments and prepend 'px' to them. If you want to set the widths and heights of elements using something other than pixels, use the `style()` method.
+* The `setWidth()` and `setHeight()` methods take number arguments and prepend `px` to them. If you want to set the widths and heights of elements using something other than pixels, use the `style()` method.
 
 * The `html()` and `css()` methods allow you to both get and set HTML and CSS, respectively. Their functionality is based on the jQuery methods of the same name. The `style()` method behaves similarly.
 
@@ -249,8 +180,6 @@ Please note the following:
 
 Aside from the above methods there are the aforementioned static factory methods:
  
-- `static clone(Class, element, ...remainingArguments)`
-- `static fromHTML(Class, html, ...remainingArguments)`
 - `static fromDOMElement(Class, domElement, ...remainingArguments)`
 - `static fromProperties(Class, properties, ...remainingArguments)`
 - `static fromString(Class, properties, ...remainingArguments)`
@@ -273,7 +202,6 @@ The `Input` and `Textarea` classes have the following methods, taken from the `I
 
 The `TextElement` class has the following methods:
 
-- `clone()`
 - `getText()`
 - `setText(text)`
 - `getOffset()`
