@@ -375,10 +375,6 @@ export default class Element {
     return nextSiblingElement;
   }
 
-  static fromDOMElement(Class, domElement, ...remainingArguments) {
-    return fromDOMElement(Class, domElement, ...remainingArguments);
-  }
-
   static fromProperties(Class, properties, ...remainingArguments) {
     const tagName = Class.tagName,
           element = fromTagName(Class, tagName, ...remainingArguments),

@@ -50,12 +50,10 @@ Automation is done with [npm scripts](https://docs.npmjs.com/misc/scripts), have
 You can pass CSS-style selectors to constructors:
 
 ```
-const link = new Link("#link", function(href) {
+const link = new Link("#link", (href) => {
   console.log(`Link click with href '${href}'.`);
 });
 ```
-
-If constructors take handlers or other additional arguments, you can pass these to the corresponding `fromDOMElement()` factory method and they will be passed on the constructor.
 
 ## Adding elements to the DOM
  
@@ -178,11 +176,9 @@ Please note the following:
 
 * The `onResize()` and `offResize()` methods are similarly defined on all elements, by way of a mixin. The resize functionality relies on attaching a child object to the element in question and therefore will not work for elements which cannot have child elements. In these cases, the `onResize()` and `offResize()` methods simply do nothing. Also, the aforementioned child object is given amongst others the style `position: relative` and therefore the element in question must be given either the `position: relative` or the `position: absolute` style in order for this trick to work.
 
-Aside from the above methods there are the aforementioned static factory methods:
+Aside from the above methods there is the aforementioned static factory method:
  
-- `static fromDOMElement(Class, domElement, ...remainingArguments)`
 - `static fromProperties(Class, properties, ...remainingArguments)`
-- `static fromString(Class, properties, ...remainingArguments)`
 
 The `InputElement` class also has these factory methods. Again bear in mind that the signatures will change for classes that inherit from the `Element` class.
 

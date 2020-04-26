@@ -39,8 +39,6 @@ export default class Select extends Element {
     "onChange"
   ];
 
-  static fromDOMElement(domElement, changeHandler) { return Element.fromDOMElement(Select, domElement, changeHandler); }
-
   static fromProperties(properties) {
     const { onChange } = properties,
           changeHandler = onChange, ///

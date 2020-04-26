@@ -45,10 +45,6 @@ export default class InputElement extends Element {
     "onChange"
   ];
 
-  static fromDOMElement(Class, domElement, ...remainingArguments) {
-    return Element.fromDOMElement(Class, domElement, ...remainingArguments);
-  }
-
   static fromProperties(Class, properties, ...remainingArguments) {
     const { onChange } = properties,
           changeHandler = onChange; ///
