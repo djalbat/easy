@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const Element = require('../element');
+const Element = require("../element");
 
 class Span extends Element {
   clone() { return Span.clone(this); }
@@ -19,7 +19,7 @@ class Span extends Element {
 }
 
 Object.assign(Span, {
-  tagName: 'span'
+  tagName: "span"
 });
 
 module.exports = Span;

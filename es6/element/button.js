@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const Element = require('../element');
+import Element from "../element";
 
 class Button extends Element {
   constructor(selector, clickHandler) {
@@ -37,9 +37,9 @@ class Button extends Element {
 }
 
 Object.assign(Button, {
-  tagName: 'button',
+  tagName: "button",
   ignoredProperties: [
-    'onClick'
+    "onClick"
   ]
 });
 

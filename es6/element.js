@@ -1,20 +1,20 @@
-'use strict';
+"use strict";
 
-const Offset = require('./miscellaneous/offset'),
-      Bounds = require('./miscellaneous/bounds'),
-      constants = require('./constants'),
-      jsxMixins = require('./mixins/jsx'),
-      keyMixins = require('./mixins/key'),
-      stateMixins = require('./mixins/state'),
-      mouseMixins = require('./mixins/mouse'),
-      eventMixins = require('./mixins/event'),
-      clickMixins = require('./mixins/click'),
-      scrollMixins = require('./mixins/scroll'),
-      resizeMixins = require('./mixins/resize'),
-      domUtilities = require('./utilities/dom'),
-      nameUtilities = require('./utilities/name'),
-      arrayUtilities = require('./utilities/array'),
-      objectUtilities = require('./utilities/object');
+const Offset = require("./miscellaneous/offset"),
+      Bounds = require("./miscellaneous/bounds"),
+      constants = require("./constants"),
+      jsxMixins = require("./mixins/jsx"),
+      keyMixins = require("./mixins/key"),
+      stateMixins = require("./mixins/state"),
+      mouseMixins = require("./mixins/mouse"),
+      eventMixins = require("./mixins/event"),
+      clickMixins = require("./mixins/click"),
+      scrollMixins = require("./mixins/scroll"),
+      resizeMixins = require("./mixins/resize"),
+      domUtilities = require("./utilities/dom"),
+      nameUtilities = require("./utilities/name"),
+      arrayUtilities = require("./utilities/array"),
+      objectUtilities = require("./utilities/object");
 
 const { combine } = objectUtilities,
       { isSVGTagName } = nameUtilities,
@@ -61,7 +61,7 @@ class Element {
   setWidth(width) {
     width = `${width}px`; ///
 
-    this.style('width', width);
+    this.style("width", width);
   }
 
   getHeight(includeBorder = true) {
@@ -75,7 +75,7 @@ class Element {
   setHeight(height) {
     height = `${height}px`; ///
 
-    this.style('height', height);
+    this.style("height", height);
   }
 
   hasAttribute(name) { return this.domElement.hasAttribute(name); }
@@ -100,7 +100,7 @@ class Element {
 
   hasClass(className) { return this.domElement.classList.contains(className); }
 
-  clearClasses() { this.domElement.className = ''; }
+  clearClasses() { this.domElement.className = ""; }
 
   prependTo(parentElement) { parentElement.prepend(this); }
 
@@ -149,15 +149,15 @@ class Element {
     }
   }
 
-  show(displayStyle = 'block') { this.display(displayStyle); }
+  show(displayStyle = "block") { this.display(displayStyle); }
 
-  hide() { this.style('display', 'none'); }
+  hide() { this.style("display", "none"); }
 
-  display(display) { this.style('display', display); }
+  display(display) { this.style("display", display); }
 
-  enable() { this.clearAttribute('disabled'); }
+  enable() { this.clearAttribute("disabled"); }
 
-  disable() { this.setAttribute('disabled', 'disabled'); }
+  disable() { this.setAttribute("disabled", "disabled"); }
 
   isEnabled() {
     const disabled = this.isDisabled(),
@@ -167,14 +167,14 @@ class Element {
   }
 
   isDisabled() {
-    const disabled = this.hasAttribute('disabled');
+    const disabled = this.hasAttribute("disabled");
 
     return disabled;
   }
   
   isDisplayed() {
-    const display = this.style('display'),
-          displayed = (display !== 'none');
+    const display = this.style("display"),
+          displayed = (display !== "none");
     
     return displayed;
   }
@@ -230,7 +230,7 @@ class Element {
       }
 
       return css;
-    } else if (typeof css === 'string') {
+    } else if (typeof css === "string") {
       let name = css; ///
 
       const computedStyle = getComputedStyle(this.domElement),
@@ -260,7 +260,7 @@ class Element {
     return focus;
   }
 
-  getDescendantElements(selector = '*') {
+  getDescendantElements(selector = "*") {
     const domNode = this.domElement,  ///
           descendantDOMNodes = descendantDOMNodesFromDOMNode(domNode),
           descendantDOMElements = filterDOMNodesBySelector(descendantDOMNodes, selector),
@@ -269,7 +269,7 @@ class Element {
     return descendantElements;
   }
 
-  getChildElements(selector = '*') {
+  getChildElements(selector = "*") {
     const childDOMNodes = this.domElement.childNodes,
           childDOMElements = filterDOMNodesBySelector(childDOMNodes, selector),
           childElements = elementsFromDOMElements(childDOMElements);
@@ -277,7 +277,7 @@ class Element {
     return childElements;
   }
 
-  getParentElement(selector = '*') {
+  getParentElement(selector = "*") {
     let parentElement = null;
 
     const parentDOMElement = this.domElement.parentElement;
@@ -295,7 +295,7 @@ class Element {
     return parentElement;
   }
 
-  getAscendantElements(selector = '*') {
+  getAscendantElements(selector = "*") {
     const ascendantDOMElements = [],
           parentDOMElement = this.domElement.parentElement;
 
@@ -313,7 +313,7 @@ class Element {
     return ascendantElements;
   }
 
-  getPreviousSiblingElement(selector = '*') {
+  getPreviousSiblingElement(selector = "*") {
     let previousSiblingElement = null;
 
     const previousSiblingDOMNode = this.domElement.previousSibling;  ///
@@ -325,7 +325,7 @@ class Element {
     return previousSiblingElement;
   }
 
-  getNextSiblingElement(selector = '*') {
+  getNextSiblingElement(selector = "*") {
     let nextSiblingElement = null;
 
     const nextSiblingDOMNode = this.domElement.nextSibling;
@@ -345,7 +345,7 @@ class Element {
   }
 
   static fromHTML(Class, html, ...remainingArguments) {
-    const outerDOMElement = document.createElement('div');
+    const outerDOMElement = document.createElement("div");
 
     outerDOMElement.innerHTML = html;  ///
 
@@ -414,7 +414,7 @@ function fromDOMElement(Class, domElement, ...remainingArguments) {
 }
 
 function defaultPropertiesFromClass(Class, defaultProperties = {}) {
-  if (Class.hasOwnProperty('defaultProperties')) {
+  if (Class.hasOwnProperty("defaultProperties")) {
     combine(defaultProperties, Class.defaultProperties);
   }
 
@@ -428,7 +428,7 @@ function defaultPropertiesFromClass(Class, defaultProperties = {}) {
 }
 
 function ignoredPropertiesFromClass(Class, ignoredProperties = []) {
-  if (Class.hasOwnProperty('ignoredProperties')) {
+  if (Class.hasOwnProperty("ignoredProperties")) {
     augment(ignoredProperties, Class.ignoredProperties, function(ignoredProperty) {
       return !ignoredProperties.includes(ignoredProperty);
     });

@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const Element = require('../element');
+const Element = require("../element");
 
 class Link extends Element {
   constructor(selector, clickHandler) {
@@ -14,11 +14,11 @@ class Link extends Element {
   clone(clickHandler) { return Link.clone(this, clickHandler); }
 
   onClick(clickHandler, object, intermediateClickHandler = defaultIntermediateClickHandler) {
-    this.on('click', clickHandler, object, intermediateClickHandler);
+    this.on("click", clickHandler, object, intermediateClickHandler);
   }
   
   offClick(clickHandler, object) {
-    this.off('click', clickHandler, object);
+    this.off("click", clickHandler, object);
   }
 
   static clone(element, clickHandler) { return Element.clone(Link, element, clickHandler); }
@@ -37,9 +37,9 @@ class Link extends Element {
 }
 
 Object.assign(Link, {
-  tagName: 'a',
+  tagName: "a",
   ignoredProperties: [
-    'onClick'
+    "onClick"
   ]
 });
 
@@ -47,7 +47,7 @@ module.exports = Link;
 
 function defaultIntermediateClickHandler(clickHandler, event, element) {
   const link = element, ///
-        hrefAttribute = link.getAttribute('href'),
+        hrefAttribute = link.getAttribute("href"),
         href = hrefAttribute; ///
   
   clickHandler.call(element, href, event, element);

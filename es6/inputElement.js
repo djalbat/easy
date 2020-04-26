@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const Element = require('./element');
+const Element = require("./element");
 
 class InputElement extends Element {
   constructor(selector, changeHandler) {
@@ -16,11 +16,11 @@ class InputElement extends Element {
   offResize() {}
 
   onChange(changeHandler, intermediateChangeHandler = defaultIntermediateChangeHandler) {
-    this.on('change', changeHandler, intermediateChangeHandler);
+    this.on("change", changeHandler, intermediateChangeHandler);
   }
 
   offChange(changeHandler) {
-    this.off('change', changeHandler);
+    this.off("change", changeHandler);
   }
 
   getValue() { return this.domElement.value; }
@@ -63,7 +63,7 @@ class InputElement extends Element {
 
 Object.assign(InputElement, {
   ignoredProperties: [
-    'onChange'
+    "onChange"
   ]
 });
 

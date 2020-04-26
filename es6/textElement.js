@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-const Offset = require('./miscellaneous/offset'),
-      Bounds = require('./miscellaneous/bounds');
+const Offset = require("./miscellaneous/offset"),
+      Bounds = require("./miscellaneous/bounds");
 
 class TextElement {
   constructor(text) {

@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const TextElement = require('../textElement');
+const TextElement = require("../textElement");
 
 function removeFalseyElements(elements) {
   elements = elements.reduce(function(elements, element) {
@@ -16,7 +16,7 @@ function removeFalseyElements(elements) {
 
 function replaceStringsWithTextElements(elements) {
   elements = elements.map(function(element) {  ///
-    if (typeof element === 'string') {
+    if (typeof element === "string") {
       const text = element,  ///
             textElement = new TextElement(text);
 

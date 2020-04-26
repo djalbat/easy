@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
-import Element from '../element';
+import Element from "../element";
 
 class Body extends Element {
-  constructor(selector = 'body') {
+  constructor(selector = "body") {
     super(selector);
   }
 
@@ -19,7 +19,7 @@ class Body extends Element {
 }
 
 Object.assign(Body, {
-  tagName: 'body'
+  tagName: "body"
 });
 
 module.exports = Body;

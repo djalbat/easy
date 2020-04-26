@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const Element = require('../element');
+const Element = require("../element");
 
 class Checkbox extends Element {
   constructor(selector, changeHandler, checked) {
@@ -18,11 +18,11 @@ class Checkbox extends Element {
   clone(changeHandler) { return Checkbox.clone(this, changeHandler); }
 
   onChange(changeHandler, object, intermediateChangeHandler = defaultIntermediateChangeHandler) {
-    this.on('click', changeHandler, object, intermediateChangeHandler);  ///
+    this.on("click", changeHandler, object, intermediateChangeHandler);  ///
   }
   
   offChange(changeHandler, object) {
-    this.off('click', changeHandler, object);  ///
+    this.off("click", changeHandler, object);  ///
   }
 
   check(checked = true) {
@@ -58,13 +58,13 @@ class Checkbox extends Element {
 }
 
 Object.assign(Checkbox, {
-  tagName: 'input',
+  tagName: "input",
   ignoredProperties: [
-    'onChange',
-    'checked'
+    "onChange",
+    "checked"
   ],
   defaultProperties: {
-    type: 'checkbox'
+    type: "checkbox"
   }
 });
 

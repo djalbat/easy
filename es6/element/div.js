@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const Element = require('../element');
+const Element = require("../element");
 
 class Div extends Element {
   constructor(selector) {
@@ -19,7 +19,7 @@ class Div extends Element {
 }
 
 Object.assign(Div, {
-  tagName: 'div'
+  tagName: "div"
 });
 
 module.exports = Div;

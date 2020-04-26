@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
-const Element = require('./element'),
-      arrayUtilities = require('./utilities/array'),
-      elementsUtilities = require('./utilities/elements');
+const Element = require("./element"),
+      arrayUtilities = require("./utilities/array"),
+      elementsUtilities = require("./utilities/elements");
 
 const { flatten } = arrayUtilities,
       { removeFalseyElements, replaceStringsWithTextElements } = elementsUtilities;
@@ -23,11 +23,11 @@ function createElement(firstArgument, properties, ...childArguments) {
       const Class = firstArgument;  ///
 
       element = Class.fromProperties(properties);
-    } else if (typeof firstArgument === 'string') {
+    } else if (typeof firstArgument === "string") {
       const tagName = firstArgument; ///
 
       element = Element.fromTagName(tagName, properties);
-    } else if (typeof firstArgument === 'function') {
+    } else if (typeof firstArgument === "function") {
       const elementFunction = firstArgument;  ///
 
       element = elementFunction(properties);

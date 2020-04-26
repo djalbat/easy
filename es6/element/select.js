@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const Element = require('../element');
+const Element = require("../element");
 
 class Select extends Element {
   constructor(selector, changeHandler) {
@@ -14,11 +14,11 @@ class Select extends Element {
   clone(changeHandler) { return Select.clone(this, changeHandler); }
 
   onChange(changeHandler, object, intermediateChangeHandler = defaultIntermediateChangeHandler) {
-    this.on('change', changeHandler, object, intermediateChangeHandler);
+    this.on("change", changeHandler, object, intermediateChangeHandler);
   }
 
   offChange(changeHandler, object) {
-    this.off('change', changeHandler, object);
+    this.off("change", changeHandler, object);
   }
 
   getSelectedOptionValue() {
@@ -51,9 +51,9 @@ class Select extends Element {
 }
 
 Object.assign(Select, {
-  tagName: 'select',
+  tagName: "select",
   ignoredProperties: [
-    'onChange'
+    "onChange"
   ]
 });
 

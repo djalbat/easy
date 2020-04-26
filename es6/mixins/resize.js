@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 function onResize(handler, element = this, intermediateHandler = defaultIntermediateResizeHandler) {
   const resizeEventListeners = findResizeEventListeners(element);
@@ -7,13 +7,13 @@ function onResize(handler, element = this, intermediateHandler = defaultIntermed
     addResizeObject(element);
   }
 
-  const eventType = 'resize';
+  const eventType = "resize";
 
   this.addEventListener(eventType, handler, element, intermediateHandler);
 }
 
 function offResize(handler, element = this) {
-  const eventType = 'resize';
+  const eventType = "resize";
 
   this.removeEventListener(eventType, handler, element);
 
@@ -30,7 +30,7 @@ module.exports = {
 };
 
 function addResizeObject(element) {
-  const resizeObject = document.createElement('object'),
+  const resizeObject = document.createElement("object"),
         domElement = element.getDOMElement(),
         style = `display: block; 
                  position: absolute; 
@@ -41,10 +41,10 @@ function addResizeObject(element) {
                  overflow: hidden; 
                  pointer-events: none; 
                  z-index: -1;`,
-        data = 'about:blank',
-        type = 'text/html';
+        data = "about:blank",
+        type = "text/html";
 
-  resizeObject.setAttribute('style', style);
+  resizeObject.setAttribute("style", style);
   resizeObject.data = data;
   resizeObject.type = type;
 
@@ -62,7 +62,7 @@ function removeResizeObject(element) {
         resizeObject = element.__resizeObject__,
         objectWindow = resizeObject.contentDocument.defaultView;  ///
 
-  objectWindow.removeEventListener('resize', resizeEventListener);
+  objectWindow.removeEventListener("resize", resizeEventListener);
 
   domElement.removeChild(resizeObject);
 }
@@ -71,7 +71,7 @@ function resizeObjectLoadHandler(element) {
   const resizeObject = element.__resizeObject__,
         resizeObjectWindow = resizeObject.contentDocument.defaultView;  ///
 
-  resizeObjectWindow.addEventListener('resize', function(event) {
+  resizeObjectWindow.addEventListener("resize", function(event) {
     const resizeEventListeners = findResizeEventListeners(element);
 
     resizeEventListeners.forEach(function(resizeEventListener){
@@ -83,11 +83,11 @@ function resizeObjectLoadHandler(element) {
 function findResizeEventListeners(element) {
   const resizeEventListeners = [];
   
-  if (element.hasOwnProperty('eventListeners')) {
+  if (element.hasOwnProperty("eventListeners")) {
     const eventListeners = element.eventListeners;  ///
 
     eventListeners.forEach(function(eventListener) {
-      if (eventListener.eventType === 'resize') {
+      if (eventListener.eventType === "resize") {
         const resizeEventListener = eventListener;
 
         resizeEventListeners.push(resizeEventListener);

@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
 function onClick(handler, element, intermediateHandler = defaultIntermediateHandler) {
-  this.on('click', handler, element, intermediateHandler);
+  this.on("click", handler, element, intermediateHandler);
 }
 
-function offClick(handler, element) { this.off('click', handler, element); }
+function offClick(handler, element) { this.off("click", handler, element); }
 
 module.exports = {
   onClick,

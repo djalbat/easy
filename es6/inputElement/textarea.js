@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const InputElement = require('../inputElement');
+const InputElement = require("../inputElement");
 
 class Textarea extends InputElement {
   clone(changeHandler) { return Textarea.clone(this, changeHandler); }
@@ -15,7 +15,7 @@ class Textarea extends InputElement {
 }
 
 Object.assign(Textarea, {
-  tagName: 'textarea'
+  tagName: "textarea"
 });
 
 module.exports = Textarea;

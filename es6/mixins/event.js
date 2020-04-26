@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
 function on(eventTypes, handler, element = this, intermediateHandler = null) {
-  eventTypes = eventTypes.split(' '); ///
+  eventTypes = eventTypes.split(" "); ///
 
   eventTypes.forEach((eventType) => {
     const eventListener = this.addEventListener(eventType, handler, element, intermediateHandler);
@@ -11,7 +11,7 @@ function on(eventTypes, handler, element = this, intermediateHandler = null) {
 }
 
 function off(eventTypes, handler, element = this) {
-  eventTypes = eventTypes.split(' '); ///
+  eventTypes = eventTypes.split(" "); ///
 
   eventTypes.forEach((eventType) => {
     const eventListener = this.removeEventListener(eventType, handler, element);
@@ -28,7 +28,7 @@ module.exports = {
 };
 
 function addEventListener(eventType, handler, element, intermediateHandler) {
-  if (!this.hasOwnProperty('eventListeners')) {
+  if (!this.hasOwnProperty("eventListeners")) {
     this.eventListeners = [];
   }
   

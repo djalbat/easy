@@ -1,10 +1,10 @@
-'use strict';
+"use strict";
 
-const constants = require('../constants'),
-      nameUtilities = require('../utilities/name'),
-      arrayUtilities = require('../utilities/array'),
-      objectUtilities = require('../utilities/object'),
-      elementsUtilities = require('../utilities/elements');
+const constants = require("../constants"),
+      nameUtilities = require("../utilities/name"),
+      arrayUtilities = require("../utilities/array"),
+      objectUtilities = require("../utilities/object"),
+      elementsUtilities = require("../utilities/elements");
 
 const { combine, prune } = objectUtilities,
       { first, guarantee } = arrayUtilities,
@@ -32,7 +32,7 @@ function applyProperties(properties = {}, defaultProperties, ignoredProperties) 
     } else if (isAttributeName(name, svg)) {
       addAttribute(this, name, value);
     } else {
-      if (!this.hasOwnProperty('properties')) {
+      if (!this.hasOwnProperty("properties")) {
         const properties = {};
 
         Object.assign(this, {
@@ -71,7 +71,7 @@ function assignContext(names, thenDelete) {
   if (argumentsLength === 1) {
     const firstArgument = first(arguments);
 
-    if (typeof firstArgument === 'boolean') {
+    if (typeof firstArgument === "boolean") {
       names = Object.keys(this.context);
 
       thenDelete = firstArgument;
@@ -111,7 +111,7 @@ module.exports = {
 function childElementsFromElementAndProperties(element, properties) {
   let childElements = null;
 
-  if (typeof element.childElements === 'function') {
+  if (typeof element.childElements === "function") {
     childElements = element.childElements(properties);
 
     childElements = guarantee(childElements);
@@ -125,7 +125,7 @@ function childElementsFromElementAndProperties(element, properties) {
 }
 
 function updateContext(childElement, context) {
-  const parentContext = (typeof childElement.parentContext === 'function') ?
+  const parentContext = (typeof childElement.parentContext === "function") ?
                           childElement.parentContext() :
                             childElement.context; ///
 
@@ -142,21 +142,21 @@ function addHandler(element, name, value) {
 }
 
 function addAttribute(element, name, value) {
-  if (name === 'className') {
-    name = 'class';
+  if (name === "className") {
+    name = "class";
   }
 
-  if (name === 'htmlFor') {
-    name = 'for';
+  if (name === "htmlFor") {
+    name = "for";
   }
 
-  if (typeof value === 'object') {
+  if (typeof value === "object") {
     const keys = Object.keys(value);
 
     keys.forEach(function(key) {
       element.domElement[name][key] = value[key];
     });
-  } else if (typeof value === 'boolean') {
+  } else if (typeof value === "boolean") {
     if (value) {
       value = name; ///
 

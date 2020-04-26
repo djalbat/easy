@@ -1,11 +1,11 @@
-'use strict';
+"use strict";
 
-const arrayUtilities = require('../utilities/array');
+const arrayUtilities = require("../utilities/array");
 
 const { splice } = arrayUtilities;
 
 function domElementFromSelector(selector) {
-  const domElement = (typeof selector === 'string') ?
+  const domElement = (typeof selector === "string") ?
                        document.querySelector(selector) :
                          selector;  ///
 
@@ -56,7 +56,7 @@ function domNodeMatchesSelector(domNode, selector) {
     }
 
     case Node.TEXT_NODE : {
-      if (selector === '*') {
+      if (selector === "*") {
         return true;
       }
     }

@@ -1,6 +1,6 @@
-'use strict';
+"use strict";
 
-const InputElement = require('../inputElement');
+const InputElement = require("../inputElement");
 
 class Input extends InputElement {
   clone(changeHandler) { return Input.clone(this, changeHandler); }
@@ -15,7 +15,7 @@ class Input extends InputElement {
 }
 
 Object.assign(Input, {
-  tagName: 'input'
+  tagName: "input"
 });
 
 module.exports = Input;

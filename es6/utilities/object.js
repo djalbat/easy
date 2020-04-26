@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 function combine(targetObject, sourceObject = {}) {
   const sourceKeys = Object.keys(sourceObject);
