@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 export { default as Body } from "./element/body";
 export { default as Button } from "./element/button";
