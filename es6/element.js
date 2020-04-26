@@ -458,9 +458,7 @@ function defaultPropertiesFromClass(Class, defaultProperties = {}) {
 
 function ignoredPropertiesFromClass(Class, ignoredProperties = []) {
   if (Class.hasOwnProperty("ignoredProperties")) {
-    augment(ignoredProperties, Class.ignoredProperties, function(ignoredProperty) {
-      return !ignoredProperties.includes(ignoredProperty);
-    });
+    augment(ignoredProperties, Class.ignoredProperties, (ignoredProperty) => !ignoredProperties.includes(ignoredProperty));
   }
 
   const superClass = Object.getPrototypeOf(Class);

@@ -45,9 +45,7 @@ function addResizeObject(element) {
 
   element.__resizeObject__ = resizeObject;
 
-  resizeObject.onload = function() {
-    resizeObjectLoadHandler(element)
-  };
+  resizeObject.onload = () => resizeObjectLoadHandler(element);
 
   domElement.appendChild(resizeObject);
 }
@@ -66,12 +64,10 @@ function resizeObjectLoadHandler(element) {
   const resizeObject = element.__resizeObject__,
         resizeObjectWindow = resizeObject.contentDocument.defaultView;  ///
 
-  resizeObjectWindow.addEventListener("resize", function(event) {
+  resizeObjectWindow.addEventListener("resize", (event) => {
     const resizeEventListeners = findResizeEventListeners(element);
 
-    resizeEventListeners.forEach(function(resizeEventListener){
-      resizeEventListener(event);
-    });
+    resizeEventListeners.forEach((resizeEventListener) => resizeEventListener(event));
   });
 }
 
@@ -81,7 +77,7 @@ function findResizeEventListeners(element) {
   if (element.hasOwnProperty("eventListeners")) {
     const eventListeners = element.eventListeners;  ///
 
-    eventListeners.forEach(function(eventListener) {
+    eventListeners.forEach((eventListener) => {
       if (eventListener.eventType === "resize") {
         const resizeEventListener = eventListener;
 

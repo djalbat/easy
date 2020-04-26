@@ -10,7 +10,7 @@ export function splice(array1, start, deleteCount = Infinity, array2 = []) {
 }
 
 export function flatten(array) {
-  return array.reduce(function(array, element) {
+  return array.reduce((array, element) => {
     array = array.concat(element);  ///
 
     return array;
@@ -26,7 +26,7 @@ export function guarantee(arrayOrElement) {
 }
 
 export function augment(array1, array2, test) {
-  array2.forEach(function(element, index) {
+  array2.forEach((element, index) => {
     const passed = test(element, index);
 
     if (passed) {

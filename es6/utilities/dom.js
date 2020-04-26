@@ -11,12 +11,8 @@ export function domElementFromSelector(selector) {
 }
 
 export function elementsFromDOMElements(domElements) {
-  const domElementsWithElements = filterDOMNodes(domElements, function(domElement) {
-          return (domElement.__element__ !== undefined);
-        }),
-        elements = domElementsWithElements.map(function(domElement) {
-          return domElement.__element__;
-        });
+  const domElementsWithElements = filterDOMNodes(domElements, (domElement) => (domElement.__element__ !== undefined)),
+        elements = domElementsWithElements.map((domElement) => domElement.__element__);
 
   return elements;
 }
@@ -28,17 +24,13 @@ export function descendantDOMNodesFromDOMNode(domNode, descendantDOMNodes = []) 
 
   splice(descendantDOMNodes, start, deleteCount, childDOMNodes);
 
-  childDOMNodes.forEach(function(childDOMNode) {
-    descendantDOMNodesFromDOMNode(childDOMNode, descendantDOMNodes);
-  });
+  childDOMNodes.forEach((childDOMNode) => descendantDOMNodesFromDOMNode(childDOMNode, descendantDOMNodes));
 
   return descendantDOMNodes;
 }
 
 export function filterDOMNodesBySelector(domNodes, selector) {
-  const filteredDOMNodes = filterDOMNodes(domNodes, function(domNode) {
-    return domNodeMatchesSelector(domNode, selector);
-  });
+  const filteredDOMNodes = filterDOMNodes(domNodes, (domNode) => domNodeMatchesSelector(domNode, selector));
 
   return filteredDOMNodes;
 }

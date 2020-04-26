@@ -53,11 +53,11 @@ function createEventListener(eventType, handler, element, intermediateHandler) {
   let eventListener;
 
   if (intermediateHandler === null) {
-    eventListener = function(event) {
+    eventListener = (event) => {
       handler.call(element, event, element)
     };
   } else {
-    eventListener = function(event) {
+    eventListener = (event) => {
       intermediateHandler(handler, event, element);
     }
   }
@@ -72,11 +72,7 @@ function createEventListener(eventType, handler, element, intermediateHandler) {
 }
 
 function findEventListener(eventListeners, eventType, handler, element) {
-  const eventListener = eventListeners.find(function(eventListener) {
-    if ( (eventListener.eventType === eventType) && (eventListener.element === element) && (eventListener.handler === handler) ) {
-      return true;
-    }
-  });
+  const eventListener = eventListeners.find((eventListener) => ((eventListener.eventType === eventType) && (eventListener.element === element) && (eventListener.handler === handler)));
   
   return eventListener;
 }

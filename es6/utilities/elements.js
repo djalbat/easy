@@ -3,7 +3,7 @@
 import TextElement from "../textElement";
 
 export function removeFalseyElements(elements) {
-  elements = elements.reduce(function(elements, element) {
+  elements = elements.reduce((elements, element) => {
     if (element) {
       elements.push(element);
     }
@@ -15,7 +15,7 @@ export function removeFalseyElements(elements) {
 }
 
 export function replaceStringsWithTextElements(elements) {
-  elements = elements.map(function(element) {  ///
+  elements = elements.map((element) => {  ///
     if (typeof element === "string") {
       const text = element,  ///
             textElement = new TextElement(text);

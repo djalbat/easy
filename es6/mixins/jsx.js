@@ -140,7 +140,7 @@ function addAttribute(element, name, value) {
   if (typeof value === "object") {
     const keys = Object.keys(value);
 
-    keys.forEach(function(key) {
+    keys.forEach((key) => {
       element.domElement[name][key] = value[key];
     });
   } else if (typeof value === "boolean") {
