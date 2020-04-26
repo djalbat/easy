@@ -6,7 +6,7 @@ export default class InputElement extends Element {
   constructor(selector, changeHandler) {
     super(selector);
 
-    if (changeHandler !== undefined) {
+    if (changeHandler !== null) {
       this.onChange(changeHandler);
     }
   }
@@ -15,13 +15,9 @@ export default class InputElement extends Element {
 
   offResize() {}
 
-  onChange(changeHandler, intermediateChangeHandler = defaultIntermediateChangeHandler) {
-    this.on("change", changeHandler, intermediateChangeHandler);
-  }
+  onChange(changeHandler) { this.on("change", changeHandler); }
 
-  offChange(changeHandler) {
-    this.off("change", changeHandler);
-  }
+  offChange(changeHandler) { this.off("change", changeHandler); }
 
   getValue() { return this.domElement.value; }
 
@@ -46,16 +42,9 @@ export default class InputElement extends Element {
   ];
 
   static fromProperties(Class, properties, ...remainingArguments) {
-    const { onChange } = properties,
+    const { onChange = null } = properties,
           changeHandler = onChange; ///
 
     return Element.fromProperties(Class, properties, changeHandler, ...remainingArguments);
   }
-}
-
-function defaultIntermediateChangeHandler(changeHandler, event, element) {
-  const inputElement = element, ///
-        value = inputElement.getValue();
-  
-  changeHandler.call(element, value, event, element);
 }

@@ -1,10 +1,10 @@
 "use strict";
 
-export function on(eventTypes, handler, element = this, intermediateHandler = null) {
+export function on(eventTypes, handler, element = this) {
   eventTypes = eventTypes.split(" "); ///
 
   eventTypes.forEach((eventType) => {
-    const eventListener = this.addEventListener(eventType, handler, element, intermediateHandler);
+    const eventListener = this.addEventListener(eventType, handler, element);
     
     this.domElement.addEventListener(eventType, eventListener);
   });
@@ -20,13 +20,13 @@ export function off(eventTypes, handler, element = this) {
   });
 }
 
-export function addEventListener(eventType, handler, element, intermediateHandler) {
+export function addEventListener(eventType, handler, element) {
   if (!this.hasOwnProperty("eventListeners")) {
     this.eventListeners = [];
   }
 
   const eventListeners = this.eventListeners,
-        eventListener = createEventListener(eventType, handler, element, intermediateHandler);
+        eventListener = createEventListener(eventType, handler, element);
 
   eventListeners.push(eventListener);
 
@@ -35,7 +35,7 @@ export function addEventListener(eventType, handler, element, intermediateHandle
 
 export function removeEventListener(eventType, handler, element) {
   const eventListeners = this.eventListeners,
-        eventListener = findEventListener(eventListeners, eventType, handler, element),
+        eventListener = eventListeners.find((eventListener) => ((eventListener.eventType === eventType) && (eventListener.element === element) && (eventListener.handler === handler))),
         index = eventListeners.indexOf(eventListener),
         start = index,  ///
         deleteCount = 1;
@@ -49,18 +49,12 @@ export function removeEventListener(eventType, handler, element) {
   return eventListener;
 }
 
-function createEventListener(eventType, handler, element, intermediateHandler) {
+function createEventListener(eventType, handler, element) {
   let eventListener;
 
-  if (intermediateHandler === null) {
-    eventListener = (event) => {
-      handler.call(element, event, element)
-    };
-  } else {
-    eventListener = (event) => {
-      intermediateHandler(handler, event, element);
-    }
-  }
+  eventListener = (event) => {
+    handler.call(element, event, element)
+  };
 
   Object.assign(eventListener, {
     eventType,
@@ -68,11 +62,5 @@ function createEventListener(eventType, handler, element, intermediateHandler) {
     element
   });
 
-  return eventListener;
-}
-
-function findEventListener(eventListeners, eventType, handler, element) {
-  const eventListener = eventListeners.find((eventListener) => ((eventListener.eventType === eventType) && (eventListener.element === element) && (eventListener.handler === handler)));
-  
   return eventListener;
 }

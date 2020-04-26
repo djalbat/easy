@@ -6,31 +6,26 @@ export default class Select extends Element {
   constructor(selector, changeHandler) {
     super(selector);
 
-    if (changeHandler !== undefined) {
+    if (changeHandler !== null) {
       this.onChange(changeHandler);
     }
   }
 
-  onChange(changeHandler, object, intermediateChangeHandler = defaultIntermediateChangeHandler) {
-    this.on("change", changeHandler, object, intermediateChangeHandler);
-  }
+  onChange(changeHandler) { this.on("change", changeHandler); }
 
-  offChange(changeHandler, object) {
-    this.off("change", changeHandler, object);
-  }
+  offChange(changeHandler) { this.off("change", changeHandler); }
 
   getSelectedOptionValue() {
-    const domElement = this.getDOMElement(),
-          selectedOptionValue = domElement.value;  ///
+    const value = this.domElement.value,  ///
+          selectedOptionValue = value;  ///
     
     return selectedOptionValue;
   }
 
   setSelectedOptionByValue(selectedOptionValue) {
-    const value = selectedOptionValue,  ///
-          domElement = this.getDOMElement();
-    
-    domElement.value = value; 
+    const value = selectedOptionValue;  ///
+
+    this.domElement.value = value;
   }
 
   static tagName = "select";
@@ -40,17 +35,10 @@ export default class Select extends Element {
   ];
 
   static fromProperties(properties) {
-    const { onChange } = properties,
+    const { onChange = null } = properties,
           changeHandler = onChange, ///
           select = Element.fromProperties(Select, properties, changeHandler);
     
     return select;
   }
-}
-
-function defaultIntermediateChangeHandler(changeHandler, event, element) {
-  const select = element, ///
-        selectedOptionValue = select.getSelectedOptionValue();
-  
-  changeHandler.call(element, selectedOptionValue, event, element);
 }

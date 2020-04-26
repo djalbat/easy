@@ -6,17 +6,9 @@ export default class Link extends Element {
   constructor(selector, clickHandler) {
     super(selector);
 
-    if (clickHandler !== undefined) {
+    if (clickHandler !== null) {
       this.onClick(clickHandler);
     }
-  }
-
-  onClick(clickHandler, object, intermediateClickHandler = defaultIntermediateClickHandler) {
-    this.on("click", clickHandler, object, intermediateClickHandler);
-  }
-  
-  offClick(clickHandler, object) {
-    this.off("click", clickHandler, object);
   }
 
   static tagName = "a";
@@ -26,18 +18,10 @@ export default class Link extends Element {
   ];
 
   static fromProperties(properties) {
-    const { onClick } = properties,
+    const { onClick = null } = properties,
           clickHandler = onClick, ///
           link = Element.fromProperties(Link, properties, clickHandler);
     
     return link;
   }
-}
-
-function defaultIntermediateClickHandler(clickHandler, event, element) {
-  const link = element, ///
-        hrefAttribute = link.getAttribute("href"),
-        href = hrefAttribute; ///
-  
-  clickHandler.call(element, href, event, element);
 }

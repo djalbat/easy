@@ -6,39 +6,20 @@ export default class Checkbox extends Element {
   constructor(selector, changeHandler, checked) {
     super(selector);
 
-    if (changeHandler !== undefined) {
+    this.check(checked);
+
+    if (changeHandler !== null) {
       this.onChange(changeHandler);
     }
-    
-    if (checked !== undefined) {
-      this.check(checked);
-    }
   }
 
-  onChange(changeHandler, object, intermediateChangeHandler = defaultIntermediateChangeHandler) {
-    this.on("click", changeHandler, object, intermediateChangeHandler);  ///
-  }
-  
-  offChange(changeHandler, object) {
-    this.off("click", changeHandler, object);  ///
-  }
+  onChange(changeHandler) { this.on("click", changeHandler); } ///
 
-  check(checked = true) {
-    const domElement = this.getDOMElement();
+  offChange(changeHandler) { this.off("click", changeHandler); } ///
 
-    domElement.checked = checked;
-  }
+  check(checked = true) { this.domElement.checked = checked; }
 
-  isChecked() {
-    const domElement = this.getDOMElement(),
-        checked = domElement.checked;
-
-    return checked;
-  }
-
-  onResize() {}
-
-  offResize() {}
+  isChecked() { return this.domElement.checked; }
 
   static tagName = "input";
 
@@ -52,17 +33,10 @@ export default class Checkbox extends Element {
   };
 
   static fromProperties(properties) {
-    const { onChange, checked } = properties,
-          changeHandler = onChange, ///    
+    const { onChange = null, checked = false } = properties,
+          changeHandler = onChange, ///
           checkbox = Element.fromProperties(Checkbox, properties, changeHandler, checked);
     
     return checkbox;
   }
-}
-
-function defaultIntermediateChangeHandler(changeHandler, event, element) {
-  const checkbox = element, ///
-        checked = checkbox.isChecked();
-  
-  changeHandler.call(element, checked, event, element);
 }

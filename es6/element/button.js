@@ -6,17 +6,9 @@ export default class Button extends Element {
   constructor(selector, clickHandler) {
     super(selector);
 
-    if (clickHandler !== undefined) {
+    if (clickHandler !== null) {
       this.onClick(clickHandler);
     }
-  }
-
-  onClick(clickHandler, object, intermediateClickHandler = defaultIntermediateClickHandler) {
-    super.onClick(clickHandler, object, intermediateClickHandler);
-  }
-
-  offClick(clickHandler, object) {
-    super.offClick(clickHandler, object);
   }
 
   static tagName = "button";
@@ -26,17 +18,10 @@ export default class Button extends Element {
   ];
 
   static fromProperties(properties) {
-    const { onClick } = properties,
+    const { onClick = null } = properties,
           clickHandler = onClick, ///
           button = Element.fromProperties(Button, properties, clickHandler);
     
     return button;
   }
-}
-
-function defaultIntermediateClickHandler(clickHandler, event, element) {
-  const { button } = event,
-				mouseButton = button;	///
-  
-  clickHandler.call(element, mouseButton, event, element);
 }
