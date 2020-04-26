@@ -21,6 +21,12 @@ export default class Link extends Element {
     this.off("click", clickHandler, object);
   }
 
+  static tagName = "a";
+
+  static ignoredProperties = [
+    "onClick"
+  ];
+
   static clone(element, clickHandler) { return Element.clone(Link, element, clickHandler); }
 
   static fromHTML(html, clickHandler) { return Element.fromHTML(Link, html, clickHandler); }
@@ -35,13 +41,6 @@ export default class Link extends Element {
     return link;
   }
 }
-
-Object.assign(Link, {
-  tagName: "a",
-  ignoredProperties: [
-    "onClick"
-  ]
-});
 
 function defaultIntermediateClickHandler(clickHandler, event, element) {
   const link = element, ///

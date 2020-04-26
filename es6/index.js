@@ -1,5 +1,6 @@
 'use strict';
 
+export { default as constants } from "./constants";
 export { default as window } from "./window";
 export { default as document } from "./document";
 export { default as Div } from "./element/div";

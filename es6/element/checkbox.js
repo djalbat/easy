@@ -42,6 +42,17 @@ export default class Checkbox extends Element {
 
   offResize() {}
 
+  static tagName = "input";
+
+  static ignoredProperties = [
+    "onChange",
+    "checked"
+  ];
+
+  static defaultProperties = {
+    type: "checkbox"
+  };
+
   static clone(element, changeHandler) { return Element.clone(Checkbox, element, changeHandler); }
 
   static fromHTML(html, changeHandler) { return Element.fromHTML(Checkbox, html, changeHandler); }
@@ -56,17 +67,6 @@ export default class Checkbox extends Element {
     return checkbox;
   }
 }
-
-Object.assign(Checkbox, {
-  tagName: "input",
-  ignoredProperties: [
-    "onChange",
-    "checked"
-  ],
-  defaultProperties: {
-    type: "checkbox"
-  }
-});
 
 function defaultIntermediateChangeHandler(changeHandler, event, element) {
   const checkbox = element, ///

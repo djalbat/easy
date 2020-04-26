@@ -9,6 +9,8 @@ export default class Span extends Element {
 
   offResize() {}
 
+  static tagName = "span";
+
   static clone(element) { return Element.clone(Span, element); }
 
   static fromHTML(html) { return Element.fromHTML(Span, html); }
@@ -17,7 +19,3 @@ export default class Span extends Element {
 
   static fromProperties(properties) { return Element.fromProperties(properties); }
 }
-
-Object.assign(Span, {
-  tagName: "span"
-});

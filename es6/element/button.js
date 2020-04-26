@@ -21,6 +21,12 @@ export default class Button extends Element {
     super.offClick(clickHandler, object);
   }
 
+  static tagName = "button";
+
+  static ignoredProperties = [
+    "onClick"
+  ];
+
   static clone(element, clickHandler) { return Element.clone(Button, element, clickHandler); }
 
   static fromHTML(html, clickHandler) { return Element.fromHTML(Button, html, clickHandler); }
@@ -35,13 +41,6 @@ export default class Button extends Element {
     return button;
   }
 }
-
-Object.assign(Button, {
-  tagName: "button",
-  ignoredProperties: [
-    "onClick"
-  ]
-});
 
 function defaultIntermediateClickHandler(clickHandler, event, element) {
   const { button } = event,

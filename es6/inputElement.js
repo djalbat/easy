@@ -41,6 +41,10 @@ export default class InputElement extends Element {
 
   select() { this.domElement.select(); }
 
+  static ignoredProperties = [
+    "onChange"
+  ];
+
   static clone(Class, element, ...remainingArguments) {
     return Element.clone(Class, element, ...remainingArguments);
   }
@@ -60,12 +64,6 @@ export default class InputElement extends Element {
     return Element.fromProperties(Class, properties, changeHandler, ...remainingArguments);
   }
 }
-
-Object.assign(InputElement, {
-  ignoredProperties: [
-    "onChange"
-  ]
-});
 
 function defaultIntermediateChangeHandler(changeHandler, event, element) {
   const inputElement = element, ///

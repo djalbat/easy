@@ -9,6 +9,8 @@ export default class Section extends Element {
 
   clone() { return Section.clone(this); }
 
+  static tagName = "div";
+
   static clone(element) { return Element.clone(Section, element); }
 
   static fromHTML(html) { return Element.fromHTML(Section, html); }
@@ -17,7 +19,3 @@ export default class Section extends Element {
 
   static fromProperties(properties) { return Element.fromProperties(Section, properties); }
 }
-
-Object.assign(Section, {
-  tagName: "div"
-});

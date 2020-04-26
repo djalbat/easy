@@ -420,12 +420,6 @@ export default class Element {
   }
 }
 
-Object.assign(Element, {
-  LEFT_MOUSE_BUTTON: 0,
-  RIGHT_MOUSE_BUTTON: 2,
-  MIDDLE_MOUSE_BUTTON: 1
-});
-
 function fromTagName(Class, tagName, ...remainingArguments) {
   const domElement = isSVGTagName(tagName) ?
                        document.createElementNS(SVG_NAMESPACE_URI, tagName) :

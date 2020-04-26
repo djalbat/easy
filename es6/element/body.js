@@ -9,6 +9,8 @@ export default class Body extends Element {
 
   clone() { return Body.clone(this); }
 
+  static tagName = "body";
+
   static clone(element) { return Element.clone(Body, element); }
 
   static fromHTML(html) { return Element.fromHTML(Body, html); }
@@ -17,7 +19,3 @@ export default class Body extends Element {
 
   static fromProperties(properties) { return Element.fromProperties(Body, properties); }
 }
-
-Object.assign(Body, {
-  tagName: "body"
-});

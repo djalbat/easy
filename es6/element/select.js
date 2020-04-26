@@ -35,6 +35,12 @@ export default class Select extends Element {
     domElement.value = value; 
   }
 
+  static tagName = "select";
+
+  static ignoredProperties = [
+    "onChange"
+  ];
+
   static clone(element, changeHandler) { return Element.clone(Select, element, changeHandler); }
 
   static fromHTML(html, changeHandler) { return Element.fromHTML(Select, html, changeHandler); }
@@ -49,13 +55,6 @@ export default class Select extends Element {
     return select;
   }
 }
-
-Object.assign(Select, {
-  tagName: "select",
-  ignoredProperties: [
-    "onChange"
-  ]
-});
 
 function defaultIntermediateChangeHandler(changeHandler, event, element) {
   const select = element, ///
