@@ -11,8 +11,6 @@ export default class Select extends Element {
     }
   }
 
-  clone(changeHandler) { return Select.clone(this, changeHandler); }
-
   onChange(changeHandler, object, intermediateChangeHandler = defaultIntermediateChangeHandler) {
     this.on("change", changeHandler, object, intermediateChangeHandler);
   }
@@ -40,8 +38,6 @@ export default class Select extends Element {
   static ignoredProperties = [
     "onChange"
   ];
-
-  static clone(element, changeHandler) { return Element.clone(Select, element, changeHandler); }
 
   static fromHTML(html, changeHandler) { return Element.fromHTML(Select, html, changeHandler); }
 

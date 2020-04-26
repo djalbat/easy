@@ -3,15 +3,11 @@
 import Element from "../element";
 
 export default class Span extends Element {
-  clone() { return Span.clone(this); }
-
   onResize() {}
 
   offResize() {}
 
   static tagName = "span";
-
-  static clone(element) { return Element.clone(Span, element); }
 
   static fromHTML(html) { return Element.fromHTML(Span, html); }
 

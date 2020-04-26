@@ -15,8 +15,6 @@ export default class Checkbox extends Element {
     }
   }
 
-  clone(changeHandler) { return Checkbox.clone(this, changeHandler); }
-
   onChange(changeHandler, object, intermediateChangeHandler = defaultIntermediateChangeHandler) {
     this.on("click", changeHandler, object, intermediateChangeHandler);  ///
   }
@@ -52,8 +50,6 @@ export default class Checkbox extends Element {
   static defaultProperties = {
     type: "checkbox"
   };
-
-  static clone(element, changeHandler) { return Element.clone(Checkbox, element, changeHandler); }
 
   static fromHTML(html, changeHandler) { return Element.fromHTML(Checkbox, html, changeHandler); }
 

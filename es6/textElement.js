@@ -10,8 +10,6 @@ export default class TextElement {
     this.domElement.__element__ = this;
   }
 
-  clone() { return TextElement.clone(this); }
-
   getText() {
     const nodeValue = this.domElement.nodeValue,
           text = nodeValue; ///

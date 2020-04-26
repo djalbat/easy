@@ -7,11 +7,7 @@ export default class Body extends Element {
     super(selector);
   }
 
-  clone() { return Body.clone(this); }
-
   static tagName = "body";
-
-  static clone(element) { return Element.clone(Body, element); }
 
   static fromHTML(html) { return Element.fromHTML(Body, html); }
 

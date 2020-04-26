@@ -11,8 +11,6 @@ export default class Link extends Element {
     }
   }
 
-  clone(clickHandler) { return Link.clone(this, clickHandler); }
-
   onClick(clickHandler, object, intermediateClickHandler = defaultIntermediateClickHandler) {
     this.on("click", clickHandler, object, intermediateClickHandler);
   }
@@ -26,8 +24,6 @@ export default class Link extends Element {
   static ignoredProperties = [
     "onClick"
   ];
-
-  static clone(element, clickHandler) { return Element.clone(Link, element, clickHandler); }
 
   static fromHTML(html, clickHandler) { return Element.fromHTML(Link, html, clickHandler); }
 

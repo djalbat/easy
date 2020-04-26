@@ -7,11 +7,7 @@ export default class Section extends Element {
     super(selector);
   }
 
-  clone() { return Section.clone(this); }
-
   static tagName = "div";
-
-  static clone(element) { return Element.clone(Section, element); }
 
   static fromHTML(html) { return Element.fromHTML(Section, html); }
 

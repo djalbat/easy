@@ -69,8 +69,6 @@ export default class Element {
     this.domElement.__element__ = this; ///
   }
 
-  clone() { return Element.clone(this); }
-  
   getDOMElement() {
     return this.domElement;
   }
@@ -375,13 +373,6 @@ export default class Element {
     }
 
     return nextSiblingElement;
-  }
-
-  static clone(Class, element, ...remainingArguments) {
-    const deep = true,
-          domElement = element.domElement.cloneNode(deep);
-
-    return fromDOMElement(Class, domElement, ...remainingArguments);
   }
 
   static fromHTML(Class, html, ...remainingArguments) {

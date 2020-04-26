@@ -45,10 +45,6 @@ export default class InputElement extends Element {
     "onChange"
   ];
 
-  static clone(Class, element, ...remainingArguments) {
-    return Element.clone(Class, element, ...remainingArguments);
-  }
-  
   static fromHTML(Class, html, ...remainingArguments) {
     return Element.fromHTML(Class, html, ...remainingArguments);
   }

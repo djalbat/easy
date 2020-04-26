@@ -3,11 +3,7 @@
 import InputElement from "../inputElement";
 
 export default class Textarea extends InputElement {
-  clone(changeHandler) { return Textarea.clone(this, changeHandler); }
-
   static tagName = "textarea";
-
-  static clone(element, changeHandler) { return InputElement.clone(Textarea, element, changeHandler); }
 
   static fromHTML(html, changeHandler) { return InputElement.fromHTML(Textarea, html, changeHandler); }
 
