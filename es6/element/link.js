@@ -2,7 +2,7 @@
 
 import Element from "../element";
 
-class Link extends Element {
+export default class Link extends Element {
   constructor(selector, clickHandler) {
     super(selector);
 
@@ -42,8 +42,6 @@ Object.assign(Link, {
     "onClick"
   ]
 });
-
-module.exports = Link;
 
 function defaultIntermediateClickHandler(clickHandler, event, element) {
   const link = element, ///

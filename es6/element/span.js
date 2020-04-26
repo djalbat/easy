@@ -2,7 +2,7 @@
 
 import Element from "../element";
 
-class Span extends Element {
+export default class Span extends Element {
   clone() { return Span.clone(this); }
 
   onResize() {}
@@ -21,5 +21,3 @@ class Span extends Element {
 Object.assign(Span, {
   tagName: "span"
 });
-
-module.exports = Span;

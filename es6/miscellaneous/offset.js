@@ -1,6 +1,6 @@
 "use strict";
 
-class Offset {
+export default class Offset {
   constructor(top, left) {
     this.top = top;
     this.left = left;
@@ -14,5 +14,3 @@ class Offset {
     return this.left;
   }
 }
-
-module.exports = Offset;

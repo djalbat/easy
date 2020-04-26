@@ -2,7 +2,7 @@
 
 import Element from "../element";
 
-class Button extends Element {
+export default class Button extends Element {
   constructor(selector, clickHandler) {
     super(selector);
 
@@ -42,8 +42,6 @@ Object.assign(Button, {
     "onClick"
   ]
 });
-
-module.exports = Button;
 
 function defaultIntermediateClickHandler(clickHandler, event, element) {
   const { button } = event,

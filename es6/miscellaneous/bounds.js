@@ -1,6 +1,6 @@
 "use strict";
 
-class Bounds {
+export default class Bounds {
   constructor(top, left, bottom, right) {
     this.top = top;
     this.left = left;
@@ -93,5 +93,3 @@ class Bounds {
     return bounds;
   }
 }
-
-module.exports = Bounds;

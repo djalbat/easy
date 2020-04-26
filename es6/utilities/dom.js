@@ -2,7 +2,7 @@
 
 import { splice } from "../utilities/array";
 
-function domElementFromSelector(selector) {
+export function domElementFromSelector(selector) {
   const domElement = (typeof selector === "string") ?
                        document.querySelector(selector) :
                          selector;  ///
@@ -10,7 +10,7 @@ function domElementFromSelector(selector) {
   return domElement;
 }
 
-function elementsFromDOMElements(domElements) {
+export function elementsFromDOMElements(domElements) {
   const domElementsWithElements = filterDOMNodes(domElements, function(domElement) {
           return (domElement.__element__ !== undefined);
         }),
@@ -21,7 +21,7 @@ function elementsFromDOMElements(domElements) {
   return elements;
 }
 
-function descendantDOMNodesFromDOMNode(domNode, descendantDOMNodes = []) {
+export function descendantDOMNodesFromDOMNode(domNode, descendantDOMNodes = []) {
   const start = -1,
         deleteCount = 0,
         childDOMNodes = domNode.childNodes;  ///
@@ -35,7 +35,7 @@ function descendantDOMNodesFromDOMNode(domNode, descendantDOMNodes = []) {
   return descendantDOMNodes;
 }
 
-function filterDOMNodesBySelector(domNodes, selector) {
+export function filterDOMNodesBySelector(domNodes, selector) {
   const filteredDOMNodes = filterDOMNodes(domNodes, function(domNode) {
     return domNodeMatchesSelector(domNode, selector);
   });
@@ -43,7 +43,7 @@ function filterDOMNodesBySelector(domNodes, selector) {
   return filteredDOMNodes;
 }
 
-function domNodeMatchesSelector(domNode, selector) {
+export function domNodeMatchesSelector(domNode, selector) {
   const domNodeType = domNode.nodeType;
 
   switch (domNodeType) {
@@ -63,7 +63,7 @@ function domNodeMatchesSelector(domNode, selector) {
   return false;
 }
 
-function filterDOMNodes(domNodes, test) {
+export function filterDOMNodes(domNodes, test) {
   const filteredDOMNodes = [],
         domNodesLength = domNodes.length;
 
@@ -78,12 +78,3 @@ function filterDOMNodes(domNodes, test) {
 
   return filteredDOMNodes;
 }
-
-module.exports = {
-  domElementFromSelector,
-  elementsFromDOMElements,
-  descendantDOMNodesFromDOMNode,
-  filterDOMNodesBySelector,
-  domNodeMatchesSelector,
-  filterDOMNodes
-};

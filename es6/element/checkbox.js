@@ -2,7 +2,7 @@
 
 import Element from "../element";
 
-class Checkbox extends Element {
+export default class Checkbox extends Element {
   constructor(selector, changeHandler, checked) {
     super(selector);
 
@@ -67,8 +67,6 @@ Object.assign(Checkbox, {
     type: "checkbox"
   }
 });
-
-module.exports = Checkbox;
 
 function defaultIntermediateChangeHandler(changeHandler, event, element) {
   const checkbox = element, ///

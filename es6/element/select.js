@@ -2,7 +2,7 @@
 
 import Element from "../element";
 
-class Select extends Element {
+export default class Select extends Element {
   constructor(selector, changeHandler) {
     super(selector);
 
@@ -56,8 +56,6 @@ Object.assign(Select, {
     "onChange"
   ]
 });
-
-module.exports = Select;
 
 function defaultIntermediateChangeHandler(changeHandler, event, element) {
   const select = element, ///

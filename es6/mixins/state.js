@@ -1,19 +1,13 @@
 "use strict";
 
-function getState() {
+export function getState() {
   return this.state;
 }
 
-function setState(state) {
+export function setState(state) {
   this.state = state;
 }
 
-function updateState(update) {
+export function updateState(update) {
   Object.assign(this.state, update);
 }
-
-module.exports = {
-  getState,
-  setState,
-  updateState
-};

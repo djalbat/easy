@@ -2,7 +2,7 @@
 
 import "./juxtapose"; ///
 
-import { Body } from "../index";
+import { Body } from "./index";
 
 const body = new Body();
 

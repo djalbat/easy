@@ -2,7 +2,7 @@
 
 import Element from "../element";
 
-class Section extends Element {
+export default class Section extends Element {
   constructor(selector) {
     super(selector);
   }
@@ -21,5 +21,3 @@ class Section extends Element {
 Object.assign(Section, {
   tagName: "div"
 });
-
-module.exports = Section;

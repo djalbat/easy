@@ -39,7 +39,7 @@ const React = {
   createElement: createElement
 };
 
-module.exports = React;
+export default React;
 
 function childElementsFromChildArguments(childArguments) {
   childArguments = flatten(childArguments); ///

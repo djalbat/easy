@@ -1,6 +1,6 @@
 "use strict";
 
-function onResize(handler, element = this, intermediateHandler = defaultIntermediateResizeHandler) {
+export function onResize(handler, element = this, intermediateHandler = defaultIntermediateResizeHandler) {
   const resizeEventListeners = findResizeEventListeners(element);
 
   if (resizeEventListeners.length === 0) {
@@ -12,7 +12,7 @@ function onResize(handler, element = this, intermediateHandler = defaultIntermed
   this.addEventListener(eventType, handler, element, intermediateHandler);
 }
 
-function offResize(handler, element = this) {
+export function offResize(handler, element = this) {
   const eventType = "resize";
 
   this.removeEventListener(eventType, handler, element);
@@ -23,11 +23,6 @@ function offResize(handler, element = this) {
     removeResizeObject(element);
   }
 }
-
-module.exports = {
-  onResize,
-  offResize
-};
 
 function addResizeObject(element) {
   const resizeObject = document.createElement("object"),

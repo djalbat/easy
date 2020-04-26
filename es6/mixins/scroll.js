@@ -1,27 +1,18 @@
 "use strict";
 
-function onScroll(handler, element, intermediateHandler = defaultIntermediateHandler) {
+export function onScroll(handler, element, intermediateHandler = defaultIntermediateHandler) {
   this.on("scroll", handler, element, intermediateHandler);
 }
 
-function offScroll(handler, element) { this.off("scroll", handler, element); }
+export function offScroll(handler, element) { this.off("scroll", handler, element); }
 
-function getScrollTop() { return this.domElement.scrollTop; }
+export function getScrollTop() { return this.domElement.scrollTop; }
 
-function getScrollLeft() { return this.domElement.scrollLeft; }
+export function getScrollLeft() { return this.domElement.scrollLeft; }
 
-function setScrollTop(scrollTop) { this.domElement.scrollTop = scrollTop; }
+export function setScrollTop(scrollTop) { this.domElement.scrollTop = scrollTop; }
 
-function setScrollLeft(scrollLeft) { this.domElement.scrollLeft = scrollLeft; }
-
-module.exports = {
-  onScroll,
-  offScroll,
-  getScrollTop,
-  getScrollLeft,
-  setScrollTop,
-  setScrollLeft
-};
+export function setScrollLeft(scrollLeft) { this.domElement.scrollLeft = scrollLeft; }
 
 function defaultIntermediateHandler(handler, event, element) {
   const scrollTop = element.getScrollTop(),

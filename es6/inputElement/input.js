@@ -2,7 +2,7 @@
 
 import InputElement from "../inputElement";
 
-class Input extends InputElement {
+export default class Input extends InputElement {
   clone(changeHandler) { return Input.clone(this, changeHandler); }
 
   static clone(element, changeHandler) { return InputElement.clone(Input, element, changeHandler); }
@@ -17,5 +17,3 @@ class Input extends InputElement {
 Object.assign(Input, {
   tagName: "input"
 });
-
-module.exports = Input;

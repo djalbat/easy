@@ -2,7 +2,7 @@
 
 import Element from "./element";
 
-class InputElement extends Element {
+export default class InputElement extends Element {
   constructor(selector, changeHandler) {
     super(selector);
 
@@ -66,8 +66,6 @@ Object.assign(InputElement, {
     "onChange"
   ]
 });
-
-module.exports = InputElement;
 
 function defaultIntermediateChangeHandler(changeHandler, event, element) {
   const inputElement = element, ///

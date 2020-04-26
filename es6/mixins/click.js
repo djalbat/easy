@@ -1,15 +1,10 @@
 "use strict";
 
-function onClick(handler, element, intermediateHandler = defaultIntermediateHandler) {
+export function onClick(handler, element, intermediateHandler = defaultIntermediateHandler) {
   this.on("click", handler, element, intermediateHandler);
 }
 
-function offClick(handler, element) { this.off("click", handler, element); }
-
-module.exports = {
-  onClick,
-  offClick
-};
+export function offClick(handler, element) { this.off("click", handler, element); }
 
 function defaultIntermediateHandler(handler, event, element) {
   const { pageY, pageX, button } = event,

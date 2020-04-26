@@ -1,15 +1,15 @@
 "use strict";
 
-function first(array) { return array[0]; }
+export function first(array) { return array[0]; }
 
-function splice(array1, start, deleteCount = Infinity, array2 = []) {
+export function splice(array1, start, deleteCount = Infinity, array2 = []) {
   const args = [start, deleteCount, ...array2],
        deletedItemsArray = Array.prototype.splice.apply(array1, args);
 
   return deletedItemsArray;
 }
 
-function flatten(array) {
+export function flatten(array) {
   return array.reduce(function(array, element) {
     array = array.concat(element);  ///
 
@@ -17,7 +17,7 @@ function flatten(array) {
   }, []);
 }
 
-function guarantee(arrayOrElement) {
+export function guarantee(arrayOrElement) {
   arrayOrElement = arrayOrElement || [];
 
   return (arrayOrElement instanceof Array) ?
@@ -25,7 +25,7 @@ function guarantee(arrayOrElement) {
               [arrayOrElement];
 }
 
-function augment(array1, array2, test) {
+export function augment(array1, array2, test) {
   array2.forEach(function(element, index) {
     const passed = test(element, index);
 
@@ -34,11 +34,3 @@ function augment(array1, array2, test) {
     }
   });
 }
-
-module.exports = {
-  first,
-  splice,
-  flatten,
-  guarantee,
-  augment
-};

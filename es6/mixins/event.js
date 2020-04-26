@@ -1,6 +1,6 @@
 "use strict";
 
-function on(eventTypes, handler, element = this, intermediateHandler = null) {
+export function on(eventTypes, handler, element = this, intermediateHandler = null) {
   eventTypes = eventTypes.split(" "); ///
 
   eventTypes.forEach((eventType) => {
@@ -10,7 +10,7 @@ function on(eventTypes, handler, element = this, intermediateHandler = null) {
   });
 }
 
-function off(eventTypes, handler, element = this) {
+export function off(eventTypes, handler, element = this) {
   eventTypes = eventTypes.split(" "); ///
 
   eventTypes.forEach((eventType) => {
@@ -20,18 +20,11 @@ function off(eventTypes, handler, element = this) {
   });
 }
 
-module.exports = {
-  on,
-  off,
-  addEventListener,
-  removeEventListener
-};
-
-function addEventListener(eventType, handler, element, intermediateHandler) {
+export function addEventListener(eventType, handler, element, intermediateHandler) {
   if (!this.hasOwnProperty("eventListeners")) {
     this.eventListeners = [];
   }
-  
+
   const eventListeners = this.eventListeners,
         eventListener = createEventListener(eventType, handler, element, intermediateHandler);
 
@@ -40,7 +33,7 @@ function addEventListener(eventType, handler, element, intermediateHandler) {
   return eventListener;
 }
 
-function removeEventListener(eventType, handler, element) {
+export function removeEventListener(eventType, handler, element) {
   const eventListeners = this.eventListeners,
         eventListener = findEventListener(eventListeners, eventType, handler, element),
         index = eventListeners.indexOf(eventListener),
@@ -52,7 +45,7 @@ function removeEventListener(eventType, handler, element) {
   if (eventListeners.length === 0) {
     delete this.eventListeners;
   }
-  
+
   return eventListener;
 }
 

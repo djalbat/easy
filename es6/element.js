@@ -1,15 +1,7 @@
 "use strict";
 
-const Offset = require("./miscellaneous/offset"),
-      Bounds = require("./miscellaneous/bounds"),
-      jsxMixins = require("./mixins/jsx"),
-      keyMixins = require("./mixins/key"),
-      stateMixins = require("./mixins/state"),
-      mouseMixins = require("./mixins/mouse"),
-      eventMixins = require("./mixins/event"),
-      clickMixins = require("./mixins/click"),
-      scrollMixins = require("./mixins/scroll"),
-      resizeMixins = require("./mixins/resize");
+import Offset from "./miscellaneous/offset";
+import Bounds from "./miscellaneous/bounds";
 
 import { combine } from "./utilities/object";
 import { isSVGTagName } from "./utilities/name";
@@ -17,7 +9,60 @@ import { first, augment } from "./utilities/array";
 import { SVG_NAMESPACE_URI } from "./constants";
 import { domNodeMatchesSelector, domElementFromSelector, elementsFromDOMElements, filterDOMNodesBySelector, descendantDOMNodesFromDOMNode } from "./utilities/dom";
 
-class Element {
+import { onClick, offClick } from "./mixins/click";
+import { onResize, offResize } from "./mixins/resize";
+import { getState, setState, updateState } from "./mixins/state";
+import { onKeyUp, offKeyUp, onKeyDown, offKeyDown } from "./mixins/key";
+import { on, off, addEventListener, removeEventListener } from "./mixins/event";
+import { getContext, getProperties, assignContext, applyProperties } from "./mixins/jsx";
+import { onScroll, offScroll, getScrollTop, getScrollLeft, setScrollTop, setScrollLeft } from "./mixins/scroll";
+import { onMouseUp, onMouseDown, onMouseOver, onMouseOut, onMouseMove, offMouseUp, offMouseDown, offMouseOver, offMouseOut, offMouseMove } from "./mixins/mouse";
+
+export default class Element {
+  on = on;
+  off = off;
+
+  onClick = onClick;
+  offClick = offClick;
+
+  onResize = onResize;
+  offResize = offResize;
+
+  getState = getState;
+  setState = setState;
+  updateState = updateState;
+
+  onKeyUp = onKeyUp;
+  offKeyUp = offKeyUp;
+  onKeyDown = onKeyDown;
+  offKeyDown = offKeyDown;
+
+  onMouseUp = onMouseUp;
+  onMouseDown = onMouseDown;
+  onMouseOver = onMouseOver;
+  onMouseOut = onMouseOut;
+  onMouseMove = onMouseMove;
+  offMouseUp = offMouseUp;
+  offMouseDown = offMouseDown;
+  offMouseOver = offMouseOver;
+  offMouseOut = offMouseOut;
+  offMouseMove = offMouseMove;
+
+  onScroll = onScroll;
+  offScroll = offScroll;
+  getScrollTop = getScrollTop;
+  getScrollLeft = getScrollLeft;
+  setScrollTop = setScrollTop;
+  setScrollLeft = setScrollLeft;
+
+  getContext = getContext;
+  getProperties = getProperties;
+  assignContext = assignContext;
+  applyProperties = applyProperties;
+
+  addEventListener = addEventListener;
+  removeEventListener = removeEventListener;
+
   constructor(selector) {
     this.domElement = domElementFromSelector(selector);
 
@@ -375,22 +420,11 @@ class Element {
   }
 }
 
-Object.assign(Element.prototype, jsxMixins);
-Object.assign(Element.prototype, keyMixins);
-Object.assign(Element.prototype, stateMixins);
-Object.assign(Element.prototype, mouseMixins);
-Object.assign(Element.prototype, eventMixins);
-Object.assign(Element.prototype, clickMixins);
-Object.assign(Element.prototype, scrollMixins);
-Object.assign(Element.prototype, resizeMixins);
-
 Object.assign(Element, {
   LEFT_MOUSE_BUTTON: 0,
   RIGHT_MOUSE_BUTTON: 2,
   MIDDLE_MOUSE_BUTTON: 1
 });
-
-module.exports = Element;
 
 function fromTagName(Class, tagName, ...remainingArguments) {
   const domElement = isSVGTagName(tagName) ?

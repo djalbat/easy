@@ -2,7 +2,7 @@
 
 import InputElement from "../inputElement";
 
-class Textarea extends InputElement {
+export default class Textarea extends InputElement {
   clone(changeHandler) { return Textarea.clone(this, changeHandler); }
 
   static clone(element, changeHandler) { return InputElement.clone(Textarea, element, changeHandler); }
@@ -17,5 +17,3 @@ class Textarea extends InputElement {
 Object.assign(Textarea, {
   tagName: "textarea"
 });
-
-module.exports = Textarea;

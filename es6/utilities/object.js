@@ -1,6 +1,6 @@
 "use strict";
 
-function combine(targetObject, sourceObject = {}) {
+export function combine(targetObject, sourceObject = {}) {
   const sourceKeys = Object.keys(sourceObject);
 
   sourceKeys.forEach(function(sourceKey) {
@@ -13,15 +13,10 @@ function combine(targetObject, sourceObject = {}) {
   });
 }
 
-function prune(targetObject, sourceKeys) {
+export function prune(targetObject, sourceKeys) {
   sourceKeys.forEach(function(sourceKey) {
     if (targetObject.hasOwnProperty(sourceKey)) {
       delete targetObject[sourceKey];
     }
   });
 }
-
-module.exports = {
-  combine,
-  prune
-};
