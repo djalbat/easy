@@ -6,7 +6,7 @@ import { Element, Body, Button, Checkbox, Link, Select, Input, Textarea, window,
 
 class SubmitButton extends Button {
   childElements(properties) {
-    return 'Submit';
+    return "Submit";
   }
 
   static className = "submit";
