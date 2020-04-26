@@ -1,26 +1,22 @@
 "use strict";
 
-export function onResize(handler, element = this, intermediateHandler = defaultIntermediateResizeHandler) {
-  const resizeEventListeners = findResizeEventListeners(element);
+export function onResize(resizeHandler) {
+  const resizeEventListeners = findResizeEventListeners(this);
 
   if (resizeEventListeners.length === 0) {
-    addResizeObject(element);
+    addResizeObject(this);
   }
 
-  const eventType = "resize";
-
-  this.addEventListener(eventType, handler, element, intermediateHandler);
+  this.addEventListener("resize", resizeHandler);
 }
 
-export function offResize(handler, element = this) {
-  const eventType = "resize";
+export function offResize(resizeHandler) {
+  this.removeEventListener("resize", resizeHandler);
 
-  this.removeEventListener(eventType, handler, element);
-
-  const resizeEventListeners = findResizeEventListeners(element);
+  const resizeEventListeners = findResizeEventListeners(this);
   
   if (resizeEventListeners.length === 0) {
-    removeResizeObject(element);
+    removeResizeObject(this);
   }
 }
 
@@ -87,12 +83,4 @@ function findResizeEventListeners(element) {
   }  
   
   return resizeEventListeners;
-}
-
-function defaultIntermediateResizeHandler(handler, event, element) {
-  const window = element, ///
-        width = window.getWidth(),
-        height = window.getHeight();
-
-  handler.call(element, width, height, event, element);
 }

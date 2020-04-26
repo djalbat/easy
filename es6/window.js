@@ -49,27 +49,9 @@ class Window {
 
   getScrollLeft() { return this.domElement.pageXOffset; } ///
 
-  onResize(handler, object, intermediateHandler = defaultIntermediateResizeHandler) {
-    const eventTypes = "resize";
-    
-    this.on(eventTypes, handler, object, intermediateHandler);
-  }
+  onResize(resizeHandler) { this.on("resize", resizeHandler); }
 
-  offResize(handler, object) {
-    const eventTypes = "resize";
-
-    this.off(eventTypes, handler, object);
-  }
+  offResize(resizeHandler) { this.off("resize", resizeHandler); }
 }
 
-const window = (typeof window === "undefined") ? undefined : new Window();  ///
-
-export default window;
-
-function defaultIntermediateResizeHandler(handler, event, element) {
-  const window = element, ///
-        width = window.getWidth(),
-        height = window.getHeight();
-  
-  handler.call(element, width, height, event, element);
-}
+export default (typeof window === "undefined") ? undefined : new Window();  ///

@@ -36,6 +36,4 @@ class Document {
   }
 }
 
-const document = (typeof document === "undefined") ? undefined : new Document();  ///
-
-export default document;
+export default (typeof document === "undefined") ? undefined : new Document();  ///

@@ -82,9 +82,9 @@ Similarly for the prepend methods.
 -  window
 -  document
 
-The `Window` and `Document` classes are not exported, only singletons, hence the lowercase. Note also that if the underlying `window` and `document` global objects are not defined (for whatever reason), then these singletons will also be undefined.
+The `Window` and `Document` classes are not exported, only singletons, hence the lowercase. Note also that if the underlying `window` and `document` global objects are not defined, for whatever reason, then these singletons will also be undefined.
 
-Obviously the list is incomplete. If you want to create other elements, use the `Element` class directly.
+Obviously the list is incomplete. If you want to create other elements, you can extend the `Element` or `InputElement` classes.
 
 ## Standard methods
 
