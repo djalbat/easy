@@ -3,8 +3,8 @@
 import Element from "../element";
 
 export default class Checkbox extends Element {
-  constructor(selector, changeHandler, checked) {
-    super(selector);
+  constructor(selectorOrDOMElement, changeHandler = null, checked = false) {
+    super(selectorOrDOMElement);
 
     this.check(checked);
 
@@ -33,10 +33,10 @@ export default class Checkbox extends Element {
   };
 
   static fromProperties(properties) {
-    const { onChange = null, checked = false } = properties,
+    const { onChange, checked } = properties,
           changeHandler = onChange, ///
           checkbox = Element.fromProperties(Checkbox, properties, changeHandler, checked);
-    
+
     return checkbox;
   }
 }
