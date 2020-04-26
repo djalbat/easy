@@ -375,16 +375,6 @@ export default class Element {
     return nextSiblingElement;
   }
 
-  static fromHTML(Class, html, ...remainingArguments) {
-    const outerDOMElement = document.createElement("div");
-
-    outerDOMElement.innerHTML = html;  ///
-
-    const domElement = outerDOMElement.firstChild;
-
-    return fromDOMElement(Class, domElement, ...remainingArguments);
-  }
-
   static fromDOMElement(Class, domElement, ...remainingArguments) {
     return fromDOMElement(Class, domElement, ...remainingArguments);
   }

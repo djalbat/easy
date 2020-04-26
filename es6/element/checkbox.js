@@ -51,8 +51,6 @@ export default class Checkbox extends Element {
     type: "checkbox"
   };
 
-  static fromHTML(html, changeHandler) { return Element.fromHTML(Checkbox, html, changeHandler); }
-
   static fromDOMElement(domElement, changeHandler) { return Element.fromDOMElement(Checkbox, domElement, changeHandler); }
 
   static fromProperties(properties) {

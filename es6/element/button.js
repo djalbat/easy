@@ -25,8 +25,6 @@ export default class Button extends Element {
     "onClick"
   ];
 
-  static fromHTML(html, clickHandler) { return Element.fromHTML(Button, html, clickHandler); }
-
   static fromDOMElement(domElement, clickHandler) { return Element.fromDOMElement(Button, domElement, clickHandler); }
 
   static fromProperties(properties) {

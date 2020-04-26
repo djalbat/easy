@@ -25,8 +25,6 @@ export default class Link extends Element {
     "onClick"
   ];
 
-  static fromHTML(html, clickHandler) { return Element.fromHTML(Link, html, clickHandler); }
-
   static fromDOMElement(domElement, clickHandler) { return Element.fromDOMElement(Link, domElement, clickHandler); }
 
   static fromProperties(properties) {

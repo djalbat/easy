@@ -45,10 +45,6 @@ export default class InputElement extends Element {
     "onChange"
   ];
 
-  static fromHTML(Class, html, ...remainingArguments) {
-    return Element.fromHTML(Class, html, ...remainingArguments);
-  }
-
   static fromDOMElement(Class, domElement, ...remainingArguments) {
     return Element.fromDOMElement(Class, domElement, ...remainingArguments);
   }

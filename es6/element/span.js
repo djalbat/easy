@@ -9,8 +9,6 @@ export default class Span extends Element {
 
   static tagName = "span";
 
-  static fromHTML(html) { return Element.fromHTML(Span, html); }
-
   static fromDOMElement(domElement) { return Element.fromDOMElement(Span, domElement); }
 
   static fromProperties(properties) { return Element.fromProperties(properties); }
