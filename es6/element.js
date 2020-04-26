@@ -7,7 +7,7 @@ import { combine } from "./utilities/object";
 import { isSVGTagName } from "./utilities/name";
 import { first, augment } from "./utilities/array";
 import { SVG_NAMESPACE_URI } from "./constants";
-import { domNodeMatchesSelector, domElementFromSelector, elementsFromDOMElements, filterDOMNodesBySelector, descendantDOMNodesFromDOMNode } from "./utilities/dom";
+import { domNodeMatchesSelector, elementsFromDOMElements, filterDOMNodesBySelector, descendantDOMNodesFromDOMNode } from "./utilities/dom";
 
 import { onClick, offClick } from "./mixins/click";
 import { onResize, offResize } from "./mixins/resize";
@@ -63,8 +63,16 @@ export default class Element {
   addEventListener = addEventListener;
   removeEventListener = removeEventListener;
 
-  constructor(selector) {
-    this.domElement = domElementFromSelector(selector);
+  constructor(selectorOrDOMElement) {
+    if (typeof selectorOrDOMElement === "string") {
+      const selector = selectorOrDOMElement;
+
+      this.domElement = document.querySelector(selector);
+    } else {
+      const domElement = selectorOrDOMElement;  ///
+
+      this.domElement = domElement;
+    }
 
     this.domElement.__element__ = this; ///
   }
@@ -375,21 +383,21 @@ export default class Element {
     return nextSiblingElement;
   }
 
-  static fromProperties(Class, properties, ...remainingArguments) {
-    const tagName = Class.tagName,
-          element = fromTagName(Class, tagName, ...remainingArguments),
-          defaultProperties = defaultPropertiesFromClass(Class),
-          ignoredProperties = ignoredPropertiesFromClass(Class);
+  static fromTagName(tagName, properties, ...remainingArguments) {
+    const element = fromTagName(Element, tagName, ...remainingArguments),
+          defaultProperties = {}, ///
+          ignoredProperties = []; ///
 
     element.applyProperties(properties, defaultProperties, ignoredProperties);
 
     return element;
   }
 
-  static fromTagName(tagName, properties, ...remainingArguments) {
-    const element = fromTagName(Element, tagName, ...remainingArguments),
-          defaultProperties = {}, ///
-          ignoredProperties = []; ///
+  static fromProperties(Class, properties, ...remainingArguments) {
+    const tagName = Class.tagName,
+          element = fromTagName(Class, tagName, ...remainingArguments),
+          defaultProperties = defaultPropertiesFromClass(Class),
+          ignoredProperties = ignoredPropertiesFromClass(Class);
 
     element.applyProperties(properties, defaultProperties, ignoredProperties);
 
@@ -414,6 +422,14 @@ function fromDOMElement(Class, domElement, ...remainingArguments) {
 }
 
 function defaultPropertiesFromClass(Class, defaultProperties = {}) {
+  if (Class.hasOwnProperty("className")) {
+    const className = Class.className;
+
+    Object.assign(defaultProperties, {
+      className
+    });
+  }
+
   if (Class.hasOwnProperty("defaultProperties")) {
     combine(defaultProperties, Class.defaultProperties);
   }

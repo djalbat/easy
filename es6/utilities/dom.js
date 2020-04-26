@@ -2,14 +2,6 @@
 
 import { splice } from "../utilities/array";
 
-export function domElementFromSelector(selector) {
-  const domElement = (typeof selector === "string") ?
-                       document.querySelector(selector) :
-                         selector;  ///
-
-  return domElement;
-}
-
 export function elementsFromDOMElements(domElements) {
   const domElementsWithElements = filterDOMNodes(domElements, (domElement) => (domElement.__element__ !== undefined)),
         elements = domElementsWithElements.map((domElement) => domElement.__element__);
