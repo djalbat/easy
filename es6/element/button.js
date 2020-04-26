@@ -17,10 +17,16 @@ export default class Button extends Element {
     "onClick"
   ];
 
-  static fromProperties(properties) {
+  static fromProperties(Class, properties) {
+    if (properties === undefined) {
+      properties = Class; ///
+
+      Class = Button;
+    }
+
     const { onClick } = properties,
           clickHandler = onClick, ///
-          button = Element.fromProperties(Button, properties, clickHandler);
+          button = Element.fromProperties(Class, properties, clickHandler);
     
     return button;
   }

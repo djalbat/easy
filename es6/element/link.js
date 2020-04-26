@@ -17,10 +17,16 @@ export default class Link extends Element {
     "onClick"
   ];
 
-  static fromProperties(properties) {
+  static fromProperties(Class, properties) {
+    if (properties === undefined) {
+      properties = Class; ///
+
+      Class = Link;
+    }
+
     const { onClick } = properties,
           clickHandler = onClick, ///
-          link = Element.fromProperties(Link, properties, clickHandler);
+          link = Element.fromProperties(Class, properties, clickHandler);
     
     return link;
   }

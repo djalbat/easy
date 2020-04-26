@@ -34,10 +34,16 @@ export default class Select extends Element {
     "onChange"
   ];
 
-  static fromProperties(properties) {
+  static fromProperties(Class, properties) {
+    if (properties === undefined) {
+      properties = Class; ///
+
+      Class = Select;
+    }
+
     const { onChange } = properties,
           changeHandler = onChange, ///
-          select = Element.fromProperties(Select, properties, changeHandler);
+          select = Element.fromProperties(Class, properties, changeHandler);
     
     return select;
   }
