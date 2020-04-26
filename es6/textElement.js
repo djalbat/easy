@@ -39,13 +39,15 @@ export default class TextElement {
   }
 
   getWidth() {
-    const width = this.domElement.clientWidth;
+    const clientWidth = this.domElement.clientWidth,
+          width = clientWidth;  ///
 
     return width;
   }
 
   getHeight() {
-    const height = this.domElement.clientHeight;
+    const clientHeight = this.domElement.clientHeight,
+          height = clientHeight;  ///
 
     return height;
   }
