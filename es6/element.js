@@ -422,16 +422,6 @@ function fromDOMElement(Class, domElement, ...remainingArguments) {
 }
 
 function defaultPropertiesFromClass(Class, defaultProperties = {}) {
-  // if (Class.hasOwnProperty("className")) {
-  //   const className = (defaultProperties.className === undefined) ?
-  //                       Class.className :
-  //                         `${defaultProperties.className} ${Class.className}`;
-  //
-  //   Object.assign(defaultProperties, {
-  //     className
-  //   });
-  // }
-
   if (Class.hasOwnProperty("defaultProperties")) {
     combine(defaultProperties, Class.defaultProperties);
   }
