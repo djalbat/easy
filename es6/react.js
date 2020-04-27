@@ -36,7 +36,7 @@ function createElement(firstArgument, properties, ...childArguments) {
 }
 
 const React = {
-  createElement: createElement
+  createElement
 };
 
 export default React;
