@@ -9,8 +9,6 @@ class SubmitButton extends Button {
     return "Submit";
   }
 
-  static className = "submit";
-
   static fromProperties(properties) { return Element.fromProperties(SubmitButton, properties); }
 }
 
