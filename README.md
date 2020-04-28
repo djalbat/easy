@@ -52,25 +52,33 @@ Automation is done with [npm scripts](https://docs.npmjs.com/misc/scripts), have
 You can pass CSS-style selectors to constructors:
 
 ```
-const link = new Link("#link", (href) => {
-  console.log(`Link click with href '${href}'.`);
+const link = new Link("#link", (event, element) => {
+
+  event.preventDefault();
+
+  console.log(element.getAttribute("href"))
+
 });
 ```
 
-## Adding elements to the DOM
+## Mounting the view
  
-The methods to add elements to the DOM are hopefully intuitive. Note the difference between the `append()` and `appendTo()` methods:
+In your main application file you should import your view and, under normal circumstances, mount it to the DOM's body element. This can be done by instantiating the `Body` class and appending the view to it:
 
 ```
-const body = new Body(),
-      form = ... ;
+import { Body } from "easy";
 
-body.append(form); // what you want, the form element becomes a child of the body element
+import View from "./view";
 
-form.appendTo(body); // also what you want, the form element becomes a child of the body element
+const body = new Body();
+
+body.prepend(
+
+  <View />
+
+);
 ```
-
-Similarly for the prepend methods.
+Note that, unlike [Reaction](https://github.com/djalbat/reaction), the concepts of mounting and unmounting are not enshrined. The former term was used above only as a turn of phrase.
 
 ## Supported elements
 
