@@ -5,11 +5,11 @@ import Element from "./element";
 import { flatten } from "./utilities/array";
 import { removeFalseyElements, replaceStringsWithTextElements } from "./utilities/elements";
 
-function createElement(firstArgument, properties, ...childArguments) {
+function createElement(firstArgument, properties, ...remainingArguments) {
   let element = null;
 
   if (firstArgument !== undefined) {
-    const childElements = childElementsFromChildArguments(childArguments);
+    const childElements = childElementsFromRemainingArguments(remainingArguments);
 
     properties = Object.assign({
       childElements
@@ -41,10 +41,10 @@ const React = {
 
 export default React;
 
-function childElementsFromChildArguments(childArguments) {
-  childArguments = flatten(childArguments); ///
+function childElementsFromRemainingArguments(remainingArguments) {
+  remainingArguments = flatten(remainingArguments); ///
 
-  let childElements = childArguments; ///
+  let childElements = remainingArguments; ///
 
   childElements = removeFalseyElements(childElements);
 
