@@ -186,13 +186,7 @@ Please note the following:
 
 * The `onResize()` and `offResize()` methods are similarly defined on all elements, by way of a mixin. The resize functionality relies on attaching a child object to the element in question and therefore will not work for elements which cannot have child elements. In these cases, the `onResize()` and `offResize()` methods simply do nothing. Also, the aforementioned child object is given amongst others the style `position: relative` and therefore the element in question must be given either the `position: relative` or the `position: absolute` style in order for this trick to work.
 
-Aside from the above methods there is the aforementioned static factory method:
- 
-- `static fromProperties(Class, properties, ...remainingArguments)`
-
-The `InputElement` class also has these factory methods. Again bear in mind that the signatures will change for classes that inherit from the `Element` class.
-
-The `Input` and `Textarea` classes have the following methods, taken from the `InputElement` class:
+The `Input` and `Textarea` classes also have the following methods, taken from the `InputElement` class:
 
 - `onChange(handler)`
 - `offChange(handler)`
@@ -206,7 +200,7 @@ The `Input` and `Textarea` classes have the following methods, taken from the `I
 - `setReadOnly(readOnly)`
 - `select()`
 
-The `TextElement` class has the following methods:
+The `TextElement` class has the following methods only:
 
 - `getText()`
 - `setText(text)`
@@ -222,62 +216,7 @@ The `TextElement` class has the following methods:
 - `insertAfter(siblingElement)`
 - `remove()`
 
-It does not have any static factory methods.
-
-The `Checkbox` class has the following additional methods:
-
-- `onChange(handler)`
-- `offChange(handler)`
-- `check(checked = true)`
-- `isChecked()`
-
-The `Input` class has the following additional methods:
-
-- `getValue()`
-- `getSelectionStart()`
-- `getSelectionEnd()`
-- `setValue(value)`
-- `setSelectionStart(selectionStart)`
-- `setSelectionEnd(selectionEnd)`
-- `onChange(handler)`
-- `offChange(handler)`
-
-The `Select` class has the following additional methods:
-
-- `getSelectedOptionValue()`
-- `setSelectedOptionByValue(selectedOptionValue)`
-- `onChange(handler)`
-- `offChange(handler)`
-  
-Both the `Window` and `Document` singletons have the following methods:
-
-- `on(eventTypes, handler)`
-- `off(eventTypes, handler)`
-- `onClick(handler)`
-- `offClick(handler)`
-- `onKeyUp(handler)`
-- `onKeyDown(handler)`
-- `onMouseUp(handler)`
-- `onMouseDown(handler)`
-- `onMouseOver(handler)`
-- `onMouseOut(handler)`
-- `onMouseMove(handler)`
-- `offMouseUp(handler)`
-- `offMouseDown(handler)`
-- `offMouseOver(handler)`
-- `offMouseOut(handler)`
-- `offMouseMove(handler)`
-
-The `Window` class, but not the `Document` class, has the following methods:
-
-- `onResize(handler)`
-- `offResize(handler)`
-- `getWidth`
-- `getHeight`
-- `getScrollTop`
-- `getScrollLeft`
-
-Remember that the `Window` and `Document` classes are exported as singletons.
+Each of the supported elements has methods specific to its function, check the source for details.
 
 ## Acknowledgements
 
