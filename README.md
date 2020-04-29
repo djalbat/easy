@@ -14,9 +14,9 @@ There is now support for JSX in the form of [Juxtapose](https://github.com/djalb
 
 ### Related projects
 
-- [Easy Layout](https://github.com/djalbat/Easy-Layout) Layout elements that work with CSS flexbox.
-- [Easy DragAndDrop](https://github.com/djalbat/Easy-DragAndDrop) Drag and drop elements including an explorer and a rubbish bin.
-- [Easy RichTextarea](https://github.com/djalbat/Easy-RichTextarea) A textarea element that handles and hands off events well.
+- [Easy Layout](https://github.com/djalbat/easy-layout) Layout elements that work with CSS flexbox.
+- [Easy DragAndDrop](https://github.com/djalbat/easy-draganddrop) Drag and drop elements including an explorer and a rubbish bin.
+- [Easy RichTextarea](https://github.com/djalbat/easy-richTextarea) A textarea element that handles and hands off events well.
 
 ## Installation
 
