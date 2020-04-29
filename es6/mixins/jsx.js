@@ -6,7 +6,9 @@ import { SVG_NAMESPACE_URI } from "../constants";
 import { isHTMLAttributeName, isSVGAttributeName } from "../utilities/name";
 import { removeFalseyElements, replaceStringsWithTextElements } from "../utilities/elements";
 
-export function applyProperties(properties = {}, defaultProperties, ignoredProperties) {
+export function applyProperties(properties, defaultProperties, ignoredProperties) {
+  properties = Object.assign({}, properties); ///
+
   combine(properties, defaultProperties);
 
   const childElements = childElementsFromElementAndProperties(this, properties) || properties.childElements;  ///
