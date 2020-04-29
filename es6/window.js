@@ -2,7 +2,7 @@
 
 import { onClick, offClick } from "./mixins/click";
 import { onKeyUp, offKeyUp, onKeyDown, offKeyDown } from "./mixins/key";
-import { on, off, addEventListener, removeEventListener } from "./mixins/event";
+import { on, off, addEventListener, findEventListener, findEventListeners, removeEventListener } from "./mixins/event";
 import { onMouseUp, onMouseDown, onMouseOver, onMouseOut, onMouseMove, offMouseUp, offMouseDown, offMouseOver, offMouseOut, offMouseMove } from "./mixins/mouse";
 
 class Window {
@@ -29,6 +29,8 @@ class Window {
   offMouseMove = offMouseMove;
 
   addEventListener = addEventListener;
+  findEventListener = findEventListener;
+  findEventListeners = findEventListeners;
   removeEventListener = removeEventListener;
 
   constructor() {
