@@ -47,7 +47,7 @@ export function removeEventListener(eventType, handler, element = this) {
   return eventListener;
 }
 
-export function findEventListener(eventTYpe, handler, element) {
+export function findEventListener(eventType, handler, element) {
   const eventListener = this.eventListeners.find((eventListener) => ((eventListener.eventType === eventType) && (eventListener.handler === handler) && (eventListener.element === element)));
 
   return eventListener;
