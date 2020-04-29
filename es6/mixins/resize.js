@@ -1,19 +1,19 @@
 "use strict";
 
-export function onResize(resizeHandler) {
-  const resizeEventListeners = findResizeEventListeners(this);
+export function onResize(resizeHandler, element) {
+  const resizeEventListeners = this.findEventListeners("resize");
 
   if (resizeEventListeners.length === 0) {
     addResizeObject(this);
   }
 
-  this.addEventListener("resize", resizeHandler);
+  this.addEventListener("resize", resizeHandler, element);
 }
 
-export function offResize(resizeHandler) {
-  this.removeEventListener("resize", resizeHandler);
+export function offResize(resizeHandler, element) {
+  this.removeEventListener("resize", resizeHandler, element);
 
-  const resizeEventListeners = findResizeEventListeners(this);
+  const resizeEventListeners = this.findEventListeners("resize");
   
   if (resizeEventListeners.length === 0) {
     removeResizeObject(this);
@@ -61,26 +61,8 @@ function resizeObjectLoadHandler(element) {
         resizeObjectWindow = resizeObject.contentDocument.defaultView;  ///
 
   resizeObjectWindow.addEventListener("resize", (event) => {
-    const resizeEventListeners = findResizeEventListeners(element);
+    const resizeEventListeners = findEventListeners(element);
 
     resizeEventListeners.forEach((resizeEventListener) => resizeEventListener(event));
   });
-}
-
-function findResizeEventListeners(element) {
-  const resizeEventListeners = [];
-  
-  if (element.hasOwnProperty("eventListeners")) {
-    const eventListeners = element.eventListeners;  ///
-
-    eventListeners.forEach((eventListener) => {
-      if (eventListener.eventType === "resize") {
-        const resizeEventListener = eventListener;
-
-        resizeEventListeners.push(resizeEventListener);
-      }      
-    });
-  }  
-  
-  return resizeEventListeners;
 }

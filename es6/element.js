@@ -13,9 +13,9 @@ import { onClick, offClick } from "./mixins/click";
 import { onResize, offResize } from "./mixins/resize";
 import { getState, setState, updateState } from "./mixins/state";
 import { onKeyUp, offKeyUp, onKeyDown, offKeyDown } from "./mixins/key";
-import { on, off, addEventListener, removeEventListener } from "./mixins/event";
 import { getContext, getProperties, assignContext, applyProperties } from "./mixins/jsx";
 import { onScroll, offScroll, getScrollTop, getScrollLeft, setScrollTop, setScrollLeft } from "./mixins/scroll";
+import { on, off, addEventListener, findEventListener, findEventListeners, removeEventListener } from "./mixins/event";
 import { onMouseUp, onMouseDown, onMouseOver, onMouseOut, onMouseMove, offMouseUp, offMouseDown, offMouseOver, offMouseOut, offMouseMove } from "./mixins/mouse";
 
 export default class Element {
@@ -61,6 +61,8 @@ export default class Element {
   applyProperties = applyProperties;
 
   addEventListener = addEventListener;
+  findEventListener = findEventListener;
+  findEventListeners = findEventListeners;
   removeEventListener = removeEventListener;
 
   constructor(selectorOrDOMElement) {

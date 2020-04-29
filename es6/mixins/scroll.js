@@ -1,8 +1,8 @@
 "use strict";
 
-export function onScroll(scrollHandler) { this.on("scroll", scrollHandler); }
+export function onScroll(scrollHandler, element) { this.on("scroll", scrollHandler, element); }
 
-export function offScroll(scrollHandler) { this.off("scroll", scrollHandler); }
+export function offScroll(scrollHandler, element) { this.off("scroll", scrollHandler, element); }
 
 export function getScrollTop() { return this.domElement.scrollTop; }
 

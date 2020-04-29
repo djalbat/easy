@@ -1,21 +1,21 @@
 "use strict";
 
-export function onMouseUp(mouseUpHandler) { this.on("mouseup", mouseUpHandler); }
+export function onMouseUp(mouseUpHandler, element) { this.on("mouseup", mouseUpHandler, element); }
 
-export function offMouseUp(mouseUpHandler) { this.off("mouseup", mouseUpHandler); }
+export function offMouseUp(mouseUpHandler, element) { this.off("mouseup", mouseUpHandler, element); }
 
-export function onMouseOut(mouseOutHandler) { this.on("mouseout", mouseOutHandler); }
+export function onMouseOut(mouseOutHandler, element) { this.on("mouseout", mouseOutHandler, element); }
 
-export function offMouseOut(mouseOutHandler) { this.off("mouseout", mouseOutHandler); }
+export function offMouseOut(mouseOutHandler, element) { this.off("mouseout", mouseOutHandler, element); }
 
-export function onMouseDown(mouseDownHandler) { this.on("mousedown", mouseDownHandler); }
+export function onMouseDown(mouseDownHandler, element) { this.on("mousedown", mouseDownHandler, element); }
 
-export function offMouseDown(mouseDownHandler) { this.off("mousedown", mouseDownHandler); }
+export function offMouseDown(mouseDownHandler, element) { this.off("mousedown", mouseDownHandler, element); }
 
-export function onMouseOver(mouseOverHandler) { this.on("mouseover", mouseOverHandler); }
+export function onMouseOver(mouseOverHandler, element) { this.on("mouseover", mouseOverHandler, element); }
 
-export function offMouseOver(mouseOverHandler) { this.off("mouseover", mouseOverHandler); }
+export function offMouseOver(mouseOverHandler, element) { this.off("mouseover", mouseOverHandler, element); }
 
-export function onMouseMove(mouseMoveHandler) { this.on("mousemove", mouseMoveHandler); }
+export function onMouseMove(mouseMoveHandler, element) { this.on("mousemove", mouseMoveHandler, element); }
 
-export function offMouseMove(mouseMoveHandler) { this.off("mousemove", mouseMoveHandler); }
+export function offMouseMove(mouseMoveHandler, element) { this.off("mousemove", mouseMoveHandler, element); }
