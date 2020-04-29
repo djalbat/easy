@@ -41,10 +41,10 @@ export default class InputElement extends Element {
     "onChange"
   ];
 
-  static fromProperties(Class, properties, ...remainingArguments) {
+  static fromClass(Class, properties, ...remainingArguments) {
     const { onChange } = properties,
           changeHandler = onChange; ///
 
-    return Element.fromProperties(Class, properties, changeHandler, ...remainingArguments);
+    return Element.fromClass(Class, properties, changeHandler, ...remainingArguments);
   }
 }

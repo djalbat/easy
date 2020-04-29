@@ -20,7 +20,7 @@ function createElement(firstArgument, properties, ...remainingArguments) {
     } else if (isSubclassOf(firstArgument, Element)) {
       const Class = firstArgument;  ///
 
-      element = Class.fromProperties(properties);
+      element = Class.fromClass(Class, properties);
     } else if (typeof firstArgument === "string") {
       const tagName = firstArgument; ///
 

@@ -32,16 +32,10 @@ export default class Checkbox extends Element {
     type: "checkbox"
   };
 
-  static fromProperties(Class, properties) {
-    if (properties === undefined) {
-      properties = Class; ///
-
-      Class = Checkbox;
-    }
-
+  static fromClass(Class, properties) {
     const { onChange, checked } = properties,
           changeHandler = onChange, ///
-          checkbox = Element.fromProperties(Class, properties, changeHandler, checked);
+          checkbox = Element.fromClass(Class, properties, changeHandler, checked);
 
     return checkbox;
   }

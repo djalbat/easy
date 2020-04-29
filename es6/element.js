@@ -393,7 +393,7 @@ export default class Element {
     return element;
   }
 
-  static fromProperties(Class, properties, ...remainingArguments) {
+  static fromClass(Class, properties, ...remainingArguments) {
     const tagName = Class.tagName,
           element = fromTagName(Class, tagName, ...remainingArguments),
           defaultProperties = defaultPropertiesFromClass(Class),

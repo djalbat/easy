@@ -2,14 +2,12 @@
 
 import "./juxtapose"; ///
 
-import { Element, Body, Button, Checkbox, Link, Select, Input, Textarea, window, document, constants } from "./index";
+import { Body, Button, Checkbox, Link, Select, Input, Textarea, window, document, constants } from "./index";
 
 class SubmitButton extends Button {
   childElements(properties) {
     return "Submit";
   }
-
-  static fromProperties(properties) { return Element.fromProperties(SubmitButton, properties); }
 }
 
 const { LEFT_MOUSE_BUTTON, MIDDLE_MOUSE_BUTTON } = constants,
