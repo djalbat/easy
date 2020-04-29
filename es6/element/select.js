@@ -3,7 +3,7 @@
 import Element from "../element";
 
 export default class Select extends Element {
-  constructor(selectorOrDOMElement, changeHandler = null) {
+  constructor(selectorOrDOMElement, changeHandler) {
     super(selectorOrDOMElement);
 
     if (changeHandler !== null) {
@@ -35,7 +35,7 @@ export default class Select extends Element {
   ];
 
   static fromClass(Class, properties) {
-    const { onChange } = properties,
+    const { onChange = null } = properties,
           changeHandler = onChange, ///
           select = Element.fromClass(Class, properties, changeHandler);
     

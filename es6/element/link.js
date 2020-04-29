@@ -3,7 +3,7 @@
 import Element from "../element";
 
 export default class Link extends Element {
-  constructor(selectorOrDOMElement, clickHandler = null) {
+  constructor(selectorOrDOMElement, clickHandler) {
     super(selectorOrDOMElement);
 
     if (clickHandler !== null) {
@@ -18,7 +18,7 @@ export default class Link extends Element {
   ];
 
   static fromClass(Class, properties) {
-    const { onClick } = properties,
+    const { onClick = null } = properties,
           clickHandler = onClick, ///
           link = Element.fromClass(Class, properties, clickHandler);
     

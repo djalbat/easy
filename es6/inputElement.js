@@ -3,7 +3,7 @@
 import Element from "./element";
 
 export default class InputElement extends Element {
-  constructor(selectorOrDOMElement, changeHandler = null) {
+  constructor(selectorOrDOMElement, changeHandler) {
     super(selectorOrDOMElement);
 
     if (changeHandler !== null) {
@@ -42,7 +42,7 @@ export default class InputElement extends Element {
   ];
 
   static fromClass(Class, properties, ...remainingArguments) {
-    const { onChange } = properties,
+    const { onChange = null } = properties,
           changeHandler = onChange; ///
 
     return Element.fromClass(Class, properties, changeHandler, ...remainingArguments);
