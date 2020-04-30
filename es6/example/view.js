@@ -4,7 +4,7 @@ import { Textarea } from "../index";
 
 import SubmitButton from "./button/submit";
 
-const View =
+const View = (properties) =>
 
   <div className="view">
     <SubmitButton />
