@@ -40,7 +40,11 @@ export default class View extends Element {
              console.log(pageX, pageY)
 
            }}
-      />,
+      >
+        <p>
+          A paragraph contained in a div with resize and mouse move handlers.
+        </p>
+      </div>,
 
     ]);
   }
