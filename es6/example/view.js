@@ -1,51 +1,45 @@
 "use strict";
 
-import { Element, Textarea } from "../index";
+import { Textarea } from "../index";
 
 import SubmitButton from "./button/submit";
 
-export default class View extends Element {
-  static tagName = "div";
+const View =
 
-  static defaultProperties = {
-    className: "view"
-  };
+  <div className="view">
+    <SubmitButton />
+    <Textarea onScroll={(event, element) => {
 
-  childElements(properties) {
-    return ([
+      const scrollTop = element.getScrollTop(),
+            scrollLeft = element.getScrollLeft();
 
-      <SubmitButton />,
-      <Textarea onScroll={(event, element) => {
+      console.log(scrollTop, scrollLeft)
 
-                  const scrollTop = element.getScrollTop(),
-                        scrollLeft = element.getScrollLeft();
+    }}
+    />
+    <div className="grey"
+         onResize={(event, element) => {
 
-                  console.log(scrollTop, scrollLeft)
+           const width = this.getWidth(),
+                 height = this.getHeight();
 
-                }}
-      />,
-      <div className="grey"
-           onResize={(event, element) => {
+           console.log(width, height)
 
-             const width = this.getWidth(),
-                   height = this.getHeight();
+         }}
+         onMouseMove={(event, element) => {
 
-             console.log(width, height)
+           const { pageX, pageY } = event;
 
-           }}
-           onMouseMove={(event, element) => {
+           console.log(pageX, pageY)
 
-             const { pageX, pageY } = event;
+         }}
+    >
+      <p>
+        A paragraph contained in a div with resize and mouse move handlers.
+      </p>
+    </div>
+  </div>
 
-             console.log(pageX, pageY)
+;
 
-           }}
-      >
-        <p>
-          A paragraph contained in a div with resize and mouse move handlers.
-        </p>
-      </div>,
-
-    ]);
-  }
-}
+export default View;
