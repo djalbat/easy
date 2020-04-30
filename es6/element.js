@@ -10,9 +10,9 @@ import { SVG_NAMESPACE_URI } from "./constants";
 import { domNodeMatchesSelector, elementsFromDOMElements, filterDOMNodesBySelector, descendantDOMNodesFromDOMNode } from "./utilities/dom";
 
 import { onClick, offClick } from "./mixins/click";
-import { onResize, offResize } from "./mixins/resize";
 import { getState, setState, updateState } from "./mixins/state";
 import { onKeyUp, offKeyUp, onKeyDown, offKeyDown } from "./mixins/key";
+import { onResize, offResize, addResizeObject, removeResizeObject } from "./mixins/resize";
 import { getContext, getProperties, assignContext, applyProperties } from "./mixins/jsx";
 import { onScroll, offScroll, getScrollTop, getScrollLeft, setScrollTop, setScrollLeft } from "./mixins/scroll";
 import { on, off, addEventListener, findEventListener, findEventListeners, removeEventListener } from "./mixins/event";
@@ -27,6 +27,8 @@ export default class Element {
 
   onResize = onResize;
   offResize = offResize;
+  addResizeObject = addResizeObject;
+  removeResizeObject = removeResizeObject;
 
   getState = getState;
   setState = setState;

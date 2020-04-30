@@ -1,11 +1,22 @@
 "use strict";
 
+import {removeResizeObject} from "./resize";
+
 export function on(eventTypes, handler, element) {
   eventTypes = eventTypes.split(" "); ///
 
   eventTypes.forEach((eventType) => {
+    if (eventType === "resize") {
+      const resizeEventListeners = this.findEventListeners("resize"),
+            resizeEventListenersLength = resizeEventListeners.length;
+
+      if (resizeEventListenersLength === 0) {
+        this.addResizeObject();
+      }
+    }
+
     const eventListener = this.addEventListener(eventType, handler, element);
-    
+
     this.domElement.addEventListener(eventType, eventListener);
   });
 }
@@ -17,6 +28,15 @@ export function off(eventTypes, handler, element) {
     const eventListener = this.removeEventListener(eventType, handler, element);
 
     this.domElement.removeEventListener(eventType, eventListener);
+
+    if (eventType === "resize") {
+      const resizeEventListeners = this.findEventListeners("resize"),
+            resizeEventListenersLength = resizeEventListeners.length;
+
+      if (resizeEventListenersLength === 0) {
+        removeResizeObject(this);
+      }
+    }
   });
 }
 
@@ -48,7 +68,15 @@ export function removeEventListener(eventType, handler, element = this) {
 }
 
 export function findEventListener(eventType, handler, element) {
-  const eventListener = this.eventListeners.find((eventListener) => ((eventListener.eventType === eventType) && (eventListener.handler === handler) && (eventListener.element === element)));
+  const eventListener = this.eventListeners.find((eventListener) => {
+    const found = ( (eventListener.element === element) &&
+                    (eventListener.handler === handler) &&
+                    (eventListener.eventType === eventType) );
+
+    if (found) {
+      return true;
+    }
+  });
 
   return eventListener;
 }
@@ -58,10 +86,10 @@ export function findEventListeners(eventType) {
 
   if (this.hasOwnProperty("eventListeners")) {
     this.eventListeners.forEach((eventListener) => {
-      if (eventListener.eventType === eventType) {
-        const eventListener = eventListener;
+      const found = (eventListener.eventType === eventType);
 
-        this.eventListeners.push(eventListener);
+      if (found) {
+        eventListeners.push(eventListener);
       }
     });
   }
@@ -77,9 +105,9 @@ function createEventListener(eventType, handler, element) {
   };
 
   Object.assign(eventListener, {
-    eventType,
+    element,
     handler,
-    element
+    eventType
   });
 
   return eventListener;

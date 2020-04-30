@@ -1,6 +1,7 @@
 "use strict";
 
 import { onClick, offClick } from "./mixins/click";
+import { onResize, offResize } from "./mixins/resize";
 import { onKeyUp, offKeyUp, onKeyDown, offKeyDown } from "./mixins/key";
 import { on, off, addEventListener, findEventListener, findEventListeners, removeEventListener } from "./mixins/event";
 import { onMouseUp, onMouseDown, onMouseOver, onMouseOut, onMouseMove, offMouseUp, offMouseDown, offMouseOver, offMouseOut, offMouseMove } from "./mixins/mouse";
@@ -11,6 +12,11 @@ class Window {
 
   onClick = onClick;
   offClick = offClick;
+
+  onResize = onResize;
+  offResize = offResize;
+  addResizeObject = addResizeObject;
+  removeResizeObject = removeResizeObject;
 
   onKeyUp = onKeyUp;
   offKeyUp = offKeyUp;
@@ -50,10 +56,10 @@ class Window {
   getScrollTop() { return this.domElement.pageYOffset; }  ///
 
   getScrollLeft() { return this.domElement.pageXOffset; } ///
-
-  onResize(resizeHandler) { this.on("resize", resizeHandler); }
-
-  offResize(resizeHandler) { this.off("resize", resizeHandler); }
 }
 
 export default (typeof window === "undefined") ? undefined : new Window();  ///
+
+function addResizeObject() {} ///
+
+function removeResizeObject() {} ///

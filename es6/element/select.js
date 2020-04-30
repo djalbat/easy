@@ -3,6 +3,9 @@
 import Element from "../element";
 
 export default class Select extends Element {
+  onChange = onChange;
+  offChange = offChange;
+
   constructor(selectorOrDOMElement, changeHandler) {
     super(selectorOrDOMElement);
 
@@ -10,10 +13,6 @@ export default class Select extends Element {
       this.onChange(changeHandler);
     }
   }
-
-  onChange(changeHandler) { this.on("change", changeHandler); }
-
-  offChange(changeHandler) { this.off("change", changeHandler); }
 
   getSelectedOptionValue() {
     const value = this.domElement.value,  ///
@@ -42,3 +41,8 @@ export default class Select extends Element {
     return select;
   }
 }
+
+
+function onChange(changeHandler, element) { this.on("change", changeHandler, element); }
+
+function offChange(changeHandler, element) { this.off("change", changeHandler, element); }

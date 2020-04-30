@@ -12,6 +12,9 @@ class Document {
   onClick = onClick;
   offClick = offClick;
 
+  onResize = onResize;
+  offResize = offResize;
+
   onKeyUp = onKeyUp;
   offKeyUp = offKeyUp;
   onKeyDown = onKeyDown;
@@ -39,3 +42,7 @@ class Document {
 }
 
 export default (typeof document === "undefined") ? undefined : new Document();  ///
+
+function onResize(resizeHandler, element) {} ///
+
+function offResize(resizeHandler, element) {}  ///
