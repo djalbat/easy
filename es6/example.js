@@ -4,7 +4,7 @@ import { React, Body, window } from "./index";
 
 import View from "./example/view"
 
-Object.assign(window, {
+window.assign({
   React
 });
 
