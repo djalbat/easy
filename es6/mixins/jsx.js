@@ -101,7 +101,7 @@ function childElementsFromElementAndProperties(element, properties) {
   let childElements = null;
 
   if (typeof element.childElements === "function") {
-    childElements = element.childElements(properties);
+    childElements = element.childElements.call(element, properties);
 
     childElements = guarantee(childElements);
 

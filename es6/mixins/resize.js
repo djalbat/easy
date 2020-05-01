@@ -45,6 +45,6 @@ function resizeObjectLoadHandler(element) {
   resizeObjectWindow.addEventListener("resize", (event) => {
     const resizeEventListeners = element.findEventListeners("resize");
 
-    resizeEventListeners.forEach((resizeEventListener) => resizeEventListener.call(element, event, element));
+    resizeEventListeners.forEach((resizeEventListener) => resizeEventListener(event));
   });
 }

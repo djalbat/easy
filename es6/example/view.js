@@ -8,10 +8,10 @@ const View = (properties) =>
 
   <div className="view">
     <SubmitButton />
-    <Textarea onScroll={(event, element) => {
+    <Textarea onScroll={function(event, element) {
 
-      const scrollTop = element.getScrollTop(),
-            scrollLeft = element.getScrollLeft();
+      const scrollTop = this.getScrollTop(),
+            scrollLeft = this.getScrollLeft();
 
       console.log(scrollTop, scrollLeft)
 
@@ -20,8 +20,8 @@ const View = (properties) =>
     <div className="grey"
          onResize={(event, element) => {
 
-           const width = this.getWidth(),
-                 height = this.getHeight();
+           const width = element.getWidth(),
+                 height = element.getHeight();
 
            console.log(width, height)
 
