@@ -8,6 +8,6 @@ export function setState(state) {
   this.state = state;
 }
 
-export function updateState(update) {
-  Object.assign(this.state, update);
+export function updateState(state) {
+  Object.assign(this.state, state);
 }
