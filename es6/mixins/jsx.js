@@ -6,7 +6,7 @@ import { SVG_NAMESPACE_URI } from "../constants";
 import { isHTMLAttributeName, isSVGAttributeName } from "../utilities/name";
 import { removeFalseyElements, replaceStringsWithTextElements } from "../utilities/elements";
 
-export function applyProperties(properties, defaultProperties, ignoredProperties) {
+function applyProperties(properties, defaultProperties, ignoredProperties) {
   properties = Object.assign({}, properties); ///
 
   combine(properties, defaultProperties);
@@ -53,15 +53,15 @@ export function applyProperties(properties, defaultProperties, ignoredProperties
   });
 }
 
-export function getProperties() {
+function getProperties() {
   return this.properties;
 }
 
-export function getContext() {
+function getContext() {
   return this.context;
 }
 
-export function assignContext(names, thenDelete) {
+function assignContext(names, thenDelete) {
   const argumentsLength = arguments.length;
 
   if (argumentsLength === 1) {
@@ -96,6 +96,13 @@ export function assignContext(names, thenDelete) {
     }
   }, []);
 }
+
+export default {
+  applyProperties,
+  getProperties,
+  getContext,
+  assignContext
+};
 
 function childElementsFromElementAndProperties(element, properties) {
   let childElements = null;

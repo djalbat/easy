@@ -3,9 +3,6 @@
 import Element from "../element";
 
 export default class Checkbox extends Element {
-  onChange = onChange;
-  offChange = offChange;
-
   constructor(selectorOrDOMElement, changeHandler, checked) {
     super(selectorOrDOMElement);
 
@@ -15,6 +12,10 @@ export default class Checkbox extends Element {
       this.onChange(changeHandler);
     }
   }
+
+  onChange(changeHandler, element) { this.on("click", changeHandler, element); } ///
+
+  offChange(changeHandler, element) { this.off("click", changeHandler, element); } ///
 
   check(checked = true) { this.domElement.checked = checked; }
 
@@ -39,7 +40,3 @@ export default class Checkbox extends Element {
     return checkbox;
   }
 }
-
-function onChange(changeHandler, element) { this.on("click", changeHandler, element); } ///
-
-function offChange(changeHandler, element) { this.off("click", changeHandler, element); } ///

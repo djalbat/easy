@@ -3,12 +3,6 @@
 import Element from "./element";
 
 export default class InputElement extends Element {
-  onChange = onChange;
-  offChange = offChange;
-
-  onResize = onResize;
-  offResize = offResize;
-
   constructor(selectorOrDOMElement, changeHandler) {
     super(selectorOrDOMElement);
 
@@ -16,6 +10,14 @@ export default class InputElement extends Element {
       this.onChange(changeHandler);
     }
   }
+
+  onChange(changeHandler, element) { this.on("change", changeHandler, element); }
+
+  offChange(changeHandler, element) { this.off("change", changeHandler, element); }
+
+  onResize(resizeHandler, element) {} ///
+
+  offResize(resizeHandler, element) {}  ///
 
   getValue() { return this.domElement.value; }
 
@@ -46,11 +48,3 @@ export default class InputElement extends Element {
     return Element.fromClass(Class, properties, changeHandler, ...remainingArguments);
   }
 }
-
-function onChange(changeHandler, element) { this.on("change", changeHandler, element); }
-
-function offChange(changeHandler, element) { this.off("change", changeHandler, element); }
-
-function onResize(resizeHandler, element) {} ///
-
-function offResize(resizeHandler, element) {}  ///

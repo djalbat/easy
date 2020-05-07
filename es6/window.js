@@ -1,44 +1,14 @@
 "use strict";
 
-import { onClick, offClick } from "./mixins/click";
-import { onResize, offResize } from "./mixins/resize";
-import { onKeyUp, offKeyUp, onKeyDown, offKeyDown } from "./mixins/key";
-import { on, off, addEventListener, findEventListener, findEventListeners, removeEventListener } from "./mixins/event";
-import { onMouseUp, onMouseDown, onMouseOver, onMouseOut, onMouseMove, offMouseUp, offMouseDown, offMouseOver, offMouseOut, offMouseMove } from "./mixins/mouse";
+import keyMixins from "./mixins/key";
+import eventMixins from "./mixins/event";
+import mouseMixins from "./mixins/mouse";
+import clickMixins from "./mixins/click";
+import resizeMixins from "./mixins/resize";
+
+const { onResize, offResize } = resizeMixins;
 
 class Window {
-  on = on;
-  off = off;
-
-  onClick = onClick;
-  offClick = offClick;
-
-  onResize = onResize;
-  offResize = offResize;
-  addResizeObject = addResizeObject;
-  removeResizeObject = removeResizeObject;
-
-  onKeyUp = onKeyUp;
-  offKeyUp = offKeyUp;
-  onKeyDown = onKeyDown;
-  offKeyDown = offKeyDown;
-
-  onMouseUp = onMouseUp;
-  onMouseDown = onMouseDown;
-  onMouseOver = onMouseOver;
-  onMouseOut = onMouseOut;
-  onMouseMove = onMouseMove;
-  offMouseUp = offMouseUp;
-  offMouseDown = offMouseDown;
-  offMouseOver = offMouseOver;
-  offMouseOut = offMouseOut;
-  offMouseMove = offMouseMove;
-
-  addEventListener = addEventListener;
-  findEventListener = findEventListener;
-  findEventListeners = findEventListeners;
-  removeEventListener = removeEventListener;
-
   constructor() {
     this.domElement = window; ///
   }
@@ -49,6 +19,10 @@ class Window {
     Object.assign(target, ...sources);
   }
 
+  addResizeObject() {} ///
+
+  removeResizeObject() {} ///
+
   getWidth() { return this.domElement.innerWidth; } ///
   
   getHeight() { return this.domElement.innerHeight; } ///
@@ -58,8 +32,10 @@ class Window {
   getScrollLeft() { return this.domElement.pageXOffset; } ///
 }
 
+Object.assign(Window.prototype, keyMixins);
+Object.assign(Window.prototype, eventMixins);
+Object.assign(Window.prototype, mouseMixins);
+Object.assign(Window.prototype, clickMixins);
+Object.assign(Window.prototype, { onResize, offResize }); ///
+
 export default (typeof window === "undefined") ? undefined : new Window();  ///
-
-function addResizeObject() {} ///
-
-function removeResizeObject() {} ///

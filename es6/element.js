@@ -2,6 +2,14 @@
 
 import Offset from "./miscellaneous/offset";
 import Bounds from "./miscellaneous/bounds";
+import jsxMixins from "./mixins/jsx";
+import keyMixins from "./mixins/key";
+import clickMixins from "./mixins/click";
+import stateMixins from "./mixins/state";
+import eventMixins from "./mixins/event";
+import mouseMixins from "./mixins/mouse";
+import resizeMixins from "./mixins/resize";
+import scrollMixins from "./mixins/scroll";
 
 import { combine } from "./utilities/object";
 import { isSVGTagName } from "./utilities/name";
@@ -9,64 +17,7 @@ import { first, augment } from "./utilities/array";
 import { SVG_NAMESPACE_URI } from "./constants";
 import { domNodeMatchesSelector, elementsFromDOMElements, filterDOMNodesBySelector, descendantDOMNodesFromDOMNode } from "./utilities/dom";
 
-import { onClick, offClick } from "./mixins/click";
-import { getState, setState, updateState } from "./mixins/state";
-import { onKeyUp, offKeyUp, onKeyDown, offKeyDown } from "./mixins/key";
-import { onResize, offResize, addResizeObject, removeResizeObject } from "./mixins/resize";
-import { getContext, getProperties, assignContext, applyProperties } from "./mixins/jsx";
-import { onScroll, offScroll, getScrollTop, getScrollLeft, setScrollTop, setScrollLeft } from "./mixins/scroll";
-import { on, off, addEventListener, findEventListener, findEventListeners, removeEventListener } from "./mixins/event";
-import { onMouseUp, onMouseDown, onMouseOver, onMouseOut, onMouseMove, offMouseUp, offMouseDown, offMouseOver, offMouseOut, offMouseMove } from "./mixins/mouse";
-
-export default class Element {
-  on = on;
-  off = off;
-
-  onClick = onClick;
-  offClick = offClick;
-
-  onResize = onResize;
-  offResize = offResize;
-  addResizeObject = addResizeObject;
-  removeResizeObject = removeResizeObject;
-
-  getState = getState;
-  setState = setState;
-  updateState = updateState;
-
-  onKeyUp = onKeyUp;
-  offKeyUp = offKeyUp;
-  onKeyDown = onKeyDown;
-  offKeyDown = offKeyDown;
-
-  onMouseUp = onMouseUp;
-  onMouseDown = onMouseDown;
-  onMouseOver = onMouseOver;
-  onMouseOut = onMouseOut;
-  onMouseMove = onMouseMove;
-  offMouseUp = offMouseUp;
-  offMouseDown = offMouseDown;
-  offMouseOver = offMouseOver;
-  offMouseOut = offMouseOut;
-  offMouseMove = offMouseMove;
-
-  onScroll = onScroll;
-  offScroll = offScroll;
-  getScrollTop = getScrollTop;
-  getScrollLeft = getScrollLeft;
-  setScrollTop = setScrollTop;
-  setScrollLeft = setScrollLeft;
-
-  getContext = getContext;
-  getProperties = getProperties;
-  assignContext = assignContext;
-  applyProperties = applyProperties;
-
-  addEventListener = addEventListener;
-  findEventListener = findEventListener;
-  findEventListeners = findEventListeners;
-  removeEventListener = removeEventListener;
-
+class Element {
   constructor(selectorOrDOMElement) {
     if (typeof selectorOrDOMElement === "string") {
       const selector = selectorOrDOMElement;
@@ -408,6 +359,17 @@ export default class Element {
     return element;
   }
 }
+
+Object.assign(Element.prototype, jsxMixins);
+Object.assign(Element.prototype, keyMixins);
+Object.assign(Element.prototype, clickMixins);
+Object.assign(Element.prototype, stateMixins);
+Object.assign(Element.prototype, eventMixins);
+Object.assign(Element.prototype, mouseMixins);
+Object.assign(Element.prototype, resizeMixins);
+Object.assign(Element.prototype, scrollMixins);
+
+export default Element;
 
 function fromTagName(Class, tagName, ...remainingArguments) {
   const domElement = isSVGTagName(tagName) ?

@@ -2,7 +2,7 @@
 
 import {removeResizeObject} from "./resize";
 
-export function on(eventTypes, handler, element) {
+function on(eventTypes, handler, element) {
   eventTypes = eventTypes.split(" "); ///
 
   eventTypes.forEach((eventType) => {
@@ -21,7 +21,7 @@ export function on(eventTypes, handler, element) {
   });
 }
 
-export function off(eventTypes, handler, element) {
+function off(eventTypes, handler, element) {
   eventTypes = eventTypes.split(" "); ///
 
   eventTypes.forEach((eventType) => {
@@ -40,7 +40,7 @@ export function off(eventTypes, handler, element) {
   });
 }
 
-export function addEventListener(eventType, handler, element = this) {
+function addEventListener(eventType, handler, element = this) {
   if (!this.hasOwnProperty("eventListeners")) {
     this.eventListeners = [];
   }
@@ -52,7 +52,7 @@ export function addEventListener(eventType, handler, element = this) {
   return eventListener;
 }
 
-export function removeEventListener(eventType, handler, element = this) {
+function removeEventListener(eventType, handler, element = this) {
   const eventListener = this.findEventListener(eventType, handler, element),
         index = this.eventListeners.indexOf(eventListener),
         start = index,  ///
@@ -67,7 +67,7 @@ export function removeEventListener(eventType, handler, element = this) {
   return eventListener;
 }
 
-export function findEventListener(eventType, handler, element) {
+function findEventListener(eventType, handler, element) {
   const eventListener = this.eventListeners.find((eventListener) => {
     const found = ( (eventListener.element === element) &&
                     (eventListener.handler === handler) &&
@@ -81,7 +81,7 @@ export function findEventListener(eventType, handler, element) {
   return eventListener;
 }
 
-export function findEventListeners(eventType) {
+function findEventListeners(eventType) {
   const eventListeners = [];
 
   if (this.hasOwnProperty("eventListeners")) {
@@ -112,3 +112,12 @@ function createEventListener(eventType, handler, element) {
 
   return eventListener;
 }
+
+export default {
+  on,
+  off,
+  addEventListener,
+  removeEventListener,
+  findEventListener,
+  findEventListeners
+};
