@@ -15,18 +15,9 @@ export default class Select extends Element {
 
   offChange(changeHandler, element) { this.off("change", changeHandler, element); }
 
-  getSelectedOptionValue() {
-    const value = this.domElement.value,  ///
-          selectedOptionValue = value;  ///
-    
-    return selectedOptionValue;
-  }
+  getValue() { return this.domElement.value; }
 
-  setSelectedOptionByValue(selectedOptionValue) {
-    const value = selectedOptionValue;  ///
-
-    this.domElement.value = value;
-  }
+  setValue(value) { this.domElement.value = value; }
 
   static tagName = "select";
 
