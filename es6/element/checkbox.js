@@ -6,11 +6,11 @@ export default class Checkbox extends Element {
   constructor(selectorOrDOMElement, changeHandler, checked) {
     super(selectorOrDOMElement);
 
-    this.check(checked);
-
     if (changeHandler !== null) {
       this.onChange(changeHandler);
     }
+
+    this.check(checked);
   }
 
   onChange(changeHandler, element) { this.on("click", changeHandler, element); } ///
