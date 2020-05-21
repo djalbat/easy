@@ -8,7 +8,7 @@ const View = (properties) =>
 
   <div className="view">
     <SubmitButton />
-    <Textarea onScroll={function(event, element) {
+    <Textarea onScroll={function(event, element) {  ///
 
       const scrollTop = this.getScrollTop(),
             scrollLeft = this.getScrollLeft();
