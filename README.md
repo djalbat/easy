@@ -10,7 +10,7 @@ If you like Easy you might like [Easy with Style](https://github.com/djalbat/eas
 
 There is now support for JSX in the form of [Juxtapose](https://github.com/djalbat/Juxtapose). What this means is that Easy *will* now help you with the architecture of your large application. In fact JSX brings with it [several benefits](http://djalbat.com/juxtapose#jsxIsGreat). So although Easy elements will continue to work standalone, their use with Juxtapose is recommended. The contents of this readme file will stay as a reference, however a much better place to start from now on is here:
 
-* [Juxtapose online documentation](http://juxtapose.info)
+**[Juxtapose online documentation](http://juxtapose.info)**
 
 ### Related projects
 
@@ -34,11 +34,24 @@ You can also clone the repository with [Git](https://git-scm.com/)...
 
 ## Usage
 
-```
-import { Select, Checkbox } from "easy";
+## Mounting the view
 
-...
+Typically you should create a view and mount it to the DOM's body element. This can be done by instantiating the `Body` class and appending the view to it:
+
 ```
+import { Body } from "easy";
+
+import View from "./view";
+
+const body = new Body();
+
+body.prepend(
+
+  <View />
+
+);
+```
+For more usage examples, see the Juxtapose documentation.
 
 ## Compiling from source
 
@@ -60,26 +73,6 @@ const link = new Link("#link", (event, element) => {
 
 });
 ```
-
-## Mounting the view
- 
-In your main application file you should import your view and, under normal circumstances, mount it to the DOM's body element. This can be done by instantiating the `Body` class and appending the view to it:
-
-```
-import { Body } from "easy";
-
-import View from "./view";
-
-const body = new Body();
-
-body.prepend(
-
-  <View />
-
-);
-```
-Note that, unlike [Reaction](https://github.com/djalbat/reaction), the concepts of mounting and unmounting are not enshrined. The former term was used above only as a turn of phrase.
-
 ## Supported elements
 
 -  Body
