@@ -34,8 +34,6 @@ You can also clone the repository with [Git](https://git-scm.com/)...
 
 ## Usage
 
-## Mounting the view
-
 Typically you should create a view and mount it to the DOM's body element. This can be done by instantiating the `Body` class and appending the view to it:
 
 ```
