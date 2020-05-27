@@ -151,9 +151,9 @@ class Element {
   }
 
   mount(element) {
-    const descendantElements = this.getDescendantElements();
-
     this.add(element);
+
+    const descendantElements = this.getDescendantElements();
 
     descendantElements.forEach((descendantElement) => (descendantElement.didMount && descendantElement.didMount()));  ///
   }
