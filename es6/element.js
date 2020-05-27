@@ -153,15 +153,23 @@ class Element {
   mount(element) {
     this.add(element);
 
-    const descendantElements = this.getDescendantElements();
+    const descendantElements = this.getDescendantElements(),
+          elements = [
+            ...descendantElements,
+            element
+          ];
 
-    descendantElements.forEach((descendantElement) => (descendantElement.didMount && descendantElement.didMount()));  ///
+    elements.forEach((element) => (element.didMount && element.didMount()));  ///
   }
 
   unmount(element) {
-    const descendantElements = this.getDescendantElements();
+    const descendantElements = this.getDescendantElements(),
+          elements = [
+            element,
+            ...descendantElements
+          ];
 
-    descendantElements.forEach((descendantElement) => (descendantElement.willUnmount && descendantElement.willUnmount()));  ///
+    elements.forEach((element) => (element.willUnmount && element.willUnmount()));  ///
 
     this.remove(element);
   }
