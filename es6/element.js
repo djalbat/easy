@@ -153,7 +153,7 @@ class Element {
   mount(element) {
     const descendantElements = this.getDescendantElements();
 
-    this.addElement(element);
+    this.add(element);
 
     descendantElements.forEach((descendantElement) => (descendantElement.didMount && descendantElement.didMount()));  ///
   }
@@ -163,7 +163,7 @@ class Element {
 
     descendantElements.forEach((descendantElement) => (descendantElement.willUnmount && descendantElement.willUnmount()));  ///
 
-    this.removeElement(element);
+    this.remove(element);
   }
 
   show(displayStyle = "block") { this.display(displayStyle); }
