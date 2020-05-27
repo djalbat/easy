@@ -150,6 +150,22 @@ class Element {
     }
   }
 
+  mount(element) {
+    const descendantElements = this.getDescendantElements();
+
+    this.addElement(element);
+
+    descendantElements.forEach((descendantElement) => (descendantElement.didMount && descendantElement.didMount()));  ///
+  }
+
+  unmount(element) {
+    const descendantElements = this.getDescendantElements();
+
+    descendantElements.forEach((descendantElement) => (descendantElement.willUnmount && descendantElement.willUnmount()));  ///
+
+    this.removeElement(element);
+  }
+
   show(displayStyle = "block") { this.display(displayStyle); }
 
   hide() { this.style("display", "none"); }
