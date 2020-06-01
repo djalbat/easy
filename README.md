@@ -202,7 +202,7 @@ The `TextElement` class has the following methods only:
 
 Each of the supported elements has methods specific to its function, check the source for details.
 
-## Compiling from source
+## Building
 
 Automation is done with [npm scripts](https://docs.npmjs.com/misc/scripts), have a look at the `package.json` file. The pertinent commands are:
 
