@@ -43,7 +43,7 @@ import View from "./view";
 
 const body = new Body();
 
-body.prepend(
+body.mount(
 
   <View />
 
