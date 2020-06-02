@@ -10,7 +10,7 @@ window.assign({
 
 const body = new Body();
 
-body.prepend(
+body.mount(
 
   <View />
 
