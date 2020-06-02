@@ -3,40 +3,13 @@
 import Element from "../element";
 
 export default class Checkbox extends Element {
-  constructor(selector, changeHandler, checked) {
-    super(selector);
-
-    if (changeHandler !== null) {
-      this.onChange(changeHandler);
-    }
-
-    this.check(checked);
-  }
-
-  onChange(changeHandler, element) { this.on("click", changeHandler, element); } ///
-
-  offChange(changeHandler, element) { this.off("click", changeHandler, element); } ///
+  isChecked() { return this.domElement.checked; }
 
   check(checked = true) { this.domElement.checked = checked; }
 
-  isChecked() { return this.domElement.checked; }
-
   static tagName = "input";
-
-  static ignoredProperties = [
-    "onChange",
-    "checked"
-  ];
 
   static defaultProperties = {
     type: "checkbox"
   };
-
-  static fromClass(Class, properties) {
-    const { onChange = null, checked = null } = properties,
-          changeHandler = onChange, ///
-          checkbox = Element.fromClass(Class, properties, changeHandler, checked);
-
-    return checkbox;
-  }
 }

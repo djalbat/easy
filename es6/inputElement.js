@@ -1,16 +1,9 @@
 "use strict";
 
 import Element from "./element";
+import changeMixins from "./mixins/change";
 
-export default class InputElement extends Element {
-  constructor(selector, changeHandler) {
-    super(selector);
-
-    if (changeHandler !== null) {
-      this.onChange(changeHandler);
-    }
-  }
-
+class InputElement extends Element {
   onChange(changeHandler, element) { this.on("change", changeHandler, element); }
 
   offChange(changeHandler, element) { this.off("change", changeHandler, element); }
@@ -36,15 +29,8 @@ export default class InputElement extends Element {
   setReadOnly(readOnly) { this.domElement.readOnly = readOnly; }
 
   select() { this.domElement.select(); }
-
-  static ignoredProperties = [
-    "onChange"
-  ];
-
-  static fromClass(Class, properties, ...remainingArguments) {
-    const { onChange = null } = properties,
-          changeHandler = onChange; ///
-
-    return Element.fromClass(Class, properties, changeHandler, ...remainingArguments);
-  }
 }
+
+Object.assign(InputElement.prototype, changeMixins);
+
+export default InputElement;

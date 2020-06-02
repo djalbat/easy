@@ -12,8 +12,10 @@ function updateState(state) {
   Object.assign(this.state, state);
 }
 
-export default {
+const stateMixins = {
   getState,
   setState,
   updateState
 };
+
+export default stateMixins;

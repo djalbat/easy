@@ -15,7 +15,8 @@ function applyProperties(properties, defaultProperties, ignoredProperties) {
 
   prune(properties, ignoredProperties);
 
-  const svg = (this.domElement.namespaceURI === SVG_NAMESPACE_URI), ///
+  const { namespaceURI } = this.domElement,
+        svg = (namespaceURI === SVG_NAMESPACE_URI), ///
         names = Object.keys(properties);  ///
 
   names.forEach((name) => {
@@ -25,18 +26,14 @@ function applyProperties(properties, defaultProperties, ignoredProperties) {
       ///
     } else if (isHandlerName(name)) {
       addHandler(this, name, value);
+
+      delete properties[name];
     } else if (isAttributeName(name, svg)) {
       addAttribute(this, name, value);
+
+      delete properties[name];
     } else {
-      if (!this.hasOwnProperty("properties")) {
-        const properties = {};
-
-        Object.assign(this, {
-          properties
-        });
-      }
-
-      this.properties[name] = value;
+      ///
     }
   });
 
@@ -49,6 +46,7 @@ function applyProperties(properties, defaultProperties, ignoredProperties) {
   });
 
   Object.assign(this, {
+    properties,
     context
   });
 }
@@ -97,12 +95,14 @@ function assignContext(names, thenDelete) {
   }, []);
 }
 
-export default {
+const jsxMixins = {
   applyProperties,
   getProperties,
   getContext,
   assignContext
 };
+
+export default jsxMixins;
 
 function childElementsFromElementAndProperties(element, properties) {
   let childElements = null;

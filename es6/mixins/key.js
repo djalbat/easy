@@ -8,9 +8,11 @@ function onKeyDown(keyDownHandler, element) { this.on("keydown", keyDownHandler,
 
 function offKeyDown(keyDownHandler, element) { this.off("keydown", keyDownHandler, element); }
 
-export default {
+const keyMixins = {
   onKeyUp,
   offKeyUp,
   onKeyDown,
   offKeyDown
 };
+
+export default keyMixins;

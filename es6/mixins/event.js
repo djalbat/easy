@@ -113,7 +113,7 @@ function createEventListener(eventType, handler, element) {
   return eventListener;
 }
 
-export default {
+const eventMixins = {
   on,
   off,
   addEventListener,
@@ -121,3 +121,5 @@ export default {
   findEventListener,
   findEventListeners
 };
+
+export default eventMixins;

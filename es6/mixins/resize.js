@@ -38,12 +38,14 @@ function removeResizeObject() {
   this.domElement.removeChild(resizeObject);
 }
 
-export default {
+const resizeMixins = {
   onResize,
   offResize,
   addResizeObject,
   removeResizeObject
 };
+
+export default resizeMixins;
 
 function resizeObjectLoadHandler(element) {
   const resizeObject = element.__resizeObject__,

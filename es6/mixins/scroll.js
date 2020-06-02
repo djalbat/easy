@@ -12,7 +12,7 @@ function setScrollTop(scrollTop) { this.domElement.scrollTop = scrollTop; }
 
 function setScrollLeft(scrollLeft) { this.domElement.scrollLeft = scrollLeft; }
 
-export default {
+const scrollMixins = {
   onScroll,
   offScroll,
   getScrollTop,
@@ -20,3 +20,5 @@ export default {
   setScrollTop,
   setScrollLeft
 };
+
+export default scrollMixins;

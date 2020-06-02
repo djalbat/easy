@@ -20,7 +20,7 @@ function onMouseMove(mouseMoveHandler, element) { this.on("mousemove", mouseMove
 
 function offMouseMove(mouseMoveHandler, element) { this.off("mousemove", mouseMoveHandler, element); }
 
-export default {
+const mouseMixins = {
   onMouseUp,
   offMouseUp,
   onMouseOut,
@@ -32,3 +32,5 @@ export default {
   onMouseMove,
   offMouseMove
 };
+
+export default mouseMixins;
