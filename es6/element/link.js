@@ -3,8 +3,8 @@
 import Element from "../element";
 
 export default class Link extends Element {
-  constructor(selectorOrDOMElement, clickHandler) {
-    super(selectorOrDOMElement);
+  constructor(selector, clickHandler) {
+    super(selector);
 
     if (clickHandler !== null) {
       this.onClick(clickHandler);

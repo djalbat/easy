@@ -3,8 +3,8 @@
 import Element from "./element";
 
 export default class InputElement extends Element {
-  constructor(selectorOrDOMElement, changeHandler) {
-    super(selectorOrDOMElement);
+  constructor(selector, changeHandler) {
+    super(selector);
 
     if (changeHandler !== null) {
       this.onChange(changeHandler);

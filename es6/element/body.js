@@ -3,8 +3,8 @@
 import Element from "../element";
 
 export default class Body extends Element {
-  constructor(selectorOrDOMElement = "body") {
-    super(selectorOrDOMElement);
+  constructor(selector = "body") {
+    super(selector);
   }
 
   static tagName = "body";

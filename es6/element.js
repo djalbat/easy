@@ -18,18 +18,12 @@ import { SVG_NAMESPACE_URI } from "./constants";
 import { domNodeMatchesSelector, elementsFromDOMElements, filterDOMNodesBySelector, descendantDOMNodesFromDOMNode } from "./utilities/dom";
 
 class Element {
-  constructor(selectorOrDOMElement) {
-    if (typeof selectorOrDOMElement === "string") {
-      const selector = selectorOrDOMElement;
-
+  constructor(selector) {
+    if (selector) {
       this.domElement = document.querySelector(selector);
-    } else {
-      const domElement = selectorOrDOMElement;  ///
 
-      this.domElement = domElement;
+      this.domElement.__element__ = this; ///
     }
-
-    this.domElement.__element__ = this; ///
   }
 
   getDOMElement() {
@@ -366,7 +360,8 @@ class Element {
   }
 
   static fromTagName(tagName, properties, ...remainingArguments) {
-    const element = fromTagName(Element, tagName, ...remainingArguments),
+    const Class = Element,  ///
+          element = elementFromTagName(Class, tagName, ...remainingArguments),
           defaultProperties = {}, ///
           ignoredProperties = []; ///
 
@@ -376,8 +371,8 @@ class Element {
   }
 
   static fromClass(Class, properties, ...remainingArguments) {
-    const tagName = Class.tagName,
-          element = fromTagName(Class, tagName, ...remainingArguments),
+    const { tagName } = Class,
+          element = elementFromTagName(Class, tagName, ...remainingArguments),
           defaultProperties = defaultPropertiesFromClass(Class),
           ignoredProperties = ignoredPropertiesFromClass(Class);
 
@@ -398,20 +393,17 @@ Object.assign(Element.prototype, scrollMixins);
 
 export default Element;
 
-function fromTagName(Class, tagName, ...remainingArguments) {
-  const domElement = isSVGTagName(tagName) ?
-                       document.createElementNS(SVG_NAMESPACE_URI, tagName) :
-                         document.createElement(tagName);
+function elementFromTagName(Class, tagName, ...remainingArguments) {
+  const selector = null,
+        element = new (Function.prototype.bind.call(Class, null, selector, ...remainingArguments));
 
-  return fromDOMElement(Class, domElement, ...remainingArguments);
-}
+  element.domElement = isSVGTagName(tagName) ?
+                         document.createElementNS(SVG_NAMESPACE_URI, tagName) :
+                           document.createElement(tagName);
 
-function fromDOMElement(Class, domElement, ...remainingArguments) {
-  remainingArguments.unshift(domElement);
+  element.domElement.__element__ = element; ///
 
-  remainingArguments.unshift(null);
-
-  return new (Function.prototype.bind.call(Class, ...remainingArguments));
+  return element;
 }
 
 function defaultPropertiesFromClass(Class, defaultProperties = {}) {

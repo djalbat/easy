@@ -3,8 +3,8 @@
 import Element from "../element";
 
 export default class Checkbox extends Element {
-  constructor(selectorOrDOMElement, changeHandler, checked) {
-    super(selectorOrDOMElement);
+  constructor(selector, changeHandler, checked) {
+    super(selector);
 
     if (changeHandler !== null) {
       this.onChange(changeHandler);
