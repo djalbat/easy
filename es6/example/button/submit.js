@@ -1,6 +1,6 @@
 "use strict";
 
-import { Button, constants } from "../../index";
+import { Button, constants } from "../../index";  ///
 
 const { LEFT_MOUSE_BUTTON } = constants;
 

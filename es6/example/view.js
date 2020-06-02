@@ -1,6 +1,6 @@
 "use strict";
 
-import { Textarea } from "../index";
+import { Textarea } from "../index";  ///
 
 import SubmitButton from "./button/submit";
 
