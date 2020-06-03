@@ -7,11 +7,13 @@ import { isHTMLAttributeName, isSVGAttributeName } from "../utilities/name";
 import { removeFalseyElements, replaceStringsWithTextElements } from "../utilities/elements";
 
 function applyProperties(properties, defaultProperties, ignoredProperties) {
+  this.properties = properties;
+
   properties = Object.assign({}, properties); ///
 
   combine(properties, defaultProperties);
 
-  const childElements = childElementsFromElementAndProperties(this, properties) || properties.childElements;  ///
+  const childElements = childElementsFromElement(this) || properties.childElements;  ///
 
   prune(properties, ignoredProperties);
 
@@ -26,12 +28,8 @@ function applyProperties(properties, defaultProperties, ignoredProperties) {
       ///
     } else if (isHandlerName(name)) {
       addHandler(this, name, value);
-
-      delete properties[name];
     } else if (isAttributeName(name, svg)) {
       addAttribute(this, name, value);
-
-      delete properties[name];
     } else {
       ///
     }
@@ -45,10 +43,7 @@ function applyProperties(properties, defaultProperties, ignoredProperties) {
     childElement.addTo(this);
   });
 
-  Object.assign(this, {
-    properties,
-    context
-  });
+  this.context = context;
 }
 
 function getProperties() {
@@ -104,11 +99,11 @@ const jsxMixins = {
 
 export default jsxMixins;
 
-function childElementsFromElementAndProperties(element, properties) {
+function childElementsFromElement(element) {
   let childElements = null;
 
   if (typeof element.childElements === "function") {
-    childElements = element.childElements.call(element, properties);
+    childElements = element.childElements.call(element);
 
     childElements = guarantee(childElements);
 
@@ -126,8 +121,6 @@ function updateContext(childElement, context) {
                             childElement.context; ///
 
   Object.assign(context, parentContext);
-
-  delete childElement.context;
 }
 
 function addHandler(element, name, value) {
