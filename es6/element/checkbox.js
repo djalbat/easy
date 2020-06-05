@@ -15,6 +15,6 @@ class Checkbox extends Element {
   };
 }
 
-Object.assign(Select.prototype, changeMixins);
+Object.assign(Checkbox.prototype, changeMixins);
 
 export default Checkbox;
