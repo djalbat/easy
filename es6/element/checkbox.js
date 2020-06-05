@@ -1,8 +1,9 @@
 "use strict";
 
 import Element from "../element";
+import changeMixins from "../mixins/change";
 
-export default class Checkbox extends Element {
+class Checkbox extends Element {
   isChecked() { return this.domElement.checked; }
 
   check(checked = true) { this.domElement.checked = checked; }
@@ -13,3 +14,7 @@ export default class Checkbox extends Element {
     type: "checkbox"
   };
 }
+
+Object.assign(Select.prototype, changeMixins);
+
+export default Checkbox;
