@@ -2,12 +2,7 @@
 
 export function first(array) { return array[0]; }
 
-export function splice(array1, start, deleteCount = Infinity, array2 = []) {
-  const args = [start, deleteCount, ...array2],
-       deletedItemsArray = Array.prototype.splice.apply(array1, args);
-
-  return deletedItemsArray;
-}
+export function push(array1, array2) { Array.prototype.push.apply(array1, array2); }
 
 export function flatten(array) {
   return array.reduce((array, element) => {
