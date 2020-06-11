@@ -145,9 +145,7 @@ class Element {
   }
 
   mount(element) {
-    this.add(element);
-
-    const descendantElements = this.getDescendantElements();
+    const descendantElements = element.getDescendantElements();
 
     descendantElements.reverse();
 
@@ -156,11 +154,13 @@ class Element {
             element
           ];
 
+    this.add(element);
+
     elements.forEach((element) => (element.didMount && element.didMount()));  ///
   }
 
   unmount(element) {
-    const descendantElements = this.getDescendantElements(),
+    const descendantElements = element.getDescendantElements(),
           elements = [
             element,
             ...descendantElements
