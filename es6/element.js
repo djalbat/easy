@@ -15,7 +15,7 @@ import { combine } from "./utilities/object";
 import { isSVGTagName } from "./utilities/name";
 import { first, augment } from "./utilities/array";
 import { SVG_NAMESPACE_URI } from "./constants";
-import { domNodeMatchesSelector, elementsFromDOMElements, filterDOMNodesBySelector, descendantDOMNodesFromDOMNode } from "./utilities/dom";
+import { domNodeMatchesSelector, elementsFromDOMElements, filterDOMNodesBySelector, ascendantDOMNodesFromDOMNode, descendantDOMNodesFromDOMNode } from "./utilities/dom";
 
 class Element {
   constructor(selector) {
@@ -318,19 +318,10 @@ class Element {
   }
 
   getAscendantElements(selector = "*") {
-    const ascendantDOMElements = [],
-          parentDOMElement = this.domElement.parentElement;
-
-    let ascendantDOMElement = parentDOMElement;  ///
-    while (ascendantDOMElement !== null) {
-      if (ascendantDOMElement.matches(selector)) {
-        ascendantDOMElements.push(ascendantDOMElement);
-      }
-
-      ascendantDOMElement = ascendantDOMElement.parentElement;
-    }
-
-    const ascendantElements = elementsFromDOMElements(ascendantDOMElements);
+    const domNode = this.domElement,  ///
+          ascendantDOMNodes = ascendantDOMNodesFromDOMNode(domNode),
+          ascendantDOMElements = filterDOMNodesBySelector(ascendantDOMNodes, selector),
+          ascendantElements = elementsFromDOMElements(ascendantDOMElements);
 
     return ascendantElements;
   }

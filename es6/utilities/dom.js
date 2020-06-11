@@ -1,6 +1,6 @@
 "use strict";
 
-import { splice } from "../utilities/array";
+import { push } from "../utilities/array";
 
 export function elementsFromDOMElements(domElements) {
   const domElementsWithElements = filterDOMNodes(domElements, (domElement) => (domElement.__element__ !== undefined)),
@@ -9,12 +9,24 @@ export function elementsFromDOMElements(domElements) {
   return elements;
 }
 
-export function descendantDOMNodesFromDOMNode(domNode, descendantDOMNodes = []) {
-  const start = -1,
-        deleteCount = 0,
-        childDOMNodes = domNode.childNodes;  ///
+export function ascendantDOMNodesFromDOMNode(domNode, ascendantDOMNodes = []) {
+  const parentElement = domNode.parentElement;  ///
 
-  splice(descendantDOMNodes, start, deleteCount, childDOMNodes);
+  if (parentElement !== null) {
+    const parentDOMNode = parentElement; ///
+
+    ascendantDOMNodes.push(parentDOMNode);
+
+    ascendantDOMNodesFromDOMNode(parentDOMNode, ascendantDOMNodes);
+  }
+
+  return ascendantDOMNodes;
+}
+
+export function descendantDOMNodesFromDOMNode(domNode, descendantDOMNodes = []) {
+  const childDOMNodes = domNode.childNodes;  ///
+
+  push(descendantDOMNodes, childDOMNodes);
 
   childDOMNodes.forEach((childDOMNode) => descendantDOMNodesFromDOMNode(childDOMNode, descendantDOMNodes));
 
