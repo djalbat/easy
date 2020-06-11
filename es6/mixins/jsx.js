@@ -40,7 +40,7 @@ function applyProperties(properties, defaultProperties, ignoredProperties) {
   childElements.forEach((childElement) => {
     updateContext(childElement, context);
 
-    childElement.addTo(this);
+    this.add(childElement);
   });
 
   this.context = context;
