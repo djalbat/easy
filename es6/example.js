@@ -15,12 +15,3 @@ body.mount(
   <View />
 
 );
-
-// window.onResize((event, element) => {
-//
-//   const width = window.getWidth(),
-//         height = window.getHeight();
-//
-//   console.log(width, height)
-//
-// });
