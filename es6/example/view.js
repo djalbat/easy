@@ -1,6 +1,6 @@
 "use strict";
 
-import { Textarea, Checkbox, Button, constants } from "../index";  ///
+import { Textarea, Checkbox, Button, constants, Element } from "../index";  ///
 
 const { LEFT_MOUSE_BUTTON } = constants;
 
@@ -38,28 +38,58 @@ const View = (properties) =>
     >
       Submit
     </Button>
-    <div onResize={(event, element) => {
-
-           const width = element.getWidth(),
-                 height = element.getHeight();
-
-           console.log(width, height)
-
-         }}
-         onMouseMove={(event, element) => {
-
-           const { pageX, pageY } = event;
-
-           console.log(pageX, pageY)
-
-         }}
-    >
-      <p>
-        A paragraph contained in a div with resize and mouse move handlers.
-      </p>
-    </div>
+    <Div />
   </div>
 
 ;
 
 export default View;
+
+class Div extends Element {
+  willMount(done) {
+    this.add(
+
+      <p>
+        A paragraph contained in a div with resize and mouse move handlers.
+      </p>
+
+    );
+
+    done();
+  }
+
+  didUnmount(done) {
+    ///
+
+    done();
+  }
+
+  initialise() {
+    this.onResize((event, element) => {
+
+      const width = this.getWidth(),
+            height = this.getHeight();
+
+      console.log(width, height)
+
+    });
+
+    this.onMouseMove((event, element) => {
+
+      const { pageX, pageY } = event;
+
+      console.log(pageX, pageY)
+
+    });
+  }
+
+  static tagName = "div";
+
+  static fromClass(Class, properties) {
+    const div = Element.fromClass(Class, properties);
+
+    div.initialise();
+
+    return div;
+  }
+}
