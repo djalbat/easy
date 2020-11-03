@@ -46,22 +46,14 @@ const View = (properties) =>
 export default View;
 
 class Div extends Element {
-  willMount(done) {
-    this.add(
+  childElements() {
+    return (
 
       <p>
         A paragraph contained in a div with resize and mouse move handlers.
       </p>
 
     );
-
-    done();
-  }
-
-  didUnmount(done) {
-    ///
-
-    done();
   }
 
   initialise() {

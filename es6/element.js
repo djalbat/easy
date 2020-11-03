@@ -12,7 +12,6 @@ import resizeMixins from "./mixins/resize";
 import scrollMixins from "./mixins/scroll";
 
 import { combine } from "./utilities/object";
-import { forEach } from "./utilities/asynchronous"
 import { isSVGTagName } from "./utilities/name";
 import { first, augment } from "./utilities/array";
 import { SVG_NAMESPACE_URI } from "./constants";
@@ -145,7 +144,7 @@ class Element {
     }
   }
 
-  mount(element, done) {
+  mount(element) {
     const descendantElements = element.getDescendantElements(),
           elements = [
             element,
@@ -154,26 +153,12 @@ class Element {
 
     elements.reverse(); ///
 
-    forEach(elements, (element, next) => {
-      if (element.willMount) {
-        const done = next;  ///
+    this.add(element);
 
-        element.willMount(done);
-
-        return
-      }
-
-      next();
-    }, () => {
-      this.add(element);
-
-      elements.forEach((element) => (element.didMount && element.didMount()));  ///
-
-      done && done();
-    });
+    elements.forEach((element) => (element.didMount && element.didMount()));  ///
   }
 
-  unmount(element, done) {
+  unmount(element) {
     const descendantElements = element.getDescendantElements(),
           elements = [
             element,
@@ -183,20 +168,6 @@ class Element {
     elements.forEach((element) => (element.willUnmount && element.willUnmount()));  ///
 
     this.remove(element);
-
-    forEach(elements, (element, next) => {
-      if (element.willUnmount) {
-        const done = next;  ///
-
-        element.willUnmount(done);
-
-        return
-      }
-
-      next();
-    }, () => {
-      done && done();
-    });
   }
 
   show(displayStyle = "block") { this.display(displayStyle); }
