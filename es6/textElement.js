@@ -2,8 +2,10 @@
 
 import Offset from "./miscellaneous/offset";
 import Bounds from "./miscellaneous/bounds";
+import elementMixins from "./mixins/element";
+import Element from "./element";
 
-export default class TextElement {
+class TextElement {
   constructor(text) {
     this.domElement = document.createTextNode(text); ///
 
@@ -78,3 +80,7 @@ export default class TextElement {
     this.domElement.remove();
   }
 }
+
+Object.assign(TextElement.prototype, elementMixins);
+
+export default TextElement;

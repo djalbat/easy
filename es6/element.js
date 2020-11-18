@@ -10,12 +10,12 @@ import eventMixins from "./mixins/event";
 import mouseMixins from "./mixins/mouse";
 import resizeMixins from "./mixins/resize";
 import scrollMixins from "./mixins/scroll";
+import elementMixins from "./mixins/element";
 
+import { augment } from "./utilities/array";
 import { combine } from "./utilities/object";
 import { isSVGTagName } from "./utilities/name";
-import { first, augment } from "./utilities/array";
 import { SVG_NAMESPACE_URI } from "./constants";
-import { domNodeMatchesSelector, elementsFromDOMElements, filterDOMNodesBySelector, ascendantDOMNodesFromDOMNode, descendantDOMNodesFromDOMNode } from "./utilities/dom";
 
 class Element {
   constructor(selector) {
@@ -281,74 +281,6 @@ class Element {
     return focus;
   }
 
-  getDescendantElements(selector = "*") {
-    const domNode = this.domElement,  ///
-          descendantDOMNodes = descendantDOMNodesFromDOMNode(domNode),
-          descendantDOMElements = filterDOMNodesBySelector(descendantDOMNodes, selector),
-          descendantElements = elementsFromDOMElements(descendantDOMElements);
-
-    return descendantElements;
-  }
-
-  getChildElements(selector = "*") {
-    const childDOMNodes = this.domElement.childNodes,
-          childDOMElements = filterDOMNodesBySelector(childDOMNodes, selector),
-          childElements = elementsFromDOMElements(childDOMElements);
-
-    return childElements;
-  }
-
-  getParentElement(selector = "*") {
-    let parentElement = null;
-
-    const parentDOMElement = this.domElement.parentElement;
-
-    if (parentDOMElement !== null) {
-      if (parentDOMElement.matches(selector)) {
-        const parentDOMElements = [parentDOMElement],
-              parentElements = elementsFromDOMElements(parentDOMElements),
-              firstParentElement = first(parentElements);
-
-        parentElement = firstParentElement || null;
-      }
-    }
-
-    return parentElement;
-  }
-
-  getAscendantElements(selector = "*") {
-    const domNode = this.domElement,  ///
-          ascendantDOMNodes = ascendantDOMNodesFromDOMNode(domNode),
-          ascendantDOMElements = filterDOMNodesBySelector(ascendantDOMNodes, selector),
-          ascendantElements = elementsFromDOMElements(ascendantDOMElements);
-
-    return ascendantElements;
-  }
-
-  getPreviousSiblingElement(selector = "*") {
-    let previousSiblingElement = null;
-
-    const previousSiblingDOMNode = this.domElement.previousSibling;  ///
-
-    if ((previousSiblingDOMNode !== null) && domNodeMatchesSelector(previousSiblingDOMNode, selector)) {
-      previousSiblingElement = previousSiblingDOMNode.__element__ || null;
-    }
-
-    return previousSiblingElement;
-  }
-
-  getNextSiblingElement(selector = "*") {
-    let nextSiblingElement = null;
-
-    const nextSiblingDOMNode = this.domElement.nextSibling;
-
-    if ((nextSiblingDOMNode !== null) && domNodeMatchesSelector(nextSiblingDOMNode, selector)) {
-      nextSiblingElement = nextSiblingDOMNode.__element__ || null;
-    }
-
-    return nextSiblingElement;
-  }
-
   static fromTagName(tagName, properties, ...remainingArguments) {
     const Class = Element,  ///
           element = elementFromTagName(Class, tagName, ...remainingArguments),
@@ -380,6 +312,7 @@ Object.assign(Element.prototype, eventMixins);
 Object.assign(Element.prototype, mouseMixins);
 Object.assign(Element.prototype, resizeMixins);
 Object.assign(Element.prototype, scrollMixins);
+Object.assign(Element.prototype, elementMixins);
 
 export default Element;
 
