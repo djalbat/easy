@@ -194,7 +194,7 @@ class Element {
   }
   
   isDisplayed() {
-    const display = this.style("display"),
+    const display = this.css("display"),
           displayed = (display !== "none");
     
     return displayed;
