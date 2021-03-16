@@ -1,9 +1,8 @@
 "use strict";
 
-const lively = require("lively-cli"), ///
-      express = require("express");
+const express = require("express");
 
-const { createLiveReloadHandler } = lively;
+const { createLiveReloadHandler } = require("lively-cli");
 
 const server = express(), ///
       staticRouter = express.static("."),
