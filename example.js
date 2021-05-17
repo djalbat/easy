@@ -36,7 +36,7 @@
         _defineProperties(Constructor, staticProps);
       return Constructor;
     }
-    var Offset = function() {
+    var Offset = /* @__PURE__ */ function() {
       function Offset2(top, left) {
         _classCallCheck(this, Offset2);
         this.top = top;
@@ -90,7 +90,7 @@
         _defineProperties(Constructor, staticProps);
       return Constructor;
     }
-    var Bounds = function() {
+    var Bounds = /* @__PURE__ */ function() {
       function Bounds2(top, left, bottom, right) {
         _classCallCheck(this, Bounds2);
         this.top = top;
@@ -860,7 +860,7 @@
     function descendantDOMNodesFromDOMNode(domNode, param) {
       var descendantDOMNodes = param === void 0 ? [] : param;
       var childDOMNodes = domNode.childNodes;
-      _array.push(descendantDOMNodes, childDOMNodes);
+      (0, _array).push(descendantDOMNodes, childDOMNodes);
       childDOMNodes.forEach(function(childDOMNode) {
         return descendantDOMNodesFromDOMNode(childDOMNode, descendantDOMNodes);
       });
@@ -910,12 +910,12 @@
     var _dom = require_dom();
     function getDescendantElements(param) {
       var selector = param === void 0 ? "*" : param;
-      var domNode = this.domElement, descendantDOMNodes = _dom.descendantDOMNodesFromDOMNode(domNode), descendantDOMElements = _dom.filterDOMNodesBySelector(descendantDOMNodes, selector), descendantElements = _dom.elementsFromDOMElements(descendantDOMElements);
+      var domNode = this.domElement, descendantDOMNodes = (0, _dom).descendantDOMNodesFromDOMNode(domNode), descendantDOMElements = (0, _dom).filterDOMNodesBySelector(descendantDOMNodes, selector), descendantElements = (0, _dom).elementsFromDOMElements(descendantDOMElements);
       return descendantElements;
     }
     function getChildElements(param) {
       var selector = param === void 0 ? "*" : param;
-      var childDOMNodes = this.domElement.childNodes, childDOMElements = _dom.filterDOMNodesBySelector(childDOMNodes, selector), childElements = _dom.elementsFromDOMElements(childDOMElements);
+      var childDOMNodes = this.domElement.childNodes, childDOMElements = (0, _dom).filterDOMNodesBySelector(childDOMNodes, selector), childElements = (0, _dom).elementsFromDOMElements(childDOMElements);
       return childElements;
     }
     function getParentElement(param) {
@@ -926,7 +926,7 @@
         if (parentDOMElement.matches(selector)) {
           var parentDOMElements = [
             parentDOMElement
-          ], parentElements = _dom.elementsFromDOMElements(parentDOMElements), firstParentElement = _array.first(parentElements);
+          ], parentElements = (0, _dom).elementsFromDOMElements(parentDOMElements), firstParentElement = (0, _array).first(parentElements);
           parentElement = firstParentElement || null;
         }
       }
@@ -934,14 +934,14 @@
     }
     function getAscendantElements(param) {
       var selector = param === void 0 ? "*" : param;
-      var domNode = this.domElement, ascendantDOMNodes = _dom.ascendantDOMNodesFromDOMNode(domNode), ascendantDOMElements = _dom.filterDOMNodesBySelector(ascendantDOMNodes, selector), ascendantElements = _dom.elementsFromDOMElements(ascendantDOMElements);
+      var domNode = this.domElement, ascendantDOMNodes = (0, _dom).ascendantDOMNodesFromDOMNode(domNode), ascendantDOMElements = (0, _dom).filterDOMNodesBySelector(ascendantDOMNodes, selector), ascendantElements = (0, _dom).elementsFromDOMElements(ascendantDOMElements);
       return ascendantElements;
     }
     function getPreviousSiblingElement(param) {
       var selector = param === void 0 ? "*" : param;
       var previousSiblingElement = null;
       var previousSiblingDOMNode = this.domElement.previousSibling;
-      if (previousSiblingDOMNode !== null && _dom.domNodeMatchesSelector(previousSiblingDOMNode, selector)) {
+      if (previousSiblingDOMNode !== null && (0, _dom).domNodeMatchesSelector(previousSiblingDOMNode, selector)) {
         previousSiblingElement = previousSiblingDOMNode.__element__ || null;
       }
       return previousSiblingElement;
@@ -950,7 +950,7 @@
       var selector = param === void 0 ? "*" : param;
       var nextSiblingElement = null;
       var nextSiblingDOMNode = this.domElement.nextSibling;
-      if (nextSiblingDOMNode !== null && _dom.domNodeMatchesSelector(nextSiblingDOMNode, selector)) {
+      if (nextSiblingDOMNode !== null && (0, _dom).domNodeMatchesSelector(nextSiblingDOMNode, selector)) {
         nextSiblingElement = nextSiblingDOMNode.__element__ || null;
       }
       return nextSiblingElement;
@@ -1005,7 +1005,7 @@
         default: obj
       };
     }
-    var TextElement = function() {
+    var TextElement = /* @__PURE__ */ function() {
       function TextElement2(text) {
         _classCallCheck(this, TextElement2);
         this.domElement = document.createTextNode(text);
@@ -1156,9 +1156,9 @@
     function applyProperties(properties, defaultProperties, ignoredProperties) {
       this.properties = properties;
       properties = Object.assign({}, properties);
-      _object.combine(properties, defaultProperties);
+      (0, _object).combine(properties, defaultProperties);
       var childElements = childElementsFromElement(this) || properties.childElements;
-      _object.prune(properties, ignoredProperties);
+      (0, _object).prune(properties, ignoredProperties);
       var _domElement = this.domElement, namespaceURI = _domElement.namespaceURI, svg = namespaceURI === _constants.SVG_NAMESPACE_URI, names = Object.keys(properties);
       names.forEach(function(name) {
         var value = properties[name];
@@ -1186,7 +1186,7 @@
     function assignContext(names, thenDelete) {
       var argumentsLength = arguments.length;
       if (argumentsLength === 1) {
-        var firstArgument = _array.first(arguments);
+        var firstArgument = (0, _array).first(arguments);
         if (typeof firstArgument === "boolean") {
           names = Object.keys(this.context);
           thenDelete = firstArgument;
@@ -1220,9 +1220,9 @@
       var childElements = null;
       if (typeof element.childElements === "function") {
         childElements = element.childElements.call(element);
-        childElements = _array.guarantee(childElements);
-        childElements = _elements.removeFalseyElements(childElements);
-        childElements = _elements.replaceStringsWithTextElements(childElements);
+        childElements = (0, _array).guarantee(childElements);
+        childElements = (0, _elements).removeFalseyElements(childElements);
+        childElements = (0, _elements).replaceStringsWithTextElements(childElements);
       }
       return childElements;
     }
@@ -1259,7 +1259,7 @@
       return name.match(/^on/);
     }
     function isAttributeName(name, svg) {
-      return svg ? _name.isSVGAttributeName(name) : _name.isHTMLAttributeName(name);
+      return svg ? (0, _name).isSVGAttributeName(name) : (0, _name).isHTMLAttributeName(name);
     }
   });
 
@@ -1415,7 +1415,7 @@
         if (eventType === "resize") {
           var resizeEventListeners = this.findEventListeners("resize"), resizeEventListenersLength = resizeEventListeners.length;
           if (resizeEventListenersLength === 0) {
-            _resize.removeResizeObject(this);
+            (0, _resize).removeResizeObject(this);
           }
         }
       }.bind(this));
@@ -1641,7 +1641,7 @@
       return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
     }
     var _bind;
-    var Element1 = function() {
+    var Element1 = /* @__PURE__ */ function() {
       function Element12(selector) {
         _classCallCheck(this, Element12);
         if (selector) {
@@ -2025,6 +2025,7 @@
               tagName
             ].concat(_toConsumableArray(remainingArguments))), defaultProperties = defaultPropertiesFromClass(Class), ignoredProperties = ignoredPropertiesFromClass(Class);
             element.applyProperties(properties, defaultProperties, ignoredProperties);
+            element.initialise && element.initialise();
             return element;
           }
         }
@@ -2051,14 +2052,14 @@
         null,
         selector
       ].concat(_toConsumableArray(remainingArguments))))();
-      element.domElement = _name.isSVGTagName(tagName) ? document.createElementNS(_constants.SVG_NAMESPACE_URI, tagName) : document.createElement(tagName);
+      element.domElement = (0, _name).isSVGTagName(tagName) ? document.createElementNS(_constants.SVG_NAMESPACE_URI, tagName) : document.createElement(tagName);
       element.domElement.__element__ = element;
       return element;
     }
     function defaultPropertiesFromClass(Class, param) {
       var defaultProperties = param === void 0 ? {} : param;
       if (Class.hasOwnProperty("defaultProperties")) {
-        _object.combine(defaultProperties, Class.defaultProperties);
+        (0, _object).combine(defaultProperties, Class.defaultProperties);
       }
       var superClass = Object.getPrototypeOf(Class);
       if (superClass !== null) {
@@ -2069,7 +2070,7 @@
     function ignoredPropertiesFromClass(Class, param) {
       var ignoredProperties = param === void 0 ? [] : param;
       if (Class.hasOwnProperty("ignoredProperties")) {
-        _array.augment(ignoredProperties, Class.ignoredProperties, function(ignoredProperty) {
+        (0, _array).augment(ignoredProperties, Class.ignoredProperties, function(ignoredProperty) {
           return !ignoredProperties.includes(ignoredProperty);
         });
       }
@@ -2218,8 +2219,8 @@
       };
       return _wrapNativeSuper(Class);
     }
-    var Body = function(Element1) {
-      _inherits(Body2, _element.default);
+    var Body = /* @__PURE__ */ function(Element1) {
+      _inherits(Body2, Element1);
       function Body2(param) {
         var selector = param === void 0 ? "body" : param;
         _classCallCheck(this, Body2);
@@ -2368,8 +2369,8 @@
       };
       return _wrapNativeSuper(Class);
     }
-    var Button = function(Element1) {
-      _inherits(Button2, _element.default);
+    var Button = /* @__PURE__ */ function(Element1) {
+      _inherits(Button2, Element1);
       function Button2() {
         _classCallCheck(this, Button2);
         return _possibleConstructorReturn(this, _getPrototypeOf(Button2).apply(this, arguments));
@@ -2556,8 +2557,8 @@
       };
       return _wrapNativeSuper(Class);
     }
-    var Checkbox = function(Element1) {
-      _inherits(Checkbox2, _element.default);
+    var Checkbox = /* @__PURE__ */ function(Element1) {
+      _inherits(Checkbox2, Element1);
       function Checkbox2() {
         _classCallCheck(this, Checkbox2);
         return _possibleConstructorReturn(this, _getPrototypeOf(Checkbox2).apply(this, arguments));
@@ -2742,8 +2743,8 @@
       };
       return _wrapNativeSuper(Class);
     }
-    var Link = function(Element1) {
-      _inherits(Link2, _element.default);
+    var Link = /* @__PURE__ */ function(Element1) {
+      _inherits(Link2, Element1);
       function Link2() {
         _classCallCheck(this, Link2);
         return _possibleConstructorReturn(this, _getPrototypeOf(Link2).apply(this, arguments));
@@ -2923,8 +2924,8 @@
       };
       return _wrapNativeSuper(Class);
     }
-    var Select = function(Element1) {
-      _inherits(Select2, _element.default);
+    var Select = /* @__PURE__ */ function(Element1) {
+      _inherits(Select2, Element1);
       function Select2() {
         _classCallCheck(this, Select2);
         return _possibleConstructorReturn(this, _getPrototypeOf(Select2).apply(this, arguments));
@@ -3103,8 +3104,8 @@
       };
       return _wrapNativeSuper(Class);
     }
-    var InputElement = function(Element1) {
-      _inherits(InputElement2, _element.default);
+    var InputElement = /* @__PURE__ */ function(Element1) {
+      _inherits(InputElement2, Element1);
       function InputElement2() {
         _classCallCheck(this, InputElement2);
         return _possibleConstructorReturn(this, _getPrototypeOf(InputElement2).apply(this, arguments));
@@ -3267,8 +3268,8 @@
     var _typeof = function(obj) {
       return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj;
     };
-    var Input = function(InputElement) {
-      _inherits(Input2, _inputElement.default);
+    var Input = /* @__PURE__ */ function(InputElement) {
+      _inherits(Input2, InputElement);
       function Input2() {
         _classCallCheck(this, Input2);
         return _possibleConstructorReturn(this, _getPrototypeOf(Input2).apply(this, arguments));
@@ -3352,8 +3353,8 @@
     var _typeof = function(obj) {
       return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj;
     };
-    var Textarea = function(InputElement) {
-      _inherits(Textarea2, _inputElement.default);
+    var Textarea = /* @__PURE__ */ function(InputElement) {
+      _inherits(Textarea2, InputElement);
       function Textarea2() {
         _classCallCheck(this, Textarea2);
         return _possibleConstructorReturn(this, _getPrototypeOf(Textarea2).apply(this, arguments));
@@ -3424,7 +3425,7 @@
     var _Object;
     var onResize = _resize.default.onResize;
     var offResize = _resize.default.offResize;
-    var Window1 = function() {
+    var Window1 = /* @__PURE__ */ function() {
       function Window12() {
         _classCallCheck(this, Window12);
         this.domElement = window;
@@ -3569,10 +3570,10 @@
     var _default = React2;
     exports.default = _default;
     function childElementsFromRemainingArguments(remainingArguments) {
-      remainingArguments = _array.flatten(remainingArguments);
+      remainingArguments = (0, _array).flatten(remainingArguments);
       var childElements = remainingArguments;
-      childElements = _elements.removeFalseyElements(childElements);
-      childElements = _elements.replaceStringsWithTextElements(childElements);
+      childElements = (0, _elements).removeFalseyElements(childElements);
+      childElements = (0, _elements).replaceStringsWithTextElements(childElements);
       return childElements;
     }
     function isSubclassOf(argument, Class) {
@@ -3867,12 +3868,12 @@
     var View = function(properties) {
       return React.createElement("div", {
         className: "view"
-      }, React.createElement(_index2.Checkbox, {
+      }, /* @__PURE__ */ React.createElement(_index2.Checkbox, {
         checked: true,
         onChange: function(event, element) {
           console.log("Changed");
         }
-      }), React.createElement(_index2.Textarea, {
+      }), /* @__PURE__ */ React.createElement(_index2.Textarea, {
         onChange: function(event, element) {
           console.log("change");
         },
@@ -3880,48 +3881,54 @@
           var scrollTop = this.getScrollTop(), scrollLeft = this.getScrollLeft();
           console.log(scrollTop, scrollLeft);
         }
-      }), React.createElement(_index2.Button, {
+      }), /* @__PURE__ */ React.createElement(_index2.Button, {
         onClick: function(event, element) {
           var button = event.button;
           console.log(button === LEFT_MOUSE_BUTTON);
         }
-      }, "Submit"), React.createElement(Div, null));
+      }, "Submit"), /* @__PURE__ */ React.createElement(Div, null));
     };
     var _default = View;
     exports.default = _default;
-    var Div = function(Element1) {
-      _inherits(Div2, _index2.Element);
+    var Div = /* @__PURE__ */ function(Element1) {
+      _inherits(Div2, Element1);
       function Div2() {
         _classCallCheck(this, Div2);
         return _possibleConstructorReturn(this, _getPrototypeOf(Div2).apply(this, arguments));
       }
       _createClass(Div2, [
         {
-          key: "childElements",
-          value: function childElements() {
-            return React.createElement("p", null, "A paragraph contained in a div with resize and mouse move handlers.");
+          key: "resizeHandler",
+          value: function resizeHandler(event, element) {
+            var width = this.getWidth(), height = this.getHeight();
+            console.log(width, height);
           }
         },
         {
-          key: "initialise",
-          value: function initialise() {
-            this.onResize(function(event, element) {
-              var width = this.getWidth(), height = this.getHeight();
-              console.log(width, height);
-            }.bind(this));
-            this.onMouseMove(function(event, element) {
-              var pageX = event.pageX, pageY = event.pageY;
-              console.log(pageX, pageY);
-            });
+          key: "mouseMoveHandler",
+          value: function mouseMoveHandler(event, element) {
+            var pageX = event.pageX, pageY = event.pageY;
+            console.log(pageX, pageY);
           }
-        }
-      ], [
+        },
         {
-          key: "fromClass",
-          value: function fromClass(Class, properties) {
-            var div = _index2.Element.fromClass(Class, properties);
-            div.initialise();
-            return div;
+          key: "didMount",
+          value: function didMount() {
+            this.onResize(this.resizeHandler, this);
+            this.onMouseMove(this.mouseMoveHandler, this);
+          }
+        },
+        {
+          key: "willUnmount",
+          value: function willUnmount() {
+            this.offMouseMove(this.mouseMoveHandler, this);
+            this.offResize(this.resizeHandler, this);
+          }
+        },
+        {
+          key: "childElements",
+          value: function childElements() {
+            return /* @__PURE__ */ React.createElement("p", null, "A paragraph contained in a div with resize and mouse move handlers.");
           }
         }
       ]);
@@ -3943,6 +3950,6 @@
     React: _index.React
   });
   var body = new _index.Body();
-  body.mount(_index.React.createElement(_view.default, null));
+  body.mount(/* @__PURE__ */ _index.React.createElement(_view.default, null));
 })();
 //# sourceMappingURL=example.js.map

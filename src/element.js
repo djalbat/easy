@@ -300,6 +300,8 @@ class Element {
 
     element.applyProperties(properties, defaultProperties, ignoredProperties);
 
+    element.initialise && element.initialise(); ///
+
     return element;
   }
 }
