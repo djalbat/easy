@@ -2011,6 +2011,7 @@
               tagName
             ].concat(_toConsumableArray(remainingArguments))), defaultProperties = {}, ignoredProperties = [];
             element.applyProperties(properties, defaultProperties, ignoredProperties);
+            element.initialise && element.initialise();
             return element;
           }
         },
