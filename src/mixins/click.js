@@ -1,8 +1,10 @@
 "use strict";
 
-function onClick(clickHandler, element) { this.on("click", clickHandler, element); }
+import { CLICK } from "../constants";
 
-function offClick(clickHandler, element) { this.off("click", clickHandler, element); }
+function onClick(clickHandler, element) { this.on(CLICK, clickHandler, element); }
+
+function offClick(clickHandler, element) { this.off(CLICK, clickHandler, element); }
 
 const clickMixins = {
   onClick,

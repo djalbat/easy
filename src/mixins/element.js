@@ -1,9 +1,10 @@
 "use strict";
 
 import { first } from "../utilities/array";
+import { WILDCARD } from "../constants";
 import { ascendantDOMNodesFromDOMNode, descendantDOMNodesFromDOMNode, domNodeMatchesSelector, elementsFromDOMElements, filterDOMNodesBySelector } from "../utilities/dom";
 
-function getDescendantElements(selector = "*") {
+function getDescendantElements(selector = WILDCARD) {
   const domNode = this.domElement,  ///
         descendantDOMNodes = descendantDOMNodesFromDOMNode(domNode),
         descendantDOMElements = filterDOMNodesBySelector(descendantDOMNodes, selector),
@@ -12,7 +13,7 @@ function getDescendantElements(selector = "*") {
   return descendantElements;
 }
 
-function getChildElements(selector = "*") {
+function getChildElements(selector = WILDCARD) {
   const childDOMNodes = this.domElement.childNodes,
         childDOMElements = filterDOMNodesBySelector(childDOMNodes, selector),
         childElements = elementsFromDOMElements(childDOMElements);
@@ -20,7 +21,7 @@ function getChildElements(selector = "*") {
   return childElements;
 }
 
-function getParentElement(selector = "*") {
+function getParentElement(selector = WILDCARD) {
   let parentElement = null;
 
   const parentDOMElement = this.domElement.parentElement;
@@ -38,7 +39,7 @@ function getParentElement(selector = "*") {
   return parentElement;
 }
 
-function getAscendantElements(selector = "*") {
+function getAscendantElements(selector = WILDCARD) {
   const domNode = this.domElement,  ///
         ascendantDOMNodes = ascendantDOMNodesFromDOMNode(domNode),
         ascendantDOMElements = filterDOMNodesBySelector(ascendantDOMNodes, selector),
@@ -47,7 +48,7 @@ function getAscendantElements(selector = "*") {
   return ascendantElements;
 }
 
-function getPreviousSiblingElement(selector = "*") {
+function getPreviousSiblingElement(selector = WILDCARD) {
   let previousSiblingElement = null;
 
   const previousSiblingDOMNode = this.domElement.previousSibling;  ///
@@ -59,7 +60,7 @@ function getPreviousSiblingElement(selector = "*") {
   return previousSiblingElement;
 }
 
-function getNextSiblingElement(selector = "*") {
+function getNextSiblingElement(selector = WILDCARD) {
   let nextSiblingElement = null;
 
   const nextSiblingDOMNode = this.domElement.nextSibling;

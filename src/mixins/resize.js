@@ -1,11 +1,13 @@
 "use strict";
 
-function onResize(resizeHandler, element) { this.on("resize", resizeHandler, element); }
+import { OBJECT, RESIZE, TEXT_HTML, ABOUT_BLANK } from "../constants";
 
-function offResize(resizeHandler, element) { this.off("resize", resizeHandler, element); }
+function onResize(resizeHandler, element) { this.on(RESIZE, resizeHandler, element); }
+
+function offResize(resizeHandler, element) { this.off(RESIZE, resizeHandler, element); }
 
 function addResizeObject() {
-  const resizeObject = document.createElement("object"),
+  const resizeObject = document.createElement(OBJECT),
         style = `display: block; 
                  position: absolute; 
                  top: 0; 
@@ -15,11 +17,13 @@ function addResizeObject() {
                  overflow: hidden; 
                  pointer-events: none; 
                  z-index: -1;`,
-        data = "about:blank",
-        type = "text/html";
+        data = ABOUT_BLANK,
+        type = TEXT_HTML;
 
   resizeObject.setAttribute("style", style);
+
   resizeObject.data = data;
+
   resizeObject.type = type;
 
   this.__resizeObject__ = resizeObject;
@@ -33,9 +37,11 @@ function removeResizeObject() {
   const resizeObject = this.__resizeObject__,
         objectWindow = resizeObject.contentDocument.defaultView;  ///
 
-  objectWindow.removeEventListener("resize", resizeEventListener);
+  objectWindow.removeEventListener(RESIZE, resizeEventListener);
 
   this.domElement.removeChild(resizeObject);
+
+  delete this.__resizeObject__;
 }
 
 const resizeMixins = {
@@ -51,8 +57,8 @@ function resizeObjectLoadHandler(element) {
   const resizeObject = element.__resizeObject__,
         resizeObjectWindow = resizeObject.contentDocument.defaultView;  ///
 
-  resizeObjectWindow.addEventListener("resize", (event) => {
-    const resizeEventListeners = element.findEventListeners("resize");
+  resizeObjectWindow.addEventListener(RESIZE, (event) => {
+    const resizeEventListeners = element.findEventListeners(RESIZE);
 
     resizeEventListeners.forEach((resizeEventListener) => resizeEventListener(event));
   });

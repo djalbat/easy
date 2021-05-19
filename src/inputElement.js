@@ -3,10 +3,12 @@
 import Element from "./element";
 import changeMixins from "./mixins/change";
 
-class InputElement extends Element {
-  onChange(changeHandler, element) { this.on("change", changeHandler, element); }
+import { CHANGE } from "./constants";
 
-  offChange(changeHandler, element) { this.off("change", changeHandler, element); }
+class InputElement extends Element {
+  onChange(changeHandler, element) { this.on(CHANGE, changeHandler, element); }
+
+  offChange(changeHandler, element) { this.off(CHANGE, changeHandler, element); }
 
   onResize(resizeHandler, element) {} ///
 

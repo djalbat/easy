@@ -5,13 +5,15 @@ import clickMixins from "./mixins/click";
 import eventMixins from "./mixins/event";
 import mouseMixins from "./mixins/mouse";
 
+import { UNDEFINED } from "./constants";
+
 class Document {
   constructor() {
     this.domElement = document; ///
   }
 }
 
-export default (typeof document === "undefined") ? undefined : new Document();  ///
+export default (typeof document === UNDEFINED) ? undefined : new Document();  ///
 
 Object.assign(Document.prototype, keyMixins);
 Object.assign(Document.prototype, clickMixins);

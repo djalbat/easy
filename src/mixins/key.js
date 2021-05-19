@@ -1,12 +1,14 @@
 "use strict";
 
-function onKeyUp(keyUpHandler, element) { this.on("keyup", keyUpHandler, element); }
+import { KEYUP, KEYDOWN } from "../constants";
 
-function offKeyUp(keyUpHandler, element) { this.off("keyup", keyUpHandler, element); }
+function onKeyUp(keyUpHandler, element) { this.on(KEYUP, keyUpHandler, element); }
 
-function onKeyDown(keyDownHandler, element) { this.on("keydown", keyDownHandler, element); }
+function offKeyUp(keyUpHandler, element) { this.off(KEYUP, keyUpHandler, element); }
 
-function offKeyDown(keyDownHandler, element) { this.off("keydown", keyDownHandler, element); }
+function onKeyDown(keyDownHandler, element) { this.on(KEYDOWN, keyDownHandler, element); }
+
+function offKeyDown(keyDownHandler, element) { this.off(KEYDOWN, keyDownHandler, element); }
 
 const keyMixins = {
   onKeyUp,

@@ -1,8 +1,10 @@
 "use strict";
 
-function onScroll(scrollHandler, element) { this.on("scroll", scrollHandler, element); }
+import { SCROLL } from "../constants";
 
-function offScroll(scrollHandler, element) { this.off("scroll", scrollHandler, element); }
+function onScroll(scrollHandler, element) { this.on(SCROLL, scrollHandler, element); }
+
+function offScroll(scrollHandler, element) { this.off(SCROLL, scrollHandler, element); }
 
 function getScrollTop() { return this.domElement.scrollTop; }
 

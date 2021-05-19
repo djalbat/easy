@@ -2,9 +2,9 @@
 
 import { combine, prune } from "../utilities/object";
 import { first, guarantee } from "../utilities/array";
-import { SVG_NAMESPACE_URI } from "../constants";
 import { isHTMLAttributeName, isSVGAttributeName } from "../utilities/name";
 import { removeFalseyElements, replaceStringsWithTextElements } from "../utilities/elements";
+import { FOR, CLASS, OBJECT, HTML_FOR, CLASS_NAME, BOOLEAN, FUNCTION, SVG_NAMESPACE_URI } from "../constants";
 
 function applyProperties(properties, defaultProperties, ignoredProperties) {
   this.properties = properties;
@@ -60,7 +60,7 @@ function assignContext(names, thenDelete) {
   if (argumentsLength === 1) {
     const firstArgument = first(arguments);
 
-    if (typeof firstArgument === "boolean") {
+    if (typeof firstArgument === BOOLEAN) {
       names = Object.keys(this.context);
 
       thenDelete = firstArgument;
@@ -102,7 +102,7 @@ export default jsxMixins;
 function childElementsFromElement(element) {
   let childElements = null;
 
-  if (typeof element.childElements === "function") {
+  if (typeof element.childElements === FUNCTION) {
     childElements = element.childElements.call(element);
 
     childElements = guarantee(childElements);
@@ -116,7 +116,7 @@ function childElementsFromElement(element) {
 }
 
 function updateContext(childElement, context) {
-  const parentContext = (typeof childElement.parentContext === "function") ?
+  const parentContext = (typeof childElement.parentContext === FUNCTION) ?
                           childElement.parentContext() :
                             childElement.context; ///
 
@@ -131,21 +131,21 @@ function addHandler(element, name, value) {
 }
 
 function addAttribute(element, name, value) {
-  if (name === "className") {
-    name = "class";
+  if (name === CLASS_NAME) {
+    name = CLASS;
   }
 
-  if (name === "htmlFor") {
-    name = "for";
+  if (name === HTML_FOR) {
+    name = FOR;
   }
 
-  if (typeof value === "object") {
+  if (typeof value === OBJECT) {
     const keys = Object.keys(value);
 
     keys.forEach((key) => {
       element.domElement[name][key] = value[key];
     });
-  } else if (typeof value === "boolean") {
+  } else if (typeof value === BOOLEAN) {
     if (value) {
       value = name; ///
 

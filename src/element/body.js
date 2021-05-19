@@ -2,8 +2,10 @@
 
 import Element from "../element";
 
+import { BODY } from "../constants";
+
 export default class Body extends Element {
-  constructor(selector = "body") {
+  constructor(selector = BODY) {
     super(selector);
   }
 

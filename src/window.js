@@ -6,6 +6,8 @@ import mouseMixins from "./mixins/mouse";
 import clickMixins from "./mixins/click";
 import resizeMixins from "./mixins/resize";
 
+import { UNDEFINED } from "./constants";
+
 const { onResize, offResize } = resizeMixins;
 
 class Window {
@@ -38,4 +40,4 @@ Object.assign(Window.prototype, mouseMixins);
 Object.assign(Window.prototype, clickMixins);
 Object.assign(Window.prototype, { onResize, offResize }); ///
 
-export default (typeof window === "undefined") ? undefined : new Window();  ///
+export default (typeof window === UNDEFINED) ? undefined : new Window();  ///

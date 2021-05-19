@@ -3,6 +3,7 @@
 import Element from "./element";
 
 import { flatten } from "./utilities/array";
+import { STRING, FUNCTION } from "./constants";
 import { removeFalseyElements, replaceStringsWithTextElements } from "./utilities/elements";
 
 function createElement(firstArgument, properties, ...remainingArguments) {
@@ -21,11 +22,11 @@ function createElement(firstArgument, properties, ...remainingArguments) {
       const Class = firstArgument;  ///
 
       element = Class.fromClass(Class, properties);
-    } else if (typeof firstArgument === "string") {
+    } else if (typeof firstArgument === STRING) {
       const tagName = firstArgument; ///
 
       element = Element.fromTagName(tagName, properties);
-    } else if (typeof firstArgument === "function") {
+    } else if (typeof firstArgument === FUNCTION) {
       const elementFunction = firstArgument;  ///
 
       element = elementFunction(properties);

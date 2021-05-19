@@ -1,13 +1,14 @@
 "use strict";
 
-import {removeResizeObject} from "./resize";
+import { RESIZE } from "../constants";
+import { removeResizeObject } from "../mixins/resize";
 
 function on(eventTypes, handler, element) {
   eventTypes = eventTypes.split(" "); ///
 
   eventTypes.forEach((eventType) => {
-    if (eventType === "resize") {
-      const resizeEventListeners = this.findEventListeners("resize"),
+    if (eventType === RESIZE) {
+      const resizeEventListeners = this.findEventListeners(RESIZE),
             resizeEventListenersLength = resizeEventListeners.length;
 
       if (resizeEventListenersLength === 0) {
@@ -29,8 +30,8 @@ function off(eventTypes, handler, element) {
 
     this.domElement.removeEventListener(eventType, eventListener);
 
-    if (eventType === "resize") {
-      const resizeEventListeners = this.findEventListeners("resize"),
+    if (eventType === RESIZE) {
+      const resizeEventListeners = this.findEventListeners(RESIZE),
             resizeEventListenersLength = resizeEventListeners.length;
 
       if (resizeEventListenersLength === 0) {
@@ -41,7 +42,7 @@ function off(eventTypes, handler, element) {
 }
 
 function addEventListener(eventType, handler, element = this) {
-  if (!this.hasOwnProperty("eventListeners")) {
+  if (this.eventListeners === undefined) {
     this.eventListeners = [];
   }
 
@@ -84,7 +85,7 @@ function findEventListener(eventType, handler, element) {
 function findEventListeners(eventType) {
   const eventListeners = [];
 
-  if (this.hasOwnProperty("eventListeners")) {
+  if (this.eventListeners !== undefined) {
     this.eventListeners.forEach((eventListener) => {
       const found = (eventListener.eventType === eventType);
 

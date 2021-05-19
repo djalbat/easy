@@ -1,6 +1,7 @@
 "use strict";
 
 import { push } from "../utilities/array";
+import { WILDCARD } from "../constants";
 
 export function elementsFromDOMElements(domElements) {
   const domElementsWithElements = filterDOMNodes(domElements, (domElement) => (domElement.__element__ !== undefined)),
@@ -10,11 +11,9 @@ export function elementsFromDOMElements(domElements) {
 }
 
 export function ascendantDOMNodesFromDOMNode(domNode, ascendantDOMNodes = []) {
-  const parentElement = domNode.parentElement;  ///
+  const parentDOMNode = domNode.parentElement;  ///
 
-  if (parentElement !== null) {
-    const parentDOMNode = parentElement; ///
-
+  if (parentDOMNode !== null) {
     ascendantDOMNodes.push(parentDOMNode);
 
     ascendantDOMNodesFromDOMNode(parentDOMNode, ascendantDOMNodes);
@@ -43,14 +42,14 @@ export function domNodeMatchesSelector(domNode, selector) {
   const domNodeType = domNode.nodeType;
 
   switch (domNodeType) {
-    case Node.ELEMENT_NODE : {
+    case Node.ELEMENT_NODE: {
       const domElement = domNode; ///
 
       return domElement.matches(selector);
     }
 
-    case Node.TEXT_NODE : {
-      if (selector === "*") {
+    case Node.TEXT_NODE: {
+      if (selector === WILDCARD) {
         return true;
       }
     }

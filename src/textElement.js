@@ -3,7 +3,6 @@
 import Offset from "./miscellaneous/offset";
 import Bounds from "./miscellaneous/bounds";
 import elementMixins from "./mixins/element";
-import Element from "./element";
 
 class TextElement {
   constructor(text) {

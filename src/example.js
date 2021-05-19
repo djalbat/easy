@@ -12,6 +12,6 @@ const body = new Body();
 
 body.mount(
 
-  <View />
+  <View/>
 
 );

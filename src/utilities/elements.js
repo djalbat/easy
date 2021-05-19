@@ -2,6 +2,8 @@
 
 import TextElement from "../textElement";
 
+import { STRING } from "../constants";
+
 export function removeFalseyElements(elements) {
   elements = elements.reduce((elements, element) => {
     if (element) {
@@ -16,7 +18,7 @@ export function removeFalseyElements(elements) {
 
 export function replaceStringsWithTextElements(elements) {
   elements = elements.map((element) => {  ///
-    if (typeof element === "string") {
+    if (typeof element === STRING) {
       const text = element,  ///
             textElement = new TextElement(text);
 

@@ -12,10 +12,20 @@ import resizeMixins from "./mixins/resize";
 import scrollMixins from "./mixins/scroll";
 import elementMixins from "./mixins/element";
 
-import { augment } from "./utilities/array";
 import { combine } from "./utilities/object";
 import { isSVGTagName } from "./utilities/name";
-import { SVG_NAMESPACE_URI } from "./constants";
+import { first, augment } from "./utilities/array";
+import { NONE,
+         BLOCK,
+         WIDTH,
+         STRING,
+         HEIGHT,
+         DISPLAY,
+         DISABLED,
+         EMPTY_STRING,
+         SVG_NAMESPACE_URI,
+         DEFAULT_PROPERTIES,
+         IGNORED_PROPERTIES } from "./constants";
 
 class Element {
   constructor(selector) {
@@ -56,7 +66,7 @@ class Element {
   setWidth(width) {
     width = `${width}px`; ///
 
-    this.style("width", width);
+    this.style(WIDTH, width);
   }
 
   getHeight(includeBorder = true) {
@@ -70,7 +80,7 @@ class Element {
   setHeight(height) {
     height = `${height}px`; ///
 
-    this.style("height", height);
+    this.style(HEIGHT, height);
   }
 
   hasAttribute(name) { return this.domElement.hasAttribute(name); }
@@ -95,7 +105,7 @@ class Element {
 
   hasClass(className) { return this.domElement.classList.contains(className); }
 
-  clearClasses() { this.domElement.className = ""; }
+  clearClasses() { this.domElement.className = EMPTY_STRING; }
 
   prependTo(parentElement) { parentElement.prepend(this); }
 
@@ -170,15 +180,15 @@ class Element {
     this.remove(element);
   }
 
-  show(displayStyle = "block") { this.display(displayStyle); }
+  show(displayStyle = BLOCK) { this.display(displayStyle); }
 
-  hide() { this.style("display", "none"); }
+  hide() { this.style(DISPLAY, NONE); }
 
-  display(display) { this.style("display", display); }
+  display(display) { this.style(DISPLAY, display); }
 
-  enable() { this.clearAttribute("disabled"); }
+  enable() { this.clearAttribute(DISABLED); }
 
-  disable() { this.setAttribute("disabled", "disabled"); }
+  disable() { this.setAttribute(DISABLED, DISABLED); }
 
   isEnabled() {
     const disabled = this.isDisabled(),
@@ -188,14 +198,14 @@ class Element {
   }
 
   isDisabled() {
-    const disabled = this.hasAttribute("disabled");
+    const disabled = this.hasAttribute(DISABLED);
 
     return disabled;
   }
   
   isDisplayed() {
-    const display = this.css("display"),
-          displayed = (display !== "none");
+    const display = this.css(DISPLAY),
+          displayed = (display !== NONE);
     
     return displayed;
   }
@@ -244,14 +254,15 @@ class Element {
             css = {};
 
       for (let index = 0; index < computedStyle.length; index++) {
-        const name = computedStyle[0],  ///
+        const firstComputedStyle = first[computedStyle],
+              name = firstComputedStyle,  ///
               value = computedStyle.getPropertyValue(name); ///
 
         css[name] = value;
       }
 
       return css;
-    } else if (typeof css === "string") {
+    } else if (typeof css === STRING) {
       let name = css; ///
 
       const computedStyle = getComputedStyle(this.domElement),
@@ -281,11 +292,11 @@ class Element {
     return focus;
   }
 
-  static fromTagName(tagName, properties, ...remainingArguments) {
-    const Class = Element,  ///
+  static fromClass(Class, properties, ...remainingArguments) {
+    const { tagName } = Class,
           element = elementFromTagName(Class, tagName, ...remainingArguments),
-          defaultProperties = {}, ///
-          ignoredProperties = []; ///
+          defaultProperties = defaultPropertiesFromClass(Class),
+          ignoredProperties = ignoredPropertiesFromClass(Class);
 
     element.applyProperties(properties, defaultProperties, ignoredProperties);
 
@@ -294,11 +305,11 @@ class Element {
     return element;
   }
 
-  static fromClass(Class, properties, ...remainingArguments) {
-    const { tagName } = Class,
+  static fromTagName(tagName, properties, ...remainingArguments) {
+    const Class = Element,  ///
           element = elementFromTagName(Class, tagName, ...remainingArguments),
-          defaultProperties = defaultPropertiesFromClass(Class),
-          ignoredProperties = ignoredPropertiesFromClass(Class);
+          defaultProperties = {}, ///
+          ignoredProperties = []; ///
 
     element.applyProperties(properties, defaultProperties, ignoredProperties);
 
@@ -334,8 +345,8 @@ function elementFromTagName(Class, tagName, ...remainingArguments) {
 }
 
 function defaultPropertiesFromClass(Class, defaultProperties = {}) {
-  if (Class.hasOwnProperty("defaultProperties")) {
-    combine(defaultProperties, Class.defaultProperties);
+  if (Class.hasOwnProperty(DEFAULT_PROPERTIES)) {
+    combine(defaultProperties, Class[DEFAULT_PROPERTIES]);
   }
 
   const superClass = Object.getPrototypeOf(Class);
@@ -348,8 +359,8 @@ function defaultPropertiesFromClass(Class, defaultProperties = {}) {
 }
 
 function ignoredPropertiesFromClass(Class, ignoredProperties = []) {
-  if (Class.hasOwnProperty("ignoredProperties")) {
-    augment(ignoredProperties, Class.ignoredProperties, (ignoredProperty) => !ignoredProperties.includes(ignoredProperty));
+  if (Class.hasOwnProperty(IGNORED_PROPERTIES)) {
+    augment(ignoredProperties, Class[IGNORED_PROPERTIES], (ignoredProperty) => !ignoredProperties.includes(ignoredProperty));
   }
 
   const superClass = Object.getPrototypeOf(Class);

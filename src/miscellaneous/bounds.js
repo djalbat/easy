@@ -25,13 +25,13 @@ export default class Bounds {
   }
 
   getWidth() {
-    const width = this.right - this.left;
+    const width = (this.right - this.left);
 
     return width;
   }
 
   getHeight() {
-    const height = this.bottom - this.top;
+    const height = (this.bottom - this.top);
 
     return height;
   }

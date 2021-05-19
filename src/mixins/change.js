@@ -1,8 +1,10 @@
 "use strict";
 
-function onChange(changeHandler, element) { this.on("change", changeHandler, element); }
+import { CHANGE } from "../constants";
 
-function offChange(changeHandler, element) { this.off("change", changeHandler, element); }
+function onChange(changeHandler, element) { this.on(CHANGE, changeHandler, element); }
+
+function offChange(changeHandler, element) { this.off(CHANGE, changeHandler, element); }
 
 const changeMixins = {
   onChange,
