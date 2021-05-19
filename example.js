@@ -852,10 +852,10 @@
     exports.FUNCTION = FUNCTION;
     var WILDCARD = "*";
     exports.WILDCARD = WILDCARD;
-    var HTML_FOR = "htmlFor";
-    exports.HTML_FOR = HTML_FOR;
     var MOUSEOUT = "mouseout";
     exports.MOUSEOUT = MOUSEOUT;
+    var HTML_FOR = "htmlFor";
+    exports.HTML_FOR = HTML_FOR;
     var UNDEFINED = "undefined";
     exports.UNDEFINED = UNDEFINED;
     var MOUSEOVER = "mouseover";
