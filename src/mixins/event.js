@@ -1,10 +1,10 @@
 "use strict";
 
-import { RESIZE } from "../constants";
+import { SPACE, RESIZE } from "../constants";
 import { removeResizeObject } from "../mixins/resize";
 
 function on(eventTypes, handler, element) {
-  eventTypes = eventTypes.split(" "); ///
+  eventTypes = eventTypes.split(SPACE);
 
   eventTypes.forEach((eventType) => {
     if (eventType === RESIZE) {
@@ -23,7 +23,7 @@ function on(eventTypes, handler, element) {
 }
 
 function off(eventTypes, handler, element) {
-  eventTypes = eventTypes.split(" "); ///
+  eventTypes = eventTypes.split(SPACE);
 
   eventTypes.forEach((eventType) => {
     const eventListener = this.removeEventListener(eventType, handler, element);

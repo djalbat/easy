@@ -809,13 +809,15 @@
     Object.defineProperty(exports, "__esModule", {
       value: true
     });
-    exports.DEFAULT_PROPERTIES = exports.BLOCK = exports.CLICK = exports.EMPTY_STRING = exports.BODY = exports.MOUSEOUT = exports.UNDEFINED = exports.DISPLAY = exports.OBJECT = exports.LEFT_MOUSE_BUTTON = exports.CLASS_NAME = exports.RIGHT_MOUSE_BUTTON = exports.TEXT_HTML = exports.CLASS = exports.WIDTH = exports.MIDDLE_MOUSE_BUTTON = exports.WILDCARD = exports.DISABLED = exports.HTML_FOR = exports.ABOUT_BLANK = exports.FUNCTION = exports.HEIGHT = exports.SVG_NAMESPACE_URI = exports.CHANGE = exports.KEYDOWN = exports.default = exports.KEYUP = exports.NONE = exports.MOUSEMOVE = exports.MOUSEDOWN = exports.MOUSEUP = exports.RESIZE = exports.STRING = exports.SCROLL = exports.FOR = exports.MOUSEOVER = exports.BOOLEAN = exports.IGNORED_PROPERTIES = void 0;
+    exports.DEFAULT_PROPERTIES = exports.BLOCK = exports.CLICK = exports.SPACE = exports.EMPTY_STRING = exports.BODY = exports.UNDEFINED = exports.MOUSEOUT = exports.DISPLAY = exports.OBJECT = exports.LEFT_MOUSE_BUTTON = exports.CLASS_NAME = exports.RIGHT_MOUSE_BUTTON = exports.TEXT_HTML = exports.CLASS = exports.WIDTH = exports.MIDDLE_MOUSE_BUTTON = exports.WILDCARD = exports.DISABLED = exports.HTML_FOR = exports.ABOUT_BLANK = exports.FUNCTION = exports.HEIGHT = exports.SVG_NAMESPACE_URI = exports.CHANGE = exports.KEYDOWN = exports.default = exports.KEYUP = exports.NONE = exports.MOUSEMOVE = exports.MOUSEDOWN = exports.MOUSEUP = exports.STRING = exports.RESIZE = exports.SCROLL = exports.FOR = exports.MOUSEOVER = exports.BOOLEAN = exports.IGNORED_PROPERTIES = void 0;
     var FOR = "for";
     exports.FOR = FOR;
     var BODY = "body";
     exports.BODY = BODY;
     var NONE = "none";
     exports.NONE = NONE;
+    var SPACE = " ";
+    exports.SPACE = SPACE;
     var CLASS = "class";
     exports.CLASS = CLASS;
     var CLICK = "click";
@@ -1473,7 +1475,7 @@
     var _constants = require_constants();
     var _resize = require_resize();
     function on(eventTypes, handler, element) {
-      eventTypes = eventTypes.split(" ");
+      eventTypes = eventTypes.split(_constants.SPACE);
       eventTypes.forEach(function(eventType) {
         if (eventType === _constants.RESIZE) {
           var resizeEventListeners = this.findEventListeners(_constants.RESIZE), resizeEventListenersLength = resizeEventListeners.length;
@@ -1486,7 +1488,7 @@
       }.bind(this));
     }
     function off(eventTypes, handler, element) {
-      eventTypes = eventTypes.split(" ");
+      eventTypes = eventTypes.split(_constants.SPACE);
       eventTypes.forEach(function(eventType) {
         var eventListener = this.removeEventListener(eventType, handler, element);
         this.domElement.removeEventListener(eventType, eventListener);
