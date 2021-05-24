@@ -1,7 +1,7 @@
 "use strict";
 
-import Offset from "./miscellaneous/offset";
-import Bounds from "./miscellaneous/bounds";
+import Offset from "./offset";
+import Bounds from "./bounds";
 import jsxMixins from "./mixins/jsx";
 import keyMixins from "./mixins/key";
 import clickMixins from "./mixins/click";

@@ -13,6 +13,6 @@ export { default as InputElement } from "./inputElement";
 export { default as window } from "./window";
 export { default as document } from "./document";
 export { default as constants } from "./constants";
-export { default as Bounds } from "./miscellaneous/bounds";
-export { default as Offset } from "./miscellaneous/offset";
+export { default as Bounds } from "./bounds";
+export { default as Offset } from "./offset";
 export { default as React } from "./react";

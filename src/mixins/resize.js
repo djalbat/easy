@@ -2,9 +2,9 @@
 
 import { OBJECT, RESIZE, TEXT_HTML, ABOUT_BLANK } from "../constants";
 
-function onResize(resizeHandler, element) { this.on(RESIZE, resizeHandler, element); }
+export function onResize(resizeHandler, element) { this.on(RESIZE, resizeHandler, element); }
 
-function offResize(resizeHandler, element) { this.off(RESIZE, resizeHandler, element); }
+export function offResize(resizeHandler, element) { this.off(RESIZE, resizeHandler, element); }
 
 function addResizeObject() {
   const resizeObject = document.createElement(OBJECT),

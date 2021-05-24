@@ -4,11 +4,9 @@ import keyMixins from "./mixins/key";
 import eventMixins from "./mixins/event";
 import mouseMixins from "./mixins/mouse";
 import clickMixins from "./mixins/click";
-import resizeMixins from "./mixins/resize";
+import windowMixins from "./mixins/window";
 
 import { UNDEFINED } from "./constants";
-
-const { onResize, offResize } = resizeMixins;
 
 class Window {
   constructor() {
@@ -38,6 +36,6 @@ Object.assign(Window.prototype, keyMixins);
 Object.assign(Window.prototype, eventMixins);
 Object.assign(Window.prototype, mouseMixins);
 Object.assign(Window.prototype, clickMixins);
-Object.assign(Window.prototype, { onResize, offResize }); ///
+Object.assign(Window.prototype, windowMixins);
 
 export default (typeof window === UNDEFINED) ? undefined : new Window();  ///

@@ -60,17 +60,17 @@ export default class Bounds {
   }
 
   isOverlappingMouse(mouseTop, mouseLeft) {
-    return (  (this.top < mouseTop)
-           && (this.left < mouseLeft)
-           && (this.bottom > mouseTop)
-           && (this.right > mouseLeft)  );
+    return (  (this.top <= mouseTop)
+           && (this.left <= mouseLeft)
+           && (this.right > mouseLeft)
+           && (this.bottom > mouseTop)  );
   }
 
   areOverlapping(bounds) {
     return (  (this.top < bounds.bottom)
            && (this.left < bounds.right)
-           && (this.bottom > bounds.top)
-           && (this.right > bounds.left)  );
+           && (this.right > bounds.left)
+           && (this.bottom > bounds.top)  );
   }
 
   static fromBoundingClientRect(boundingClientRect) {
