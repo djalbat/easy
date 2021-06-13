@@ -10,7 +10,7 @@ If you like Easy you might like [Easy with Style](https://github.com/djalbat/eas
 
 There is now support for JSX in the form of [Juxtapose](https://github.com/djalbat/Juxtapose). What this means is that Easy *will* now help you with the architecture of your large application. So although Easy elements will continue to work standalone, their use with Juxtapose is recommended. The contents of this readme file will stay as a reference, however a much better place to start from now on is here:
 
-**[Juxtapose online documentation](http://juxtapose.info)**
+**[Juxtapose online documentation](https://juxtapose.info)**
 
 ### Related projects
 
