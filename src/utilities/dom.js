@@ -10,24 +10,32 @@ export function elementsFromDOMElements(domElements) {
   return elements;
 }
 
-export function ascendantDOMNodesFromDOMNode(domNode, ascendantDOMNodes = []) {
-  const parentDOMNode = domNode.parentElement;  ///
+export function ascendantDOMNodesFromDOMNode(domNode, height, ascendantDOMNodes = []) {
+  if (height > 0) {
+    const parentDOMNode = domNode.parentElement;  ///
 
-  if (parentDOMNode !== null) {
-    ascendantDOMNodes.push(parentDOMNode);
+    if (parentDOMNode !== null) {
+      ascendantDOMNodes.push(parentDOMNode);
 
-    ascendantDOMNodesFromDOMNode(parentDOMNode, ascendantDOMNodes);
+      height--;
+
+      ascendantDOMNodesFromDOMNode(parentDOMNode, height, ascendantDOMNodes);
+    }
   }
 
   return ascendantDOMNodes;
 }
 
-export function descendantDOMNodesFromDOMNode(domNode, descendantDOMNodes = []) {
-  const childDOMNodes = domNode.childNodes;  ///
+export function descendantDOMNodesFromDOMNode(domNode, depth, descendantDOMNodes = []) {
+  if (depth > 0) {
+    const childDOMNodes = domNode.childNodes;  ///
 
-  push(descendantDOMNodes, childDOMNodes);
+    push(descendantDOMNodes, childDOMNodes);
 
-  childDOMNodes.forEach((childDOMNode) => descendantDOMNodesFromDOMNode(childDOMNode, descendantDOMNodes));
+    depth--;
+
+    childDOMNodes.forEach((childDOMNode) => descendantDOMNodesFromDOMNode(childDOMNode, depth, descendantDOMNodes));
+  }
 
   return descendantDOMNodes;
 }

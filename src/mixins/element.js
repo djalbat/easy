@@ -2,24 +2,7 @@
 
 import { first } from "../utilities/array";
 import { WILDCARD } from "../constants";
-import { ascendantDOMNodesFromDOMNode, descendantDOMNodesFromDOMNode, domNodeMatchesSelector, elementsFromDOMElements, filterDOMNodesBySelector } from "../utilities/dom";
-
-function getDescendantElements(selector = WILDCARD) {
-  const domNode = this.domElement,  ///
-        descendantDOMNodes = descendantDOMNodesFromDOMNode(domNode),
-        descendantDOMElements = filterDOMNodesBySelector(descendantDOMNodes, selector),
-        descendantElements = elementsFromDOMElements(descendantDOMElements);
-
-  return descendantElements;
-}
-
-function getChildElements(selector = WILDCARD) {
-  const childDOMNodes = this.domElement.childNodes,
-        childDOMElements = filterDOMNodesBySelector(childDOMNodes, selector),
-        childElements = elementsFromDOMElements(childDOMElements);
-
-  return childElements;
-}
+import { domNodeMatchesSelector, elementsFromDOMElements, filterDOMNodesBySelector, ascendantDOMNodesFromDOMNode, descendantDOMNodesFromDOMNode } from "../utilities/dom";
 
 function getParentElement(selector = WILDCARD) {
   let parentElement = null;
@@ -39,25 +22,30 @@ function getParentElement(selector = WILDCARD) {
   return parentElement;
 }
 
-function getAscendantElements(selector = WILDCARD) {
+function getChildElements(selector = WILDCARD) {
+  const childDOMNodes = this.domElement.childNodes,
+        childDOMElements = filterDOMNodesBySelector(childDOMNodes, selector),
+        childElements = elementsFromDOMElements(childDOMElements);
+
+  return childElements;
+}
+
+function getAscendantElements(selector = WILDCARD, height = Infinity) {
   const domNode = this.domElement,  ///
-        ascendantDOMNodes = ascendantDOMNodesFromDOMNode(domNode),
+        ascendantDOMNodes = ascendantDOMNodesFromDOMNode(domNode, height),
         ascendantDOMElements = filterDOMNodesBySelector(ascendantDOMNodes, selector),
         ascendantElements = elementsFromDOMElements(ascendantDOMElements);
 
   return ascendantElements;
 }
 
-function getPreviousSiblingElement(selector = WILDCARD) {
-  let previousSiblingElement = null;
+function getDescendantElements(selector = WILDCARD, depth = Infinity) {
+  const domNode = this.domElement,  ///
+        descendantDOMNodes = descendantDOMNodesFromDOMNode(domNode, depth),
+        descendantDOMElements = filterDOMNodesBySelector(descendantDOMNodes, selector),
+        descendantElements = elementsFromDOMElements(descendantDOMElements);
 
-  const previousSiblingDOMNode = this.domElement.previousSibling;  ///
-
-  if ((previousSiblingDOMNode !== null) && domNodeMatchesSelector(previousSiblingDOMNode, selector)) {
-    previousSiblingElement = previousSiblingDOMNode.__element__ || null;
-  }
-
-  return previousSiblingElement;
+  return descendantElements;
 }
 
 function getNextSiblingElement(selector = WILDCARD) {
@@ -72,13 +60,25 @@ function getNextSiblingElement(selector = WILDCARD) {
   return nextSiblingElement;
 }
 
+function getPreviousSiblingElement(selector = WILDCARD) {
+  let previousSiblingElement = null;
+
+  const previousSiblingDOMNode = this.domElement.previousSibling;  ///
+
+  if ((previousSiblingDOMNode !== null) && domNodeMatchesSelector(previousSiblingDOMNode, selector)) {
+    previousSiblingElement = previousSiblingDOMNode.__element__ || null;
+  }
+
+  return previousSiblingElement;
+}
+
 const elementMixins = {
-  getDescendantElements,
-  getChildElements,
   getParentElement,
+  getChildElements,
   getAscendantElements,
-  getPreviousSiblingElement,
-  getNextSiblingElement
+  getDescendantElements,
+  getNextSiblingElement,
+  getPreviousSiblingElement
 };
 
 export default elementMixins;

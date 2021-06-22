@@ -129,12 +129,12 @@ Each class bar the `Window`, `Document` and `TextElement` classes has the follow
 - `blur()`
 - `focus()`
 - `hasFocus()`
-- `getDescendantElements(selector = "*")`
-- `getChildElements(selector = "*")`
 - `getParentElement(selector = "*")`
-- `getAscendantElements(selector = "*")`
-- `getPreviousSiblingElement(selector = "*")`
+- `getChildElements(selector = "*")`
+- `getAscendantElements(selector = "*", height = Inifnity)`
+- `getDescendantElements(selector = "*", depth = Infinity)`
 - `getNextSiblingElement(selector = "*")`
+- `getPreviousSiblingElement(selector = "*")`
 - `getScrollTop()`
 - `getScrollLeft()`
 - `setScrollTop(scrollTop)`
