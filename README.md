@@ -48,7 +48,7 @@ The source for the example can be found in the `src/example.js` file and corresp
 
 The development server will reload the page whenever you make changes.
 
-One last thing to bear in mind is that this package is included by way of a relative rather than a package import. If you are importingit into your own application, however, you should use the standard package import.
+One last thing to bear in mind is that this package is included by way of a relative rather than a package import. If you are importing it into your own application, however, you should use the standard package import.
 
 ## Usage
 
