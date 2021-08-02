@@ -1,6 +1,6 @@
 "use strict";
 
-import "./preamble";
+import "./example/preamble";
 
 import { Body } from "./index";  ///
 
