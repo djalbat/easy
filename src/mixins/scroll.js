@@ -1,10 +1,10 @@
 "use strict";
 
-import { SCROLL } from "../constants";
+import { SCROLL_EVENT_TYPE } from "../eventTypes";
 
-function onScroll(scrollHandler, element) { this.on(SCROLL, scrollHandler, element); }
+function onScroll(scrollHandler, element) { this.on(SCROLL_EVENT_TYPE, scrollHandler, element); }
 
-function offScroll(scrollHandler, element) { this.off(SCROLL, scrollHandler, element); }
+function offScroll(scrollHandler, element) { this.off(SCROLL_EVENT_TYPE, scrollHandler, element); }
 
 function getScrollTop() { return this.domElement.scrollTop; }
 

@@ -1,10 +1,12 @@
 "use strict";
 
-import { OBJECT, RESIZE, TEXT_HTML, ABOUT_BLANK } from "../constants";
+import { RESIZE_EVENT_TYPE } from "../eventTypes";
+import { OBJECT, ABOUT_BLANK } from "../constants";
+import { TEXT_HTML_CONTENT_TYPE } from "../contentTypes";
 
-export function onResize(resizeHandler, element) { this.on(RESIZE, resizeHandler, element); }
+export function onResize(resizeHandler, element) { this.on(RESIZE_EVENT_TYPE, resizeHandler, element); }
 
-export function offResize(resizeHandler, element) { this.off(RESIZE, resizeHandler, element); }
+export function offResize(resizeHandler, element) { this.off(RESIZE_EVENT_TYPE, resizeHandler, element); }
 
 function addResizeObject() {
   const resizeObject = document.createElement(OBJECT),
@@ -18,7 +20,7 @@ function addResizeObject() {
                  pointer-events: none; 
                  z-index: -1;`,
         data = ABOUT_BLANK,
-        type = TEXT_HTML;
+        type = TEXT_HTML_CONTENT_TYPE;
 
   resizeObject.setAttribute("style", style);
 
@@ -37,7 +39,7 @@ function removeResizeObject() {
   const resizeObject = this.__resizeObject__,
         objectWindow = resizeObject.contentDocument.defaultView;  ///
 
-  objectWindow.removeEventListener(RESIZE, resizeEventListener);
+  objectWindow.removeEventListener(RESIZE_EVENT_TYPE, resizeEventListener);
 
   this.domElement.removeChild(resizeObject);
 
@@ -57,8 +59,8 @@ function resizeObjectLoadHandler(element) {
   const resizeObject = element.__resizeObject__,
         resizeObjectWindow = resizeObject.contentDocument.defaultView;  ///
 
-  resizeObjectWindow.addEventListener(RESIZE, (event) => {
-    const resizeEventListeners = element.findEventListeners(RESIZE);
+  resizeObjectWindow.addEventListener(RESIZE_EVENT_TYPE, (event) => {
+    const resizeEventListeners = element.findEventListeners(RESIZE_EVENT_TYPE);
 
     resizeEventListeners.forEach((resizeEventListener) => resizeEventListener(event));
   });
