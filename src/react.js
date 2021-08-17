@@ -55,17 +55,17 @@ function childElementsFromRemainingArguments(remainingArguments) {
 }
 
 function isSubclassOf(argument, Class) {
-  let typeOf = false;
+  let subclassOf = false;
 
   if (argument.name === Class.name) { ///
-    typeOf = true;
+    subclassOf = true;
   } else {
     argument = Object.getPrototypeOf(argument); ///
 
     if (argument) {
-      typeOf = isSubclassOf(argument, Class);
+      subclassOf = isSubclassOf(argument, Class);
     }
   }
 
-  return typeOf;
+  return subclassOf;
 }
