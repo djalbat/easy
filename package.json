@@ -1,7 +1,7 @@
 {
   "name": "easy",
   "author": "James Smith",
-  "version": "12.1.6",
+  "version": "12.1.7",
   "license": "MIT, Anti-996",
   "homepage": "https://github.com/djalbat/easy",
   "description": "Elements that abstract away from the DOM.",
@@ -20,7 +20,7 @@
   "scripts": {
     "start": "node ./bin/main.js",
     "clean": "rm -rf ./lib",
-    "watchful": "watchful -m --transpiler=swc --bundler=esbuild --source-directory=./src --lib-directory=./lib --entry-file=example.js --bundle-file=./example.js --pause=100",
+    "watchful": "watchful -m --transpiler=swc --bundler=esbuild --source-directory=./src --lib-directory=./lib --entry-file=example.js --bundle-file=./example.js --wait=100",
     "batch": "npm run watchful batch --",
     "batch-debug": "npm run watchful batch -- --debug",
     "incremental": "npm run watchful incremental --",
