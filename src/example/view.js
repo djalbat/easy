@@ -4,38 +4,44 @@ import { Textarea, Checkbox, Button, constants, Element } from "../index";  ///
 
 const { LEFT_MOUSE_BUTTON } = constants;
 
-const View = (properties) =>
+export default class View extends Element {
+  childElements() {
+    return ([
 
-  <div className="view">
-    <Checkbox checked
-              onChange={(event, element) => {
-                console.log("Changed")
+      <Checkbox onChange={(event, element) => {
+                  console.log("Changed")
+                }}
+                checked
+      />,
+      <Textarea onChange={(event, element) => {
+                  console.log("change")
+                }}
+                onScroll={function(event, element) {  ///
+                  const scrollTop = this.getScrollTop(),
+                        scrollLeft = this.getScrollLeft();
+
+                  console.log(scrollTop, scrollLeft)
+                }}
+      />,
+      <Button onClick={(event, element) => {
+                const { button } = event;
+
+                console.log(button === LEFT_MOUSE_BUTTON)
               }}
-    />
-    <Textarea onChange={(event, element) => {
-                console.log("change")
-              }}
-              onScroll={function(event, element) {  ///
-                const scrollTop = this.getScrollTop(),
-                      scrollLeft = this.getScrollLeft();
+      >
+        Submit
+      </Button>,
+      <Div />
 
-                console.log(scrollTop, scrollLeft)
-              }}
-    />
-    <Button onClick={(event, element) => {
-              const { button } = event;
+    ]);
+  }
 
-              console.log(button === LEFT_MOUSE_BUTTON)
-            }}
-    >
-      Submit
-    </Button>
-    <Div />
-  </div>
+  static tagName = "div";
 
-;
-
-export default View;
+  static defaultProperties = {
+    className: "view"
+  };
+}
 
 class Div extends Element {
   resizeHandler(event, element) {
