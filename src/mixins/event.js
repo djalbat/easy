@@ -47,7 +47,7 @@ function addEventListener(eventType, handler, element = this) {
     this.eventListeners = [];
   }
 
-  const eventListener = createEventListener(eventType, handler, element);
+  const eventListener = this.createEventListener(eventType, handler, element);
 
   this.eventListeners.push(eventListener);
 
@@ -103,7 +103,7 @@ function createEventListener(eventType, handler, element) {
   let eventListener;
 
   eventListener = (event) => {
-    handler.call(element, event, element)
+    handler.call(element, event, this); ///
   };
 
   Object.assign(eventListener, {
@@ -120,6 +120,7 @@ const eventMixins = {
   off,
   addEventListener,
   removeEventListener,
+  createEventListener,
   findEventListener,
   findEventListeners
 };
