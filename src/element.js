@@ -161,9 +161,9 @@ class Element {
             ...descendantElements
           ];
 
-    elements.reverse(); ///
-
     this.add(element);
+
+    elements.reverse(); ///
 
     elements.forEach((element) => (element.didMount && element.didMount()));  ///
   }
