@@ -30,8 +30,9 @@ function getChildElements(selector = WILDCARD) {
   return childElements;
 }
 
-function getAscendantElements(selector = WILDCARD, height = Infinity) {
-  const domNode = this.domElement,  ///
+function getAscendantElements(selector = WILDCARD, maximumHeight = Infinity) {
+  const height = maximumHeight, ///
+        domNode = this.domElement,  ///
         ascendantDOMNodes = ascendantDOMNodesFromDOMNode(domNode, height),
         ascendantDOMElements = filterDOMNodesBySelector(ascendantDOMNodes, selector),
         ascendantElements = elementsFromDOMElements(ascendantDOMElements);
@@ -39,8 +40,9 @@ function getAscendantElements(selector = WILDCARD, height = Infinity) {
   return ascendantElements;
 }
 
-function getDescendantElements(selector = WILDCARD, depth = Infinity) {
-  const domNode = this.domElement,  ///
+function getDescendantElements(selector = WILDCARD, maximumDepth = Infinity) {
+  const depth = maximumDepth, ///
+        domNode = this.domElement,  ///
         descendantDOMNodes = descendantDOMNodesFromDOMNode(domNode, depth),
         descendantDOMElements = filterDOMNodesBySelector(descendantDOMNodes, selector),
         descendantElements = elementsFromDOMElements(descendantDOMElements);
