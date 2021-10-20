@@ -1,41 +1,40 @@
 "use strict";
 
-import { combine, prune } from "../utilities/object";
 import { first, guarantee } from "../utilities/array";
 import { isHTMLAttributeName, isSVGAttributeName } from "../utilities/name";
 import { removeFalseyElements, replaceStringsWithTextElements } from "../utilities/elements";
 import { FOR, CLASS, OBJECT, HTML_FOR, CLASS_NAME, BOOLEAN, FUNCTION, SVG_NAMESPACE_URI } from "../constants";
 
 function applyProperties(properties, defaultProperties, ignoredProperties) {
-  this.properties = properties;
-
-  properties = Object.assign({}, properties); ///
-
-  combine(properties, defaultProperties);
-
-  const childElements = childElementsFromElement(this) || properties.childElements;  ///
-
-  prune(properties, ignoredProperties);
+  this.properties = Object.assign({}, properties, defaultProperties); ///
 
   const { namespaceURI } = this.domElement,
         svg = (namespaceURI === SVG_NAMESPACE_URI), ///
-        names = Object.keys(properties);  ///
+        propertiesKeys = Object.keys(this.properties),
+        ignoredNames = ignoredProperties, ///
+        names = propertiesKeys;  ///
 
   names.forEach((name) => {
-    const value = properties[name];
+    const ignoredNamesIncludesName = ignoredNames.includes(name);
 
-    if (false) {
-      ///
-    } else if (isHandlerName(name)) {
-      addHandler(this, name, value);
-    } else if (isAttributeName(name, svg)) {
-      addAttribute(this, name, value);
-    } else {
-      ///
+    if (!ignoredNamesIncludesName) {
+      const value = this.properties[name],
+            nameHandlerName = isNameHandlerName(name);
+
+      if (nameHandlerName) {
+        addHandler(this, name, value);
+      } else {
+        const nameAttributeName = isNameAttributeName(name, svg);
+
+        if (nameAttributeName) {
+          addAttribute(this, name, value);
+        }
+      }
     }
   });
 
-  const context = {};
+  const childElements = childElementsFromElement(this) || this.properties.childElements,  ///
+        context = {};
 
   childElements.forEach((childElement) => {
     updateContext(childElement, context);
@@ -156,10 +155,10 @@ function addAttribute(element, name, value) {
   }
 }
 
-function isHandlerName(name) {
+function isNameHandlerName(name) {
   return name.match(/^on/);
 }
 
-function isAttributeName(name, svg) {
+function isNameAttributeName(name, svg) {
   return svg ? isSVGAttributeName(name) : isHTMLAttributeName(name)
 }

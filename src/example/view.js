@@ -1,6 +1,8 @@
 "use strict";
 
-import { Textarea, Checkbox, Button, constants, Element } from "../index";  ///
+import { Textarea, Button, constants, Element } from "../index";  ///
+
+import Checkbox from "./checkbox";
 
 const { LEFT_MOUSE_BUTTON } = constants;
 
