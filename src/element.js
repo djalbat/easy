@@ -346,13 +346,13 @@ function elementFromTagName(Class, tagName, ...remainingArguments) {
 
 function defaultPropertiesFromClass(Class, defaultProperties = {}) {
   if (Class.hasOwnProperty(DEFAULT_PROPERTIES)) {
-    combine(defaultProperties, Class[DEFAULT_PROPERTIES]);
+    defaultProperties = combine(defaultProperties, Class[DEFAULT_PROPERTIES]);
   }
 
   const superClass = Object.getPrototypeOf(Class);
 
   if (superClass !== null) {
-    defaultPropertiesFromClass(superClass, defaultProperties);
+    defaultProperties = defaultPropertiesFromClass(superClass, defaultProperties);
   }
 
   return defaultProperties;
@@ -360,13 +360,13 @@ function defaultPropertiesFromClass(Class, defaultProperties = {}) {
 
 function ignoredPropertiesFromClass(Class, ignoredProperties = []) {
   if (Class.hasOwnProperty(IGNORED_PROPERTIES)) {
-    augment(ignoredProperties, Class[IGNORED_PROPERTIES], (ignoredProperty) => !ignoredProperties.includes(ignoredProperty));
+    ignoredProperties = augment(ignoredProperties, Class[IGNORED_PROPERTIES], (ignoredProperty) => !ignoredProperties.includes(ignoredProperty));
   }
 
   const superClass = Object.getPrototypeOf(Class);
 
   if (superClass !== null) {
-    ignoredPropertiesFromClass(superClass, ignoredProperties);
+    ignoredProperties = ignoredPropertiesFromClass(superClass, ignoredProperties);
   }
 
   return ignoredProperties;

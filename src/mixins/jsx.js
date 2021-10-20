@@ -1,39 +1,37 @@
 "use strict";
 
+import { combine, prune } from "../utilities/object";
 import { first, guarantee } from "../utilities/array";
 import { isHTMLAttributeName, isSVGAttributeName } from "../utilities/name";
 import { removeFalseyElements, replaceStringsWithTextElements } from "../utilities/elements";
 import { FOR, CLASS, OBJECT, HTML_FOR, CLASS_NAME, BOOLEAN, FUNCTION, SVG_NAMESPACE_URI } from "../constants";
 
 function applyProperties(properties, defaultProperties, ignoredProperties) {
-  this.properties = Object.assign({}, properties, defaultProperties); ///
+  this.properties = combine(properties, defaultProperties);
+
+  properties = prune(this.properties, ignoredProperties); ///
 
   const { namespaceURI } = this.domElement,
         svg = (namespaceURI === SVG_NAMESPACE_URI), ///
-        propertiesKeys = Object.keys(this.properties),
-        ignoredNames = ignoredProperties, ///
+        propertiesKeys = Object.keys(properties),
         names = propertiesKeys;  ///
 
   names.forEach((name) => {
-    const ignoredNamesIncludesName = ignoredNames.includes(name);
+    const value = properties[name],
+          nameHandlerName = isNameHandlerName(name);
 
-    if (!ignoredNamesIncludesName) {
-      const value = this.properties[name],
-            nameHandlerName = isNameHandlerName(name);
+    if (nameHandlerName) {
+      addHandler(this, name, value);
+    } else {
+      const nameAttributeName = isNameAttributeName(name, svg);
 
-      if (nameHandlerName) {
-        addHandler(this, name, value);
-      } else {
-        const nameAttributeName = isNameAttributeName(name, svg);
-
-        if (nameAttributeName) {
-          addAttribute(this, name, value);
-        }
+      if (nameAttributeName) {
+        addAttribute(this, name, value);
       }
     }
   });
 
-  const childElements = childElementsFromElement(this) || this.properties.childElements,  ///
+  const childElements = childElementsFromElement(this) || properties.childElements,  ///
         context = {};
 
   childElements.forEach((childElement) => {

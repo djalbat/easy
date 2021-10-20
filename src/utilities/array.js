@@ -21,6 +21,8 @@ export function guarantee(arrayOrElement) {
 }
 
 export function augment(array1, array2, test) {
+  array1 = [ ...array1 ]; ///
+
   array2.forEach((element, index) => {
     const passed = test(element, index);
 
@@ -28,4 +30,6 @@ export function augment(array1, array2, test) {
       array1.push(element);
     }
   });
+
+  return array1;
 }
