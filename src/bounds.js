@@ -1,11 +1,11 @@
 "use strict";
 
 export default class Bounds {
-  constructor(top, left, bottom, right) {
+  constructor(top, left, right, bottom) {
     this.top = top;
     this.left = left;
-    this.bottom = bottom;
     this.right = right;
+    this.bottom = bottom;
   }
 
   getTop() {
@@ -16,12 +16,12 @@ export default class Bounds {
     return this.left;
   }
 
-  getBottom() {
-    return this.bottom;
-  }
-
   getRight() {
     return this.right;
+  }
+
+  getBottom() {
+    return this.bottom;
   }
 
   getWidth() {
@@ -44,19 +44,19 @@ export default class Bounds {
     this.left = left;
   }
 
-  setBottom(bottom) {
-    this.bottom = bottom;
-  }
-
   setRight(right) {
     this.right = right;
+  }
+
+  setBottom(bottom) {
+    this.bottom = bottom;
   }
 
   shift(horizontalOffset, verticalOffset) {
     this.top += verticalOffset;
     this.left += horizontalOffset;
-    this.bottom += verticalOffset;
     this.right += horizontalOffset;
+    this.bottom += verticalOffset;
   }
 
   isOverlappingMouse(mouseTop, mouseLeft) {
@@ -78,9 +78,9 @@ export default class Bounds {
           windowScrollLeft = window.pageXOffset,  ///
           top = boundingClientRect.top + windowScrollTop,
           left = boundingClientRect.left + windowScrollLeft,
-          bottom = boundingClientRect.bottom + windowScrollTop,
           right = boundingClientRect.right + windowScrollLeft,
-          bounds = new Bounds(top, left, bottom, right);
+          bottom = boundingClientRect.bottom + windowScrollTop,
+          bounds = new Bounds(top, left, right, bottom);
 
     return bounds;
   }
@@ -88,7 +88,7 @@ export default class Bounds {
   static fromTopLeftWidthAndHeight(top, left, width, height) {
     const bottom = top + height,
           right = left + width,
-          bounds = new Bounds(top, left, bottom, right);
+          bounds = new Bounds(top, left, right, bottom);
 
     return bounds;
   }
