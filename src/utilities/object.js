@@ -1,30 +1,51 @@
 "use strict";
 
-export function combine(targetObject, sourceObject = {}) {
-  targetObject = { ...targetObject };  ///
+import { BOOLEAN } from "../constants";
 
-  const sourceKeys = Object.keys(sourceObject);
+export function combine(target, source = {}) {
+  target = { ...target };  ///
 
-  sourceKeys.forEach((sourceKey) => {
-    const targetProperty = targetObject[sourceKey],
-          sourceProperty = sourceObject[sourceKey];
+  const names = Object.keys(source);  ///
 
-    targetObject[sourceKey] = targetObject.hasOwnProperty(sourceKey) ?
-                               `${targetProperty} ${sourceProperty}` :
-                                  sourceProperty;
+  names.forEach((name) => {
+    const targetValue = target[name],
+          sourceValue = source[name],
+          targetHasOwnProperty = target.hasOwnProperty(name);
+
+    target[name] = targetHasOwnProperty ?
+                     combineValues(targetValue, sourceValue) :
+                       sourceValue; ///
   });
 
-  return targetObject;
+  return target;
 }
 
-export function prune(targetObject, sourceKeys = []) {
-  targetObject = { ...targetObject };  ///
+export function prune(target, names = []) {
+  target = { ...target };  ///
 
-  sourceKeys.forEach((sourceKey) => {
-    if (targetObject.hasOwnProperty(sourceKey)) {
-      delete targetObject[sourceKey];
+  names.forEach((name) => {
+    const targetHasOwnProperty = target.hasOwnProperty(name);
+
+    if (targetHasOwnProperty) {
+      delete target[name];
     }
   });
 
-  return targetObject;
+  return target;
+}
+
+function combineValues(targetValue, sourceValue) {
+  const targetValueBoolean = isValueBoolean(targetValue),
+        sourceValueBoolean = isValueBoolean(sourceValue),
+        combinedValue = (targetValueBoolean && sourceValueBoolean) ?
+                          targetValue : ///
+                            `${targetValue} ${sourceValue}`;
+
+  return combinedValue;
+}
+
+function isValueBoolean(value) {
+  const valueBoolean = (typeof value === BOOLEAN);
+
+  return valueBoolean;
 }
