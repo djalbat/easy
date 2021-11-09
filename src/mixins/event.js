@@ -42,7 +42,7 @@ function off(eventTypes, handler, element = this) {
   });
 }
 
-function addEventListener(eventType, handler) {
+function addEventListener(eventType, handler, element) {
   if (this.eventListeners === undefined) {
     this.eventListeners = [];
   }
@@ -54,7 +54,7 @@ function addEventListener(eventType, handler) {
   return eventListener;
 }
 
-function removeEventListener(eventType, handler) {
+function removeEventListener(eventType, handler, element) {
   const eventListener = this.findEventListener(eventType, handler, element),
         index = this.eventListeners.indexOf(eventListener),
         start = index,  ///
