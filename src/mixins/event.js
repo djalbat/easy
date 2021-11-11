@@ -4,7 +4,7 @@ import { SPACE } from "../constants";
 import { RESIZE_EVENT_TYPE } from "../eventTypes";
 import { removeResizeObject } from "../mixins/resize";
 
-function on(eventTypes, handler, element) {
+function on(eventTypes, handler, element = this) {
   eventTypes = eventTypes.split(SPACE);
 
   eventTypes.forEach((eventType) => {
@@ -23,7 +23,7 @@ function on(eventTypes, handler, element) {
   });
 }
 
-function off(eventTypes, handler, element) {
+function off(eventTypes, handler, element = this) {
   eventTypes = eventTypes.split(SPACE);
 
   eventTypes.forEach((eventType) => {
@@ -42,7 +42,7 @@ function off(eventTypes, handler, element) {
   });
 }
 
-function addEventListener(eventType, handler, element = this) {
+function addEventListener(eventType, handler, element) {
   if (this.eventListeners === undefined) {
     this.eventListeners = [];
   }
@@ -54,7 +54,7 @@ function addEventListener(eventType, handler, element = this) {
   return eventListener;
 }
 
-function removeEventListener(eventType, handler, element = this) {
+function removeEventListener(eventType, handler, element) {
   const eventListener = this.findEventListener(eventType, handler, element),
         index = this.eventListeners.indexOf(eventListener),
         start = index,  ///
@@ -71,11 +71,7 @@ function removeEventListener(eventType, handler, element = this) {
 
 function findEventListener(eventType, handler, element) {
   const eventListener = this.eventListeners.find((eventListener) => {
-    const found = ( (eventListener.element === element) &&
-                    (eventListener.handler === handler) &&
-                    (eventListener.eventType === eventType) );
-
-    if (found) {
+    if ((eventListener.element === element) && (eventListener.handler === handler) && (eventListener.eventType === eventType)) {
       return true;
     }
   });
@@ -102,8 +98,12 @@ function findEventListeners(eventType) {
 function createEventListener(eventType, handler, element) {
   let eventListener;
 
+  const handlerElement = element; ///
+
   eventListener = (event) => {
-    handler.call(element, event, this); ///
+    const element = this; ///
+
+    handler.call(handlerElement, event, element);
   };
 
   Object.assign(eventListener, {
