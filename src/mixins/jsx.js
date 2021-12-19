@@ -14,7 +14,7 @@ function applyProperties(properties, defaultProperties, ignoredProperties) {
   const { namespaceURI } = this.domElement,
         svg = (namespaceURI === SVG_NAMESPACE_URI), ///
         propertiesKeys = Object.keys(properties),
-        names = propertiesKeys;  ///
+        names = propertiesKeys;  ///=
 
   names.forEach((name) => {
     const value = properties[name],
@@ -154,7 +154,7 @@ function addAttribute(element, name, value) {
 }
 
 function isNameHandlerName(name) {
-  return name.match(/^on/);
+  return /^on/.test(name);
 }
 
 function isNameAttributeName(name, svg) {
