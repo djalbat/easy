@@ -2,6 +2,7 @@
 
 import Element from "./element";
 
+import { flatten } from "./utilities/array";
 import { STRING, FUNCTION } from "./constants";
 import { removeFalseyElements, replaceStringsWithTextElements } from "./utilities/elements";
 
@@ -42,6 +43,8 @@ const React = {
 export default React;
 
 function sanitiseChildElements(childElements) {
+  childElements = flatten(childElements);
+
   childElements = removeFalseyElements(childElements);
 
   childElements = replaceStringsWithTextElements(childElements);

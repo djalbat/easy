@@ -33,7 +33,7 @@ export default class View extends Element {
       >
         Submit
       </Button>,
-      <Div />
+      <Div/>
 
     ]);
   }
