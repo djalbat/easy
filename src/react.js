@@ -2,15 +2,14 @@
 
 import Element from "./element";
 
-import { flatten } from "./utilities/array";
 import { STRING, FUNCTION } from "./constants";
 import { removeFalseyElements, replaceStringsWithTextElements } from "./utilities/elements";
 
-function createElement(firstArgument, properties, ...remainingArguments) {
+function createElement(firstArgument, properties, ...childElements) {
   let element = null;
 
   if (firstArgument !== undefined) {
-    const childElements = childElementsFromRemainingArguments(remainingArguments);
+    childElements = sanitiseChildElements(childElements);
 
     properties = Object.assign({
       childElements
@@ -42,11 +41,7 @@ const React = {
 
 export default React;
 
-function childElementsFromRemainingArguments(remainingArguments) {
-  remainingArguments = flatten(remainingArguments); ///
-
-  let childElements = remainingArguments; ///
-
+function sanitiseChildElements(childElements) {
   childElements = removeFalseyElements(childElements);
 
   childElements = replaceStringsWithTextElements(childElements);
