@@ -5,6 +5,7 @@ export const MOVE_EVENT_TYPE = "move";
 export const BLUR_EVENT_TYPE = "blur";
 export const DRAG_EVENT_TYPE = "drag";
 export const DROP_EVENT_TYPE = "drop";
+export const WHEEL_EVENT_TYPE = "wheel";
 export const INPUT_EVENT_TYPE = "input";
 export const FOCUS_EVENT_TYPE = "focus";
 export const CLICK_EVENT_TYPE = "click";
@@ -33,6 +34,7 @@ export default {
   BLUR_EVENT_TYPE,
   DRAG_EVENT_TYPE,
   DROP_EVENT_TYPE,
+  WHEEL_EVENT_TYPE,
   INPUT_EVENT_TYPE,
   FOCUS_EVENT_TYPE,
   CLICK_EVENT_TYPE,
