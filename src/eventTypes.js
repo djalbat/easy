@@ -15,6 +15,7 @@ export const RESIZE_EVENT_TYPE = "resize";
 export const SCROLL_EVENT_TYPE = "scroll";
 export const KEYDOWN_EVENT_TYPE = "keydown";
 export const MOUSEUP_EVENT_TYPE = "mouseup";
+export const AUXCLICK_EVENT_TYPE = "auxclick";
 export const DRAG_OUT_EVENT_TYPE = "dragout";
 export const MOUSEOUT_EVENT_TYPE = "mouseout";
 export const DBLCLICK_EVENT_TYPE = "dblclick";
@@ -41,8 +42,9 @@ export default {
   RESIZE_EVENT_TYPE,
   SCROLL_EVENT_TYPE,
   KEYDOWN_EVENT_TYPE,
-  DRAG_OUT_EVENT_TYPE,
   MOUSEUP_EVENT_TYPE,
+  AUXCLICK_EVENT_TYPE,
+  DRAG_OUT_EVENT_TYPE,
   MOUSEOUT_EVENT_TYPE,
   DBLCLICK_EVENT_TYPE,
   MOUSEOVER_EVENT_TYPE,
