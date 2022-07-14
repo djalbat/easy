@@ -52,18 +52,9 @@ function sanitiseChildElements(childElements) {
   return childElements;
 }
 
+
 function isSubclassOf(argument, Class) {
-  let subclassOf = false;
-
-  if (argument.name === Class.name) { ///
-    subclassOf = true;
-  } else {
-    argument = Object.getPrototypeOf(argument); ///
-
-    if (argument) {
-      subclassOf = isSubclassOf(argument, Class);
-    }
-  }
+  const subclassOf = (argument.prototype instanceof Class);
 
   return subclassOf;
 }
