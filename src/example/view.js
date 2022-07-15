@@ -46,17 +46,17 @@ export default class View extends Element {
 }
 
 class Div extends Element {
-  resizeHandler(event, element) {
+  mouseMoveHandler = (event, element) => {
+    const { pageX, pageY } = event;
+
+    console.log(pageX, pageY)
+  }
+
+  resizeHandler = (event, element) => {
     const width = this.getWidth(),
           height = this.getHeight();
 
     console.log(width, height)
-  }
-
-  mouseMoveHandler(event, element) {
-    const { pageX, pageY } = event;
-
-    console.log(pageX, pageY)
   }
 
   didMount() {
