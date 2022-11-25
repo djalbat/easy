@@ -11,6 +11,8 @@ class Document {
   constructor() {
     this.domElement = document; ///
   }
+
+  getRange() { return this.domElement.getRange(); }
 }
 
 export default (typeof document === UNDEFINED) ? undefined : new Document();  ///

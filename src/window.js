@@ -30,6 +30,8 @@ class Window {
   getScrollTop() { return this.domElement.pageYOffset; }  ///
 
   getScrollLeft() { return this.domElement.pageXOffset; } ///
+
+  getSelection() { return this.domElement.getSelection(); }
 }
 
 Object.assign(Window.prototype, keyMixins);

@@ -218,7 +218,7 @@ The `TextElement` class has the following methods only:
 - `insertAfter(siblingElement)`
 - `remove()`
 
-Each of the supported elements has methods specific to its function, check the source for details.
+Each of the supported elements has methods specific to its function, check the source for details, especially for the `window` and `document` singletons.
 
 ## Building
 
