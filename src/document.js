@@ -12,7 +12,7 @@ class Document {
     this.domElement = document; ///
   }
 
-  getRange() { return this.domElement.getRange(); }
+  createRange() { return this.domElement.createRange(); }
 }
 
 export default (typeof document === UNDEFINED) ? undefined : new Document();  ///
