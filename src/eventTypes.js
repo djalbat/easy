@@ -9,6 +9,7 @@ export const INPUT_EVENT_TYPE = "input";
 export const FOCUS_EVENT_TYPE = "focus";
 export const CLICK_EVENT_TYPE = "click";
 export const KEYUP_EVENT_TYPE = "keyup";
+export const SELECT_EVENT_TYPE = "select";
 export const CHANGE_EVENT_TYPE = "change";
 export const RESIZE_EVENT_TYPE = "resize";
 export const SCROLL_EVENT_TYPE = "scroll";
@@ -32,6 +33,7 @@ export default {
   FOCUS_EVENT_TYPE,
   CLICK_EVENT_TYPE,
   KEYUP_EVENT_TYPE,
+  SELECT_EVENT_TYPE,
   CHANGE_EVENT_TYPE,
   RESIZE_EVENT_TYPE,
   SCROLL_EVENT_TYPE,
