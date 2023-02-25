@@ -22,6 +22,7 @@ export const MOUSEOVER_EVENT_TYPE = "mouseover";
 export const MOUSEDOWN_EVENT_TYPE = "mousedown";
 export const MOUSEMOVE_EVENT_TYPE = "mousemove";
 export const CONTEXTMENU_EVENT_TYPE = "contextmenu";
+export const SELECTIONCHANGE_EVENT_TYPE = "selectionchange";
 
 export default {
   CUT_EVENT_TYPE,
@@ -45,5 +46,6 @@ export default {
   MOUSEOVER_EVENT_TYPE,
   MOUSEDOWN_EVENT_TYPE,
   MOUSEMOVE_EVENT_TYPE,
-  CONTEXTMENU_EVENT_TYPE
+  CONTEXTMENU_EVENT_TYPE,
+  SELECTIONCHANGE_EVENT_TYPE
 };
