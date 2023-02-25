@@ -1,6 +1,9 @@
 "use strict";
 
+export const CUT_EVENT_TYPE = "cut";
+export const COPY_EVENT_TYPE = "copy";
 export const BLUR_EVENT_TYPE = "blur";
+export const PASTE_EVENT_TYPE = "paste";
 export const WHEEL_EVENT_TYPE = "wheel";
 export const INPUT_EVENT_TYPE = "input";
 export const FOCUS_EVENT_TYPE = "focus";
@@ -20,7 +23,10 @@ export const MOUSEMOVE_EVENT_TYPE = "mousemove";
 export const CONTEXTMENU_EVENT_TYPE = "contextmenu";
 
 export default {
+  CUT_EVENT_TYPE,
+  COPY_EVENT_TYPE,
   BLUR_EVENT_TYPE,
+  PASTE_EVENT_TYPE,
   WHEEL_EVENT_TYPE,
   INPUT_EVENT_TYPE,
   FOCUS_EVENT_TYPE,
