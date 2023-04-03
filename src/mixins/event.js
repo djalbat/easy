@@ -36,7 +36,7 @@ function off(eventTypes, handler, element = this) {
             resizeEventListenersLength = resizeEventListeners.length;
 
       if (resizeEventListenersLength === 0) {
-        removeResizeObject(this);
+        this.removeResizeObject();
       }
     }
   });
