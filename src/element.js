@@ -142,6 +142,8 @@ class Element {
     this.domElement.insertBefore(domElement, null); ///
   }
 
+  insert(element) { this.append(element); }
+
   add(element) { this.append(element); }
 
   remove(element) {
@@ -154,28 +156,30 @@ class Element {
     }
   }
 
-  mount(element) {
-    const descendantElements = element.getDescendantElements(),
-          elements = [
-            element,
-            ...descendantElements
-          ];
+  mountBefore(siblingElement) {
+    this.insertBefore(siblingElement);
 
+    const element = this; ///
+
+    mountElement(element);
+  }
+
+  mountAfter(siblingElement) {
+    this.insertBefore(siblingElement);
+
+    const element = this; ///
+
+    mountElement(element);
+  }
+
+  mount(element) {
     this.add(element);
 
-    elements.reverse(); ///
-
-    elements.forEach((element) => (element.didMount && element.didMount()));  ///
+    mountElement(element);
   }
 
   unmount(element) {
-    const descendantElements = element.getDescendantElements(),
-          elements = [
-            element,
-            ...descendantElements
-          ];
-
-    elements.forEach((element) => (element.willUnmount && element.willUnmount()));  ///
+    unmountElement(element);
 
     this.remove(element);
   }
@@ -330,6 +334,28 @@ Object.assign(Element.prototype, scrollMixins);
 Object.assign(Element.prototype, elementMixins);
 
 export default Element;
+
+function mountElement(element) {
+  const descendantElements = element.getDescendantElements(),
+        elements = [
+          element,
+          ...descendantElements
+        ];
+
+  elements.reverse(); ///
+
+  elements.forEach((element) => (element.didMount && element.didMount()));  ///
+}
+
+function unmountElement(element) {
+  const descendantElements = element.getDescendantElements(),
+        elements = [
+          element,
+          ...descendantElements
+        ];
+
+  elements.forEach((element) => (element.willUnmount && element.willUnmount()));  ///
+}
 
 function elementFromTagName(Class, tagName, ...remainingArguments) {
   const selector = null,

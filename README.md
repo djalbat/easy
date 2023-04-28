@@ -130,7 +130,12 @@ Each class bar the `Window`, `Document` and `TextElement` classes has the follow
 - `prepend(element)`
 - `append(element)`
 - `add(element)`
+- `insert(element)`
 - `remove(element)`
+- `mountBefore(siblingElement)`
+- `mountAfter(siblingElement)`
+- `mount(element)`
+- `unmount(element)`
 - `show(displayStyle = 'block')`
 - `hide()`
 - `display(displayStyle)`
