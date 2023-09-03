@@ -16,6 +16,6 @@ export { default as TextElement } from "./textElement";
 export { default as InputElement } from "./inputElement";
 
 export { default as window } from "./window";
-export { default as buttons } from "./buttons";
 export { default as document } from "./document";
 export { default as eventTypes } from "./eventTypes";
+export { default as mouseButtons } from "./mouseButtons";

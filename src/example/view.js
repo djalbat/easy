@@ -1,10 +1,10 @@
 "use strict";
 
-import { Textarea, Button, buttons, Element } from "../index";  ///
+import { Button, Element, Textarea, mouseButtons } from "../index";  ///
 
 import Checkbox from "./checkbox";
 
-const { LEFT_MOUSE_BUTTON } = buttons;
+const { LEFT_MOUSE_BUTTON } = mouseButtons;
 
 export default class View extends Element {
   childElements() {
