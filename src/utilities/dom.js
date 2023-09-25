@@ -4,8 +4,16 @@ import { push } from "../utilities/array";
 import { WILDCARD } from "../constants";
 
 export function elementsFromDOMElements(domElements) {
-  const domElementsWithElements = filterDOMNodes(domElements, (domElement) => (domElement.__element__ !== undefined)),
-        elements = domElementsWithElements.map((domElement) => domElement.__element__);
+  const domElementsWithElements = filterDOMNodes(domElements, (domElement) => {
+        if ((domElement.__element__)) {
+          return true;
+        }
+        }),
+        elements = domElementsWithElements.map((domElement) => {
+          const element = domElement.__element__;
+
+          return element;
+        });
 
   return elements;
 }
@@ -34,14 +42,20 @@ export function descendantDOMNodesFromDOMNode(domNode, depth, descendantDOMNodes
 
     depth--;
 
-    childDOMNodes.forEach((childDOMNode) => descendantDOMNodesFromDOMNode(childDOMNode, depth, descendantDOMNodes));
+    childDOMNodes.forEach((childDOMNode) => {
+      descendantDOMNodesFromDOMNode(childDOMNode, depth, descendantDOMNodes);
+    });
   }
 
   return descendantDOMNodes;
 }
 
 export function filterDOMNodesBySelector(domNodes, selector) {
-  const filteredDOMNodes = filterDOMNodes(domNodes, (domNode) => domNodeMatchesSelector(domNode, selector));
+  const filteredDOMNodes = filterDOMNodes(domNodes, (domNode) => {
+    if (domNodeMatchesSelector(domNode, selector)) {
+      return true;
+    }
+  });
 
   return filteredDOMNodes;
 }

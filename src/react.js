@@ -9,7 +9,7 @@ import { removeFalseyElements, replaceStringsWithTextElements } from "./utilitie
 function createElement(firstArgument, properties, ...childElements) {
   let element = null;
 
-  if (firstArgument !== undefined) {
+  if (firstArgument) {
     childElements = sanitiseChildElements(childElements);
 
     properties = Object.assign({

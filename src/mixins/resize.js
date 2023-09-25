@@ -30,7 +30,9 @@ function addResizeObject() {
 
   this.__resizeObject__ = resizeObject;
 
-  resizeObject.onload = () => resizeObjectLoadHandler(this);
+  resizeObject.onload = () => {
+    resizeObjectLoadHandler(this);
+  };
 
   this.domElement.appendChild(resizeObject);
 }
@@ -62,6 +64,8 @@ function resizeObjectLoadHandler(element) {
   resizeObjectWindow.addEventListener(RESIZE_EVENT_TYPE, (event) => {
     const resizeEventListeners = element.findEventListeners(RESIZE_EVENT_TYPE);
 
-    resizeEventListeners.forEach((resizeEventListener) => resizeEventListener(event));
+    resizeEventListeners.forEach((resizeEventListener) => {
+      resizeEventListener(event);
+    });
   });
 }

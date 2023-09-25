@@ -228,32 +228,36 @@ class Element {
     return hidden;
   }
 
-  style(name, value) {
-    if (value !== undefined) {
+  style(name, value = null) {
+    if (value !== null) {
       this.domElement.style[name] = value;
-    } else {
-      const style = this.domElement.style[name];
 
-      return style;
+      return;
     }
+
+    const style = this.domElement.style[name];
+
+    return style;
   }
 
-  html(html) {
-    if (html === undefined) {
-      const innerHTML = this.domElement.innerHTML;
-
-      html = innerHTML; ///
-
-      return html;
-    } else {
+  html(html = null) {
+    if (html !== null) {
       const innerHTML = html; ///
 
       this.domElement.innerHTML = innerHTML
+
+      return;
     }
+
+    const innerHTML = this.domElement.innerHTML;
+
+    html = innerHTML; ///
+
+    return html;
   }
 
-  css(css) {
-    if (css === undefined) {
+  css(css = null) {
+    if (css === null) {
       const computedStyle = getComputedStyle(this.domElement),
             css = {};
 
@@ -266,7 +270,9 @@ class Element {
       }
 
       return css;
-    } else if (typeof css === STRING) {
+    }
+
+    if (typeof css === STRING) {
       let name = css; ///
 
       const computedStyle = getComputedStyle(this.domElement),
@@ -275,15 +281,15 @@ class Element {
       css = value;  ///
 
       return css;
-    } else {
-      const names = Object.keys(css); ///
-
-      names.forEach((name) => {
-        const value = css[name];
-
-        this.style(name, value);
-      });
     }
+
+    const names = Object.keys(css); ///
+
+    names.forEach((name) => {
+      const value = css[name];
+
+      this.style(name, value);
+    });
   }
   
   blur() { this.domElement.blur(); }
@@ -344,7 +350,9 @@ function mountElement(element) {
 
   elements.reverse(); ///
 
-  elements.forEach((element) => (element.didMount && element.didMount()));  ///
+  elements.forEach((element) => {
+    element.didMount && element.didMount();
+  });
 }
 
 function unmountElement(element) {
@@ -354,7 +362,9 @@ function unmountElement(element) {
           ...descendantElements
         ];
 
-  elements.forEach((element) => (element.willUnmount && element.willUnmount()));  ///
+  elements.forEach((element) => {
+    element.willUnmount && element.willUnmount();
+  });
 }
 
 function elementFromTagName(Class, tagName, ...remainingArguments) {
@@ -386,7 +396,11 @@ function defaultPropertiesFromClass(Class, defaultProperties = {}) {
 
 function ignoredPropertiesFromClass(Class, ignoredProperties = []) {
   if (Class.hasOwnProperty(IGNORED_PROPERTIES)) {
-    ignoredProperties = augment(ignoredProperties, Class[IGNORED_PROPERTIES], (ignoredProperty) => !ignoredProperties.includes(ignoredProperty));
+    ignoredProperties = augment(ignoredProperties, Class[IGNORED_PROPERTIES], (ignoredProperty) => {
+      if (!ignoredProperties.includes(ignoredProperty)) {
+        return true;
+      }
+    });
   }
 
   const superClass = Object.getPrototypeOf(Class);

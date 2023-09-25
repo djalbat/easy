@@ -43,11 +43,11 @@ function off(eventTypes, handler, element = this) {
 }
 
 function addEventListener(eventType, handler, element) {
-  if (this.eventListeners === undefined) {
+  const eventListener = this.createEventListener(eventType, handler, element);
+
+  if (!this.eventListeners) {
     this.eventListeners = [];
   }
-
-  const eventListener = this.createEventListener(eventType, handler, element);
 
   this.eventListeners.push(eventListener);
 
@@ -82,7 +82,7 @@ function findEventListener(eventType, handler, element) {
 function findEventListeners(eventType) {
   const eventListeners = [];
 
-  if (this.eventListeners !== undefined) {
+  if (this.eventListeners) {
     this.eventListeners.forEach((eventListener) => {
       const found = (eventListener.eventType === eventType);
 
