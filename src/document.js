@@ -18,6 +18,8 @@ class Document {
   }
 
   createRange() { return this.domElement.createRange(); }
+
+  createTextNode(data) { return this.domElement.createTextNode(data); }
 }
 
 export default (typeof document === UNDEFINED) ? undefined : new Document();  ///
