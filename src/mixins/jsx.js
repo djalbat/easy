@@ -4,7 +4,7 @@ import { combine, prune } from "../utilities/object";
 import { first, guarantee } from "../utilities/array";
 import { isHTMLAttributeName, isSVGAttributeName } from "../utilities/name";
 import { removeFalseyElements, replaceStringsWithTextElements } from "../utilities/elements";
-import { FOR, CLASS, OBJECT, HTML_FOR, CLASS_NAME, BOOLEAN, FUNCTION, SVG_NAMESPACE_URI } from "../constants";
+import { FOR, CLASS, OBJECT, HTML_FOR, CLASS_NAME, BOOLEAN, FUNCTION, SVG_NAMESPACE_URI, CUSTOM_EVENT_TYPE_SUFFIX } from "../constants";
 
 function applyProperties(properties, defaultProperties, ignoredProperties) {
   this.properties = combine(properties, defaultProperties);
@@ -18,10 +18,15 @@ function applyProperties(properties, defaultProperties, ignoredProperties) {
 
   names.forEach((name) => {
     const value = properties[name],
-          nameHandlerName = isNameHandlerName(name);
+          nameHandlerName = isNameHandlerName(name),
+          nameCustomHandlerName = isNameCustomHandlerName(name);
 
-    if (nameHandlerName) {
+    if (false) {
+      ///
+    } else if (nameHandlerName) {
       addHandler(this, name, value);
+    } else if (nameCustomHandlerName) {
+      addCustomHandler(this, name, value);
     } else {
       const nameAttributeName = isNameAttributeName(name, svg);
 
@@ -121,10 +126,17 @@ function updateContext(childElement, context) {
 }
 
 function addHandler(element, name, value) {
-  const eventType = name.substr(2).toLowerCase(), ///
+  const eventType = name.substring(2).toLowerCase(), ///
         handler = value;  ///
 
   element.onEvent(eventType, handler);
+}
+
+function addCustomHandler(element, name, value) {
+  const customEventType = name.substring(8).toLowerCase() + CUSTOM_EVENT_TYPE_SUFFIX, ///
+        customHandler = value;  ///
+
+  element.onCustomEvent(customEventType, customHandler);
 }
 
 function addAttribute(element, name, value) {
@@ -154,9 +166,21 @@ function addAttribute(element, name, value) {
 }
 
 function isNameHandlerName(name) {
-  return /^on/.test(name);
+  const nameHandlerName =  /^on(?!Custom)/.test(name);  ///
+
+  return nameHandlerName;
 }
 
 function isNameAttributeName(name, svg) {
-  return svg ? isSVGAttributeName(name) : isHTMLAttributeName(name)
+  const nameAttributeName = svg ?
+                             isSVGAttributeName(name) :
+                               isHTMLAttributeName(name);
+
+  return nameAttributeName;
+}
+
+function isNameCustomHandlerName(name) {
+  const nameCustomHandlerName = /^onCustom/.test(name);
+
+  return nameCustomHandlerName;
 }
