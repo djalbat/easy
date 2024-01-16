@@ -3,21 +3,23 @@
 import { SPACE } from "../constants";
 import { forEach } from "../utilities/async";
 
-function onCustomEvent(customEventTypes, handler, element = this) {
+function onCustomEvent(customEventTypes, customHandler, element = this) {
   customEventTypes = customEventTypes.split(SPACE);
 
   customEventTypes.forEach((customEventType) => {
-    const eventType = customEventType;  ///
+    const eventType = customEventType,  ///
+          handler = customHandler;  ///
 
     this.addEventListener(eventType, handler, element);
   });
 }
 
-function offCustomEvent(customEventTypes, handler, element = this) {
+function offCustomEvent(customEventTypes, customHandler, element = this) {
   customEventTypes = customEventTypes.split(SPACE);
 
   customEventTypes.forEach((customEventType) => {
-    const eventType = customEventType;  ///
+    const eventType = customEventType,  ///
+          handler = customHandler;  ///
 
     this.removeEventListener(eventType, handler, element);
   });
