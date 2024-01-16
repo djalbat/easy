@@ -5,6 +5,7 @@ import eventMixins from "./mixins/event";
 import mouseMixins from "./mixins/mouse";
 import clickMixins from "./mixins/click";
 import windowMixins from "./mixins/window";
+import customEventMixins from "./mixins/customEvent";
 
 import { UNDEFINED } from "./constants";
 
@@ -39,5 +40,6 @@ Object.assign(Window.prototype, eventMixins);
 Object.assign(Window.prototype, mouseMixins);
 Object.assign(Window.prototype, clickMixins);
 Object.assign(Window.prototype, windowMixins);
+Object.assign(Window.prototype, customEventMixins);
 
 export default (typeof window === UNDEFINED) ? undefined : new Window();  ///

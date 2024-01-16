@@ -124,7 +124,7 @@ function addHandler(element, name, value) {
   const eventType = name.substr(2).toLowerCase(), ///
         handler = value;  ///
 
-  element.on(eventType, handler);
+  element.onEvent(eventType, handler);
 }
 
 function addAttribute(element, name, value) {

@@ -2,9 +2,9 @@
 
 import { SELECTIONCHANGE_EVENT_TYPE } from "../eventTypes";
 
-function onSelectionChange(selectionChangeHandler, element) { this.on(SELECTIONCHANGE_EVENT_TYPE, selectionChangeHandler, element); }
+function onSelectionChange(selectionChangeHandler, element) { this.onEvent(SELECTIONCHANGE_EVENT_TYPE, selectionChangeHandler, element); }
 
-function offSelectionChange(selectionChangeHandler, element) { this.off(SELECTIONCHANGE_EVENT_TYPE, selectionChangeHandler, element); }
+function offSelectionChange(selectionChangeHandler, element) { this.offEvent(SELECTIONCHANGE_EVENT_TYPE, selectionChangeHandler, element); }
 
 function createEventListener(eventType, handler, element) {
   let eventListener;

@@ -5,6 +5,7 @@ import clickMixins from "./mixins/click";
 import eventMixins from "./mixins/event";
 import mouseMixins from "./mixins/mouse";
 import selectionMixins from "./mixins/selection";
+import customEventMixins from "./mixins/customEvent";
 
 import { UNDEFINED } from "./constants";
 
@@ -29,3 +30,4 @@ Object.assign(Document.prototype, clickMixins);
 Object.assign(Document.prototype, eventMixins);
 Object.assign(Document.prototype, mouseMixins);
 Object.assign(Document.prototype, selectionMixins);
+Object.assign(Document.prototype, customEventMixins);

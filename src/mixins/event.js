@@ -4,7 +4,7 @@ import { SPACE } from "../constants";
 import { RESIZE_EVENT_TYPE } from "../eventTypes";
 import { removeResizeObject } from "../mixins/resize";
 
-function on(eventTypes, handler, element = this) {
+function onEvent(eventTypes, handler, element = this) {
   eventTypes = eventTypes.split(SPACE);
 
   eventTypes.forEach((eventType) => {
@@ -23,7 +23,7 @@ function on(eventTypes, handler, element = this) {
   });
 }
 
-function off(eventTypes, handler, element = this) {
+function offEvent(eventTypes, handler, element = this) {
   eventTypes = eventTypes.split(SPACE);
 
   eventTypes.forEach((eventType) => {
@@ -116,8 +116,8 @@ function createEventListener(eventType, handler, element) {
 }
 
 const eventMixins = {
-  on,
-  off,
+  onEvent,
+  offEvent,
   addEventListener,
   removeEventListener,
   createEventListener,

@@ -4,9 +4,9 @@ import { RESIZE_EVENT_TYPE } from "../eventTypes";
 import { OBJECT, ABOUT_BLANK } from "../constants";
 import { TEXT_HTML_CONTENT_TYPE } from "../contentTypes";
 
-export function onResize(resizeHandler, element) { this.on(RESIZE_EVENT_TYPE, resizeHandler, element); }
+export function onResize(resizeHandler, element) { this.onEvent(RESIZE_EVENT_TYPE, resizeHandler, element); }
 
-export function offResize(resizeHandler, element) { this.off(RESIZE_EVENT_TYPE, resizeHandler, element); }
+export function offResize(resizeHandler, element) { this.offEvent(RESIZE_EVENT_TYPE, resizeHandler, element); }
 
 function addResizeObject() {
   const resizeObject = document.createElement(OBJECT),

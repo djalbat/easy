@@ -6,9 +6,9 @@ import changeMixins from "./mixins/change";
 import { CHANGE_EVENT_TYPE } from "./eventTypes";
 
 class InputElement extends Element {
-  onChange(changeHandler, element) { this.on(CHANGE_EVENT_TYPE, changeHandler, element); }
+  onChange(changeHandler, element) { this.onEvent(CHANGE_EVENT_TYPE, changeHandler, element); }
 
-  offChange(changeHandler, element) { this.off(CHANGE_EVENT_TYPE, changeHandler, element); }
+  offChange(changeHandler, element) { this.offEvent(CHANGE_EVENT_TYPE, changeHandler, element); }
 
   onResize(resizeHandler, element) {} ///
 

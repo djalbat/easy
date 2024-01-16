@@ -162,8 +162,6 @@ Each class bar the `Window`, `Document` and `TextElement` classes has the follow
 - `getScrollLeft()`
 - `setScrollTop(scrollTop)`
 - `setScrollLeft(scrollLeft)`
-- `on(eventTypes, handler)`
-- `off(eventTypes, handler)`
 - `onClick(handler)`
 - `offClick(handler)`
 - `onKeyUp(handler)`
@@ -182,6 +180,10 @@ Each class bar the `Window`, `Document` and `TextElement` classes has the follow
 - `offScroll(handler)`
 - `onResize(handler)`
 - `offResize(handler)`
+- `onEvent(eventTypes, handler)`
+- `offEvent(eventTypes, handler)`
+- `onCustomEvent(customEventTypes, handler)`
+- `offCustomEvent(customEventTypes, handler)`
 
 Please note the following:
 

@@ -11,6 +11,7 @@ import mouseMixins from "./mixins/mouse";
 import resizeMixins from "./mixins/resize";
 import scrollMixins from "./mixins/scroll";
 import elementMixins from "./mixins/element";
+import customEventMixins from "./mixins/customEvent";
 
 import { combine } from "./utilities/object";
 import { isSVGTagName } from "./utilities/name";
@@ -338,6 +339,7 @@ Object.assign(Element.prototype, mouseMixins);
 Object.assign(Element.prototype, resizeMixins);
 Object.assign(Element.prototype, scrollMixins);
 Object.assign(Element.prototype, elementMixins);
+Object.assign(Element.prototype, customEventMixins);
 
 export default Element;
 
