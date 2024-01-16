@@ -22,9 +22,27 @@ function offCustomEvent(customEventTypes, handler, element = this) {
   });
 }
 
+function callCustomHandlers(customEventType, ...remainingArguments) {
+  const eventListeners = this.findEventListeners(customEventType);
+
+  eventListeners.forEach((eventListener) => {
+    let { element } = eventListener;
+
+    const { handler } = eventListener;
+
+    const customHandler = handler,  ///
+          customHandlerElement = element; ///
+
+    element = this; ///
+
+    customHandler.call(customHandlerElement, ...remainingArguments, element);
+  });
+}
+
 const customEventMixins = {
   onCustomEvent,
-  offCustomEvent
+  offCustomEvent,
+  callCustomHandlers
 };
 
 export default customEventMixins;
