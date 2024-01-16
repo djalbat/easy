@@ -1,6 +1,7 @@
 "use strict";
 
 import { SPACE } from "../constants";
+import { forEach } from "../utilities/async";
 
 function onCustomEvent(customEventTypes, handler, element = this) {
   customEventTypes = customEventTypes.split(SPACE);
@@ -26,23 +27,31 @@ function callCustomHandlers(customEventType, ...remainingArguments) {
   const eventListeners = this.findEventListeners(customEventType);
 
   eventListeners.forEach((eventListener) => {
-    let { element } = eventListener;
-
-    const { handler } = eventListener;
-
-    const customHandler = handler,  ///
-          customHandlerElement = element; ///
-
-    element = this; ///
+    const { handler: customHandler, element: customHandlerElement } = eventListener,
+          element = this; ///
 
     customHandler.call(customHandlerElement, ...remainingArguments, element);
   });
 }
 
+function callCustomHandlersAsync(customEventType, ...remainingArguments) {
+  const eventListeners = this.findEventListeners(customEventType),
+        done = remainingArguments.pop();  ///
+
+  forEach(eventListeners, (eventListener, next) => {
+    const { handler: customHandler, element: customHandlerElement } = eventListener,
+          element = this, ///
+          done = next;  ///
+
+    customHandler.call(customHandlerElement, ...remainingArguments, element, done);
+  }, done);
+}
+
 const customEventMixins = {
   onCustomEvent,
   offCustomEvent,
-  callCustomHandlers
+  callCustomHandlers,
+  callCustomHandlersAsync
 };
 
 export default customEventMixins;
