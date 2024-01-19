@@ -23,7 +23,7 @@ function callCustomHandlers(customEventType, ...remainingArguments) {
   const customEventListeners = this.findCustomEventListeners(customEventType);
 
   customEventListeners.forEach((customEventListener) => {
-    const { customHandler, customHandlerElement } = customEventListener,
+    const { customHandler, element: customHandlerElement } = customEventListener,
           element = this; ///
 
     customHandler.call(customHandlerElement, ...remainingArguments, element);
@@ -35,7 +35,7 @@ function callCustomHandlersAsync(customEventType, ...remainingArguments) {
         done = remainingArguments.pop();  ///
 
   forEach(customEventListeners, (customEventListener, next) => {
-    const { customHandler, customHandlerElement } = customEventListener,
+    const { customHandler, element: customHandlerElement } = customEventListener,
           element = this, ///
           done = next;  ///
 

@@ -5,7 +5,7 @@ import { RESIZE_EVENT_TYPE } from "../eventTypes";
 import { removeResizeObject } from "../mixins/resize";
 
 function onEvent(eventTypes, handler, element = this) {
-  eventTypes = eventTypes.split(SPACE);
+  eventTypes = eventTypes.split(SPACE); ///
 
   eventTypes.forEach((eventType) => {
     if (eventType === RESIZE_EVENT_TYPE) {
@@ -24,7 +24,7 @@ function onEvent(eventTypes, handler, element = this) {
 }
 
 function offEvent(eventTypes, handler, element = this) {
-  eventTypes = eventTypes.split(SPACE);
+  eventTypes = eventTypes.split(SPACE); ///
 
   eventTypes.forEach((eventType) => {
     const eventListener = this.removeEventListener(eventType, handler, element);
