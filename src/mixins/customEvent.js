@@ -4,32 +4,26 @@ import { SPACE } from "../constants";
 import { forEach } from "../utilities/async";
 
 function onCustomEvent(customEventTypes, customHandler, element = this) {
-  customEventTypes = customEventTypes.split(SPACE);
+  customEventTypes = customEventTypes.split(SPACE); ///
 
   customEventTypes.forEach((customEventType) => {
-    const eventType = customEventType,  ///
-          handler = customHandler;  ///
-
-    this.addEventListener(eventType, handler, element);
+    this.addCustomEventListener(customEventType, customHandler, element);
   });
 }
 
 function offCustomEvent(customEventTypes, customHandler, element = this) {
-  customEventTypes = customEventTypes.split(SPACE);
+  customEventTypes = customEventTypes.split(SPACE); ///
 
   customEventTypes.forEach((customEventType) => {
-    const eventType = customEventType,  ///
-          handler = customHandler;  ///
-
-    this.removeEventListener(eventType, handler, element);
+    this.removeCustomEventListener(customEventType, customHandler, element);
   });
 }
 
 function callCustomHandlers(customEventType, ...remainingArguments) {
-  const eventListeners = this.findEventListeners(customEventType);
+  const customEventListeners = this.findCustomEventListeners(customEventType);
 
-  eventListeners.forEach((eventListener) => {
-    const { handler: customHandler, element: customHandlerElement } = eventListener,
+  customEventListeners.forEach((customEventListener) => {
+    const { customHandler, customHandlerElement } = customEventListener,
           element = this; ///
 
     customHandler.call(customHandlerElement, ...remainingArguments, element);
@@ -37,11 +31,11 @@ function callCustomHandlers(customEventType, ...remainingArguments) {
 }
 
 function callCustomHandlersAsync(customEventType, ...remainingArguments) {
-  const eventListeners = this.findEventListeners(customEventType),
+  const customEventListeners = this.findCustomEventListeners(customEventType),
         done = remainingArguments.pop();  ///
 
-  forEach(eventListeners, (eventListener, next) => {
-    const { handler: customHandler, element: customHandlerElement } = eventListener,
+  forEach(customEventListeners, (customEventListener, next) => {
+    const { customHandler, customHandlerElement } = customEventListener,
           element = this, ///
           done = next;  ///
 
@@ -49,11 +43,83 @@ function callCustomHandlersAsync(customEventType, ...remainingArguments) {
   }, done);
 }
 
+function addCustomEventListener(customEventType, customHandler, element) {
+  const customEventListener = this.createCustomEventListener(customEventType, customHandler, element);
+
+  if (!this.customEventListeners) {
+    this.customEventListeners = [];
+  }
+
+  this.customEventListeners.push(customEventListener);
+
+  return customEventListener;
+}
+
+function removeCustomEventListener(customEventType, customHandler, element) {
+  const customEventListener = this.findCustomEventListener(customEventType, customHandler, element),
+        index = this.customEventListeners.indexOf(customEventListener),
+        start = index,  ///
+        deleteCount = 1;
+
+  this.customEventListeners.splice(start, deleteCount);
+
+  if (this.customEventListeners.length === 0) {
+    delete this.customEventListeners;
+  }
+
+  return customEventListener;
+}
+
+function findCustomEventListener(customEventType, customHandler, element) {
+  const customEventListener = this.customEventListeners.find((customEventListener) => {
+    if ((customEventListener.element === element) && (customEventListener.customHandler === customHandler) && (customEventListener.customEventType === customEventType)) {
+      return true;
+    }
+  });
+
+  return customEventListener;
+}
+
+function findCustomEventListeners(customEventType) {
+  const customEventListeners = [];
+
+  if (this.customEventListeners) {
+    this.customEventListeners.forEach((customEventListener) => {
+      const found = (customEventListener.customEventType === customEventType);
+
+      if (found) {
+        customEventListeners.push(customEventListener);
+      }
+    });
+  }
+
+  return customEventListeners;
+}
+
+function createCustomEventListener(customEventType, customHandler, element) {
+  let customEventListener;
+
+  customEventListener = () => {}; ///
+
+  Object.assign(customEventListener, {
+    element,
+    customHandler,
+    customEventType
+  });
+
+  return customEventListener;
+}
+
 const customEventMixins = {
   onCustomEvent,
   offCustomEvent,
   callCustomHandlers,
-  callCustomHandlersAsync
+  callCustomHandlersAsync,
+  addCustomEventListener,
+  removeCustomEventListener,
+  findCustomEventListener,
+  findCustomEventListeners,
+  createCustomEventListener
 };
 
 export default customEventMixins;

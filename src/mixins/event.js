@@ -120,9 +120,9 @@ const eventMixins = {
   offEvent,
   addEventListener,
   removeEventListener,
-  createEventListener,
   findEventListener,
-  findEventListeners
+  findEventListeners,
+  createEventListener
 };
 
 export default eventMixins;
