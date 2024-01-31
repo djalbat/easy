@@ -5,6 +5,7 @@ import { first, guarantee } from "../utilities/array";
 import { isHTMLAttributeName, isSVGAttributeName } from "../utilities/name";
 import { removeFalseyElements, replaceStringsWithTextElements } from "../utilities/elements";
 import { FOR, CLASS, OBJECT, HTML_FOR, CLASS_NAME, BOOLEAN, FUNCTION, SVG_NAMESPACE_URI, CUSTOM_EVENT_TYPE_SUFFIX } from "../constants";
+import {camelCaseToSnakeCase} from "../utilities/string";
 
 function applyProperties(properties, defaultProperties, ignoredProperties) {
   this.properties = combine(properties, defaultProperties);
@@ -133,7 +134,7 @@ function addHandler(element, name, value) {
 }
 
 function addCustomHandler(element, name, value) {
-  const customEventType = name.substring(8).toLowerCase() + CUSTOM_EVENT_TYPE_SUFFIX, ///
+  const customEventType = camelCaseToSnakeCase(name).replace(/on-custom-/, "") + CUSTOM_EVENT_TYPE_SUFFIX, ///
         customHandler = value;  ///
 
   element.onCustomEvent(customEventType, customHandler);

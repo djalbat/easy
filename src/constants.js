@@ -3,6 +3,7 @@
 export const FOR = "for";
 export const BODY = "body";
 export const NONE = "none";
+export const DASH = "-";
 export const SPACE = " ";
 export const CLASS = "class";
 export const WIDTH = "width";
