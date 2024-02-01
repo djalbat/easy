@@ -24,4 +24,3 @@ export const EMPTY_STRING = "";
 export const SVG_NAMESPACE_URI = "http://www.w3.org/2000/svg";
 export const DEFAULT_PROPERTIES = "defaultProperties";
 export const IGNORED_PROPERTIES = "ignoredProperties";
-export const CUSTOM_EVENT_TYPE_SUFFIX = "-custom";
