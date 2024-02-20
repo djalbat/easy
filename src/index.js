@@ -20,4 +20,4 @@ export { default as document } from "./document";
 export { default as eventTypes } from "./eventTypes";
 export { default as mouseButtons } from "./mouseButtons";
 
-export { defautl as elementMixins } from "./mixins/element";
+export { default as elementMixins } from "./mixins/element";
