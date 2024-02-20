@@ -4,6 +4,32 @@ import { first } from "../utilities/array";
 import { WILDCARD } from "../constants";
 import { domNodeMatchesSelector, elementsFromDOMElements, filterDOMNodesBySelector, ascendantDOMNodesFromDOMNode, descendantDOMNodesFromDOMNode } from "../utilities/dom";
 
+function mountElement(element) {
+  const descendantElements = element.getDescendantElements(),
+        elements = [
+          element,
+          ...descendantElements
+        ];
+
+  elements.reverse(); ///
+
+  elements.forEach((element) => {
+    element.didMount && element.didMount();
+  });
+}
+
+function unmountElement(element) {
+  const descendantElements = element.getDescendantElements(),
+        elements = [
+          element,
+          ...descendantElements
+        ];
+
+  elements.forEach((element) => {
+    element.willUnmount && element.willUnmount();
+  });
+}
+
 function getParentElement(selector = WILDCARD) {
   let parentElement = null;
 
@@ -75,6 +101,8 @@ function getPreviousSiblingElement(selector = WILDCARD) {
 }
 
 const elementMixins = {
+  mountElement,
+  unmountElement,
   getParentElement,
   getChildElements,
   getAscendantElements,

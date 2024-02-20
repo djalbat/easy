@@ -5,9 +5,9 @@ import { WILDCARD } from "../constants";
 
 export function elementsFromDOMElements(domElements) {
   const domElementsWithElements = filterDOMNodes(domElements, (domElement) => {
-        if ((domElement.__element__)) {
-          return true;
-        }
+          if ((domElement.__element__)) {
+            return true;
+          }
         }),
         elements = domElementsWithElements.map((domElement) => {
           const element = domElement.__element__;

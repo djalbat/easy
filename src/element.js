@@ -162,7 +162,7 @@ class Element {
 
     const element = this; ///
 
-    mountElement(element);
+    this.mountElement(element);
   }
 
   mountAfter(siblingElement) {
@@ -170,17 +170,17 @@ class Element {
 
     const element = this; ///
 
-    mountElement(element);
+    this.mountElement(element);
   }
 
   mount(element) {
     this.add(element);
 
-    mountElement(element);
+    this.mountElement(element);
   }
 
   unmount(element) {
-    unmountElement(element);
+    this.unmountElement(element);
 
     this.remove(element);
   }
@@ -342,32 +342,6 @@ Object.assign(Element.prototype, elementMixins);
 Object.assign(Element.prototype, customEventMixins);
 
 export default Element;
-
-function mountElement(element) {
-  const descendantElements = element.getDescendantElements(),
-        elements = [
-          element,
-          ...descendantElements
-        ];
-
-  elements.reverse(); ///
-
-  elements.forEach((element) => {
-    element.didMount && element.didMount();
-  });
-}
-
-function unmountElement(element) {
-  const descendantElements = element.getDescendantElements(),
-        elements = [
-          element,
-          ...descendantElements
-        ];
-
-  elements.forEach((element) => {
-    element.willUnmount && element.willUnmount();
-  });
-}
 
 function elementFromTagName(Class, tagName, ...remainingArguments) {
   const selector = null,
