@@ -16,6 +16,7 @@ import customEventMixins from "./mixins/customEvent";
 import { combine } from "./utilities/object";
 import { isSVGTagName } from "./utilities/name";
 import { first, augment } from "./utilities/array";
+import { mountElement, unmountElement } from "./utilities/element";
 import { NONE,
          BLOCK,
          WIDTH,
@@ -162,7 +163,7 @@ class Element {
 
     const element = this; ///
 
-    this.mountElement(element);
+    mountElement(element);
   }
 
   mountAfter(siblingElement) {
@@ -170,17 +171,17 @@ class Element {
 
     const element = this; ///
 
-    this.mountElement(element);
+    mountElement(element);
   }
 
   mount(element) {
     this.add(element);
 
-    this.mountElement(element);
+    mountElement(element);
   }
 
   unmount(element) {
-    this.unmountElement(element);
+    unmountElement(element);
 
     this.remove(element);
   }
