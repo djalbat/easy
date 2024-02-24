@@ -11,6 +11,10 @@ class TextElement {
     this.domElement.__element__ = this;
   }
 
+  getDOMElement() {
+    return this.domElement;
+  }
+
   getText() {
     const nodeValue = this.domElement.nodeValue,
           text = nodeValue; ///
