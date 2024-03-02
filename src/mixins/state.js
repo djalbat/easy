@@ -9,7 +9,9 @@ function setState(state) {
 }
 
 function updateState(state) {
-  Object.assign(this.state, state);
+  (this.state === undefined) ?
+    this.state = state :
+      Object.assign(this.state, state);
 }
 
 const stateMixins = {
