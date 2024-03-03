@@ -43,11 +43,11 @@ const React = {
 export default React;
 
 function sanitiseChildElements(childElements) {
-  childElements = flatten(childElements);
+  childElements = flatten(childElements); ///
 
-  childElements = removeFalseyElements(childElements);
+  childElements = removeFalseyElements(childElements);  ///
 
-  childElements = replaceStringsWithTextElements(childElements);
+  childElements = replaceStringsWithTextElements(childElements);  ///
 
   return childElements;
 }

@@ -2,7 +2,7 @@
 
 import { Button, Element, Textarea, mouseButtons } from "../index";  ///
 
-import Checkbox from "./checkbox";
+import Checkbox from "./view/checkbox";
 
 const { LEFT_MOUSE_BUTTON } = mouseButtons;
 

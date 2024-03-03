@@ -1,8 +1,7 @@
 "use strict";
 
 import { RESIZE_EVENT_TYPE } from "../eventTypes";
-import { OBJECT, ABOUT_BLANK } from "../constants";
-import { TEXT_HTML_CONTENT_TYPE } from "../contentTypes";
+import { OBJECT, TEXT_HTML, ABOUT_BLANK } from "../constants";
 
 export function onResize(resizeHandler, element) { this.onEvent(RESIZE_EVENT_TYPE, resizeHandler, element); }
 
@@ -10,6 +9,8 @@ export function offResize(resizeHandler, element) { this.offEvent(RESIZE_EVENT_T
 
 function addResizeObject() {
   const resizeObject = document.createElement(OBJECT),
+        type = TEXT_HTML,  ///
+        data = ABOUT_BLANK, ///
         style = `display: block; 
                  position: absolute; 
                  top: 0; 
@@ -18,17 +19,16 @@ function addResizeObject() {
                  width: 100%; 
                  overflow: hidden; 
                  pointer-events: none; 
-                 z-index: -1;`,
-        data = ABOUT_BLANK,
-        type = TEXT_HTML_CONTENT_TYPE;
+                 z-index: -1;`;
+
+  Object.assign(resizeObject, {
+    type,
+    data
+  });
 
   resizeObject.setAttribute("style", style);
 
-  resizeObject.data = data;
-
-  resizeObject.type = type;
-
-  this.__resizeObject__ = resizeObject;
+  this.__resizeObject__ = resizeObject; ///
 
   resizeObject.onload = () => {
     resizeObjectLoadHandler(this);
@@ -38,7 +38,7 @@ function addResizeObject() {
 }
 
 function removeResizeObject() {
-  const resizeObject = this.__resizeObject__,
+  const resizeObject = this.__resizeObject__, ///
         objectWindow = resizeObject.contentDocument.defaultView;  ///
 
   objectWindow.removeEventListener(RESIZE_EVENT_TYPE, resizeEventListener);

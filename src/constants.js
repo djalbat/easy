@@ -17,6 +17,7 @@ export const DISABLED = "disabled";
 export const FUNCTION = "function";
 export const WILDCARD = "*";
 export const HTML_FOR = "htmlFor";
+export const TEXT_HTML = "text/html";
 export const UNDEFINED = 'undefined';
 export const CLASS_NAME = "className";
 export const ABOUT_BLANK = "about:blank";

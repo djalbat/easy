@@ -8,7 +8,7 @@ class TextElement {
   constructor(text) {
     this.domElement = document.createTextNode(text); ///
 
-    this.domElement.__element__ = this;
+    this.domElement.__element__ = this; ///
   }
 
   getDOMElement() {
@@ -66,15 +66,15 @@ class TextElement {
   removeFrom(parentElement) { parentElement.remove(this); }
 
   insertBefore(siblingElement) {
-    const parentDOMNode = siblingElement.domElement.parentNode,
-          siblingDOMElement = siblingElement.domElement;
+    const parentDOMNode = siblingElement.domElement.parentNode, ///
+          siblingDOMElement = siblingElement.domElement;  ///
 
     parentDOMNode.insertBefore(this.domElement, siblingDOMElement);
   }
 
   insertAfter(siblingElement) {
-    const parentDOMNode = siblingElement.domElement.parentNode,
-          siblingDOMElement = siblingElement.domElement;
+    const parentDOMNode = siblingElement.domElement.parentNode, ///
+          siblingDOMElement = siblingElement.domElement;  ///
 
     parentDOMNode.insertBefore(this.domElement, siblingDOMElement.nextSibling);  ///
   }

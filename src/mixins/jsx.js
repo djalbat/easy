@@ -12,7 +12,7 @@ function applyProperties(properties, defaultProperties, ignoredProperties) {
 
   properties = prune(this.properties, ignoredProperties); ///
 
-  const { namespaceURI } = this.domElement,
+  const namespaceURI = this.domElement.namespaceURI,
         svg = (namespaceURI === SVG_NAMESPACE_URI), ///
         propertiesKeys = Object.keys(properties),
         names = propertiesKeys;  ///=

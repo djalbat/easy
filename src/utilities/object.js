@@ -3,7 +3,9 @@
 import { BOOLEAN } from "../constants";
 
 export function combine(target, source = {}) {
-  target = { ...target };  ///
+  target = {  ///
+    ...target
+  };
 
   const names = Object.keys(source);  ///
 
@@ -21,7 +23,9 @@ export function combine(target, source = {}) {
 }
 
 export function prune(target, names = []) {
-  target = { ...target };  ///
+  target = {  ///
+    ...target
+  };
 
   names.forEach((name) => {
     const targetHasOwnProperty = target.hasOwnProperty(name);

@@ -67,10 +67,16 @@ export default class Bounds {
   }
 
   areOverlapping(bounds) {
-    return (  (this.top < bounds.bottom)
-           && (this.left < bounds.right)
-           && (this.right > bounds.left)
-           && (this.bottom > bounds.top)  );
+    const bottom = bounds.getBottom(),
+          right = bounds.getRight(),
+          left = bounds.getLeft(),
+          top = bounds.getTop(),
+          overlapping = (  (this.top < bottom)
+                        && (this.left < right)
+                        && (this.right > left)
+                        && (this.bottom > top)  );
+
+    return overlapping;
   }
 
   static fromBoundingClientRect(boundingClientRect) {

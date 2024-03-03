@@ -118,22 +118,22 @@ class Element {
   removeFrom(parentElement) { parentElement.remove(this); }
 
   insertBefore(siblingElement) {
-    const parentDOMNode = siblingElement.domElement.parentNode,
-          siblingDOMElement = siblingElement.domElement;
+    const parentDOMNode = siblingElement.domElement.parentNode, ///
+          siblingDOMElement = siblingElement.domElement;  ///
 
     parentDOMNode.insertBefore(this.domElement, siblingDOMElement);
   }
 
   insertAfter(siblingElement) {
-    const parentDOMNode = siblingElement.domElement.parentNode,
-          siblingDOMElement = siblingElement.domElement;
+    const parentDOMNode = siblingElement.domElement.parentNode, ///
+          siblingDOMElement = siblingElement.domElement;  ///
 
     parentDOMNode.insertBefore(this.domElement, siblingDOMElement.nextSibling);  ///
   }
 
   prepend(element) {
     const domElement = element.domElement,
-          firstChildDOMElement = this.domElement.firstChild;
+          firstChildDOMElement = this.domElement.firstChild;  ///
 
     this.domElement.insertBefore(domElement, firstChildDOMElement);
   }
@@ -362,7 +362,7 @@ function defaultPropertiesFromClass(Class, defaultProperties = {}) {
     defaultProperties = combine(defaultProperties, Class[DEFAULT_PROPERTIES]);
   }
 
-  const superClass = Object.getPrototypeOf(Class);
+  const superClass = Object.getPrototypeOf(Class);  ///
 
   if (superClass !== null) {
     defaultProperties = defaultPropertiesFromClass(superClass, defaultProperties);

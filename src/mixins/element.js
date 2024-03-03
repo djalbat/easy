@@ -7,11 +7,13 @@ import { domNodeMatchesSelector, elementsFromDOMElements, filterDOMNodesBySelect
 function getParentElement(selector = WILDCARD) {
   let parentElement = null;
 
-  const parentDOMElement = this.domElement.parentElement;
+  const parentDOMElement = this.domElement.parentElement; ///
 
   if (parentDOMElement !== null) {
     if (parentDOMElement.matches(selector)) {
-      const parentDOMElements = [parentDOMElement],
+      const parentDOMElements = [
+              parentDOMElement
+            ],
             parentElements = elementsFromDOMElements(parentDOMElements),
             firstParentElement = first(parentElements);
 
@@ -23,7 +25,7 @@ function getParentElement(selector = WILDCARD) {
 }
 
 function getChildElements(selector = WILDCARD) {
-  const childDOMNodes = this.domElement.childNodes,
+  const childDOMNodes = this.domElement.childNodes, ///
         childDOMElements = filterDOMNodesBySelector(childDOMNodes, selector),
         childElements = elementsFromDOMElements(childDOMElements);
 
@@ -53,7 +55,7 @@ function getDescendantElements(selector = WILDCARD, maximumDepth = Infinity) {
 function getNextSiblingElement(selector = WILDCARD) {
   let nextSiblingElement = null;
 
-  const nextSiblingDOMNode = this.domElement.nextSibling;
+  const nextSiblingDOMNode = this.domElement.nextSibling; ///
 
   if ((nextSiblingDOMNode !== null) && domNodeMatchesSelector(nextSiblingDOMNode, selector)) {
     nextSiblingElement = nextSiblingDOMNode.__element__ || null;

@@ -5,12 +5,12 @@ import { WILDCARD } from "../constants";
 
 export function elementsFromDOMElements(domElements) {
   const domElementsWithElements = filterDOMNodes(domElements, (domElement) => {
-          if ((domElement.__element__)) {
+          if ((domElement.__element__)) { ///
             return true;
           }
         }),
         elements = domElementsWithElements.map((domElement) => {
-          const element = domElement.__element__;
+          const element = domElement.__element__; ///
 
           return element;
         });
@@ -61,7 +61,7 @@ export function filterDOMNodesBySelector(domNodes, selector) {
 }
 
 export function domNodeMatchesSelector(domNode, selector) {
-  const domNodeType = domNode.nodeType;
+  const domNodeType = domNode.nodeType; ///
 
   switch (domNodeType) {
     case Node.ELEMENT_NODE: {
