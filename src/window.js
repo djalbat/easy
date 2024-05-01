@@ -14,6 +14,10 @@ class Window {
     this.domElement = window; ///
   }
 
+  getDOMElement() {
+    return this.domElement;
+  }
+
   assign(...sources) {
     const target = this.domElement; ///
 
