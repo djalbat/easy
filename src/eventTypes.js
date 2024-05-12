@@ -18,11 +18,15 @@ export const MOUSEUP_EVENT_TYPE = "mouseup";
 export const AUXCLICK_EVENT_TYPE = "auxclick";
 export const MOUSEOUT_EVENT_TYPE = "mouseout";
 export const DBLCLICK_EVENT_TYPE = "dblclick";
+export const TOUCHEND_EVENT_TYPE = "touchend";
+export const TOUCHMOVE_EVENT_TYPE = "touchmove";
 export const MOUSEOVER_EVENT_TYPE = "mouseover";
 export const MOUSEDOWN_EVENT_TYPE = "mousedown";
 export const MOUSEMOVE_EVENT_TYPE = "mousemove";
+export const TOUCHSTART_EVENT_TYPE = "touchstart";
 export const CONTEXTMENU_EVENT_TYPE = "contextmenu";
 export const SELECTIONCHANGE_EVENT_TYPE = "selectionchange";
+export const FULLSCREENCHANGE_EVENT_TYPE = "fullscreenchange";
 
 export default {
   CUT_EVENT_TYPE,
@@ -43,9 +47,13 @@ export default {
   AUXCLICK_EVENT_TYPE,
   MOUSEOUT_EVENT_TYPE,
   DBLCLICK_EVENT_TYPE,
+  TOUCHEND_EVENT_TYPE,
+  TOUCHMOVE_EVENT_TYPE,
   MOUSEOVER_EVENT_TYPE,
   MOUSEDOWN_EVENT_TYPE,
   MOUSEMOVE_EVENT_TYPE,
+  TOUCHSTART_EVENT_TYPE,
   CONTEXTMENU_EVENT_TYPE,
-  SELECTIONCHANGE_EVENT_TYPE
+  SELECTIONCHANGE_EVENT_TYPE,
+  FULLSCREENCHANGE_EVENT_TYPE
 };
