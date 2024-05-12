@@ -23,10 +23,9 @@ function callCustomHandlers(customEventType, ...remainingArguments) {
   const customEventListeners = this.findCustomEventListeners(customEventType);
 
   customEventListeners.forEach((customEventListener) => {
-    const { customHandler, element: customHandlerElement } = customEventListener,
-          element = this; ///
+    const { customHandler, element: customHandlerElement } = customEventListener; ///
 
-    customHandler.call(customHandlerElement, ...remainingArguments, element);
+    customHandler.call(customHandlerElement, ...remainingArguments);
   });
 }
 
@@ -36,10 +35,9 @@ function callCustomHandlersAsync(customEventType, ...remainingArguments) {
 
   forEach(customEventListeners, (customEventListener, next) => {
     const { customHandler, element: customHandlerElement } = customEventListener,
-          element = this, ///
           done = next;  ///
 
-    customHandler.call(customHandlerElement, ...remainingArguments, element, done);
+    customHandler.call(customHandlerElement, ...remainingArguments, done);
   }, done);
 }
 
