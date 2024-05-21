@@ -10,8 +10,9 @@ If you like Easy you might like [Easy with Style](https://github.com/djalbat/eas
 
 There is now support for JSX in the form of [Juxtapose](https://github.com/djalbat/Juxtapose). What this means is that Easy *will* now help you with the architecture of your large application. So although Easy elements will continue to work standalone, their use with Juxtapose is recommended.
 
-### Related projects
+### Easy projects
 
+- [Easy](https://github.com/djalbat/easy) Elements that abstract away from the DOM.
 - [Easy Layout](https://github.com/djalbat/easy-layout) Layout elements that work with CSS flexbox.
 - [Easy Mobile](https://github.com/djalbat/easy-mobile) Touch gestures for mobile web applications.
 - [Easy Navigation](https://github.com/djalbat/easy-navigation) A responsive accordion and associated navigation.
