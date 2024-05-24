@@ -4,6 +4,7 @@ import { combine, prune } from "../utilities/object";
 import { first, guarantee } from "../utilities/array";
 import { camelCaseToSnakeCase } from "../utilities/string";
 import { isHTMLAttributeName, isSVGAttributeName } from "../utilities/name";
+import { DBLCLICK_EVENT_TYPE, DOUBLE_CLICK_EVENT_TYPE } from "../eventTypes";
 import { removeFalseyElements, replaceStringsWithTextElements } from "../utilities/elements";
 import { FOR, CLASS, OBJECT, HTML_FOR, CLASS_NAME, BOOLEAN, FUNCTION, SVG_NAMESPACE_URI } from "../constants";
 
@@ -127,8 +128,13 @@ function updateContext(childElement, context) {
 }
 
 function addHandler(element, name, value) {
-  const eventType = name.substring(2).toLowerCase(), ///
-        handler = value;  ///
+  let eventType = name.substring(2).toLowerCase(); ///
+
+  if (eventType === DOUBLE_CLICK_EVENT_TYPE) {
+    eventType = DBLCLICK_EVENT_TYPE;
+  }
+
+  const handler = value;  ///
 
   element.onEvent(eventType, handler);
 }
