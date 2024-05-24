@@ -25,7 +25,7 @@ export const MOUSEDOWN_EVENT_TYPE = "mousedown";
 export const MOUSEMOVE_EVENT_TYPE = "mousemove";
 export const TOUCHSTART_EVENT_TYPE = "touchstart";
 export const CONTEXTMENU_EVENT_TYPE = "contextmenu";
-export const DOUBLE_CLICK_EVENT_TYPE = "doubleClick";
+export const DOUBLE_CLICK_EVENT_TYPE = "doubleclick";
 export const SELECTIONCHANGE_EVENT_TYPE = "selectionchange";
 export const FULLSCREENCHANGE_EVENT_TYPE = "fullscreenchange";
 
