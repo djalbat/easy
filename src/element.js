@@ -85,6 +85,8 @@ class Element {
     this.style(HEIGHT, height);
   }
 
+  scrollTo(scrollTop, scrollLeft) { this.domElement.scrollTo(scrollTop, scrollLeft); }
+
   hasAttribute(name) { return this.domElement.hasAttribute(name); }
 
   getAttribute(name) { return this.domElement.getAttribute(name); }
