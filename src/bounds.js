@@ -52,29 +52,24 @@ export default class Bounds {
     this.bottom = bottom;
   }
 
-  shift(horizontalOffset, verticalOffset) {
-    this.top += verticalOffset;
-    this.left += horizontalOffset;
-    this.right += horizontalOffset;
-    this.bottom += verticalOffset;
-  }
-
-  isOverlappingMouse(mouseTop, mouseLeft) {
-    return (  (this.top <= mouseTop)
-           && (this.left <= mouseLeft)
-           && (this.right > mouseLeft)
-           && (this.bottom > mouseTop)  );
-  }
-
   areOverlapping(bounds) {
     const bottom = bounds.getBottom(),
           right = bounds.getRight(),
           left = bounds.getLeft(),
           top = bounds.getTop(),
-          overlapping = (  (this.top < bottom)
-                        && (this.left < right)
-                        && (this.right > left)
-                        && (this.bottom > top)  );
+          overlapping = ((this.top < bottom)
+                      && (this.left < right)
+                      && (this.right > left)
+                      && (this.bottom > top));
+
+    return overlapping;
+  }
+
+  areOverlappingByTopAndLeft(top, left) {
+    const overlapping = ((this.top <= top)
+                      && (this.left <= left)
+                      && (this.right > left)
+                      && (this.bottom > top));
 
     return overlapping;
   }
