@@ -164,24 +164,26 @@ Each class bar the `Window`, `Document` and `TextElement` classes has the follow
 - `getScrollLeft()`
 - `setScrollTop(scrollTop)`
 - `setScrollLeft(scrollLeft)`
-- `onClick(handler)`
-- `offClick(handler)`
-- `onKeyUp(handler)`
-- `onKeyDown(handler)`
-- `onMouseUp(handler)`
-- `onMouseDown(handler)`
-- `onMouseOver(handler)`
-- `onMouseOut(handler)`
-- `onMouseMove(handler)`
-- `offMouseUp(handler)`
-- `offMouseDown(handler)`
-- `offMouseOver(handler)`
-- `offMouseOut(handler)`
-- `offMouseMove(handler)`
-- `onScroll(handler)`
-- `offScroll(handler)`
-- `onResize(handler)`
-- `offResize(handler)`
+- `onClick(clickHandler)`
+- `offClick(clickHandler)`
+- `onKeyUp(keyUpHandler)`
+- `offKeyUp(keyUpHandler)`
+- `onKeyDown(keyDownHandler)`
+- `offKeyDown(keyDownHandler)`
+- `onMouseUp(mouseUpHandler)`
+- `onMouseDown(mouseDownHandler)`
+- `onMouseOver(mouseOverHandler)`
+- `onMouseOut(mouseOutHandler)`
+- `onMouseMove(mouseMoveHandler)`
+- `offMouseUp(mouseUpHandler)`
+- `offMouseDown(mouseDownHandler)`
+- `offMouseOver(mouseOverHandler)`
+- `offMouseOut(mouseOutHandler)`
+- `offMouseMove(mouseOverHandler)`
+- `onScroll(scrollHandler)`
+- `offScroll(scrollHandler)`
+- `onResize(resizeHandler)`
+- `offResize(resizeHandler)`
 - `onEvent(eventTypes, handler)`
 - `offEvent(eventTypes, handler)`
 - `onCustomEvent(customEventTypes, handler)`
@@ -199,8 +201,12 @@ Please note the following:
 
 The `Input` and `Textarea` classes also have the following methods, taken from the `InputElement` class:
 
-- `onChange(handler)`
-- `offChange(handler)`
+- `onBlur(blurHandler)`
+- `offBlur(blurHandler)`
+- `onFocus(focusHandler)`
+- `offFocus(focusHandler)`
+- `onChange(changeHandler)`
+- `offChange(changeHandler)`
 - `getValue()`
 - `getSelectionStart()`
 - `getSelectionEnd()`
