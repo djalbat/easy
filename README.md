@@ -207,6 +207,12 @@ The `Input` and `Textarea` classes also have the following methods, taken from t
 - `offFocus(focusHandler)`
 - `onChange(changeHandler)`
 - `offChange(changeHandler)`
+- `onCut(cutHandler)`
+- `offCut(cutHandler)`
+- `onCopy(copyHandler)`
+- `offCopy(copyHandler)`
+- `onPaste(pasteHandler)`
+- `offPaste(pasteHandler)`
 - `getValue()`
 - `getSelectionStart()`
 - `getSelectionEnd()`

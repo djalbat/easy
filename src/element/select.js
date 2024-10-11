@@ -1,9 +1,10 @@
 "use strict";
 
 import Element from "../element";
-import changeMixins from "../mixins/change";
+import inputMixins from "../mixins/input";
+import focusMixins from "../mixins/focus";
 
-class Select extends Element {
+export default class Select extends Element {
   onResize(resizeHandler, element) {} ///
 
   offResize(resizeHandler, element) {}  ///
@@ -15,6 +16,5 @@ class Select extends Element {
   static tagName = "select";
 }
 
-Object.assign(Select.prototype, changeMixins);
-
-export default Select;
+Object.assign(Select.prototype, inputMixins);
+Object.assign(Select.prototype, focusMixins);

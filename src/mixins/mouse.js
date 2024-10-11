@@ -1,10 +1,6 @@
 "use strict";
 
-import { MOUSEUP_EVENT_TYPE,
-         MOUSEOUT_EVENT_TYPE,
-         MOUSEDOWN_EVENT_TYPE,
-         MOUSEOVER_EVENT_TYPE,
-         MOUSEMOVE_EVENT_TYPE } from "../eventTypes";
+import { MOUSEUP_EVENT_TYPE, MOUSEOUT_EVENT_TYPE, MOUSEDOWN_EVENT_TYPE, MOUSEOVER_EVENT_TYPE, MOUSEMOVE_EVENT_TYPE } from "../eventTypes";
 
 function onMouseUp(mouseUpHandler, element) { this.onEvent(MOUSEUP_EVENT_TYPE, mouseUpHandler, element); }
 

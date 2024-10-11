@@ -4,12 +4,13 @@ import Offset from "./offset";
 import Bounds from "./bounds";
 import jsxMixins from "./mixins/jsx";
 import keyMixins from "./mixins/key";
-import clickMixins from "./mixins/click";
 import stateMixins from "./mixins/state";
 import eventMixins from "./mixins/event";
 import mouseMixins from "./mixins/mouse";
-import resizeMixins from "./mixins/resize";
+import clickMixins from "./mixins/click";
+import focusMixins from "./mixins/focus";
 import scrollMixins from "./mixins/scroll";
+import resizeMixins from "./mixins/resize";
 import elementMixins from "./mixins/element";
 import customEventMixins from "./mixins/customEvent";
 
@@ -29,7 +30,7 @@ import { NONE,
          DEFAULT_PROPERTIES,
          IGNORED_PROPERTIES } from "./constants";
 
-class Element {
+export default class Element {
   constructor(selector) {
     if (selector) {
       this.domElement = document.querySelector(selector);
@@ -294,16 +295,6 @@ class Element {
     });
   }
   
-  blur() { this.domElement.blur(); }
-
-  focus() { this.domElement.focus(); }
-
-  hasFocus() {
-    const focus = (document.activeElement === this.domElement);  ///
-
-    return focus;
-  }
-
   static fromClass(Class, properties, ...remainingArguments) {
     const { tagName } = Class,
           element = elementFromTagName(Class, tagName, ...remainingArguments),
@@ -333,16 +324,15 @@ class Element {
 
 Object.assign(Element.prototype, jsxMixins);
 Object.assign(Element.prototype, keyMixins);
+Object.assign(Element.prototype, mouseMixins);
 Object.assign(Element.prototype, clickMixins);
 Object.assign(Element.prototype, stateMixins);
 Object.assign(Element.prototype, eventMixins);
-Object.assign(Element.prototype, mouseMixins);
-Object.assign(Element.prototype, resizeMixins);
+Object.assign(Element.prototype, focusMixins);
 Object.assign(Element.prototype, scrollMixins);
+Object.assign(Element.prototype, resizeMixins);
 Object.assign(Element.prototype, elementMixins);
 Object.assign(Element.prototype, customEventMixins);
-
-export default Element;
 
 function elementFromTagName(Class, tagName, ...remainingArguments) {
   const selector = null,

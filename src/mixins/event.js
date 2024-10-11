@@ -2,7 +2,6 @@
 
 import { SPACE } from "../constants";
 import { RESIZE_EVENT_TYPE } from "../eventTypes";
-import { removeResizeObject } from "../mixins/resize";
 
 function onEvent(eventTypes, handler, element = this) {
   eventTypes = eventTypes.split(SPACE); ///

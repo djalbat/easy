@@ -1,6 +1,7 @@
 "use strict";
 
 import Element from "../element";
+import focusMixins from "../mixins/focus";
 
 export default class Link extends Element {
   getHRef() { return this.getAttribute("href"); }
@@ -9,3 +10,5 @@ export default class Link extends Element {
 
   static tagName = "a";
 }
+
+Object.assign(Link.prototype, focusMixins);

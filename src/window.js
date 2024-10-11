@@ -4,7 +4,8 @@ import keyMixins from "./mixins/key";
 import eventMixins from "./mixins/event";
 import mouseMixins from "./mixins/mouse";
 import clickMixins from "./mixins/click";
-import windowMixins from "./mixins/window";
+import focusMixins from "./mixins/focus";
+import scrollMixins from "./mixins/scroll";
 import customEventMixins from "./mixins/customEvent";
 
 import { UNDEFINED } from "./constants";
@@ -43,7 +44,8 @@ Object.assign(Window.prototype, keyMixins);
 Object.assign(Window.prototype, eventMixins);
 Object.assign(Window.prototype, mouseMixins);
 Object.assign(Window.prototype, clickMixins);
-Object.assign(Window.prototype, windowMixins);
+Object.assign(Window.prototype, focusMixins);
+Object.assign(Window.prototype, scrollMixins);
 Object.assign(Window.prototype, customEventMixins);
 
 export default (typeof window === UNDEFINED) ? undefined : new Window();  ///

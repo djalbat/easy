@@ -1,20 +1,26 @@
 "use strict";
 
-import { BLUR_EVENT_TYPE, FOCUS_EVENT_TYPE } from "../eventTypes";
+import { CHANGE_EVENT_TYPE } from "../eventTypes";
 
-function onBlur(blurHandler, element) { this.onEvent(BLUR_EVENT_TYPE, blurHandler, element); }
+function onChange(changeHandler, element) { this.onEvent(CHANGE_EVENT_TYPE, changeHandler, element); }
 
-function offBlur(blurHandler, element) { this.offEvent(BLUR_EVENT_TYPE, blurHandler, element); }
+function offChange(changeHandler, element) { this.offEvent(CHANGE_EVENT_TYPE, changeHandler, element); }
 
-function onFocus(focusHandler, element) { this.onEvent(FOCUS_EVENT_TYPE, focusHandler, element); }
+function getValue() { return this.domElement.value; }
 
-function offFocus(focusHandler, element) { this.offEvent(FOCUS_EVENT_TYPE, focusHandler, element); }
+function setValue(value) { this.domElement.value = value; }
+
+function isReadOnly() { return this.domElement.readOnly; }
+
+function setReadOnly(readOnly) { this.domElement.readOnly = readOnly; }
 
 const inputMixins = {
-  onBlur,
-  offBlur,
-  onFocus,
-  offFocus
+  onChange,
+  offChange,
+  getValue,
+  setValue,
+  isReadOnly,
+  setReadOnly
 };
 
 export default inputMixins;
