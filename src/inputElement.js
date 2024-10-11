@@ -1,15 +1,10 @@
 "use strict";
 
 import Element from "./element";
+import inputMixins from "./mixins/input";
 import changeMixins from "./mixins/change";
 
-import { CHANGE_EVENT_TYPE } from "./eventTypes";
-
 class InputElement extends Element {
-  onChange(changeHandler, element) { this.onEvent(CHANGE_EVENT_TYPE, changeHandler, element); }
-
-  offChange(changeHandler, element) { this.offEvent(CHANGE_EVENT_TYPE, changeHandler, element); }
-
   onResize(resizeHandler, element) {} ///
 
   offResize(resizeHandler, element) {}  ///
@@ -33,6 +28,7 @@ class InputElement extends Element {
   select() { this.domElement.select(); }
 }
 
+Object.assign(InputElement.prototype, inputMixins);
 Object.assign(InputElement.prototype, changeMixins);
 
 export default InputElement;
