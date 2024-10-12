@@ -10,6 +10,8 @@ import scrollMixins from "./mixins/scroll";
 import { UNDEFINED } from "./constants";
 import { RESIZE_EVENT_TYPE } from "./eventTypes";
 
+const { onScroll, offScroll } = scrollMixins;
+
 class Window {
   constructor() {
     this.domElement = window; ///
@@ -55,6 +57,6 @@ Object.assign(Window.prototype, eventMixins);
 Object.assign(Window.prototype, mouseMixins);
 Object.assign(Window.prototype, clickMixins);
 Object.assign(Window.prototype, focusMixins);
-Object.assign(Window.prototype, scrollMixins);
+Object.assign(Window.prototype, { onScroll, offScroll }); ///
 
 export default (typeof window === UNDEFINED) ? undefined : new Window();  ///
