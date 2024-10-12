@@ -98,148 +98,24 @@ const link = new Link("#link", (event, element) => {
 
 The `Window` and `Document` classes are not exported, only singletons, hence the lowercase. Note also that if the underlying `window` and `document` global objects are not defined, for whatever reason, then these singletons will also be undefined.
 
-Obviously the list is incomplete. If you want to create other elements, you can extend the `Element` or `InputElement` classes.
+Obviously the list is incomplete. If you want to create other elements, you can extend the `Element` class.
 
-## Standard methods
+## API
 
-Each class bar the `Window`, `Document` and `TextElement` classes has the following methods. They are taken from the `Element` class and are overridden in many cases, in which case the signatures may change:
+Please see the source and the examples for guidance. The following files will be helpful:
 
-- `getDOMElement()`
-- `getOffset()`
-- `getBounds()`
-- `getWidth(includeBorder = true)`
-- `setWidth(width)`
-- `getHeight(includeBorder = true)`
-- `setHeight(height)`
-- `hasAttribute(name)`
-- `getAttribute(name)`
-- `setAttribute(name, value)`
-- `clearAttribute(name)`
-- `addAttribute(name, value)`
-- `removeAttribute(name)`
-- `setClass(className)`
-- `addClass(className)`
-- `removeClass(className)`
-- `toggleClass(className)`
-- `hasClass(className)`
-- `clearClasses()`
-- `appendTo(parentElement)`
-- `prependTo(parentElement)`
-- `addTo(parentElement)`
-- `removeFrom(parentElement)`
-- `insertBefore(siblingElement)`
-- `insertAfter(siblingElement)`
-- `prepend(element)`
-- `append(element)`
-- `add(element)`
-- `insert(element)`
-- `remove(element)`
-- `mountBefore(siblingElement)`
-- `mountAfter(siblingElement)`
-- `mount(element)`
-- `unmount(element)`
-- `show(displayStyle = 'block')`
-- `hide()`
-- `display(displayStyle)`
-- `enable()`
-- `disable()`
-- `isEnabled()`
-- `isDisabled()`
-- `isDisplayed()`
-- `isShowing()`
-- `isHidden()`
-- `style(style)`
-- `html(html)`
-- `css(css)`
-- `blur()`
-- `focus()`
-- `hasFocus()`
-- `getParentElement(selector = "*")`
-- `getChildElements(selector = "*")`
-- `getAscendantElements(selector = "*", height = Inifnity)`
-- `getDescendantElements(selector = "*", depth = Infinity)`
-- `getNextSiblingElement(selector = "*")`
-- `getPreviousSiblingElement(selector = "*")`
-- `getScrollTop()`
-- `getScrollLeft()`
-- `setScrollTop(scrollTop)`
-- `setScrollLeft(scrollLeft)`
-- `onClick(clickHandler)`
-- `offClick(clickHandler)`
-- `onKeyUp(keyUpHandler)`
-- `offKeyUp(keyUpHandler)`
-- `onKeyDown(keyDownHandler)`
-- `offKeyDown(keyDownHandler)`
-- `onMouseUp(mouseUpHandler)`
-- `onMouseDown(mouseDownHandler)`
-- `onMouseOver(mouseOverHandler)`
-- `onMouseOut(mouseOutHandler)`
-- `onMouseMove(mouseMoveHandler)`
-- `offMouseUp(mouseUpHandler)`
-- `offMouseDown(mouseDownHandler)`
-- `offMouseOver(mouseOverHandler)`
-- `offMouseOut(mouseOutHandler)`
-- `offMouseMove(mouseOverHandler)`
-- `onScroll(scrollHandler)`
-- `offScroll(scrollHandler)`
-- `onResize(resizeHandler)`
-- `offResize(resizeHandler)`
-- `onEvent(eventTypes, handler)`
-- `offEvent(eventTypes, handler)`
-- `onCustomEvent(customEventTypes, handler)`
-- `offCustomEvent(customEventTypes, handler)`
+- `element.js`
+- `window.js`
+- `document.js`
+- `textElement.js`
 
-Please note the following:
+Also the mixins files will be useful Here are some of them:
 
-* The `setWidth()` and `setHeight()` methods take number arguments and prepend `px` to them. If you want to set the widths and heights of elements using something other than pixels, use the `style()` method.
+- `mixins/event.js`
+- `mixins/element.js`
+- `mixins/customEvent.js`
 
-* The `html()` and `css()` methods allow you to both get and set HTML and CSS, respectively. Their functionality is based on the jQuery methods of the same name. The `style()` method behaves similarly.
-
-* The `blur()` and `focus()` events are defined on all elements, however they will not have an effect if the element in question cannot have the focus. 
-
-* The `onResize()` and `offResize()` methods are similarly defined on all elements, by way of a mixin. The resize functionality relies on attaching a child object to the element in question and therefore will not work for elements which cannot have child elements. In these cases, the `onResize()` and `offResize()` methods simply do nothing. Also, the aforementioned child object is given amongst others the style `position: relative` and therefore the element in question must be given either the `position: relative` or the `position: absolute` style in order for this trick to work.
-
-The `Input` and `Textarea` classes also have the following methods, taken from the `InputElement` class:
-
-- `onBlur(blurHandler)`
-- `offBlur(blurHandler)`
-- `onFocus(focusHandler)`
-- `offFocus(focusHandler)`
-- `onChange(changeHandler)`
-- `offChange(changeHandler)`
-- `onCut(cutHandler)`
-- `offCut(cutHandler)`
-- `onCopy(copyHandler)`
-- `offCopy(copyHandler)`
-- `onPaste(pasteHandler)`
-- `offPaste(pasteHandler)`
-- `getValue()`
-- `getSelectionStart()`
-- `getSelectionEnd()`
-- `isReadOnly()`
-- `setValue(value)`
-- `setSelectionStart(selectionStart)`
-- `setSelectionEnd(selectionEnd)`
-- `setReadOnly(readOnly)`
-- `select()`
-
-The `TextElement` class has the following methods only:
-
-- `getText()`
-- `setText(text)`
-- `getOffset()`
-- `getBounds()`
-- `getWidth()`
-- `getHeight()`
-- `prependTo(parentElement)`
-- `appendTo(parentElement)`
-- `addTo(parentElement)`
-- `removeFrom(parentElement)`
-- `insertBefore(siblingElement)`
-- `insertAfter(siblingElement)`
-- `remove()`
-
-Each of the supported elements has methods specific to its function, check the source for details, especially for the `window` and `document` singletons.
+Perhaps an API reference will follow someday. The examples in the other Easy projects, given close to the top of this file, really are the best place to look.
 
 ## Building
 

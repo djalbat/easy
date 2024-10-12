@@ -12,13 +12,25 @@ function onEvent(eventTypes, handler, element = this) {
             resizeEventListenersLength = resizeEventListeners.length;
 
       if (resizeEventListenersLength === 0) {
-        this.addResizeObject();
+        this.resizeObserver = new ResizeObserver((entries) => {
+          const resizeEventListeners = this.findEventListeners(RESIZE_EVENT_TYPE);
+
+          resizeEventListeners.forEach((resizeEventListener) => {
+            const event = null;
+
+            resizeEventListener(event);
+          });
+        });
+
+        this.resizeObserver.observe(this.domElement)
       }
+
+      this.addEventListener(eventType, handler, element);
+    } else {
+      const eventListener = this.addEventListener(eventType, handler, element);
+
+      this.domElement.addEventListener(eventType, eventListener);
     }
-
-    const eventListener = this.addEventListener(eventType, handler, element);
-
-    this.domElement.addEventListener(eventType, eventListener);
   });
 }
 
@@ -26,17 +38,21 @@ function offEvent(eventTypes, handler, element = this) {
   eventTypes = eventTypes.split(SPACE); ///
 
   eventTypes.forEach((eventType) => {
-    const eventListener = this.removeEventListener(eventType, handler, element);
-
-    this.domElement.removeEventListener(eventType, eventListener);
-
     if (eventType === RESIZE_EVENT_TYPE) {
+      this.removeEventListener(eventType, handler, element);
+
       const resizeEventListeners = this.findEventListeners(RESIZE_EVENT_TYPE),
             resizeEventListenersLength = resizeEventListeners.length;
 
       if (resizeEventListenersLength === 0) {
-        this.removeResizeObject();
+        this.resizeObserver.unobserve(this.domElement);
+
+        delete this.resizeObserver;
       }
+    } else {
+      const eventListener = this.removeEventListener(eventType, handler, element);
+
+      this.domElement.removeEventListener(eventType, eventListener);
     }
   });
 }

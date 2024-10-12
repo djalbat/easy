@@ -6,10 +6,6 @@ import focusMixins from "../mixins/focus";
 import selectionMixins from "../mixins/selection";
 
 export default class Textarea extends Element {
-  onResize(resizeHandler, element) {} ///
-
-  offResize(resizeHandler, element) {}  ///
-
   static tagName = "textarea";
 }
 

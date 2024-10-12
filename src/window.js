@@ -9,6 +9,7 @@ import scrollMixins from "./mixins/scroll";
 import customEventMixins from "./mixins/customEvent";
 
 import { UNDEFINED } from "./constants";
+import { RESIZE_EVENT_TYPE } from "./eventTypes";
 
 class Window {
   constructor() {
@@ -25,10 +26,6 @@ class Window {
     Object.assign(target, ...sources);
   }
 
-  addResizeObject() {} ///
-
-  removeResizeObject() {} ///
-
   getWidth() { return this.domElement.innerWidth; } ///
   
   getHeight() { return this.domElement.innerHeight; } ///
@@ -38,6 +35,20 @@ class Window {
   getScrollLeft() { return this.domElement.pageXOffset; } ///
 
   getSelection() { return this.domElement.getSelection(); }
+
+  onResize(resizeHandler, element) {
+    const eventType = RESIZE_EVENT_TYPE,
+          eventListener = this.addEventListener(eventType, resizeHandler, element);
+
+    this.domElement.addEventListener(eventType, eventListener);
+  }
+
+  offResize(resizeHandler, element) {
+    const eventType = RESIZE_EVENT_TYPE,
+          eventListener = this.removeEventListener(eventType, resizeHandler, element);
+
+    this.domElement.removeEventListener(eventType, eventListener);
+  }
 }
 
 Object.assign(Window.prototype, keyMixins);

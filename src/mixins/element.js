@@ -4,7 +4,7 @@ import { first } from "../utilities/array";
 import { WILDCARD } from "../constants";
 import { domNodeMatchesSelector, elementsFromDOMElements, filterDOMNodesBySelector, ascendantDOMNodesFromDOMNode, descendantDOMNodesFromDOMNode } from "../utilities/dom";
 
-function getParentElement(selector = WILDCARD) {
+export function getParentElement(selector = WILDCARD) {
   let parentElement = null;
 
   const parentDOMElement = this.domElement.parentElement; ///
@@ -24,7 +24,7 @@ function getParentElement(selector = WILDCARD) {
   return parentElement;
 }
 
-function getChildElements(selector = WILDCARD) {
+export function getChildElements(selector = WILDCARD) {
   const childDOMNodes = this.domElement.childNodes, ///
         childDOMElements = filterDOMNodesBySelector(childDOMNodes, selector),
         childElements = elementsFromDOMElements(childDOMElements);
@@ -32,7 +32,7 @@ function getChildElements(selector = WILDCARD) {
   return childElements;
 }
 
-function getAscendantElements(selector = WILDCARD, maximumHeight = Infinity) {
+export function getAscendantElements(selector = WILDCARD, maximumHeight = Infinity) {
   const height = maximumHeight, ///
         domNode = this.domElement,  ///
         ascendantDOMNodes = ascendantDOMNodesFromDOMNode(domNode, height),
@@ -42,7 +42,7 @@ function getAscendantElements(selector = WILDCARD, maximumHeight = Infinity) {
   return ascendantElements;
 }
 
-function getDescendantElements(selector = WILDCARD, maximumDepth = Infinity) {
+export function getDescendantElements(selector = WILDCARD, maximumDepth = Infinity) {
   const depth = maximumDepth, ///
         domNode = this.domElement,  ///
         descendantDOMNodes = descendantDOMNodesFromDOMNode(domNode, depth),
@@ -52,7 +52,7 @@ function getDescendantElements(selector = WILDCARD, maximumDepth = Infinity) {
   return descendantElements;
 }
 
-function getNextSiblingElement(selector = WILDCARD) {
+export function getNextSiblingElement(selector = WILDCARD) {
   let nextSiblingElement = null;
 
   const nextSiblingDOMNode = this.domElement.nextSibling; ///
@@ -64,7 +64,7 @@ function getNextSiblingElement(selector = WILDCARD) {
   return nextSiblingElement;
 }
 
-function getPreviousSiblingElement(selector = WILDCARD) {
+export function getPreviousSiblingElement(selector = WILDCARD) {
   let previousSiblingElement = null;
 
   const previousSiblingDOMNode = this.domElement.previousSibling;  ///

@@ -6,10 +6,6 @@ import focusMixins from "../mixins/focus";
 import selectionMixins from "../mixins/selection";
 
 export default class Input extends Element {
-  onResize(resizeHandler, element) {} ///
-
-  offResize(resizeHandler, element) {}  ///
-
   static tagName = "input";
 }
 

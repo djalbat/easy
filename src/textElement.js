@@ -2,7 +2,7 @@
 
 import Offset from "./offset";
 import Bounds from "./bounds";
-import elementMixins from "./mixins/element";
+import textElementMixins from "./mixins/textElement";
 
 export default class TextElement {
   constructor(text) {
@@ -84,4 +84,4 @@ export default class TextElement {
   }
 }
 
-Object.assign(TextElement.prototype, elementMixins);
+Object.assign(TextElement.prototype, textElementMixins);
