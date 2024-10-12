@@ -57,10 +57,10 @@ class Document {
   }
 }
 
-export default (typeof document === UNDEFINED) ? undefined : new Document();  ///
-
 Object.assign(Document.prototype, keyMixins);
 Object.assign(Document.prototype, eventMixins);
 Object.assign(Document.prototype, mouseMixins);
 Object.assign(Document.prototype, clickMixins);
 Object.assign(Document.prototype, selectionMixins);
+
+export default (typeof document === UNDEFINED) ? undefined : new Document();  ///

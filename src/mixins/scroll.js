@@ -2,9 +2,9 @@
 
 import { SCROLL_EVENT_TYPE } from "../eventTypes";
 
-export function onScroll(scrollHandler, element) { this.onEvent(SCROLL_EVENT_TYPE, scrollHandler, element); }
+function onScroll(scrollHandler, element) { this.onEvent(SCROLL_EVENT_TYPE, scrollHandler, element); }
 
-export function offScroll(scrollHandler, element) { this.offEvent(SCROLL_EVENT_TYPE, scrollHandler, element); }
+function offScroll(scrollHandler, element) { this.offEvent(SCROLL_EVENT_TYPE, scrollHandler, element); }
 
 function scrollTo(scrollTop, scrollLeft) { this.domElement.scrollTo(scrollTop, scrollLeft); }
 
