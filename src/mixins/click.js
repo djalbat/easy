@@ -10,9 +10,9 @@ function onAuxClick(auxClickHandler, element) { this.onEvent(AUXCLICK_EVENT_TYPE
 
 function offAuxClick(auxClickHandler, element) { this.offEvent(AUXCLICK_EVENT_TYPE, auxClickHandler, element); }
 
-function onDoubleClick(doubleClickHandler, element) { this.onEvent(DBLCLICK_EVENT_TYPE, doubleClickHandler, element); }
+function onDoubleClick(doubleClickHandler, element) { this.onEvent(DBLCLICK_EVENT_TYPE, doubleClickHandler, element); } ///
 
-function offDoubleClick(doubleClickHandler, element) { this.offEvent(DBLCLICK_EVENT_TYPE, doubleClickHandler, element); }
+function offDoubleClick(doubleClickHandler, element) { this.offEvent(DBLCLICK_EVENT_TYPE, doubleClickHandler, element); } ///
 
 const clickMixins = {
   onClick,

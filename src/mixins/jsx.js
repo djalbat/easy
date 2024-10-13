@@ -4,9 +4,14 @@ import { combine, prune } from "../utilities/object";
 import { first, guarantee } from "../utilities/array";
 import { camelCaseToSnakeCase } from "../utilities/string";
 import { isHTMLAttributeName, isSVGAttributeName } from "../utilities/name";
-import { DBLCLICK_EVENT_TYPE, DOUBLE_CLICK_EVENT_TYPE } from "../eventTypes";
 import { removeFalseyElements, replaceStringsWithTextElements } from "../utilities/elements";
 import { FOR, CLASS, OBJECT, HTML_FOR, CLASS_NAME, BOOLEAN, FUNCTION, SVG_NAMESPACE_URI } from "../constants";
+import { DBLCLICK_EVENT_TYPE,
+         DOUBLE_CLICK_EVENT_TYPE,
+         SELECTIONCHANGE_EVENT_TYPE,
+         SELECTION_CHANGE_EVENT_TYPE,
+         FULLSCREENCHANGE_EVENT_TYPE,
+         FULL_SCREEN_CHANGE_EVENT_TYPE } from "../eventTypes";
 
 function applyProperties(properties, defaultProperties, ignoredProperties) {
   this.properties = combine(properties, defaultProperties);
@@ -130,8 +135,25 @@ function updateContext(childElement, context) {
 function addHandler(element, name, value) {
   let eventType = name.substring(2).toLowerCase(); ///
 
-  if (eventType === DOUBLE_CLICK_EVENT_TYPE) {
-    eventType = DBLCLICK_EVENT_TYPE;
+  switch (eventType) {
+    case DOUBLE_CLICK_EVENT_TYPE: {
+      eventType = DBLCLICK_EVENT_TYPE;
+
+      break;
+    }
+
+    case SELECTION_CHANGE_EVENT_TYPE: {
+      eventType = SELECTIONCHANGE_EVENT_TYPE;
+
+      break;
+    }
+
+    case FULL_SCREEN_CHANGE_EVENT_TYPE: {
+      eventType = FULLSCREENCHANGE_EVENT_TYPE;
+
+      break;
+    }
+
   }
 
   const handler = value;  ///

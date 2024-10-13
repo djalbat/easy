@@ -22,9 +22,9 @@ class Document {
 
   createTextNode(data) { return this.domElement.createTextNode(data); }
 
-  onSelectionChange(selectionChangeHandler, element) { this.onEvent(SELECTIONCHANGE_EVENT_TYPE, selectionChangeHandler, element); }
+  onSelectionChange(selectionChangeHandler, element) { this.onEvent(SELECTIONCHANGE_EVENT_TYPE, selectionChangeHandler, element); } ///
 
-  offSelectionChange(selectionChangeHandler, element) { this.offEvent(SELECTIONCHANGE_EVENT_TYPE, selectionChangeHandler, element); }
+  offSelectionChange(selectionChangeHandler, element) { this.offEvent(SELECTIONCHANGE_EVENT_TYPE, selectionChangeHandler, element); } ///
 
   createEventListener(eventType, handler, element) {
     let eventListener;

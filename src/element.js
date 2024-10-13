@@ -9,9 +9,11 @@ import eventMixins from "./mixins/event";
 import mouseMixins from "./mixins/mouse";
 import clickMixins from "./mixins/click";
 import focusMixins from "./mixins/focus";
+import touchMixins from "./mixins/touch";
 import scrollMixins from "./mixins/scroll";
 import resizeMixins from "./mixins/resize";
 import elementMixins from "./mixins/element";
+import fullscreenMixins from "./mixins/fullScreen";
 import customEventMixins from "./mixins/customEvent";
 
 import { combine } from "./utilities/object";
@@ -329,9 +331,11 @@ Object.assign(Element.prototype, clickMixins);
 Object.assign(Element.prototype, stateMixins);
 Object.assign(Element.prototype, eventMixins);
 Object.assign(Element.prototype, focusMixins);
+Object.assign(Element.prototype, touchMixins);
 Object.assign(Element.prototype, scrollMixins);
 Object.assign(Element.prototype, resizeMixins);
 Object.assign(Element.prototype, elementMixins);
+Object.assign(Element.prototype, fullscreenMixins);
 Object.assign(Element.prototype, customEventMixins);
 
 function elementFromTagName(Class, tagName, ...remainingArguments) {
