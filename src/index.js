@@ -8,6 +8,7 @@ export { default as mouseButtons } from "./mouseButtons";
 export { default as elementUtilities } from "./utilities/element";
 export { default as inputMixins } from "./mixins/input";
 export { default as selectionMixins } from "./mixins/selection";
+export { default as customEventMixins } from "./mixins/customEvent";
 export { default as Element } from "./element";
 export { default as TextElement } from "./textElement";
 export { default as document } from "./document";
