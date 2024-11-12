@@ -18,6 +18,8 @@ class Document {
     return this.domElement;
   }
 
+  getSelection() { return this.domElement.getSelection(); }
+
   createRange() { return this.domElement.createRange(); }
 
   createTextNode(data) { return this.domElement.createTextNode(data); }
