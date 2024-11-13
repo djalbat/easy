@@ -100,6 +100,8 @@ export default class Element {
 
   removeAttribute(name) { this.clearAttribute(name); }
 
+  hasClass(className) { return this.domElement.classList.contains(className); }
+
   setClass(className) { this.domElement.className = className; }
 
   addClass(className) { this.domElement.classList.add(className); }
@@ -108,9 +110,7 @@ export default class Element {
 
   toggleClass(className) { this.domElement.classList.toggle(className); }
 
-  hasClass(className) { return this.domElement.classList.contains(className); }
-
-  clearClasses() { this.domElement.className = EMPTY_STRING; }
+  removeAllClasses() { this.domElement.className = EMPTY_STRING; }
 
   prependTo(parentElement) { parentElement.prepend(this); }
 
