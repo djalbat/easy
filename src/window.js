@@ -25,6 +25,10 @@ class Window {
     Object.assign(target, ...sources);
   }
 
+  reload() {
+    window.location.reload(); ///
+  }
+
   getWidth() { return this.domElement.innerWidth; } ///
   
   getHeight() { return this.domElement.innerHeight; } ///
