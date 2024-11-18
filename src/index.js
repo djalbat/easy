@@ -7,6 +7,7 @@ export { default as eventTypes } from "./eventTypes";
 export { default as mouseButtons } from "./mouseButtons";
 export { default as elementUtilities } from "./utilities/element";
 export { default as inputMixins } from "./mixins/input";
+export { default as focusMixins } from "./mixins/focus";
 export { default as selectionMixins } from "./mixins/selection";
 export { default as customEventMixins } from "./mixins/customEvent";
 export { default as Element } from "./element";
