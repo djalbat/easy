@@ -33,11 +33,7 @@ import { NONE,
 
 export default class Element {
   constructor(selector) {
-    if (selector) {
-      this.domElement = document.querySelector(selector);
-
-      this.domElement.__element__ = this; ///
-    }
+    this.domElement = document.querySelector(selector);
   }
 
   getDOMElement() {
@@ -111,40 +107,13 @@ export default class Element {
 
   removeAllClasses() { this.domElement.className = EMPTY_STRING; }
 
-  prependTo(parentElement) { parentElement.prepend(this); }
+  addTo(parentElement) { parentElement.add(this); }
 
   appendTo(parentElement) { parentElement.append(this); }
 
-  addTo(parentElement) { parentElement.add(this); }
+  prependTo(parentElement) { parentElement.prepend(this); }
 
   removeFrom(parentElement) { parentElement.remove(this); }
-
-  insertBefore(siblingElement) {
-    const parentDOMNode = siblingElement.domElement.parentNode, ///
-          siblingDOMElement = siblingElement.domElement;  ///
-
-    parentDOMNode.insertBefore(this.domElement, siblingDOMElement);
-  }
-
-  insertAfter(siblingElement) {
-    const parentDOMNode = siblingElement.domElement.parentNode, ///
-          siblingDOMElement = siblingElement.domElement;  ///
-
-    parentDOMNode.insertBefore(this.domElement, siblingDOMElement.nextSibling);  ///
-  }
-
-  prepend(element) {
-    const domElement = element.domElement,
-          firstChildDOMElement = this.domElement.firstChild;  ///
-
-    this.domElement.insertBefore(domElement, firstChildDOMElement);
-  }
-
-  append(element) {
-    const domElement = element.domElement;
-
-    this.domElement.insertBefore(domElement, null); ///
-  }
 
   insert(element) { this.append(element); }
 
@@ -152,12 +121,64 @@ export default class Element {
 
   remove(element) {
     if (element) {
-      const domElement = element.domElement;
+      element.remove();
 
-      this.domElement.removeChild(domElement);
-    } else {
-      this.domElement.remove();
+      return;
     }
+
+    delete this.domElement.__element__;
+
+    this.domElement.remove();
+  }
+
+  prepend(element) {
+    const domElement = element.domElement,
+          referenceDOMElement = this.domElement.firstChild;  ///
+
+    this.domElement.insertBefore(domElement, referenceDOMElement);
+
+    domElement.__element__ = element;
+  }
+
+  append(element) {
+    const domElement = element.domElement,
+          referenceDOMElement = null; ///
+
+    this.domElement.insertBefore(domElement, referenceDOMElement);
+
+    domElement.__element__ = element;
+  }
+
+  insertBefore(siblingElement) {
+    const element = this, ///
+          parentDOMNode = siblingElement.domElement.parentNode, ///
+          referenceDOMElement = siblingElement.domElement;  ///
+
+    parentDOMNode.insertBefore(this.domElement, referenceDOMElement);
+
+    this.domElement.__element__ = element;
+  }
+
+  insertAfter(siblingElement) {
+    const element = this, ///
+          parentDOMNode = siblingElement.domElement.parentNode, ///
+          referenceDOMElement = siblingElement.domElement.nextSibling;  ///
+
+    parentDOMNode.insertBefore(this.domElement, referenceDOMElement);
+
+    this.domElement.__element__ = element;
+  }
+
+  mount(element) {
+    this.add(element);
+
+    mountElement(element);
+  }
+
+  unmount(element) {
+    unmountElement(element);
+
+    this.remove(element);
   }
 
   mountBefore(siblingElement) {
@@ -174,18 +195,6 @@ export default class Element {
     const element = this; ///
 
     mountElement(element);
-  }
-
-  mount(element) {
-    this.add(element);
-
-    mountElement(element);
-  }
-
-  unmount(element) {
-    unmountElement(element);
-
-    this.remove(element);
   }
 
   show(displayStyle = BLOCK) { this.display(displayStyle); }
