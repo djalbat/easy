@@ -3,6 +3,7 @@
 export const CUT_EVENT_TYPE = "cut";
 export const COPY_EVENT_TYPE = "copy";
 export const BLUR_EVENT_TYPE = "blur";
+export const ERROR_EVENT_TYPE = "error";
 export const PASTE_EVENT_TYPE = "paste";
 export const WHEEL_EVENT_TYPE = "wheel";
 export const INPUT_EVENT_TYPE = "input";
@@ -35,6 +36,7 @@ export default {
   CUT_EVENT_TYPE,
   COPY_EVENT_TYPE,
   BLUR_EVENT_TYPE,
+  ERROR_EVENT_TYPE,
   PASTE_EVENT_TYPE,
   WHEEL_EVENT_TYPE,
   INPUT_EVENT_TYPE,
