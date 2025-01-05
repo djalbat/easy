@@ -41,12 +41,6 @@ export default class Element {
     }
   }
 
-  destroy() {
-    const element = this; ///
-
-    destroyElement(element);
-  }
-
   getDOMElement() {
     return this.domElement;
   }
@@ -303,7 +297,13 @@ export default class Element {
       this.style(name, value);
     });
   }
-  
+
+  destroy() {
+    const element = this; ///
+
+    destroyElement(element);
+  }
+
   static fromClass(Class, properties, ...remainingArguments) {
     const { tagName } = Class,
           element = elementFromTagName(Class, tagName, ...remainingArguments),

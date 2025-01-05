@@ -3,13 +3,16 @@
 import Offset from "./offset";
 import Bounds from "./bounds";
 
+import { constructElement, destroyElement } from "./utilities/element";
+
 import { getParentElement, getAscendantElements, getNextSiblingElement, getPreviousSiblingElement } from "./mixins/element";
 
 export default class TextElement {
   constructor(text) {
-    this.domElement = document.createTextNode(text); ///
+    const element = this, ///
+          domElement = document.createTextNode(text); ///
 
-    this.domElement.__element__ = this; ///
+    constructElement(element, domElement);
   }
 
   getDOMElement() {
@@ -82,6 +85,12 @@ export default class TextElement {
 
   remove() {
     this.domElement.remove();
+  }
+
+  destroy() {
+    const element = this; ///
+
+    destroyElement(element);
   }
 }
 
