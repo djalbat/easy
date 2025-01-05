@@ -18,7 +18,7 @@ import customEventMixins from "./mixins/customEvent";
 import { combine } from "./utilities/object";
 import { isSVGTagName } from "./utilities/name";
 import { first, augment } from "./utilities/array";
-import { mountElement, unmountElement } from "./utilities/element";
+import { constructElement, destroyElement, mountElement, unmountElement } from "./utilities/element";
 import { NONE,
          BLOCK,
          WIDTH,
@@ -33,7 +33,18 @@ import { NONE,
 
 export default class Element {
   constructor(selector) {
-    this.domElement = document.querySelector(selector);
+    if (selector !== null) {
+      const element =this,  ///
+            domElement = document.querySelector(selector);
+
+      constructElement(element, domElement);
+    }
+  }
+
+  destroy() {
+    const element = this; ///
+
+    destroyElement(element);
   }
 
   getDOMElement() {
@@ -126,8 +137,6 @@ export default class Element {
       return;
     }
 
-    delete this.domElement.__element__;
-
     this.domElement.remove();
   }
 
@@ -136,8 +145,6 @@ export default class Element {
           referenceDOMElement = this.domElement.firstChild;  ///
 
     this.domElement.insertBefore(domElement, referenceDOMElement);
-
-    domElement.__element__ = element;
   }
 
   append(element) {
@@ -145,28 +152,20 @@ export default class Element {
           referenceDOMElement = null; ///
 
     this.domElement.insertBefore(domElement, referenceDOMElement);
-
-    domElement.__element__ = element;
   }
 
   insertBefore(siblingElement) {
-    const element = this, ///
-          parentDOMNode = siblingElement.domElement.parentNode, ///
+    const parentDOMNode = siblingElement.domElement.parentNode, ///
           referenceDOMElement = siblingElement.domElement;  ///
 
     parentDOMNode.insertBefore(this.domElement, referenceDOMElement);
-
-    this.domElement.__element__ = element;
   }
 
   insertAfter(siblingElement) {
-    const element = this, ///
-          parentDOMNode = siblingElement.domElement.parentNode, ///
+    const parentDOMNode = siblingElement.domElement.parentNode, ///
           referenceDOMElement = siblingElement.domElement.nextSibling;  ///
 
     parentDOMNode.insertBefore(this.domElement, referenceDOMElement);
-
-    this.domElement.__element__ = element;
   }
 
   mount(element) {
@@ -347,13 +346,12 @@ Object.assign(Element.prototype, customEventMixins);
 
 function elementFromTagName(Class, tagName, ...remainingArguments) {
   const selector = null,
-        element = new (Function.prototype.bind.call(Class, null, selector, ...remainingArguments));
+        element = new (Function.prototype.bind.call(Class, null, selector, ...remainingArguments)),
+        domElement = isSVGTagName(tagName) ?
+                       document.createElementNS(SVG_NAMESPACE_URI, tagName) :
+                         document.createElement(tagName);
 
-  element.domElement = isSVGTagName(tagName) ?
-                         document.createElementNS(SVG_NAMESPACE_URI, tagName) :
-                           document.createElement(tagName);
-
-  element.domElement.__element__ = element; ///
+  constructElement(element, domElement);
 
   return element;
 }
