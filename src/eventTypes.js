@@ -31,6 +31,7 @@ export const SELECTIONCHANGE_EVENT_TYPE = "selectionchange";
 export const SELECTION_CHANGE_EVENT_TYPE = "selectionChange";
 export const FULLSCREENCHANGE_EVENT_TYPE = "fullscreenchange";
 export const FULL_SCREEN_CHANGE_EVENT_TYPE = "fullScreenChange";
+export const UNHANDLEDREJECTION_EVENT_TYPE = "unhandledrejection";
 
 export default {
   CUT_EVENT_TYPE,
@@ -63,5 +64,6 @@ export default {
   SELECTIONCHANGE_EVENT_TYPE,
   SELECTION_CHANGE_EVENT_TYPE,
   FULLSCREENCHANGE_EVENT_TYPE,
-  FULL_SCREEN_CHANGE_EVENT_TYPE
+  FULL_SCREEN_CHANGE_EVENT_TYPE,
+  UNHANDLEDREJECTION_EVENT_TYPE
 };
