@@ -5,13 +5,12 @@ import { first, guarantee } from "../utilities/array";
 import { camelCaseToSnakeCase } from "../utilities/string";
 import { isHTMLAttributeName, isSVGAttributeName } from "../utilities/name";
 import { removeFalseyElements, replaceStringsWithTextElements } from "../utilities/elements";
+import { DBLCLICK_EVENT_TYPE, SELECTIONCHANGE_EVENT_TYPE, FULLSCREENCHANGE_EVENT_TYPE } from "../eventTypes";
 import { FOR, CLASS, OBJECT, HTML_FOR, CLASS_NAME, BOOLEAN, FUNCTION, SVG_NAMESPACE_URI } from "../constants";
-import { DBLCLICK_EVENT_TYPE,
-         DOUBLE_CLICK_EVENT_TYPE,
-         SELECTIONCHANGE_EVENT_TYPE,
-         SELECTION_CHANGE_EVENT_TYPE,
-         FULLSCREENCHANGE_EVENT_TYPE,
-         FULL_SCREEN_CHANGE_EVENT_TYPE } from "../eventTypes";
+
+const DOUBLE_CLICK_EVENT_TYPE = "doubleclick",
+      SELECTION_CHANGE_EVENT_TYPE = "selectionChange",
+      FULL_SCREEN_CHANGE_EVENT_TYPE = "fullScreenChange";
 
 function applyProperties(properties, defaultProperties, ignoredProperties) {
   this.properties = combine(properties, defaultProperties);
