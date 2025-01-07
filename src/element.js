@@ -183,7 +183,7 @@ export default class Element {
   }
 
   mountAfter(siblingElement) {
-    this.insertBefore(siblingElement);
+    this.insertAfter(siblingElement);
 
     const element = this; ///
 
