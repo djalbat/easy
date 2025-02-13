@@ -46,40 +46,29 @@ export default class Element {
   }
 
   getOffset() {
-    const top = this.domElement.offsetTop,  ///
-          left = this.domElement.offsetLeft,  ///
-          offset = new Offset(top, left);
+    const offset = Offset.fromDOMElement(this.domElement);
 
     return offset;
   }
 
   getBounds() {
-    const boundingClientRect = this.domElement.getBoundingClientRect(),
-          bounds = Bounds.fromBoundingClientRect(boundingClientRect);
+    const bounds = Bounds.fromDOMElement(this.domElement);
 
     return bounds;
   }
 
-  getWidth(includeBorder = true) {
-    const width = includeBorder ?
-                    this.domElement.offsetWidth :
-                      this.domElement.clientWidth;
+  getWidth() { return this.domElement.offsetWidth; }  ///
 
-    return width;
-  }
+  getHeight() { return this.domElement.offsetHeight; }  ///
+
+  getInnerWidth() { return this.domElement.clientWidth; } ///
+
+  getInnerHeight() { return this.domElement.clientHeight; } ///
 
   setWidth(width) {
     width = `${width}px`; ///
 
     this.style(WIDTH, width);
-  }
-
-  getHeight(includeBorder = true) {
-    const height = includeBorder ?
-                     this.domElement.offsetHeight :
-                       this.domElement.clientHeight;
-
-    return height;
   }
 
   setHeight(height) {

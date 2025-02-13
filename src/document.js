@@ -18,6 +18,10 @@ class Document {
     return this.domElement;
   }
 
+  getInnerWidth() { return this.domElement.clientWidth; } ///
+
+  getInnerHeight() { return this.domElement.clientHeight; } ///
+
   getSelection() { return this.domElement.getSelection(); }
 
   createRange() { return this.domElement.createRange(); }

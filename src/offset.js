@@ -13,4 +13,13 @@ export default class Offset {
   getLeft() {
     return this.left;
   }
+
+  static fromDOMElement(domElement) {
+    const { offsetTop, offsetLeft } = domElement,
+          top = offsetTop,  ///
+          left = offsetLeft,  ///
+          offset = new Offset(top, left);
+
+    return offset;
+  }
 }

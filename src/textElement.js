@@ -4,7 +4,6 @@ import Offset from "./offset";
 import Bounds from "./bounds";
 
 import { constructElement, destroyElement } from "./utilities/element";
-
 import { getParentElement, getAscendantElements, getNextSiblingElement, getPreviousSiblingElement } from "./mixins/element";
 
 export default class TextElement {
@@ -19,6 +18,22 @@ export default class TextElement {
     return this.domElement;
   }
 
+  getOffset() {
+    const offset = Offset.fromDOMElement(this.domElement);
+
+    return offset;
+  }
+
+  getBounds() {
+    const bounds = Bounds.fromDOMElement(this.domElement);
+
+    return bounds;
+  }
+
+  getWidth() { return this.domElement.offsetWidth; }  ///
+
+  getHeight() { return this.domElement.offsetHeight; }  ///
+
   getText() {
     const nodeValue = this.domElement.nodeValue,
           text = nodeValue; ///
@@ -30,35 +45,6 @@ export default class TextElement {
     const nodeValue = text; ///
 
     this.domElement.nodeValue = nodeValue;
-  }
-
-  getOffset() {
-    const top = this.domElement.offsetTop,  ///
-          left = this.domElement.offsetLeft,  ///
-          offset = new Offset(top, left);
-
-    return offset;
-  }
-
-  getBounds() {
-    const boundingClientRect = this.domElement.getBoundingClientRect(),
-          bounds = Bounds.fromBoundingClientRect(boundingClientRect);
-
-    return bounds;
-  }
-
-  getWidth() {
-    const clientWidth = this.domElement.clientWidth,
-          width = clientWidth;  ///
-
-    return width;
-  }
-
-  getHeight() {
-    const clientHeight = this.domElement.clientHeight,
-          height = clientHeight;  ///
-
-    return height;
   }
 
   prependTo(parentElement) { parentElement.prepend(this); }

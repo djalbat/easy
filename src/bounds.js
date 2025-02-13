@@ -74,9 +74,11 @@ export default class Bounds {
     return overlapping;
   }
 
-  static fromBoundingClientRect(boundingClientRect) {
-    const windowScrollTop = window.pageYOffset, ///
-          windowScrollLeft = window.pageXOffset,  ///
+  static fromDOMElement(domElement) {
+    const { pageXOffset, pageYOffset } = window,
+          boundingClientRect = domElement.getBoundingClientRect(),
+          windowScrollTop = pageYOffset, ///
+          windowScrollLeft = pageXOffset,  ///
           top = boundingClientRect.top + windowScrollTop,
           left = boundingClientRect.left + windowScrollLeft,
           right = boundingClientRect.right + windowScrollLeft,
