@@ -62,25 +62,9 @@ function getContext() {
   return this.context;
 }
 
-function assignContext(names, thenDelete) {
-  const argumentsLength = arguments.length;
-
-  if (argumentsLength === 1) {
-    const firstArgument = first(arguments);
-
-    if (typeof firstArgument === BOOLEAN) {
-      names = Object.keys(this.context);
-
-      thenDelete = firstArgument;
-    } else {
-      thenDelete = true;
-    }
-  }
-
-  if (argumentsLength === 0) {
-    names = Object.keys(this.context);
-
-    thenDelete = true;
+function assignContext(names) {
+  if (names === undefined) {
+    names = Object.keys(this.context)
   }
 
   names.forEach((name) => {
@@ -92,10 +76,8 @@ function assignContext(names, thenDelete) {
 
     Object.defineProperty(this, propertyName, descriptor);
 
-    if (thenDelete) {
-      delete this.context[name];
-    }
-  }, []);
+    delete this.context[name];
+  });
 }
 
 const jsxMixins = {
