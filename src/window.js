@@ -39,6 +39,10 @@ class Window {
 
   getSelection() { return this.domElement.getSelection(); }
 
+  getScreenWidth() { return this.domElement.screen.width; }
+
+  getScreenHeight() { return this.domElement.screen.height; }
+
   onResize(resizeHandler, element) {
     const eventType = RESIZE_EVENT_TYPE,
           eventListener = this.addEventListener(eventType, resizeHandler, element);

@@ -19,7 +19,7 @@ function exitFullScreen() {
 
 function isFullScreen() {
   const { fullscreenElement } = document,
-        fullScreen =(fullscreenElement !== null);
+        fullScreen = (fullscreenElement !== null);
 
   return fullScreen;
 }
