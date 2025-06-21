@@ -253,38 +253,35 @@ export default class Element {
 
   css(css = null) {
     if (css === null) {
-      const computedStyle = getComputedStyle(this.domElement),
-            css = {};
+      css = {};
 
-      for (let index = 0; index < computedStyle.length; index++) {
-        const firstComputedStyle = first[computedStyle],
-              name = firstComputedStyle,  ///
-              value = computedStyle.getPropertyValue(name); ///
+      const computedStyles = getComputedStyle(this.domElement); ///
+
+      for (let index = 0; index < computedStyles.length; index++) {
+        const computedStyle = computedStyles[index],
+              name = computedStyle,  ///
+              value = computedStyles.getPropertyValue(name); ///
 
         css[name] = value;
       }
-
-      return css;
-    }
-
-    if (typeof css === STRING) {
+    } else if (typeof css === STRING) {
       let name = css; ///
 
-      const computedStyle = getComputedStyle(this.domElement),
-            value = computedStyle.getPropertyValue(name); ///
+      const computedStyles = getComputedStyle(this.domElement), ///
+            value = computedStyles.getPropertyValue(name); ///
 
       css = value;  ///
+    } else {
+      const names = Object.keys(css); ///
 
-      return css;
+      names.forEach((name) => {
+        const value = css[name];
+
+        this.style(name, value);
+      });
     }
 
-    const names = Object.keys(css); ///
-
-    names.forEach((name) => {
-      const value = css[name];
-
-      this.style(name, value);
-    });
+    return css;
   }
 
   destroy() {
