@@ -1,7 +1,7 @@
 {
   "name": "easy",
   "author": "James Smith",
-  "version": "23.1.6",
+  "version": "23.1.7",
   "license": "MIT, Anti-996",
   "homepage": "https://github.com/djalbat/easy",
   "description": "Elements that abstract away from the DOM.",
@@ -13,8 +13,8 @@
     "@swc/core": "1.13.20",
     "esbuild": "0.11.14",
     "express": "^4.17.1",
-    "lively-cli": "^2.0.65",
-    "watchful-cli": "^1.7.56"
+    "lively-cli": "^2.0.76",
+    "watchful-cli": "^1.7.60"
   },
   "scripts": {
     "start": "node ./bin/main.js",
