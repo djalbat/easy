@@ -15,9 +15,9 @@ import elementMixins from "./mixins/element";
 import fullScreenMixins from "./mixins/fullScreen";
 import customEventMixins from "./mixins/customEvent";
 
+import { augment } from "./utilities/array";
 import { combine } from "./utilities/object";
 import { isSVGTagName } from "./utilities/name";
-import { first, augment } from "./utilities/array";
 import { constructElement, destroyElement, mountElement, unmountElement } from "./utilities/element";
 import { NONE,
          BLOCK,
