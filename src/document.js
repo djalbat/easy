@@ -4,7 +4,6 @@ import keyMixins from "./mixins/key";
 import eventMixins from "./mixins/event";
 import mouseMixins from "./mixins/mouse";
 import clickMixins from "./mixins/click";
-import selectionMixins from "./mixins/selection";
 
 import { UNDEFINED } from "./constants";
 import { SELECTIONCHANGE_EVENT_TYPE } from "./eventTypes";
@@ -17,10 +16,6 @@ class Document {
   getDOMElement() {
     return this.domElement;
   }
-
-  getInnerWidth() { return this.domElement.clientWidth; } ///
-
-  getInnerHeight() { return this.domElement.clientHeight; } ///
 
   getSelection() { return this.domElement.getSelection(); }
 
@@ -67,6 +62,5 @@ Object.assign(Document.prototype, keyMixins);
 Object.assign(Document.prototype, eventMixins);
 Object.assign(Document.prototype, mouseMixins);
 Object.assign(Document.prototype, clickMixins);
-Object.assign(Document.prototype, selectionMixins);
 
 export default (typeof document === UNDEFINED) ? undefined : new Document();  ///
