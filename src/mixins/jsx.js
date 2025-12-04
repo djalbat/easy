@@ -1,7 +1,7 @@
 "use strict";
 
+import { guarantee } from "../utilities/array";
 import { combine, prune } from "../utilities/object";
-import { first, guarantee } from "../utilities/array";
 import { camelCaseToSnakeCase } from "../utilities/string";
 import { isHTMLAttributeName, isSVGAttributeName } from "../utilities/name";
 import { removeFalseyElements, replaceStringsWithTextElements } from "../utilities/elements";
