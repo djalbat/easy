@@ -43,6 +43,8 @@ class Window {
 
   getScreenHeight() { return this.domElement.screen.height; }
 
+  scrollTo(scrollTop, scrollLeft) { this.domElement.scrollTo(scrollLeft, scrollTop); }
+
   onResize(resizeHandler, element) {
     const eventType = RESIZE_EVENT_TYPE,
           eventListener = this.addEventListener(eventType, resizeHandler, element);
