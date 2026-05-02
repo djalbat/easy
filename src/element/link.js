@@ -4,9 +4,9 @@ import Element from "../element";
 import focusMixins from "../mixins/focus";
 
 export default class Link extends Element {
-  getHRef() { return this.getAttribute("href"); }
+  getHref() { return this.getAttribute("href"); }
 
-  setHRef(href) { return this.setAttribute("href", href); }
+  setHref(href) { return this.setAttribute("href", href); }
 
   static tagName = "a";
 }
