@@ -29,7 +29,7 @@ export function flatten(array) {
 export function guarantee(arrayOrElement) {
   arrayOrElement = arrayOrElement || [];
 
-  return (arrayOrElement instanceof Array) ?
+  return Array.isArray(arrayOrElement) ?
             arrayOrElement :
               [arrayOrElement];
 }

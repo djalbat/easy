@@ -18,7 +18,7 @@ function createElement(firstArgument, properties, ...childElements) {
 
     if (false) {
       ///
-    } else if (isSubclassOf(firstArgument, Element)) {
+    } else if (Element.isPrototypeOf(firstArgument)) {
       const Class = firstArgument;  ///
 
       element = Class.fromClass(Class, properties);
@@ -50,11 +50,4 @@ function sanitiseChildElements(childElements) {
   childElements = replaceStringsWithTextElements(childElements);  ///
 
   return childElements;
-}
-
-
-function isSubclassOf(argument, Class) {
-  const subclassOf = (argument.prototype instanceof Class);
-
-  return subclassOf;
 }
