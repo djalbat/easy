@@ -87,10 +87,10 @@ export default class Bounds {
 
     ({ top, left, right, bottom } = boundingClientRect);
 
-    top += top + windowScrollTop;
-    left += left + windowScrollLeft;
-    right += right + windowScrollLeft;
-    bottom += bottom + windowScrollTop;
+    top += windowScrollTop;
+    left += windowScrollLeft;
+    right += windowScrollLeft;
+    bottom += windowScrollTop;
 
     const bounds = new Bounds(top, left, right, bottom);
 
