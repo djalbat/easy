@@ -76,14 +76,23 @@ export default class Bounds {
 
   static fromDOMElement(domElement) {
     const { pageXOffset, pageYOffset } = window,
-          boundingClientRect = domElement.getBoundingClientRect(),
           windowScrollTop = pageYOffset, ///
-          windowScrollLeft = pageXOffset,  ///
-          top = boundingClientRect.top + windowScrollTop,
-          left = boundingClientRect.left + windowScrollLeft,
-          right = boundingClientRect.right + windowScrollLeft,
-          bottom = boundingClientRect.bottom + windowScrollTop,
-          bounds = new Bounds(top, left, right, bottom);
+          windowScrollLeft = pageXOffset, ///
+          boundingClientRect = domElement.getBoundingClientRect();
+
+    let top,
+        left,
+        right,
+        bottom;
+
+    ({ top, left, right, bottom } = boundingClientRect);
+
+    top += top + windowScrollTop;
+    left += left + windowScrollLeft;
+    right += right + windowScrollLeft;
+    bottom += bottom + windowScrollTop;
+
+    const bounds = new Bounds(top, left, right, bottom);
 
     return bounds;
   }
