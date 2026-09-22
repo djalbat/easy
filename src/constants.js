@@ -7,6 +7,7 @@ export const SPACE = " ";
 export const CLASS = "class";
 export const WIDTH = "width";
 export const BLOCK = "block";
+export const ESCAPE = "Escape";
 export const HEIGHT = "height";
 export const OBJECT = "object";
 export const STRING = "string";
